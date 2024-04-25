@@ -32,13 +32,16 @@ class CustomerController extends Controller
 		if ($request->hasFile('photo')) {
 			$image = $request->file('photo')->store('customers', 'public');
 		}
+
+		// dd($request);
+
 		Customer::create([
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 			'photo' => $image,
 			'name' => $request->name,
 			'email' => $request->email,
-			'shop_name' => $request->shopname,
+			'shop_name' => $request->shop_name,
 			'phone' => $request->phone,
 			'address' => $request->address,
 			// 'type' => $request->type,
