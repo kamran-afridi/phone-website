@@ -61,14 +61,31 @@
 
                                             <x-input label="Email address" name="email" :value="old('email', $customer->email)"
                                                 :required="true" />
-                                        </div>
 
-                                        <div class="col-sm-6 col-md-6">
-                                            <x-input label="Phone number" name="phone" :value="old('phone', $customer->phone)"
+                                            <x-input label="Phone number" name="phone" type='tel' :value="old('phone', $customer->phone)"
+                                                :required="true" />
+
+                                            <x-input label="Shop name" name="shop_name" :value="old('shop_name', $customer->shop_name)"
                                                 :required="true" />
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="address" class="form-label required">
+                                                    {{ __('Address') }}
+                                                </label>
+
+                                                <textarea id="address" name="address" rows="3" class="form-control @error('address') is-invalid @enderror">{{ old('address', $customer->address) }}</textarea>
+
+                                                @error('address')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <label for="bank_name" class="form-label">
                                                 {{ __('Bank Name') }}
                                             </label>
@@ -108,23 +125,7 @@
                                         <div class="col-sm-6 col-md-6">
                                             <x-input label="Account number" name="account_number" :value="old('account_number', $customer->account_number)"
                                                 :required="true" />
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label for="address" class="form-label required">
-                                                    {{ __('Address') }}
-                                                </label>
-
-                                                <textarea id="address" name="address" rows="3" class="form-control @error('address') is-invalid @enderror">{{ old('address', $customer->address) }}</textarea>
-
-                                                @error('address')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="card-footer text-end">
