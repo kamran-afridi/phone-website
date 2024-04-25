@@ -24,9 +24,16 @@ class StoreCustomerRequest extends FormRequest
 		return [
 			'photo' => 'image|file|max:1024',
 			'name' => 'required|string|max:50',
+			'shop_name' => 'required|string|max:50',
 			'email' => 'required|email|max:50',
-			'phone' => 'required|string|max:25',
+			'phone' => ['required', 'regex:/^(\+44|0)\d{10}$/'],
 			'address' => 'required|string|max:100',
+		];
+	}
+	public function messages(): array
+	{
+		return [
+			'phone.regex' => 'The phone number must be a valid UK phone number.(start with +44 or 0 followed by 10 digits)',
 		];
 	}
 }

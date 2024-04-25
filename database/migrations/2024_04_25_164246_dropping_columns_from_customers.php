@@ -14,6 +14,7 @@ return new class extends Migration {
 			$table->dropColumn('account_holder');
 			$table->dropColumn('account_number');
 			$table->dropColumn('bank_name');
+			$table->string('shop_name')->nullable();
 		});
 	}
 
@@ -26,6 +27,7 @@ return new class extends Migration {
 			$table->string('account_holder')->nullable();
 			$table->string('account_number')->nullable();
 			$table->string('bank_name')->nullable();
+			$table->dropColumn('shop_name');
 		});
 	}
 };
