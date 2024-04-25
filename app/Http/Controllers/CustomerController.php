@@ -95,11 +95,7 @@ class CustomerController extends Controller
 			'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,
-			'shopname' => $request->shopname,
-			'type' => $request->type,
-			'account_holder' => $request->account_holder,
-			'account_number' => $request->account_number,
-			'bank_name' => $request->bank_name,
+			'shop_name' => $request->shop_name,
 			'address' => $request->address,
 		]);
 
