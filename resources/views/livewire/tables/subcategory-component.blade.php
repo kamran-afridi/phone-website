@@ -7,10 +7,9 @@
             </label>
             <select wire:model.live="selectedCategory" name="category" id="category" class="form-select">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" class="">{{ $category->name }}</option>
                 @endforeach
             </select>
-            <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm mt-2">Add Category</a>
         </div>
         <div class="col-sm-6 col-md-6 mb-3">
             <label for="sub_category" class="form-label">
@@ -25,7 +24,6 @@
                     @endforeach
                 @endif
             </select>
-            <a href="{{ route('subcategories.create') }}" class="btn btn-primary btn-sm mt-2">Add Sub Category</a>
         </div>
 
 
@@ -56,3 +54,8 @@
 
     </div>
 </div>
+{{-- <script>
+    $(document).ready(function() {
+        // $('.selectpicker').selectpicker();
+    });
+</script> --}}

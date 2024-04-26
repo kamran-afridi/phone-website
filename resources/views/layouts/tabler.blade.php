@@ -15,6 +15,8 @@
     <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
     <style>
         @import url('https://rsms.me/inter/inter.css');
@@ -35,6 +37,9 @@
     {{-- - Page Styles - --}}
     @stack('page-styles')
     @livewireStyles
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 </head>
 
 <body>
@@ -546,12 +551,12 @@
             </footer> --}}
         </div>
     </div>
-
     <!-- Libs JS -->
     @stack('page-libraries')
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+
     {{-- - Page Scripts - --}}
     @stack('page-scripts')
 

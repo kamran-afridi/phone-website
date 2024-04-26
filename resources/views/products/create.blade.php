@@ -67,6 +67,15 @@
                                         {{-- @livewire('tables.subcategory-select-component', ['product' => $product]) --}}
                                         @livewire('tables.subcategory-component', ['product' => $product])
 
+                                        <div class="col-sm-6 col-md-6">
+                                            <x-input label="Price" name="price" id="price" type="number"
+                                                value="{{ old('price') }}" />
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <x-input label="Quantity" name="quantity" id="quantity"
+                                                value="{{ old('quantity') }}" />
+                                        </div>
+
                                         <div class="col-md-12 mb-3">
                                             <label for="description" class="form-label">
                                                 {{ __('Decription') }}
@@ -75,14 +84,12 @@
                                             <textarea name="description" id="description" rows="5" class="form-control" placeholder="Description...">{{ old('description') }}</textarea>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="Manufacturer" name="manufacturer" id="manufacturer"
                                                 value="{{ old('manufacturer') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
-                                            {{-- <x-input label="Device" name="device" id="device"
-                                                value="{{ old('device') }}" /> --}}
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <label for="device" class="form-label">
                                                 Device
                                             </label>
@@ -93,19 +100,19 @@
                                             </select>
                                             <a href="{{ route('devices.create') }}" class="btn btn-primary btn-sm mt-2">Add
                                                 a device</a>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="SKU" name="sku" id="sku"
                                                 value="{{ old('sku') }}" />
                                         </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="UPC Code" name="upc_code" id="upc_code"
                                                 value="{{ old('upc_code') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6 mb-3">
+                                        {{-- <div class="col-sm-6 col-md-6 mb-3">
                                             <label for="bar_code" class="form-label">
                                                 Is Barcode
                                             </label>
@@ -129,9 +136,9 @@
                                             <x-input type="number" label="New Inventory Item Cost"
                                                 name="new_inventory_item_cost" id="new_inventory_item_cost" placeholder="0"
                                                 value="{{ old('new_inventory_item_cost') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="Tax Class" name="tax_class" id="tax_class"
                                                 value="{{ old('tax_class') }}" />
                                         </div>
@@ -144,9 +151,9 @@
                                         <div class="col-sm-6 col-md-6">
                                             <x-input type="number" label="Retail price" name="retail_price"
                                                 id="retail_price" placeholder="0" value="{{ old('retail_price') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input type="number" label="Cost price" name="cost_price" id="cost_price"
                                                 placeholder="0" value="{{ old('cost_price') }}" />
                                         </div>
@@ -165,9 +172,9 @@
                                             <x-input type="number" label="On hand quantity" name="on_hand_quantity"
                                                 id="on_hand_quantity" placeholder="0"
                                                 value="{{ old('on_hand_quantity') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input type="number" label="Stock warning" name="stock_warning"
                                                 id="stock_warning" placeholder="0" value="{{ old('stock_warning') }}" />
                                         </div>
@@ -180,9 +187,9 @@
                                         <div class="col-sm-6 col-md-6">
                                             <x-input label="Manage serialized" name="manage_serialized"
                                                 id="manage_serialized" value="{{ old('manage_serialized') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="Condition" name="condition" id="condition"
                                                 value="{{ old('condition') }}" />
                                         </div>
@@ -206,9 +213,9 @@
                                         <div class="col-sm-6 col-md-6">
                                             <x-input label="Warranty time frame" name="warranty_time_frame"
                                                 id="warranty_time_frame" value="{{ old('warranty_time_frame') }}" />
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="col-sm-6 col-md-6">
+                                        {{-- <div class="col-sm-6 col-md-6">
                                             <x-input type="number" label="IMEI" name="imei" id="imei"
                                                 placeholder="0" value="{{ old('imei') }}" />
                                         </div>
@@ -245,7 +252,7 @@
                                             <x-input type="number" label="Comission Amount" name="comission_amount"
                                                 id="comission_amount" placeholder="0"
                                                 value="{{ old('comission_amount') }}" />
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
