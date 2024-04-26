@@ -83,113 +83,21 @@
                                             <td>{{ $product->product_description }}</td>
                                         </tr>
                                         <tr>
-                                            <td><span class="text-secondary">Manufacturer</span></td>
-                                            <td>{{ $product->manufacturer }}</td>
+                                            <td>Price</td>
+                                            <td>{{ $product->price }}</td>
                                         </tr>
                                         <tr>
+                                            <td>Category</td>
+                                            <td>{{ $product->category_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sub Category</td>
+                                            <td>{{ $product->sub_category_name }}</td>
+                                        </tr>
+                                        {{-- <tr>
                                             <td>Device</td>
                                             <td>{{ $product->device }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SKU</td>
-                                            <td>{{ $product->sku }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>UPC Code</td>
-                                            <td>{{ $product->upc_code }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Is barcode</td>
-                                            <td>{{ $product->is_barcode }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Valuation method</td>
-                                            <td>{{ $product->valuation_method }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>New stock adjustment</td>
-                                            <td>{{ $product->new_stock_adjustment }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>New inventory item cost</td>
-                                            <td>{{ $product->new_inventory_item_cost }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tax inclusive</td>
-                                            <td>{{ $product->tax_inclusive }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Retail price</td>
-                                            <td>{{ $product->retail_price }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cost price</td>
-                                            <td>{{ $product->cost_price }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sale price</td>
-                                            <td>{{ $product->sale_price }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Minimum price</td>
-                                            <td>{{ $product->minimum_price }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>On hand quantity</td>
-                                            <td>{{ $product->on_hand_quantity }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Stock warning</td>
-                                            <td>{{ $product->stock_warning }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Re order level</td>
-                                            <td>{{ $product->re_order_level }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Manage serialized</td>
-                                            <td>{{ $product->manage_serialized }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Condition</td>
-                                            <td>{{ $product->condition }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Supplier</td>
-                                            <td>{{ $product->supplier }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Physical location</td>
-                                            <td>{{ $product->physical_location }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Warranty</td>
-                                            <td>{{ $product->warranty }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Warranty time frame</td>
-                                            <td>{{ $product->warranty_time_frame }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>IMEI</td>
-                                            <td>{{ $product->imei }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Display on point of sale</td>
-                                            <td>{{ $product->display_on_point_of_sale }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Display on widget</td>
-                                            <td>{{ $product->display_on_widget }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Comission percentage</td>
-                                            <td>{{ $product->comission_percentage }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Comission amount</td>
-                                            <td>{{ $product->comission_amount }}</td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
