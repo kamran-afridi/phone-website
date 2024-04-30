@@ -92,12 +92,12 @@
                                                 <strong>{{ Cart::subtotal() }}</strong>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td colspan="3" class="text-end"><strong>Tax</strong></td>
                                             <td class="text-center">
                                                 <strong>{{ Cart::tax() }}</strong>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td colspan="3" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
