@@ -361,7 +361,7 @@
 
 
 
-                            <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
+                            {{-- <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
                                 <a class="nav-link" href="{{ route('phone-repairs.index') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -382,7 +382,7 @@
                                         {{ __('Phone repair') }}
                                     </span>
                                 </a>
-                            </li>
+                            </li> --}}
 
 
 
@@ -459,9 +459,9 @@
                                             <a class="dropdown-item" href="{{ route('subcategories.index') }}">
                                                 {{ __('Sub categories') }}
                                             </a>
-                                            <a class="dropdown-item" href="{{ route('repair-parts.index') }}">
+                                            {{-- <a class="dropdown-item" href="{{ route('repair-parts.index') }}">
                                                 {{ __('Repair Parts') }}
-                                            </a>
+                                            </a> --}}
                                             <a class="dropdown-item" href="{{ route('devices.index') }}">
                                                 {{ __('Devices') }}
                                             </a>

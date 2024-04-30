@@ -72,8 +72,8 @@
                                                 value="{{ old('price') }}" />
                                         </div>
                                         <div class="col-sm-6 col-md-6">
-                                            <x-input label="Quantity" name="quantity" id="quantity"
-                                                value="{{ old('quantity') }}" />
+                                            <x-input label="Quantity" name="quantity" type="number" step="1"
+                                                id="quantity" value="{{ old('quantity') }}" />
                                         </div>
 
                                         <div class="col-md-12 mb-3">

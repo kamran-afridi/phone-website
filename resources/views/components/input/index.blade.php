@@ -2,6 +2,7 @@
     'label' => null ?? ucfirst($name),
     'type' => null ?? 'text',
     'name',
+    'step' => null ?? '0.01',
     'id' => null ?? $name,
     'placeholder' => null,
     'autocomplete' => null ?? 'off',
@@ -18,10 +19,10 @@
     </label>
 
     <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}"
-        @if ($type === 'number') step="0.01" @endif class="form-control @error($name) is-invalid @enderror"
-        placeholder="{{ $placeholder }}" autocomplete="{{ $autocomplete }}" {{ $readonly ? 'readonly' : '' }}
-        {{ $disabled ? 'disabled' : '' }} {{ $required ? 'required' : '' }} {{--           value="{{ old($name, $model->name ) }}" --}}
-        value="{{ $value }}">
+        @if ($type === 'number') step="{{ $step }}" @endif
+        class="form-control @error($name) is-invalid @enderror" placeholder="{{ $placeholder }}"
+        autocomplete="{{ $autocomplete }}" {{ $readonly ? 'readonly' : '' }} {{ $disabled ? 'disabled' : '' }}
+        {{ $required ? 'required' : '' }} {{--           value="{{ old($name, $model->name ) }}" --}} value="{{ $value }}">
 
     @error($name)
         <div class="invalid-feedback">
