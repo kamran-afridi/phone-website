@@ -249,7 +249,7 @@
                                                 {{ $product->unit->name }}
                                             </td> --}}
                                                     <td class="text-center">
-                                                        {{ number_format($product->sale_price, 2) }}
+                                                        {{ number_format($product->price, 2) }}
                                                     </td>
                                                     <td>
                                                         <div class="d-flex">
@@ -261,7 +261,7 @@
                                                                 <input type="hidden" name="name"
                                                                     value="{{ $product->name }}">
                                                                 <input type="hidden" name="sale_price"
-                                                                    value="{{ $product->sale_price }}">
+                                                                    value="{{ $product->price }}">
 
                                                                 <button type="submit"
                                                                     class="btn btn-icon btn-outline-primary">
