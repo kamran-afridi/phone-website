@@ -15,9 +15,13 @@ class ProductController extends Controller
 {
 	public function index()
 	{
-		$products = Product::where("user_id", auth()->id())->count();
+		if(auth()->user()->role === 'admin') {
+			$products = Product::all();
+		} else {
+			$products = Product::where("user_id", auth()->id())->count();
+		}
 
-		return view('products.index', [
+ 		return view('products.index', [
 			'products' => $products,
 		]);
 	}
@@ -46,6 +50,11 @@ class ProductController extends Controller
 		/**
 		 * Handle upload image
 		 */
+
+		 if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		 }
+
 		$image = "";
 		if ($request->hasFile('product_image')) {
 			$image = $request->file('product_image')->store('products', 'public');
@@ -68,7 +77,11 @@ class ProductController extends Controller
 	}
 
 	public function show($uuid)
-	{
+	{	
+		if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		}
+	
 		$product = Product::join('categories', 'products.category_id', '=', 'categories.id')
 			->join('sub_categories', 'products.sub_category', '=', 'sub_categories.id')
 			->select('products.*', 'categories.name as category_name', 'sub_categories.sub_category_name as sub_category_name')
@@ -87,6 +100,10 @@ class ProductController extends Controller
 
 	public function edit($uuid)
 	{
+		if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		}
+
 		$categories = Category::where("user_id", auth()->id())->get(['id', 'name']);
 
 		$product = Product::where("uuid", $uuid)->firstOrFail();
@@ -99,6 +116,10 @@ class ProductController extends Controller
 
 	public function update(UpdateProductRequest $request, $uuid)
 	{
+		if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		}
+
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 		// $product->update($request->except('product_image'));
 
@@ -131,6 +152,10 @@ class ProductController extends Controller
 
 	public function destroy($uuid)
 	{
+		if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		}
+
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 		/**
 		 * Delete photo if exists.
@@ -147,16 +172,5 @@ class ProductController extends Controller
 		return redirect()
 			->route('products.index')
 			->with('success', 'Product has been deleted!');
-	}
-
-	private function generate_SKU(
-		$name,
-		$category_id,
-		$imei,
-		$upc_code
-	): string {
-		$sku = substr($name, 0, 2) . '-' . substr(Str::uuid(), 0, 2) . '-' . $category_id . '-' . substr($imei, 0, 2) . '-' . substr($upc_code, 0, 2);
-
-		return strtoupper(str_replace(" ", "", $sku));
 	}
 }

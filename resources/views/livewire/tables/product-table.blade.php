@@ -131,10 +131,13 @@
                             {{ $product->sub_category_name }}
                         </td>
                         <td class="align-middle text-center" style="width: 10%">
-                            <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
-                            <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
-                            <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product->uuid) }}"
-                                onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
+                            @if (auth()->user()->role === 'admin')
+                                <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
+                                <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
+                                <x-button.delete class="btn-icon"
+                                    route="{{ route('products.destroy', $product->uuid) }}"
+                                    onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
+                            @endif
                         </td>
                     </tr>
                 @empty
