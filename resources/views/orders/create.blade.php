@@ -67,128 +67,6 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                        <!-- The modal -->
-                                        <div class="modal modal-lg" id="myModal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form action="{{ route('customers.store') }}" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h3 class="card-title">
-                                                                            {{ __('Customer Image') }}
-                                                                        </h3>
-
-                                                                        <img class="img-account-profile rounded-circle mb-2"
-                                                                            src="{{ asset('assets/img/demo/user-placeholder.svg') }}"
-                                                                            alt="" id="image-preview" />
-
-                                                                        <div class="small font-italic text-muted mb-2">JPG
-                                                                            or PNG no larger than 2 MB</div>
-
-                                                                        <input
-                                                                            class="form-control @error('photo') is-invalid @enderror"
-                                                                            type="file" id="image" name="photo"
-                                                                            accept="image/*" onchange="previewImage();">
-
-                                                                        @error('photo')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-8">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h3 class="card-title">
-                                                                            {{ __('Customer Details') }}
-                                                                        </h3>
-
-                                                                        <div class="row row-cards">
-                                                                            <div class="col-md-12">
-                                                                                <x-input name="name" :required="true" />
-                                                                                <x-input name="email"
-                                                                                    label="Email address"
-                                                                                    :required="true" />
-                                                                                <x-input name="shop_name" label="Shop Name"
-                                                                                    :required="true" />
-                                                                                <x-input label="Phone Number" name="phone"
-                                                                                    type='tel' :required="true" />
-                                                                                {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
-																					required> --}}
-                                                                            </div>
-
-                                                                            <div class="mb-3">
-                                                                                <label for="address"
-                                                                                    class="form-label required">
-                                                                                    Address
-                                                                                </label>
-
-                                                                                <textarea name="address" id="address" rows="3"
-                                                                                    class="form-control form-control-solid @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
-
-                                                                                @error('address')
-                                                                                    <div class="invalid-feedback">
-                                                                                        {{ $message }}
-                                                                                    </div>
-                                                                                @enderror
-                                                                            </div>
-
-
-                                                                            {{-- <div class="col-sm-6 col-md-6">
-																			<label for="bank_name" class="form-label">
-																				Bank Name
-																			</label>
-									
-																			<select class="form-select form-control-solid @error('bank_name') is-invalid @enderror" id="bank_name" name="bank_name">
-																				<option selected="" disabled="">Select a bank:</option>
-																				<option value="BRI" @if (old('bank_name') == 'BRI')selected="selected"@endif>BRI</option>
-																				<option value="BNI" @if (old('bank_name') == 'BNI')selected="selected"@endif>BNI</option>
-																				<option value="BCA" @if (old('bank_name') == 'BCA')selected="selected"@endif>BCA</option>
-																				<option value="BSI" @if (old('bank_name') == 'BSI')selected="selected"@endif>BSI</option>
-																				<option value="Mandiri" @if (old('bank_name') == 'Mandiri')selected="selected"@endif>Mandiri</option>
-																			</select>
-									
-																			@error('bank_name')
-																			<div class="invalid-feedback">
-																				{{ $message }}
-																			</div>
-																			@enderror
-																		</div> --}}
-
-
-                                                                            {{-- <div class="col-sm-6 col-md-6">
-																			<x-input label="Account holder" name="account_holder" />
-																		</div>
-									
-																		<div class="col-sm-6 col-md-6">
-																			<x-input label="Account number" name="account_number" />
-																		</div> --}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-footer text-end">
-                                                                        <button class="btn btn-primary" type="submit">
-                                                                            {{ __('Save') }}
-                                                                        </button>
-
-                                                                        <a class="btn btn-outline-warning"
-                                                                            href="{{ route('customers.index') }}">
-                                                                            {{ __('Cancel') }}
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
 
@@ -235,8 +113,8 @@
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control" name="qty"
                                                                     required value="{{ old('qty', $item->qty) }}">
-                                                                <input type="hidden" class="form-control"
-                                                                    name="product_id" value="{{ $item->id }}">
+                                                                <input type="hidden" class="form-control" name="product_id"
+                                                                    value="{{ $item->id }}">
 
                                                                 <div class="input-group-append text-center">
                                                                     <button type="submit"
@@ -248,8 +126,7 @@
                                                                             width="24" height="24"
                                                                             viewBox="0 0 24 24" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round">
+                                                                            stroke-linecap="round" stroke-linejoin="round">
                                                                             <path stroke="none" d="M0 0h24v24H0z"
                                                                                 fill="none" />
                                                                             <path d="M5 12l5 5l10 -10" />
@@ -270,8 +147,7 @@
                                                             method="POST">
                                                             @method('delete')
                                                             @csrf
-                                                            <button type="submit"
-                                                                class="btn btn-icon btn-outline-danger "
+                                                            <button type="submit" class="btn btn-icon btn-outline-danger "
                                                                 onclick="return confirm('Are you sure you want to delete this record?')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     class="icon icon-tabler icon-tabler-trash"
@@ -343,6 +219,90 @@
                     @livewire('search-orders', ['products' => $products])
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- The modal -->
+    <div class="modal modal-lg" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        {{ __('Customer Image') }}
+                                    </h3>
+
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="{{ asset('assets/img/demo/user-placeholder.svg') }}" alt=""
+                                        id="image-preview" />
+
+                                    <div class="small font-italic text-muted mb-2">JPG
+                                        or PNG no larger than 2 MB</div>
+
+                                    <input class="form-control @error('photo') is-invalid @enderror" type="file"
+                                        id="image" name="photo" accept="image/*" onchange="previewImage();">
+
+                                    @error('photo')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        {{ __('Customer Details') }}
+                                    </h3>
+
+                                    <div class="row row-cards">
+                                        <div class="col-md-12">
+                                            <x-input name="name" :required="true" />
+                                            <x-input name="email" label="Email address" :required="true" />
+                                            <x-input name="shop_name" label="Shop Name" :required="true" />
+                                            <x-input label="Phone Number" name="phone" type='tel'
+                                                :required="true" />
+                                            {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
+												required> --}}
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label required">
+                                                Address
+                                            </label>
+
+                                            <textarea name="address" id="address" rows="3"
+                                                class="form-control form-control-solid @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
+
+                                            @error('address')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-end">
+                                    <button class="btn btn-primary" type="submit">
+                                        {{ __('Save') }}
+                                    </button>
+
+                                    <a class="btn btn-outline-warning" href="{{ route('customers.index') }}">
+                                        {{ __('Cancel') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

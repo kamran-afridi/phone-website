@@ -54,8 +54,7 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="{{ url('/') }}">
-                        <img src="{{ asset('static/logo.svg') }}" width="110" height="32" alt="Tabler"
-                            class="navbar-brand-image">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="Tabler" class="navbar-brand-image">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row order-md-last">
@@ -345,7 +344,7 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{ request()->is('customers*') ? 'active' : null }}">
+                                <li class="nav-item {{ request()->is('credit_history*') ? 'active' : null }}">
                                     <a class="nav-link" href="#">
                                         {{-- {{ route('customers.index') }} --}}
                                         <span
@@ -443,8 +442,7 @@
 
 
 
-                                <li
-                                    class="nav-item dropdown {{ request()->is('suppliers*', 'customers*') ? 'active' : null }}">
+                                <li class="nav-item dropdown {{ request()->is('suppliers*') ? 'active' : null }}">
                                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                         data-bs-auto-close="outside" role="button" aria-expanded="false">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">

@@ -44,17 +44,16 @@ class CustomerController extends Controller
 			'shop_name' => $request->shop_name,
 			'phone' => $request->phone,
 			'address' => $request->address,
-			// 'type' => $request->type,
-			// 'account_holder' => $request->account_holder,
-			// 'account_number' => $request->account_number,
-			// 'bank_name' => $request->bank_name,
 		]);
 
 
-
-		return redirect()
-			->route('customers.index')
-			->with('success', 'New customer has been created!');
+		if (str_contains(url()->previous(), '/orders/create')) {
+			return redirect()->route('orders.create');
+		} else {
+			return redirect()
+				->route('customers.index')
+				->with('success', 'New customer has been created!');
+		}
 	}
 
 	public function show($uuid)
