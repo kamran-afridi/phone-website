@@ -227,7 +227,7 @@
                 <div class="navbar">
                     <div class="container-xl">
                         <ul class="navbar-nav">
-                            <li class="nav-item {{ request()->is('dashboard*') ? 'active' : null }}">
+                            {{-- <li class="nav-item {{ request()->is('dashboard*') ? 'active' : null }}">
                                 <a class="nav-link" href="{{ route('dashboard') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -245,7 +245,7 @@
                                         {{ __('Dashboard') }}
                                     </span>
                                 </a>
-                            </li>
+                            </li> --}}
 
 
                             <li class="nav-item {{ request()->is('products*') ? 'active' : null }}">
@@ -317,6 +317,35 @@
                                     </div>
                                 </div>
                             </li>
+
+                            <li class="nav-item {{ request()->is('customers*') ? 'active' : null }}">
+                                <a class="nav-link" href="{{ route('customers.index') }}">
+                                    <span
+                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-packages" width="24"
+                                            height="24" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                            <path d="M2 13.5v5.5l5 3" />
+                                            <path d="M7 16.545l5 -3.03" />
+                                            <path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                            <path d="M12 19l5 3" />
+                                            <path d="M17 16.5l5 -3" />
+                                            <path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5" />
+                                            <path d="M7 5.03v5.455" />
+                                            <path d="M12 8l5 -3" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        {{ __('Customers') }}
+                                    </span>
+                                </a>
+                            </li>
+
+
 
 
                             <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
@@ -412,9 +441,9 @@
                                             <a class="dropdown-item" href="{{ route('suppliers.index') }}">
                                                 {{ __('Suppliers') }}
                                             </a>
-                                            <a class="dropdown-item" href="{{ route('customers.index') }}">
+                                            {{-- <a class="dropdown-item" href="{{ route('customers.index') }}">
                                                 {{ __('Customers') }}
-                                            </a>
+                                            </a> --}}
                                             <a class="dropdown-item" href="{{ route('expenses.index') }}">
                                                 {{ __('Expenses') }}
                                             </a>

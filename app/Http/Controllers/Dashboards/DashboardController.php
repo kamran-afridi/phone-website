@@ -15,6 +15,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+		if (auth()->user()->role !== 'admin') {
+			return redirect()->route('orders.index');
+		}
+
         $orders = Order::where("user_id", auth()->id())->count();
         $products = Product::where("user_id", auth()->id())->count();
 
