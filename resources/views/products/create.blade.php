@@ -65,24 +65,28 @@
                                             <x-input name="name" id="name" value="{{ old('name') }}" />
                                         </div>
                                         {{-- @livewire('tables.subcategory-select-component', ['product' => $product]) --}}
-                                        @livewire('tables.subcategory-component', ['product' => $product])
+                                        {{-- @livewire('tables.subcategory-component', ['product' => $product]) --}}
 
-                                        <div class="col-sm-6 col-md-6">
-                                            <x-input label="Price" name="price" id="price" type="number"
-                                                value="{{ old('price') }}" />
+                                        <div class="col-12">
+                                            <x-input label="Cost Price" name="cost_price" id="cost_price" type="number"
+                                                value="{{ old('cost_price') }}" />
                                         </div>
-                                        <div class="col-sm-6 col-md-6">
-                                            <x-input label="Quantity" name="quantity" type="number" step="1"
-                                                id="quantity" value="{{ old('quantity') }}" />
+                                        <div class="col-12">
+                                            <x-input label="Whole Sale Price" name="whole_sale_price" id="whole_sale_price"
+                                                type="number" value="{{ old('whole_sale_price') }}" />
+                                        </div>
+                                        <div class="col-12">
+                                            <x-input label="Sale Price" name="sale_price" id="sale_price" type="number"
+                                                value="{{ old('sale_price') }}" />
                                         </div>
 
-                                        <div class="col-md-12 mb-3">
+                                        {{-- <div class="col-md-12 mb-3">
                                             <label for="description" class="form-label">
                                                 {{ __('Decription') }}
                                             </label>
 
                                             <textarea name="description" id="description" rows="5" class="form-control" placeholder="Description...">{{ old('description') }}</textarea>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="col-sm-6 col-md-6">
                                             <x-input label="Manufacturer" name="manufacturer" id="manufacturer"

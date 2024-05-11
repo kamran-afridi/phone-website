@@ -79,25 +79,17 @@
                                             <td>{{ $product->name }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Description</td>
-                                            <td>{{ $product->product_description }}</td>
+                                            <td>Cost Price</td>
+                                            <td>{{ $product->cost_price }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Price</td>
-                                            <td>{{ $product->price }}</td>
+                                            <td>Sale Price</td>
+                                            <td>{{ $product->sale_price }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Category</td>
-                                            <td>{{ $product->category_name }}</td>
+                                            <td>Whole Sale Price</td>
+                                            <td>{{ $product->whole_sale_price }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Sub Category</td>
-                                            <td>{{ $product->sub_category_name }}</td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td>Device</td>
-                                            <td>{{ $product->device }}</td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

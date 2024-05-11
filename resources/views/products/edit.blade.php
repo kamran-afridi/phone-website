@@ -81,18 +81,39 @@
                                         </div>
 
                                         {{-- @livewire('tables.subcategory-select-component', ['product' => $product]) --}}
-                                        @livewire('tables.subcategory-component', ['product' => $product])
+                                        {{-- @livewire('tables.subcategory-component', ['product' => $product]) --}}
 
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">
-                                                    {{ __('Price') }}
+                                                    {{ __('Cost Price') }}
                                                     <span class="text-danger">*</span>
                                                 </label>
 
-                                                <input type="number" id="price" name="price" step="0.01"
-                                                    class="form-control @error('price') is-invalid @enderror"
-                                                    placeholder="Price" value="{{ old('price', $product->price) }}">
+                                                <input type="number" id="cost_price" name="cost_price" step="0.01"
+                                                    class="form-control @error('cost_price') is-invalid @enderror"
+                                                    placeholder="Cost Price"
+                                                    value="{{ old('cost_price', $product->cost_price) }}">
+
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">
+                                                    {{ __('Sale Price') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <input type="number" id="sale_price" name="sale_price" step="0.01"
+                                                    class="form-control @error('sale_price') is-invalid @enderror"
+                                                    placeholder="Sale Price"
+                                                    value="{{ old('sale_price', $product->sale_price) }}">
 
                                                 @error('name')
                                                     <div class="invalid-feedback">
@@ -104,14 +125,15 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">
-                                                    {{ __('Quantity') }}
+                                                    {{ __('Whole Sale Price') }}
                                                     <span class="text-danger">*</span>
                                                 </label>
 
-                                                <input type="number" id="quantity" name="quantity"
-                                                    class="form-control @error('quantity') is-invalid @enderror"
-                                                    placeholder="quantity"
-                                                    value="{{ old('quantity', $product->quantity) }}">
+                                                <input type="number" id="whole_sale_price" name="whole_sale_price"
+                                                    step="0.01"
+                                                    class="form-control @error('whole_sale_price') is-invalid @enderror"
+                                                    placeholder="Whole Sale Price"
+                                                    value="{{ old('whole_sale_price', $product->whole_sale_price) }}">
 
                                                 @error('name')
                                                     <div class="invalid-feedback">
@@ -121,27 +143,19 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 mb-3">
-                                            <label for="description" class="form-label">
-                                                {{ __('Decription') }}
-                                            </label>
 
-                                            <textarea name="description" id="description" rows="5" class="form-control" placeholder="Description...">{{ old('product_description', $product->product_description) }}</textarea>
+                                        <div class="card-footer text-end">
+                                            <button class="btn btn-primary" type="submit">
+                                                {{ __('Update') }}
+                                            </button>
+
+                                            <a class="btn btn-danger" href="{{ url()->previous() }}">
+                                                {{ __('Cancel') }}
+                                            </a>
                                         </div>
-                                    </div>
-
-                                    <div class="card-footer text-end">
-                                        <button class="btn btn-primary" type="submit">
-                                            {{ __('Update') }}
-                                        </button>
-
-                                        <a class="btn btn-danger" href="{{ url()->previous() }}">
-                                            {{ __('Cancel') }}
-                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                 </form>
             </div>
         </div>
