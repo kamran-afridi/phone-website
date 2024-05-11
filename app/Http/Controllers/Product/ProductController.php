@@ -15,11 +15,7 @@ class ProductController extends Controller
 {
 	public function index()
 	{
-		if(auth()->user()->role === 'admin') {
-			$products = Product::all();
-		} else {
-			$products = Product::where("user_id", auth()->id())->count();
-		}
+		$products = Product::all();
 
  		return view('products.index', [
 			'products' => $products,
@@ -28,6 +24,11 @@ class ProductController extends Controller
 
 	public function create(Request $request)
 	{
+
+		if(auth()->user()->role !== 'admin') {
+			return abort(404);
+		}
+
 		$categories = Category::where("user_id", auth()->id())->get(['id', 'name']);
 		$product = Product::where('uuid', auth()->id())->first();
 		// $devices = Device::where('user_id', auth()->id())->get(['id', 'name']);
