@@ -6,9 +6,11 @@
             </h3>
         </div>
 
-        {{-- <div class="card-actions">
-            <x-action.create route="{{ route('products.create') }}" />
-        </div> --}}
+        @if (auth()->user()->role === 'admin')
+            <div class="card-actions">
+                <x-action.create route="{{ route('products.create') }}" />
+            </div>
+        @endif
     </div>
 
     <div class="card-body border-bottom py-3">
@@ -53,49 +55,26 @@
                             @include('inclues._sort-icon', ['field' => 'products.name'])
                         </a>
                     </th>
+
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('products.product_description')" href="#" role="button">
-                            {{ __('Description') }}
-                            @include('inclues._sort-icon', ['field' => 'products.product_description'])
-                        </a>
-                    </th>
-                    {{-- <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('products.manufacturer')" href="#" role="button">
-                            {{ __('Manufacturer') }}
-                            @include('inclues._sort-icon', ['field' => 'products.manufacturer'])
+                        <a wire:click.prevent="sortBy('products.cost_price')" href="#" role="button">
+                            {{ __('Cost Price') }}
+                            @include('inclues._sort-icon', ['field' => 'products.cost_price'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('products.device')" href="#" role="button">
-                            {{ __('Device') }}
-                            @include('inclues._sort-icon', ['field' => 'products.device'])
-                        </a>
-                    </th> --}}
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('products.quantity')" href="#" role="button">
-                            {{ __('Quantity') }}
-                            @include('inclues._sort-icon', ['field' => 'products.quantity'])
+                        <a wire:click.prevent="sortBy('products.sale_price')" href="#" role="button">
+                            {{ __('Sale Price') }}
+                            @include('inclues._sort-icon', ['field' => 'products.sale_price'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('products.price')" href="#" role="button">
-                            {{ __('Price') }}
-                            @include('inclues._sort-icon', ['field' => 'products.price'])
+                        <a wire:click.prevent="sortBy('products.sale_price')" href="#" role="button">
+                            {{ __('Whole Sale Price') }}
+                            @include('inclues._sort-icon', ['field' => 'products.sale_price'])
                         </a>
                     </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('categories.name')" href="#" role="button">
-                            {{ __('Category') }}
-                            @include('inclues._sort-icon', ['field' => 'categories.name'])
-                        </a>
-                    </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('sub_categories.sub_category_name')" href="#"
-                            role="button">
-                            {{ __('Sub Category') }}
-                            @include('inclues._sort-icon', ['field' => 'sub_category_name'])
-                        </a>
-                    </th>
+
                     <th scope="col" class="align-middle text-center">
                         {{ __('Action') }}
                     </th>
@@ -113,22 +92,17 @@
                                 alt="">
                         </td>
                         <td class="align-middle text-center">
-                            {{ $product->product_name }}
+                            {{ $product->name }}
+                        </td>
+
+                        <td class="align-middle text-center">
+                            {{ $product->cost_price }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $product->product_description }}
+                            {{ $product->sale_price }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $product->quantity }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $product->price }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $product->category_name }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $product->sub_category_name }}
+                            {{ $product->whole_sale_price }}
                         </td>
                         <td class="align-middle text-center" style="width: 10%">
                             @if (auth()->user()->role === 'admin')

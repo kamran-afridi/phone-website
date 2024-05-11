@@ -63,14 +63,10 @@ class ProductController extends Controller
 
 		Product::create([
 			'name' => $request->name,
-			'category_id' => $request->category,
-			'sub_category' => $request->sub_category,
-			'product_description' => $request->description,
-			'price' => $request->price,
-			'quantity' => $request->quantity,
+			'cost_price' => $request->cost_price,
+			'whole_sale_price' => $request->whole_sale_price,
+			'sale_price' => $request->sale_price,
 			'user_id' => auth()->id(),
-			'device_id' => $request->device,
-			'slug' => Str::slug($request->name, '-'),
 			'uuid' => Str::uuid(),
 		]);
 
@@ -83,10 +79,7 @@ class ProductController extends Controller
 			return abort(404);
 		}
 	
-		$product = Product::join('categories', 'products.category_id', '=', 'categories.id')
-			->join('sub_categories', 'products.sub_category', '=', 'sub_categories.id')
-			->select('products.*', 'categories.name as category_name', 'sub_categories.sub_category_name as sub_category_name')
-			->where('products.uuid', $uuid)->firstOrFail();
+		$product = Product::where('products.uuid', $uuid)->firstOrFail();
 
 		// Generate a barcode
 		// $generator = new BarcodeGeneratorHTML();
@@ -105,12 +98,9 @@ class ProductController extends Controller
 			return abort(404);
 		}
 
-		$categories = Category::where("user_id", auth()->id())->get(['id', 'name']);
-
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 
 		return view('products.edit', [
-			'categories' => $categories,
 			'product' => $product,
 		]);
 	}
@@ -135,12 +125,9 @@ class ProductController extends Controller
 		}
 
 		$product->name = $request->name;
-		$product->slug = Str::slug($request->name, '-');
-		$product->category_id = $request->category;
-		$product->sub_category = $request->sub_category;
-		$product->product_description = $request->description;
-		$product->price = $request->price;
-		$product->quantity = $request->quantity;
+		$product->cost_price = $request->cost_price;
+		$product->sale_price = $request->sale_price;
+		$product->whole_sale_price = $request->whole_sale_price;
 		$product->user_id = auth()->id();
 		$product->uuid = Str::uuid();
 		$product->save();

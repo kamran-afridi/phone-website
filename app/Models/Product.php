@@ -14,48 +14,14 @@ class Product extends Model
 
 	protected $guarded = ['id'];
 	protected $fillable = [
-		'category',
-		'sub_category',
 		'name',
 		'uuid',
 		'user_id',
-		'product_description',
-		'quantity',
-		'price',
-		'category_id',
+		'cost_price',
+		'sale_price',
+		'whole_sale_price',
 		'created_at',
-		'slug',
 		'update_at',
-		// 'manufacturer',
-		// 'device',
-		// 'sku',
-		// 'upc_code',
-		// 'is_barcode',
-		// 'valuation_method',
-		// 'new_stock_adjustment',
-		// 'new_inventory_item_cost',
-		// 'tax_class',
-		// 'tax_inclusive',
-		// 'retail_price',
-		// 'cost_price',
-		// 'sale_price',
-		// 'minimum_price',
-		// 'on_hand_quantity',
-		// 'stock_warning',
-		// 're_order_level',
-		// 'manage_serialized',
-		// 'condition',
-		// 'device_id',
-		// 'product_image',
-		// 'supplier',
-		// 'physical_location',
-		// 'warranty',
-		// 'warranty_time_frame',
-		// 'imei',
-		// 'display_on_point_of_sale',
-		// 'display_on_widget',
-		// 'comission_percentage',
-		// 'comission_amount',
 	];
 
 	protected $casts = [
@@ -80,8 +46,7 @@ class Product extends Model
 
 	public function scopeSearch($query, $value): void
 	{
-		$query->where('products.name', 'like', "%{$value}%")
-			->orWhere('products.category_id', 'like', "%{$value}%");
+		$query->where('products.name', 'like', "%{$value}%");
 	}
 	/**
 	 * Get the user that owns the Category
