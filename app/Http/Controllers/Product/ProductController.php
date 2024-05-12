@@ -66,9 +66,14 @@ class ProductController extends Controller
 			'cost_price' => $request->cost_price,
 			'whole_sale_price' => $request->whole_sale_price,
 			'sale_price' => $request->sale_price,
+			'quantity' => $request->quantity,
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
+
+		if (str_contains(url()->previous(), '/orders/create')) {
+			return to_route('orders.create');
+		}
 
 		return to_route('products.index')->with('success', 'Product has been created!');
 	}
@@ -128,9 +133,14 @@ class ProductController extends Controller
 		$product->cost_price = $request->cost_price;
 		$product->sale_price = $request->sale_price;
 		$product->whole_sale_price = $request->whole_sale_price;
+		$product->quantity = $request->quantity;
 		$product->user_id = auth()->id();
 		$product->uuid = Str::uuid();
 		$product->save();
+
+		if(str_contains(url()->previous(), '/orders/create')) {
+			return to_route('orders.create');
+		}
 
 
 		return redirect()

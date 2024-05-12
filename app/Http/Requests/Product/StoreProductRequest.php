@@ -27,6 +27,7 @@ class StoreProductRequest extends FormRequest
 			'cost_price' => 'required|numeric',
 			'whole_sale_price' => 'required|numeric',
 			'sale_price' => 'required|numeric',
+			'quantity' => 'required|numeric',
 			// 'category' => 'required|string',
 			// 'sub_category' => 'required|string',
 			// 'description' => 'required|string',
