@@ -54,7 +54,8 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="{{ url('/') }}">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="Tabler" width="60" height="auto">
+                        <img src="{{ asset('assets/img/logo.PNG') }}" alt="Panther Force" width="60"
+                            height="auto">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row order-md-last">
