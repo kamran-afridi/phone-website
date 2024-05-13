@@ -64,7 +64,7 @@
         <div class="container container-tight py-4">
             <div class="text-center mb-4">
                 <a href="{{ url('/') }}" class="navbar-brand navbar-brand-autodark">
-                    <img src="{{ asset('assets/img/logo.png') }}" width="121" height="auto" alt="Panther Force">
+                    <img src="{{ asset('assets/img/logo.PNG') }}" width="121" height="auto" alt="Panther Force">
                 </a>
             </div>
 
