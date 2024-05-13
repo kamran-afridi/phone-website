@@ -262,6 +262,10 @@
                                     <h3 class="card-title">
                                         {{ __('Customer Details') }}
                                     </h3>
+                                    <button type="button" class="close btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                    </button>
 
                                     <div class="row row-cards">
                                         <div class="col-md-12">
@@ -294,10 +298,6 @@
                                     <button class="btn btn-primary" type="submit">
                                         {{ __('Save') }}
                                     </button>
-
-                                    <a class="btn btn-outline-warning" href="{{ route('customers.index') }}">
-                                        {{ __('Cancel') }}
-                                    </a>
                                 </div>
                             </div>
                         </div>

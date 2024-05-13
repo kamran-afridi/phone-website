@@ -35,7 +35,12 @@ class OrderController extends Controller
 	{
 		$products = Product::where('user_id', auth()->id())->with(['category_id'])->get();
 
-		$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
+		if(auth()->user()->role == 'admin')
+		{
+			$customers = Customer::get(['id', 'name']);
+		} else {
+			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
+		}
 
 		$carts = Cart::content();
 
