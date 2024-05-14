@@ -80,6 +80,24 @@
                             @include('inclues._sort-icon', ['field' => 'products.sale_price'])
                         </a>
                     </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('products.quantity')" href="#" role="button">
+                            {{ __('Quantity') }}
+                            @include('inclues._sort-icon', ['field' => 'products.quantity'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('products.bar_code')" href="#" role="button">
+                            {{ __('Bar code') }}
+                            @include('inclues._sort-icon', ['field' => 'products.bar_code'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('products.item_type')" href="#" role="button">
+                            {{ __('Item type') }}
+                            @include('inclues._sort-icon', ['field' => 'products.item_type'])
+                        </a>
+                    </th>
 
                     @if (auth()->user()->role === 'admin')
                         <th scope="col" class="align-middle text-center">
@@ -115,6 +133,15 @@
                         <td class="align-middle text-center">
                             {{ $product->whole_sale_price }}
                         </td>
+                        <td class="align-middle text-center">
+                            {{ $product->quantity }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ $product->bar_code }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ $product->item_type }}
+                        </td>
                         @if (auth()->user()->role === 'admin')
                             <td class="align-middle text-center" style="width: 10%">
                                 <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
@@ -136,12 +163,12 @@
 
     <div class="card-footer d-flex align-items-center">
         <p class="m-0 text-secondary">
-            {{-- Showing <span>{{ $products->firstItem() }}</span> --}}
-            {{-- to <span>{{ $products->lastItem() }}</span> of <span>{{ $products->total() }}</span> entries --}}
+            Showing <span>{{ $products->firstItem() }}</span>
+            to <span>{{ $products->lastItem() }}</span> of <span>{{ $products->total() }}</span> entries
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{-- {{ $products->links() }} --}}
+            {{ $products->links() }}
         </ul>
     </div>
 </div>

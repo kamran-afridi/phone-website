@@ -20,6 +20,10 @@ class Product extends Model
 		'cost_price',
 		'sale_price',
 		'whole_sale_price',
+		'quantity',
+		'sku',
+		'item_type',
+		'bar_code',
 		'created_at',
 		'update_at',
 	];
@@ -46,7 +50,8 @@ class Product extends Model
 
 	public function scopeSearch($query, $value): void
 	{
-		$query->where('products.name', 'like', "%{$value}%");
+		$query->where('products.name', 'like', "%{$value}%")
+			->orWhere('products.sku', 'like', "%{$value}%");
 	}
 	/**
 	 * Get the user that owns the Category

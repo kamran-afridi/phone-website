@@ -67,6 +67,9 @@ class ProductController extends Controller
 			'whole_sale_price' => $request->whole_sale_price,
 			'sale_price' => $request->sale_price,
 			'quantity' => $request->quantity,
+			'sku' => $request->sku,
+			'bar_code' => $request->bar_code,
+			'item_type' => $request->item_type,
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
@@ -134,6 +137,9 @@ class ProductController extends Controller
 		$product->sale_price = $request->sale_price;
 		$product->whole_sale_price = $request->whole_sale_price;
 		$product->quantity = $request->quantity;
+		$product->sku = $request->sku;
+		$product->item_type = $request->item_type;
+		$product->bar_code = $request->bar_code;
 		$product->user_id = auth()->id();
 		$product->uuid = Str::uuid();
 		$product->save();

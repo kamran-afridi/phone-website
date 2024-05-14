@@ -142,6 +142,81 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">
+                                                    {{ __('Quantity') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <input type="number" id="quantity" name="quantity" step="0.01"
+                                                    class="form-control @error('quantity') is-invalid @enderror"
+                                                    placeholder="Whole Sale Price"
+                                                    value="{{ old('quantity', $product->quantity) }}">
+
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">
+                                                    {{ __('SKU') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <input id="sku" name="sku" step="0.01"
+                                                    class="form-control @error('sku') is-invalid @enderror"
+                                                    placeholder="SKU" value="{{ old('sku', $product->sku) }}">
+
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">
+                                                    {{ __('Item type') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <input id="item_type" name="item_type" step="0.01"
+                                                    class="form-control @error('item_type') is-invalid @enderror"
+                                                    placeholder="Item type"
+                                                    value="{{ old('item_type', $product->item_type) }}">
+
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">
+                                                    {{ __('Bar code') }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <input id="bar_code" name="bar_code" step="0.01"
+                                                    class="form-control @error('bar_code') is-invalid @enderror"
+                                                    placeholder="Bar code"
+                                                    value="{{ old('bar_code', $product->bar_code) }}">
+
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
 
 
                                         <div class="card-footer text-end">

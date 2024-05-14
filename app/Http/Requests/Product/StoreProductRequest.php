@@ -24,6 +24,9 @@ class StoreProductRequest extends FormRequest
 		return [
 			'product_image' => 'image|file|max:2048',
 			'name' => 'required|string',
+			'sku' => 'required|string',
+			'item_type' => 'required|string',
+			'bar_code' => 'required|string',
 			'cost_price' => 'required|numeric',
 			'whole_sale_price' => 'required|numeric',
 			'sale_price' => 'required|numeric',
