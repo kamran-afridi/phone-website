@@ -183,7 +183,7 @@
 
                                 <input type="number" step="0.01" id="pay" name="pay"
                                     class="form-control @error('pay') is-invalid @enderror"
-                                    value="{{ old('pay') }}" required>
+                                    value="{{ Cart::total() }}" required>
 
                                 @error('pay')
                                     <div class="invalid-feedback">
