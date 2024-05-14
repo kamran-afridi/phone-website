@@ -162,8 +162,8 @@
 
                                     <select class="form-control @error('payment_type') is-invalid @enderror"
                                         id="payment_type" name="payment_type" required>
-                                        <option selected="" disabled="">Select a payment:</option>
-                                        <option  value="HandCash">HandCash</option>
+                                        {{-- <option selected="" disabled="">Select a payment:</option> --}}
+                                        <option  selected value="HandCash">HandCash</option>
                                         <option value="Cheque">Cheque</option>
                                         <option value="Due">Due</option>
                                     </select>
