@@ -34,7 +34,7 @@ class OrderTable extends Component
     public function render()
     {
 
-		if(auth()->user()->role === 'admin' && auth()->user()->role === 'supplier') {
+		if(auth()->user()->role === 'admin' OR auth()->user()->role === 'supplier') {
 			$orders = Order::with(['customer', 'details'])
 			->search($this->search)
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
