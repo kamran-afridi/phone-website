@@ -5,7 +5,7 @@
             Search:
             <div class="ms-2 d-inline-block">
                 <input type="text" wire:model.live="search" class="form-control form-control-sm"
-                    aria-label="Search invoice">
+                    aria-label="Search product">
             </div>
         </div>
     </div>
@@ -18,6 +18,7 @@
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col">SKU</th>
                             <th scope="col">Name</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Price</th>
@@ -27,6 +28,9 @@
                     <tbody>
                         @forelse ($products as $product)
                             <tr>
+                                <td class="text-center">
+                                    {{ $product->sku }}
+                                </td>
                                 <td class="text-center">
                                     {{ $product->name }}
                                 </td>
