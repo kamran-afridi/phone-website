@@ -31,7 +31,7 @@ class QuotationController extends Controller
 
         return view('quotations.create', [
             'cart' => Cart::content('quotation'),
-            'products' => Product::where("user_id",auth()->id())->get(),
+            'products' => Product::all(),
             'customers' => Customer::where("user_id",auth()->id())->get(),
 
             // maybe?
