@@ -58,10 +58,10 @@
                                     {{ $product->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ $product->quantity }}
+                                    {{ number_format($product->cost_price, 2) }}
                                 </td>
                                 <td class="text-center">
-                                    {{ number_format($product->cost_price, 2) }}
+                                    {{ $product->quantity }}
                                 </td>
                                 <td>
                                     <div class="d-flex">
