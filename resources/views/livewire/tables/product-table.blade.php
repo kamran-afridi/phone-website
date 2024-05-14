@@ -75,9 +75,11 @@
                         </a>
                     </th>
 
-                    <th scope="col" class="align-middle text-center">
-                        {{ __('Action') }}
-                    </th>
+                    @if (auth()->user()->role === 'admin')
+                        <th scope="col" class="align-middle text-center">
+                            {{ __('Action') }}
+                        </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -104,15 +106,15 @@
                         <td class="align-middle text-center">
                             {{ $product->whole_sale_price }}
                         </td>
-                        <td class="align-middle text-center" style="width: 10%">
-                            @if (auth()->user()->role === 'admin')
+                        @if (auth()->user()->role === 'admin')
+                            <td class="align-middle text-center" style="width: 10%">
                                 <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
                                 <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
                                 <x-button.delete class="btn-icon"
                                     route="{{ route('products.destroy', $product->uuid) }}"
                                     onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
-                            @endif
-                        </td>
+                            </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>
