@@ -22,7 +22,6 @@ class ProductTable extends Component
 	{
 		if ($this->sortField === $field) {
 			$this->sortAsc = !$this->sortAsc;
-
 		} else {
 			$this->sortAsc = true;
 		}
@@ -32,20 +31,12 @@ class ProductTable extends Component
 
 	public function render()
 	{
-
-		if(auth()->user()->role == 'admin') {
-			$products = Product::search($this->search)
+		$products = Product::search($this->search)
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
 			->paginate($this->perPage);
-		} else {
-			$products = Product::where('user_id' , auth()->user()->id)
-				->search($this->search)
-				->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-				->paginate($this->perPage);
-			}
-			return view('livewire.tables.product-table', [
+
+		return view('livewire.tables.product-table', [
 			'products' => $products
 		]);
 	}
-
 }

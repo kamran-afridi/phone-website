@@ -50,6 +50,12 @@
                         {{ __('Image') }}
                     </th>
                     <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('products.sku')" href="#" role="button">
+                            {{ __('Sku') }}
+                            @include('inclues._sort-icon', ['field' => 'products.sku'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('products.name')" href="#" role="button">
                             {{ __('Name') }}
                             @include('inclues._sort-icon', ['field' => 'products.name'])
@@ -92,6 +98,9 @@
                             <img style="width: 90px;"
                                 src="{{ $product->product_image ? asset('storage/' . $product->product_image) : asset('assets/img/products/default.webp') }}"
                                 alt="">
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ $product->sku }}
                         </td>
                         <td class="align-middle text-center">
                             {{ $product->name }}
