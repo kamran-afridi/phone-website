@@ -18,11 +18,37 @@
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col">SKU</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="align-middle text-center">
+                                <a wire:click.prevent="sortBy('products.sku')" href="#" role="button">
+                                    {{ __('Sku') }}
+                                    @include('inclues._sort-icon', ['field' => 'products.sku'])
+                                </a>
+                            </th>
+                            <th scope="col" class="align-middle text-center">
+                                <a wire:click.prevent="sortBy('products.name')" href="#" role="button">
+                                    {{ __('Name') }}
+                                    @include('inclues._sort-icon', ['field' => 'products.name'])
+                                </a>
+                            </th>
+
+                            <th scope="col" class="align-middle text-center">
+                                <a wire:click.prevent="sortBy('products.cost_price')" href="#" role="button">
+                                    {{ __('Cost Price') }}
+                                    @include('inclues._sort-icon', ['field' => 'products.cost_price'])
+                                </a>
+                            </th>
+                            <th scope="col" class="align-middle text-center">
+                                <a wire:click.prevent="sortBy('products.quantity')" href="#" role="button">
+                                    {{ __('Quantity') }}
+                                    @include('inclues._sort-icon', ['field' => 'products.quantity'])
+                                </a>
+                            </th>
+
+                            @if (auth()->user()->role === 'admin')
+                                <th scope="col" class="align-middle text-center">
+                                    {{ __('Action') }}
+                                </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +84,7 @@
                                         </button>
                                     </div>
                                 </td>
+                                {{-- Modal --}}
                                 <div class="modal modal-lg" id="{{ $product->id }}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -114,9 +141,19 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                <div class="card-footer d-flex align-items-center">
+                    {{-- <p class="m-0 text-secondary">
+                        Showing <span>{{ $products->firstItem() }}</span>
+                        to <span>{{ $products->lastItem() }}</span> of <span>{{ $products->total() }}</span> entries
+                    </p> --}}
+
+                    <ul class="pagination m-0 ms-auto mb-0">
+                        {{ $products->links() }}
+                    </ul>
+                </div>
             </div>
         </div>
-
     </div>
 
 </div>

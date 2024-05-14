@@ -79,6 +79,22 @@
                                             <x-input label="Sale Price" name="sale_price" id="sale_price" type="number"
                                                 value="{{ old('sale_price') }}" />
                                         </div>
+                                        <div class="col-12">
+                                            <x-input label="Quantity" name="quantity" id="quantity" type="number"
+                                                value="{{ old('quantity') }}" />
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <x-input label="SKU" name="sku" id="sku"
+                                                value="{{ old('sku') }}" />
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <x-input label="Bar code" name="bar_code" id="bar_code"
+                                                value="{{ old('bar_code') }}" />
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <x-input label="Item type" name="item_type" id="item_type"
+                                                value="{{ old('item_type') }}" />
+                                        </div>
 
                                         {{-- <div class="col-md-12 mb-3">
                                             <label for="description" class="form-label">
