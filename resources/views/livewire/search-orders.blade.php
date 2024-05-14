@@ -42,13 +42,10 @@
                                     {{ __('Quantity') }}
                                     @include('inclues._sort-icon', ['field' => 'products.quantity'])
                                 </a>
+                            </th> 
+                            <th scope="col" class="align-middle text-center">
+                                {{ __('Action') }}
                             </th>
-
-                            @if (auth()->user()->role === 'admin')
-                                <th scope="col" class="align-middle text-center">
-                                    {{ __('Action') }}
-                                </th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody>
