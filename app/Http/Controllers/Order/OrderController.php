@@ -24,7 +24,12 @@ class OrderController extends Controller
 {
 	public function index()
 	{
-		$orders = Order::where('user_id', auth()->id())->count();
+		if (auth()->user()->role === 'supplier' OR auth()->user()->role !== 'supplier') {
+			// dd("asd");
+			$orders = Order::all()->count();
+		} else {
+			$orders = Order::where('user_id', auth()->id())->count();
+		}
 
 		return view('orders.index', [
 			'orders' => $orders

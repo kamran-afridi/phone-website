@@ -34,19 +34,20 @@ class OrderTable extends Component
     public function render()
     {
 
-		if(auth()->user()->role === 'admin' OR auth()->user()->role === 'supplier') {
+		if(auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
 			$orders = Order::with(['customer', 'details'])
 			->search($this->search)
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-			->paginate($this->perPage);
+			->paginate($this->perPage); 
 		} else {
-			$orders = Order::where("user_id",auth()->id())
+            // dd("A");
+            $orders = Order::where("user_id",auth()->id())
 			->with(['customer', 'details'])
 			->search($this->search)
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
 			->paginate($this->perPage);
 		}
-        dd($orders);
+
         return view('livewire.tables.order-table', [
             'orders' => $orders
         ]);
