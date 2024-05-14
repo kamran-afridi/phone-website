@@ -32,9 +32,9 @@
                             </th>
 
                             <th scope="col" class="align-middle text-center">
-                                <a wire:click.prevent="sortBy('products.cost_price')" href="#" role="button">
-                                    {{ __('Cost Price') }}
-                                    @include('inclues._sort-icon', ['field' => 'products.cost_price'])
+                                <a wire:click.prevent="sortBy('products.sale_price')" href="#" role="button">
+                                    {{ __('Sale Price') }}
+                                    @include('inclues._sort-icon', ['field' => 'products.sale_price'])
                                 </a>
                             </th>
                             <th scope="col" class="align-middle text-center">
@@ -58,7 +58,7 @@
                                     {{ $product->name }}
                                 </td>
                                 <td class="text-center">
-                                    {{ number_format($product->cost_price, 2) }}
+                                    {{ number_format($product->sale_price, 2) }}
                                 </td>
                                 <td class="text-center">
                                     {{ $product->quantity }}
@@ -69,7 +69,7 @@
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                             <input type="hidden" name="name" value="{{ $product->name }}">
-                                            <input type="hidden" name="sale_price" value="{{ $product->cost_price }}">
+                                            <input type="hidden" name="sale_price" value="{{ $product->sale_price }}">
 
                                             <button type="submit" class="btn btn-icon btn-outline-primary">
                                                 <x-icon.cart />
