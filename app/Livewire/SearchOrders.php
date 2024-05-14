@@ -16,7 +16,7 @@ class SearchOrders extends Component
 
 	public $sortField = 'products.id';
 
-	public $sortAsc = false;
+	public $sortAsc = 'desc';
 
 	public function sortBy($field): void
 	{
