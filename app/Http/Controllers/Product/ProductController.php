@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
 	public function index()
 	{
-		$products = Product::all()->sortByDesc("sku");;
+		$products = Product::all()->sortByDesc("id");;
 
  		return view('products.index', [
 			'products' => $products,
