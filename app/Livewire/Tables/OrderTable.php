@@ -8,7 +8,8 @@ use Livewire\WithPagination;
 
 class OrderTable extends Component
 {
-    use WithPagination;
+    // use WithPagination; 
+	protected $paginationTheme = 'bootstrap';
 
     public $perPage = 5;
 

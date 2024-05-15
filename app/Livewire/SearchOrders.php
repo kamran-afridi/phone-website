@@ -30,11 +30,10 @@ class SearchOrders extends Component
 	}
 
     public function render()
-    {
+    { 
         $products = Product::search($this->search)
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-			->paginate($this->perPage);
-
+			->paginate($this->perPage);  
         return view('livewire.search-orders', ['products' => $products]);
     }
 }

@@ -31,14 +31,13 @@
                 Search:
                 <div class="ms-2 d-inline-block">
                     <input type="text" wire:model.live="search" class="form-control form-control-sm"
-                        aria-label="Search invoice">
+                        aria-label="Search product">
                 </div>
             </div>
         </div>
     </div>
 
-    <x-spinner.loading-spinner />
-
+    <x-spinner.loading-spinner /> 
     <div class="table-responsive">
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
             <thead class="thead-light">
@@ -107,6 +106,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @forelse ($products as $product)
                     <tr>
                         <td class="align-middle text-center">
@@ -168,7 +168,7 @@
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{ $products->links() }}
+            {{ $products->links('pagination::bootstrap-4') }}
         </ul>
     </div>
 </div>
