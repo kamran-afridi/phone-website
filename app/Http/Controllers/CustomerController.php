@@ -41,7 +41,7 @@ class CustomerController extends Controller
 			'photo' => $image,
 			'name' => $request->name,
 			'email' => $request->email,
-			'shop_name' => $request->shop_name,
+			'store_address' => $request->store_address,
 			'phone' => $request->phone,
 			'address' => $request->address,
 		]);
@@ -94,7 +94,7 @@ class CustomerController extends Controller
 			'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,
-			'shop_name' => $request->shop_name,
+			'store_address' => $request->store_address,
 			'address' => $request->address,
 		]);
 

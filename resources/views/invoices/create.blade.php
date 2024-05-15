@@ -28,12 +28,13 @@
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="logo">
-                                        <h1>{{ $user->store_name }}</h1>
+                                        <img src="{{ asset('assets/img/logo.PNG') }}" style="width: 125px; height:125px"
+                                            alt="Panther Force">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="invoice">
-                                        {{-- <h1>Invoice # <span>123456</span></h1> --}}
+                                        <h1>Invoice # <span>123456</span></h1>
                                     </div>
                                 </div>
                             </div>
@@ -55,14 +56,14 @@
                                     <p class="inv-from-1">{{ $customer->name }}</p>
                                     <p class="inv-from-1">{{ $customer->phone }}</p>
                                     <p class="inv-from-1">{{ $customer->email }}</p>
-                                    <p class="inv-from-2">{{ $customer->address }}</p>
                                 </div>
                                 <div class="col-sm-6 text-end mb-50">
                                     <h4 class="inv-title-1">Store</h4>
-                                    <p class="inv-from-1">{{ $user->store_name }}</p>
-                                    <p class="inv-from-1">{{ $user->store_phone }}</p>
+                                    <p class="inv-from-1">{{ $customer->store_address }}</p>
+                                    <p class="inv-from-1">{{ $customer->address }}</p>
+                                    {{-- <p class="inv-from-1">{{ $user->store_phone }}</p>
                                     <p class="inv-from-1">{{ $user->store_email }}</p>
-                                    <p class="inv-from-2">{{ $user->store_address }}</p>
+                                    <p class="inv-from-2">{{ $user->store_address }}</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -81,15 +82,15 @@
                                         @foreach ($carts as $item)
                                             <tr>
                                                 <td class="text-center">{{ $item->name }}</td>
-                                                <td class="text-center">{{ $item->price }}</td>
-                                                <td class="text-center">{{ $item->qty }}</td>
-                                                <td class="text-center">{{ $item->subtotal }}</td>
+                                                <td class="text-center">{{ Number::currency($item->price, 'GBP') }}</td>
+                                                <td class="text-center">{{ $item->qty }}</td> 
+                                                <td class="text-center">{{ Number::currency($item->subtotal, 'GBP') }}</td>
                                             </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Cart::subtotal() }}</strong>
+                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
                                             </td>
                                         </tr>
                                         {{-- <tr>
@@ -101,7 +102,7 @@
                                         <tr>
                                             <td colspan="3" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Cart::total() }}</strong>
+                                                <strong>{{ Number::currency(Cart::total(), 'GBP')  }}</strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -163,7 +164,7 @@
                                     <select class="form-control @error('payment_type') is-invalid @enderror"
                                         id="payment_type" name="payment_type" required>
                                         {{-- <option selected="" disabled="">Select a payment:</option> --}}
-                                        <option  selected value="HandCash">HandCash</option>
+                                        <option selected value="HandCash">HandCash</option>
                                         <option value="Cheque">Cheque</option>
                                         <option value="Due">Due</option>
                                     </select>
@@ -183,7 +184,7 @@
 
                                 <input type="number" step="0.01" id="pay" name="pay"
                                     class="form-control @error('pay') is-invalid @enderror"
-                                    value="{{ Cart::total() }}" required>
+                                    value="{{ Number::currency(Cart::total(), 'GBP')  }}" required>
 
                                 @error('pay')
                                     <div class="invalid-feedback">
