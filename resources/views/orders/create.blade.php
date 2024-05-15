@@ -137,10 +137,10 @@
                                                         </form>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ $item->price }}
+                                                        {{ Number::currency($item->price, 'GBP') }} 
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ $item->subtotal }}
+                                                        {{ Number::currency($item->subtotal, 'GBP') }} 
                                                     </td>
                                                     <td class="text-center">
                                                         <form action="{{ route('pos.deleteCartItem', $item->rowId) }}"
@@ -184,7 +184,7 @@
                                             <tr>
                                                 <td colspan="4" class="text-end">Subtotal</td>
                                                 <td class="text-center">
-                                                    {{ Cart::subtotal() }}
+                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }} 
                                                 </td>
                                             </tr>
                                             {{-- <tr>
@@ -196,7 +196,7 @@
                                             <tr>
                                                 <td colspan="4" class="text-end">Total</td>
                                                 <td class="text-center">
-                                                    {{ Cart::total() }}
+                                                    {{ Number::currency(Cart::total(), 'GBP') }}  
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -271,7 +271,7 @@
                                         <div class="col-md-12">
                                             <x-input name="name" :required="true" />
                                             <x-input name="email" label="Email address" :required="true" />
-                                            <x-input name="shop_name" label="Shop Name" :required="true" />
+                                            <x-input name="store_address" label="Shop Name" :required="true" />
                                             <x-input label="Phone Number" name="phone" type='tel'
                                                 :required="true" />
                                             {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"

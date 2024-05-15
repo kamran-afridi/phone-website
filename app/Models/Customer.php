@@ -21,7 +21,7 @@ class Customer extends Model
 		'phone',
 		'address',
 		'photo',
-		'shop_name',
+		'store_address',
 		// 'account_holder',
 		// 'account_number',
 		// 'bank_name',

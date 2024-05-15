@@ -72,9 +72,9 @@
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('shop_name')" href="#" role="button">
+                        <a wire:click.prevent="sortBy('store_address')" href="#" role="button">
                             {{ __('Shop name') }}
-                            @include('inclues._sort-icon', ['field' => 'shop_name'])
+                            @include('inclues._sort-icon', ['field' => 'store_address'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
@@ -107,7 +107,7 @@
                             {{ $customer->phone }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $customer->shop_name }}
+                            {{ $customer->store_address }}
                         </td>
                         <td class="align-middle text-center">
                             {{ $customer->created_at->diffForHumans() }}

@@ -24,7 +24,7 @@ class StoreCustomerRequest extends FormRequest
 		return [
 			'photo' => 'image|file|max:1024',
 			'name' => 'required|string|max:50',
-			'shop_name' => 'required|string|max:50',
+			'store_address' => 'required|string|max:50',
 			'email' => 'required|email|max:50',
 			'phone' => ['required', 'regex:/^(\+44|0)\d{10}$/'],
 			'address' => 'required|string|max:100',

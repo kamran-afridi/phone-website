@@ -62,7 +62,7 @@
 
                                         <tr>
                                             <td>Shop name</td>
-                                            <td>{{ $customer->shop_name }}</td>
+                                            <td>{{ $customer->store_address }}</td>
                                         </tr>
 
                                     </tbody>

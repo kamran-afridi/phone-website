@@ -65,7 +65,7 @@
                                             <x-input label="Phone number" name="phone" type='tel' :value="old('phone', $customer->phone)"
                                                 :required="true" />
 
-                                            <x-input label="Shop name" name="shop_name" :value="old('shop_name', $customer->shop_name)"
+                                            <x-input label="Shop name" name="store_address" :value="old('store_address', $customer->store_address)"
                                                 :required="true" />
                                         </div>
 

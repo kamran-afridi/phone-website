@@ -18,7 +18,7 @@
             <select wire:model="selectedSubCategory" name="sub_category" id="sub_category" class="form-select">
                 @if ($selectedCategory)
                     @foreach (App\Models\SubCategory::where('category_id', $selectedCategory)->get() as $subcategory)
-                        <option value="{{ $subcategory->id }}"
+                        <option value="{{ $subcategory->id }}" 
                             @if (old('sub_category', $subcategory->id) == $selectedSubCategory) selected="selected" @endif>
                             {{ $subcategory->sub_category_name }}</option>
                     @endforeach

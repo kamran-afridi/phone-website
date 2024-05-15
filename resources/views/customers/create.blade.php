@@ -58,7 +58,7 @@
                                         <div class="col-md-12">
                                             <x-input name="name" :required="true" />
                                             <x-input name="email" label="Email address" :required="true" />
-                                            <x-input name="shop_name" label="Shop Name" :required="true" />
+                                            <x-input name="store_address" label="Shop Name" :required="true" />
                                             <x-input label="Phone Number" name="phone" type='tel' :required="true" />
                                             {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
                                                 required> --}}
