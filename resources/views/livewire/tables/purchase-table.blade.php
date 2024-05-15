@@ -144,7 +144,7 @@
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{ $purchases->links() }}
+            {{ $products->links('pagination::bootstrap-4') }}
         </ul>
     </div>
 </div>

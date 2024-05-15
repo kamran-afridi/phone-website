@@ -50,9 +50,11 @@ class Product extends Model
 
 	public function scopeSearch($query, $value): void
 	{
-		$query->where('products.name', 'like', "%{$value}%")
-			->orWhere('products.sku', 'like', "%{$value}%")
-			->orWhere('products.bar_code', 'like', "%{$value}%");
+		$query = $query->where('products.name', 'like', '%' . trim($value) . '%')
+			->orWhere('products.sku', 'like', '%' . trim($value) . '%')
+			->orWhere('products.bar_code', 'like', '%' . trim($value) . '%'); 
+			// dd($query);
+
 	}
 	/**
 	 * Get the user that owns the Category

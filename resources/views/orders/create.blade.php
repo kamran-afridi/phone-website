@@ -47,14 +47,14 @@
                                             data-bs-target="#myModal">
                                             Add customer
                                         </button>
-
+                                        {{-- {{ dd(old('customer_id')) }} --}}
                                         <select
                                             class="form-select form-control-solid @error('customer_id') is-invalid @enderror"
                                             id="customer_id" name="customer_id">
                                             <option selected="" disabled="">
                                                 Select a customer:
                                             </option>
-
+                                           
                                             @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}" @selected(old('customer_id') == $customer->id)>
                                                     {{ $customer->name }}

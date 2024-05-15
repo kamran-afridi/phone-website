@@ -8,7 +8,8 @@ use Livewire\WithPagination;
 
 class ProductTable extends Component
 {
-	use WithPagination;
+	// use WithPagination;
+	protected $paginationTheme = 'bootstrap';
 
 	public $perPage = 5;
 	public $selectedValue;
@@ -16,7 +17,7 @@ class ProductTable extends Component
 
 	public $sortField = 'products.id';
 
-	public $sortAsc = 'desc';
+	public $sortAsc = false;
 
 	public function sortBy($field): void
 	{
