@@ -23,6 +23,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Email\EmailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,7 +147,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/purchases/update/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update');
 	Route::delete('/purchases/delete/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.delete');
 
-
+	Route::get('/send-welcome-email', [EmailController::class, 'sendWelcomeEmail']);
 
 	// Route Quotations
 	// Route::get('/quotations/{quotation}/edit', [QuotationController::class, 'edit'])->name('quotations.edit');
