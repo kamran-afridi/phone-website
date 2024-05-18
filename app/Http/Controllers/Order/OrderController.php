@@ -161,8 +161,7 @@ class OrderController extends Controller
 				->attachData($pdf->output(), "Invoice.pdf", [
 					'mime' => 'application/pdf',
 				]);
-		});
-		dd($send);
+		}); 
 		return redirect()
 			->route('orders.complete')
 			->with('success', 'Order has been completed!');
