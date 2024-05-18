@@ -117,7 +117,7 @@ class OrderController extends Controller
 	{
 
 		ini_set('max_execution_time', 120);
-		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
+		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();  	
 
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		// TODO refactoring
@@ -149,7 +149,7 @@ class OrderController extends Controller
 			'pay' => $order->total
 		]);
 		$data = [
-			"email" => "kamranafridi089@gmail.com",
+			"email" => $order->customer->email,
 			"title" => "From pantherforce.co.uk",
 			"body" => 'Invoice',
 		];
