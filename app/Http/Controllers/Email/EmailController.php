@@ -16,7 +16,7 @@ class EmailController extends Controller
         $body = 'Thank you for participating!';
 
         $Mail = Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
-        dd($Mail);
+        // dd($Mail);
 
         return "Email sent successfully!";
     }
