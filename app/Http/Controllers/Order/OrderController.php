@@ -18,13 +18,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Str;
 
 class OrderController extends Controller
 {
 	public function index()
 	{
-		if (auth()->user()->role === 'supplier' OR auth()->user()->role !== 'supplier') {
+		if (auth()->user()->role === 'supplier' or auth()->user()->role !== 'supplier') {
 			// dd("asd");
 			$orders = Order::all()->count();
 		} else {
@@ -114,6 +115,10 @@ class OrderController extends Controller
 
 	public function update($uuid, Request $request)
 	{
+
+		ini_set('max_execution_time', 120);
+		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
+
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		// TODO refactoring
 
@@ -138,12 +143,27 @@ class OrderController extends Controller
 			}
 			Mail::to($listAdmin)->send(new StockAlert($stockAlertProducts));
 		}
-		$order->update([
+		$operation = $order->update([
 			'order_status' => OrderStatus::COMPLETE,
 			'due' => '0',
 			'pay' => $order->total
 		]);
-
+		if ($operation) {
+			$data = [
+				"email" => "kamranafridi089@gmail.com",
+				"title" => "From pantherforce.co.uk",
+				"body" => 'Invoice',
+			];
+			$pdf = PDF::loadView('emails.invoice', compact('order'));
+			// dd($pdf);
+			Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
+				$message->to($data["email"], $data["email"])
+					->subject($data["title"])
+					->attachData($pdf->output(), "Invoice.pdf", [
+						'mime' => 'application/pdf',
+					]);
+			});
+		}
 		return redirect()
 			->route('orders.complete')
 			->with('success', 'Order has been completed!');
