@@ -143,11 +143,11 @@ class OrderController extends Controller
 			}
 			Mail::to($listAdmin)->send(new StockAlert($stockAlertProducts));
 		}
-		$operation = $order->update([
-			'order_status' => OrderStatus::COMPLETE,
-			'due' => '0',
-			'pay' => $order->total
-		]);
+		// $operation = $order->update([
+		// 	'order_status' => OrderStatus::COMPLETE,
+		// 	'due' => '0',
+		// 	'pay' => $order->total
+		// ]);
 		$data = [
 			"email" => "kamranafridi089@gmail.com",
 			"title" => "From pantherforce.co.uk",
