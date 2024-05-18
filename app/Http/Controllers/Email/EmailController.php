@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Email;
 
-use App\Mail\WelcomeMail;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Mail\WelcomeMail;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
     public function sendWelcomeEmail()
     {
-        $title = 'Welcome to the laracoding.com example email';
-        $body = 'Thank you for participating!';
+        try {
+            $title = 'Welcome to the laracoding.com example email';
+            $body = 'Thank you for participating!';
 
-        Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
-        if (Mail::failures()) {
+            Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
+        } catch (Exception $e) {
             dd("Email sent unsuccessful");
         }
 
