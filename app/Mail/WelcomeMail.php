@@ -36,7 +36,7 @@ class WelcomeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.invoice',
+            view: 'emails.message',
             with: [
                 'title' => $this->title,
                 'body' => $this->body,

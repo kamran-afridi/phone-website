@@ -10,7 +10,7 @@ use App\Models\Order;
 
 class EmailController extends Controller
 {
-    public function sendWelcomeEmails()
+    public function sendWelcomeEmail()
     {
         $title = 'Welcome to the laracoding.com example email';
         $body = 'Thank you for participating!';
@@ -19,7 +19,7 @@ class EmailController extends Controller
 
         return "Email sent successfully!";
     }
-    public function sendWelcomeEmail()
+    public function sendWelcomeEmails()
     {
         ini_set('max_execution_time', 120);
         $order = Order::with(['customer', 'details'])->where('uuid', 'd3d35bf7-c397-4618-9c2f-e7d5b12e842f')->firstOrFail();
