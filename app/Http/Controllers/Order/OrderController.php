@@ -155,13 +155,14 @@ class OrderController extends Controller
 		];
 		$pdf = PDF::loadView('emails.invoice', compact('order'));
 		// dd($pdf);
-		Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
+		$send=Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
 			$message->to($data["email"], $data["email"])
 				->subject($data["title"])
 				->attachData($pdf->output(), "Invoice.pdf", [
 					'mime' => 'application/pdf',
 				]);
 		});
+		dd($send);
 		return redirect()
 			->route('orders.complete')
 			->with('success', 'Order has been completed!');
