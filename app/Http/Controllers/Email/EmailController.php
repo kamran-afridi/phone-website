@@ -16,6 +16,9 @@ class EmailController extends Controller
         $body = 'Thank you for participating!';
 
         Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
+        if (Mail::failures()) {
+            dd("Email sent unsuccessful");
+        }
 
         return "Email sent successfully!";
     }
@@ -33,7 +36,7 @@ class EmailController extends Controller
         // dd($pdf);
         Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
             $message->to($data["email"], $data["email"])
-                ->subject($data["title"]) 
+                ->subject($data["title"])
                 ->attachData($pdf->output(), "Invoice.pdf", [
                     'mime' => 'application/pdf',
                 ]);
