@@ -12,14 +12,11 @@ class EmailController extends Controller
 {
     public function sendWelcomeEmail()
     {
-        try {
-            $title = 'Welcome to the laracoding.com example email';
-            $body = 'Thank you for participating!';
+        $title = 'Welcome to the laracoding.com example email';
+        $body = 'Thank you for participating!';
 
-            Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
-        } catch (Exception $e) {
-            dd("Email sent unsuccessful");
-        }
+        $Mail = Mail::to('kamranafridi089@gmail.com')->send(new WelcomeMail($title, $body));
+        dd($Mail);
 
         return "Email sent successfully!";
     }
