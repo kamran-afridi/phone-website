@@ -25,7 +25,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Email\EmailController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SmsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -149,6 +149,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('/send-welcome-email', [EmailController::class, 'sendWelcomeEmail']);
 
+	/* for sending sms */
+
+	Route::get('/sms-page', [SmsController::class, 'sms_page']);
+	Route::post('/send-sms', [SmsController::class, 'send_sms'])->name('send.sms');
 	// Route Quotations
 	// Route::get('/quotations/{quotation}/edit', [QuotationController::class, 'edit'])->name('quotations.edit');
 	// Route::post('/quotations/complete/{quotation}', [QuotationController::class, 'update'])->name('quotations.update');
