@@ -16,6 +16,7 @@ class SmsController extends Controller
 
     public function send_sms(Request $request)
     {
+        define('WP_DEBUG_DISPLAY', true);
         $receiver_number = '07943289303';
         $message = 'SMSFrom Web Journey';
         $account_sid = getenv("TWILIO_SID");
