@@ -109,10 +109,11 @@ class CustomerController extends Controller
 		if ($customer->photo) {
 			unlink(public_path('storage/') . $customer->photo);
 		}
-		$customer = Customer::where('uuid', $uuid)->delete();
-		dd($customer);
-		// return redirect()
-		// 	->back()
-		// 	->with('success', 'Customer has been deleted!');
+
+		$customer->delete();
+
+		return redirect()
+			->back()
+			->with('success', 'Customer has been deleted!');
 	}
 }
