@@ -38,7 +38,8 @@ class UpdateCustomerRequest extends FormRequest
 				'email',
 				'max:50'
 			],
-			'phone' => ['required', 'regex:/^(\+44|0)\d{10}$/'],
+			'phone' => ['required', 'regex:/^(\+44)\d{10}$/'],
+			// 'phone' => ['required', 'regex:/^(\+44|0)\d{10}$/'],
 			'address' => [
 				'required',
 				'string',
@@ -49,7 +50,7 @@ class UpdateCustomerRequest extends FormRequest
 	public function messages(): array
 	{
 		return [
-			'phone.regex' => 'The phone number must be a valid UK phone number.(start with +44 or 0 followed by 10 digits)',
+			'phone.regex' => 'The phone number must be a valid UK phone number.(start with +44 followed by 10 digits (+4479432xxxxx))',
 		];
 	}
 }
