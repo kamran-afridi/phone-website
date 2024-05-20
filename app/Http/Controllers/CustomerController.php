@@ -42,7 +42,7 @@ class CustomerController extends Controller
 			'name' => $request->name,
 			'email' => $request->email,
 			'store_address' => $request->store_address,
-			'phone' => $request->phone,
+			'phone' => '+44'.$request->phone,
 			'address' => $request->address,
 		]);
 
