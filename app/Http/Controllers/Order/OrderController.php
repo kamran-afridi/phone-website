@@ -165,20 +165,24 @@ class OrderController extends Controller
 				]);
 		});
 		$receiver_number = $order->customer->phone;
-		$message = 'Invoice details: \n' . ' Total: ' . $order->total . '\n' . ' quantity: ' . $order->total_products . '\n' . 'Due' . $order->due;
+		$message = 'Invoice details: ' . ' Total: ' . $order->total . ' ' . ' quantity: ' . $order->total_products . ' ' . 'Due' . $order->due;
 		try {
 			$account_sid = getenv("TWILIO_SID");
 			$auth_token = getenv("TWILIO_TOKEN");
 			$twilio_number = getenv("TWILIO_FROM");
-
+			/* for customer */
 			$client = new Client($account_sid, $auth_token);
 			$client->messages->create($receiver_number, [
 				'from' => $twilio_number,
 				'body' => $message
 			]);
+			/* for admin */
+			$client->messages->create($twilio_number, [
+				'from' => $twilio_number,
+				'body' => $message
+			]);
 			return redirect()->back();
 		} catch (Exception $e) {
-			//
 		}
 		return redirect()
 			->route('orders.complete')
