@@ -13,23 +13,31 @@ class SmsController extends Controller
     {
         return view('sms_page');
     }
-
+    // $message = $client->messages
+    // ->create(
+    //     "+447943289303", // to
+    //     array(
+    //         "from" => "+447447359383",
+    //         "body" => "hello I am testing it"
+    //     )
+    // );
     public function send_sms(Request $request)
     {
-        define('WP_DEBUG_DISPLAY', true);
-        $receiver_number = '07943289303';
+        $receiver_number = $request->number;
         $message = 'SMSFrom Web Journey';
-        $account_sid = getenv("TWILIO_SID");
-        $auth_token = getenv("TWILIO_TOKEN");
-        $twilio_number = getenv("TWILIO_FROM");
-        $client = new Client($account_sid, $auth_token);
-        $client->messages->create(
-            // Where to send a text message (your cell phone?)
-            '+447943289303',
-            array(
-                'from' => $twilio_number,
-                'body' => 'I sent this message in under 10 minutes!'
-            )
-        ); 
+        try {
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+  
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiver_number,[
+                'from' => $twilio_number, 
+                'body' => $message
+            ]);
+            return redirect()->back(); 
+        }catch (Exception $e) {
+            //
+        }
     }
 }

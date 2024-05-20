@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Str;
+use Exception;
+use Twilio\Rest\Client;
 
 class OrderController extends Controller
 {
@@ -117,7 +119,7 @@ class OrderController extends Controller
 	{
 
 		ini_set('max_execution_time', 120);
-		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();  	
+		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
 
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		// TODO refactoring
@@ -155,13 +157,29 @@ class OrderController extends Controller
 		];
 		$pdf = PDF::loadView('emails.invoice', compact('order'));
 		// dd($pdf);
-		$send=Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
+		$send = Mail::send('emails.message', $data, function ($message) use ($data, $pdf) {
 			$message->to($data["email"], $data["email"])
 				->subject($data["title"])
 				->attachData($pdf->output(), "Invoice.pdf", [
 					'mime' => 'application/pdf',
 				]);
-		}); 
+		});
+		$receiver_number = $order->customer->phone;
+		$message = 'Invoice details: \n' . ' Total: ' . $order->total . '\n' . ' quantity: ' . $order->total_products . '\n' . 'Due' . $order->due;
+		try {
+			$account_sid = getenv("TWILIO_SID");
+			$auth_token = getenv("TWILIO_TOKEN");
+			$twilio_number = getenv("TWILIO_FROM");
+
+			$client = new Client($account_sid, $auth_token);
+			$client->messages->create($receiver_number, [
+				'from' => $twilio_number,
+				'body' => $message
+			]);
+			return redirect()->back();
+		} catch (Exception $e) {
+			//
+		}
 		return redirect()
 			->route('orders.complete')
 			->with('success', 'Order has been completed!');
