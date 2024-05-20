@@ -109,7 +109,7 @@ class CustomerController extends Controller
 		if ($customer->photo) {
 			unlink(public_path('storage/') . $customer->photo);
 		}
-
+		dd($customer);
 		$customer->delete();
 
 		return redirect()
