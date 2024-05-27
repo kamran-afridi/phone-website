@@ -30,7 +30,7 @@ class UpdateProductRequest extends FormRequest
 			'sale_price' => 'required|numeric',
 			'whole_sale_price' => 'required|numeric',
 			'quantity' => 'required|numeric',
-			'sku' => 'required|string',
+			// 'sku' => 'required|string',
 			'item_type' => 'required|string',
 			'bar_code' => 'required|string',
 			// 'category' => 'required|string',
