@@ -13,12 +13,12 @@ use Str;
 
 class ProductController extends Controller
 {
-	
+
 	public function index()
 	{
 		$products = Product::all()->sortByDesc("id");;
 
- 		return view('products.index', [
+		return view('products.index', [
 			'products' => $products,
 		]);
 	}
@@ -56,7 +56,7 @@ class ProductController extends Controller
 		//  if(auth()->user()->role !== 'admin') {
 		// 	return abort(404);
 		//  }
-
+		dd($request);
 		$image = "";
 		if ($request->hasFile('product_image')) {
 			$image = $request->file('product_image')->store('products', 'public');
@@ -83,11 +83,11 @@ class ProductController extends Controller
 	}
 
 	public function show($uuid)
-	{	
+	{
 		// if(auth()->user()->role !== 'admin') {
 		// 	return abort(404);
 		// }
-	
+
 		$product = Product::where('products.uuid', $uuid)->firstOrFail();
 
 		// Generate a barcode
@@ -145,7 +145,7 @@ class ProductController extends Controller
 		$product->uuid = Str::uuid();
 		$product->save();
 
-		if(str_contains(url()->previous(), '/orders/create')) {
+		if (str_contains(url()->previous(), '/orders/create')) {
 			return to_route('orders.create');
 		}
 
