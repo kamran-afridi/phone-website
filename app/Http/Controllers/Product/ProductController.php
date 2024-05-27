@@ -26,9 +26,9 @@ class ProductController extends Controller
 	public function create(Request $request)
 	{
 
-		if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		}
+		// if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		// }
 
 		$categories = Category::where("user_id", auth()->id())->get(['id', 'name']);
 		$product = Product::where('uuid', auth()->id())->first();
@@ -53,9 +53,9 @@ class ProductController extends Controller
 		 * Handle upload image
 		 */
 
-		 if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		 }
+		//  if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		//  }
 
 		$image = "";
 		if ($request->hasFile('product_image')) {
@@ -84,9 +84,9 @@ class ProductController extends Controller
 
 	public function show($uuid)
 	{	
-		if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		}
+		// if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		// }
 	
 		$product = Product::where('products.uuid', $uuid)->firstOrFail();
 
@@ -103,9 +103,9 @@ class ProductController extends Controller
 
 	public function edit($uuid)
 	{
-		if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		}
+		// if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		// }
 
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 
@@ -116,9 +116,9 @@ class ProductController extends Controller
 
 	public function update(UpdateProductRequest $request, $uuid)
 	{
-		if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		}
+		// if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		// }
 
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 		// $product->update($request->except('product_image'));
@@ -157,9 +157,9 @@ class ProductController extends Controller
 
 	public function destroy($uuid)
 	{
-		if(auth()->user()->role !== 'admin') {
-			return abort(404);
-		}
+		// if(auth()->user()->role !== 'admin') {
+		// 	return abort(404);
+		// }
 
 		$product = Product::where("uuid", $uuid)->firstOrFail();
 		/**
