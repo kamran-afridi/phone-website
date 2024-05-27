@@ -8,7 +8,9 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Device;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 use Str;
 
 class ProductController extends Controller
@@ -56,13 +58,13 @@ class ProductController extends Controller
 		//  if(auth()->user()->role !== 'admin') {
 		// 	return abort(404);
 		//  }
-		dd($request);
+		// dd($request);
 		$image = "";
 		if ($request->hasFile('product_image')) {
 			$image = $request->file('product_image')->store('products', 'public');
 		}
 
-		Product::create([
+		$Product = Product::create([
 			'name' => $request->name,
 			'cost_price' => $request->cost_price,
 			'whole_sale_price' => $request->whole_sale_price,
@@ -74,7 +76,7 @@ class ProductController extends Controller
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
-
+		dd($Product);
 		if (str_contains(url()->previous(), '/orders/create')) {
 			return to_route('orders.create');
 		}
