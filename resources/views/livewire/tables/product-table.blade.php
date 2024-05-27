@@ -6,11 +6,11 @@
             </h3>
         </div>
 
-        @if (auth()->user()->role === 'admin')
-            <div class="card-actions">
-                <x-action.create route="{{ route('products.create') }}" />
-            </div>
-        @endif
+        {{-- @if (auth()->user()->role === 'admin') --}}
+        <div class="card-actions">
+            <x-action.create route="{{ route('products.create') }}" />
+        </div>
+        {{-- @endif --}}
     </div>
 
     <div class="card-body border-bottom py-3">
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <x-spinner.loading-spinner /> 
+    <x-spinner.loading-spinner />
     <div class="table-responsive">
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
             <thead class="thead-light">
@@ -97,16 +97,13 @@
                             @include('inclues._sort-icon', ['field' => 'products.item_type'])
                         </a>
                     </th>
-
-                    @if (auth()->user()->role === 'admin')
-                        <th scope="col" class="align-middle text-center">
-                            {{ __('Action') }}
-                        </th>
-                    @endif
+                    <th scope="col" class="align-middle text-center">
+                        {{ __('Action') }}
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                
+
                 @forelse ($products as $product)
                     <tr>
                         <td class="align-middle text-center">
@@ -142,15 +139,12 @@
                         <td class="align-middle text-center">
                             {{ $product->item_type }}
                         </td>
-                        @if (auth()->user()->role === 'admin')
-                            <td class="align-middle text-center" style="width: 10%">
-                                <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
-                                <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
-                                <x-button.delete class="btn-icon"
-                                    route="{{ route('products.destroy', $product->uuid) }}"
-                                    onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
-                            </td>
-                        @endif
+                        <td class="align-middle text-center" style="width: 10%">
+                            <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
+                            <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
+                            <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product->uuid) }}"
+                                onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
+                        </td>
                     </tr>
                 @empty
                     <tr>
