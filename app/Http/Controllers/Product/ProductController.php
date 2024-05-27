@@ -76,7 +76,7 @@ class ProductController extends Controller
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
-		dd($Product);
+		// dd($Product);
 		if (str_contains(url()->previous(), '/orders/create')) {
 			return to_route('orders.create');
 		}
