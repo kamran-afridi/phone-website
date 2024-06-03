@@ -165,7 +165,7 @@ class OrderController extends Controller
 				]);
 		});
 		$receiver_number = $order->customer->phone;
-		$message = 'Invoice details: ' . ' Total: ' . $order->total . ' ' . ' quantity: ' . $order->total_products . ' ' . 'Due' . $order->due;
+		$message = 'Invoice details: ' . ' Total: ' . $order->total . ' ' . ' quantity: ' . $order->total_products . ' ' . 'Due: ' . $order->due;
 		try {
 			$account_sid = getenv("TWILIO_SID");
 			$auth_token = getenv("TWILIO_TOKEN");
