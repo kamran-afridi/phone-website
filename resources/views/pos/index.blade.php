@@ -74,9 +74,9 @@
 
                     <!-- Form Row -->
                     <div class="row gx-3 mb-3">
-                        <!-- Form Group (total product) -->
+                        <!-- Form Group (total product) --> 
                         <div class="col-md-6">
-                            <label class="small mb-1">Total Product</label>
+                            <label class="small mb-1">Total Product</labe l>
                             <div class="form-control form-control-solid fw-bold text-red">{{ Cart::count() }}</div>
                         </div>
                         <!-- Form Group (subtotal) -->
