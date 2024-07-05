@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Email;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\Models\Order;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf; 
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
