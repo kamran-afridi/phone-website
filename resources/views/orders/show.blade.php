@@ -125,7 +125,7 @@
                                         </td> 
                                         <td class="align-middle text-center">
                                             {{-- {{ number_format($item->unitcost, 2) }} --}}
-                                            {{ number_format($item->$product->sale_price, 2) }}
+                                            {{ number_format($item->product->sale_price, 2) }}
                                         </td>
                                         <td class="align-middle text-center">
                                             {{ number_format($item->total, 2) }}
