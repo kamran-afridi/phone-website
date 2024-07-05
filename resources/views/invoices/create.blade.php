@@ -102,7 +102,7 @@
                                         <tr>
                                             <td colspan="3" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Number::currency(Cart::total(), 'GBP')  }}</strong>
+                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -184,7 +184,7 @@
 
                                 <input type="number" step="0.01" id="pay" name="pay"
                                     class="form-control @error('pay') is-invalid @enderror"
-                                    value="{{ Cart::total()  }}" required>
+                                    value="{{ Cart::subtotal()  }}" required>
 
                                 @error('pay')
                                     <div class="invalid-feedback">

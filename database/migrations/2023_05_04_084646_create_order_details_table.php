@@ -21,10 +21,9 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Product::class)
                 ->constrained()
                 ->cascadeOnDelete();
-
+            $table->float('unitcost', 10, 5);
+            $table->float('total', 10, 5);
             $table->integer('quantity');
-            $table->integer('unitcost');
-            $table->integer('total');
             $table->timestamps();
         });
     }
