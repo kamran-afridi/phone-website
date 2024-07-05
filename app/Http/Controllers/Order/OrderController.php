@@ -110,6 +110,7 @@ class OrderController extends Controller
 	{
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		$order->loadMissing(['customer', 'details'])->get();
+		dd($order);
 		return view('orders.show', [
 			'order' => $order
 		]);
