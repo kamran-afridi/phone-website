@@ -196,7 +196,7 @@
                                             <tr>
                                                 <td colspan="4" class="text-end">Total</td>
                                                 <td class="text-center">
-                                                    {{ Number::currency(Cart::total(), 'GBP') }}  
+                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}  
                                                 </td>
                                             </tr>
                                         </tbody>

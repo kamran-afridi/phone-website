@@ -70,15 +70,16 @@ class OrderController extends Controller
 			'order_status' => OrderStatus::PENDING->value,
 			'total_products' => Cart::count(),
 			'sub_total' => Cart::subtotal(),
-			'vat' => Cart::tax(),
-			'total' => Cart::total(),
+			// 'vat' => Cart::tax(),
+			'vat' => 0,
+			'total' => Cart::subtotal(),
 			'invoice_no' => IdGenerator::generate([
 				'table' => 'orders',
 				'field' => 'invoice_no',
 				'length' => 10,
 				'prefix' => 'INV-'
 			]),
-			'due' => (Cart::total() - $request->pay),
+			'due' => (Cart::subtotal() - $request->pay),
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
@@ -93,9 +94,9 @@ class OrderController extends Controller
 			$oDetails['quantity'] = $content->qty;
 			$oDetails['unitcost'] = $content->price;
 			$oDetails['total'] = $content->subtotal;
-			$oDetails['created_at'] = Carbon::now();
-
+			$oDetails['created_at'] = Carbon::now(); 
 			OrderDetails::insert($oDetails);
+			// dd($oDetails);
 		}
 
 		// Delete Cart Sopping History
