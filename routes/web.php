@@ -39,8 +39,8 @@ use App\Http\Controllers\SmsController;
 
 Route::get('php/', function () {
 	return phpinfo();
-});
-
+}); 
+   
 Route::get('/', function () {
 	if (Auth::check()) {
 		return redirect('/dashboard');
