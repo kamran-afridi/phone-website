@@ -122,7 +122,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             {{ $item->quantity }}
-                                        </td>
+                                        </td> 
                                         <td class="align-middle text-center">
                                             {{ number_format($item->unitcost, 2) }}
                                         </td>
