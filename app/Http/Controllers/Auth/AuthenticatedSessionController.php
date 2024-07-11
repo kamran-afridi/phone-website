@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Models\UsersLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -37,6 +39,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $UsersLog = UsersLog::create([
+            'date' => Carbon::now()->format('Y-m-d'),
+            'time' => Carbon::now()->format('H:i:s'),
+            'status' => 'LOGOUT',
+            'user_id' => auth()->id(),
+        ]);
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

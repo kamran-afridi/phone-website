@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use App\Models\UsersLog;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
@@ -43,14 +45,20 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
-//            throw ValidationException::withMessages([
-//                $this->email  => trans('auth.failed'),
-//            ]);
+            //            throw ValidationException::withMessages([
+            //                $this->email  => trans('auth.failed'),
+            //            ]);
+        } else {
+            $UsersLog = UsersLog::create([
+                'date' => Carbon::now()->format('Y-m-d'),
+                'time' => Carbon::now()->format('H:i:s'),
+                'status' => 'LOGIN',
+                'user_id' => auth()->id(),
+            ]);
         }
-
         //RateLimiter::clear($this->throttleKey());
     }
 
@@ -61,7 +69,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -82,14 +90,14 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('username')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('username')) . '|' . $this->ip());
     }
 
-//    protected function prepareForValidation()
-//    {
-//        $this->inputType = filter_var($this->input('input_type'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-//        $this->merge([
-//            $this->inputType => $this->input('input_type')
-//        ]);
-//    }
+    //    protected function prepareForValidation()
+    //    {
+    //        $this->inputType = filter_var($this->input('input_type'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    //        $this->merge([
+    //            $this->inputType => $this->input('input_type')
+    //        ]);
+    //    }
 }
