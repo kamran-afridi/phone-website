@@ -17,6 +17,13 @@ class UsersLog extends Model
         'status',
         "user_id",
     ];
+    public function scopeSearch($query, $value): void
+    {
+        $query->where('date', 'like', "%{$value}%")
+            ->orWhere('status', 'like', "%{$value}%")
+            ->orWhere('time', 'like', "%{$value}%");
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -2,13 +2,12 @@
     <div class="card-header">
         <div>
             <h3 class="card-title">
-                {{ __('Users') }}
+
+                @if (!$UsersLogs->isEmpty())
+                    {{ $UsersLogs[0]->user->name }}
+                @endif
             </h3>
         </div>
-
-        {{-- <div class="card-actions">
-            <x-action.create route="{{ route('users.create') }}" />
-        </div> --}}
     </div>
 
     <div class="card-body border-bottom py-3">
@@ -41,60 +40,66 @@
         <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
             <thead class="thead-light">
                 <tr>
-                    <th class="align-middle text-center w-1">
+                    <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('id')" href="#" role="button">
-                            {{ __('ID') }}
+                            {{ __('Id') }}
                             @include('inclues._sort-icon', ['field' => 'id'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        {{ __('Photo') }}
-                    </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('name')" href="#" role="button">
-                            {{ __('Name') }}
-                            @include('inclues._sort-icon', ['field' => 'name'])
+                        <a wire:click.prevent="sortBy('status')" href="#" role="button">
+                            {{ __('Status') }}
+                            @include('inclues._sort-icon', ['field' => 'status'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('email')" href="#" role="button">
-                            {{ __('Email') }}
-                            @include('inclues._sort-icon', ['field' => 'email'])
+                        <a wire:click.prevent="sortBy('time')" href="#" role="button">
+                            {{ __('Date') }}
+                            @include('inclues._sort-icon', ['field' => 'date'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('created_at')" href="#" role="button">
-                            {{ __('Created at') }}
-                            @include('inclues._sort-icon', ['field' => 'created_at'])
+                        <a wire:click.prevent="sortBy('date')" href="#" role="button">
+                            {{ __('Date') }}
+                            @include('inclues._sort-icon', ['field' => 'Day'])
                         </a>
                     </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('date')" href="#" role="button">
+                            {{ __('Time') }}
+                            @include('inclues._sort-icon', ['field' => 'time'])
+                        </a>
+                    </th>
+
                     <th scope="col" class="align-middle text-center">
                         {{ __('Action') }}
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($users as $user)
+                @forelse ($UsersLogs as $userslog)
                     <tr>
-                        <td class="align-middle text-center" style="width: 10%">
-                            {{ $user->id }}
-                        </td>
-                        <td class="align-middle text-center d-none d-sm-table-cell">
-                            {{ $user->photo }}
+                        <td class="align-middle text-center">
+                            {{ $loop->index + 1 }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $user->name }}
+                            {{ $userslog->status }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $user->email }}
+                            @php
+                                $date = strtotime($userslog->date);
+                                $day = date('l', $date);
+                            @endphp
+                            {{ $userslog->date }}
                         </td>
-                        <td class="align-middle text-center d-none d-sm-table-cell" style="width: 15%">
-                            {{ $user->created_at->format('d-m-Y') }}
+                        <td class="align-middle text-center">
+                            {{ $day }}
                         </td>
-                        <td class="align-middle text-center" style="width: 15%">
-                            <x-button.show class="btn-icon" route="{{ route('users.show', $user->uuid) }}" />
-                            {{-- <x-button.edit class="btn-icon" route="{{ route('users.edit', $user) }}"/>
-                        <x-button.delete class="btn-icon" route="{{ route('users.destroy', $user) }}"/> --}}
+                        <td class="align-middle text-center">
+                            {{ $userslog->time }}
+                        </td>
+                        <td class="align-middle text-center">
+                            <x-button.back class="btn-icon" route="{{ route('users.index') }}" />
                         </td>
                     </tr>
                 @empty
@@ -110,12 +115,12 @@
 
     <div class="card-footer d-flex align-items-center">
         <p class="m-0 text-secondary d-none d-sm-block">
-            Showing <span>{{ $users->firstItem() }}</span> to <span>{{ $users->lastItem() }}</span> of
-            <span>{{ $users->total() }}</span> entries
+            Showing <span>{{ $UsersLogs->firstItem() }}</span> to <span>{{ $UsersLogs->lastItem() }}</span> of
+            <span>{{ $UsersLogs->total() }}</span> entries
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{ $users->links() }}
+            {{ $UsersLogs->links() }}
         </ul>
     </div>
 </div>
