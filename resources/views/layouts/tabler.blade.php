@@ -620,6 +620,11 @@
                                                 <a class="dropdown-item" href="{{ route('customers.index') }}">
                                                     {{ __('Customers') }}
                                                 </a>
+                                                @if (auth()->user()->role == 'admin')
+                                                    <a class="dropdown-item" href="{{ route('users.index') }}">
+                                                        {{ __('Users') }}
+                                                    </a>
+                                                @endif
                                                 <a class="dropdown-item" href="{{ route('expenses.index') }}">
                                                     {{ __('Expenses') }}
                                                 </a>

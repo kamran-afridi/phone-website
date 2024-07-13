@@ -1,4 +1,4 @@
-@extends('layouts.tabler')
+{{-- @extends('layouts.tabler')
 
 @section('content')
     <div class="page-header d-print-none">
@@ -79,4 +79,15 @@
             </div>
         </div>
     </div>
+@endsection --}}
+@extends('layouts.tabler')
+
+@section('content')
+<div class="page-body">
+    <div class="container-xl">
+        
+        @livewire('tables.user-log-table', ['user' => $user->uuid])
+    </div>
+</div>
 @endsection
+ 
