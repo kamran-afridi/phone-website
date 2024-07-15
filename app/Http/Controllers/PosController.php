@@ -30,8 +30,7 @@ class PosController extends Controller
 		//dd($request);
 
 		$rules = [
-			'id' => 'required|numeric',
-			'sku' => 'required|string',
+			'id' => 'required|numeric', 
 			'name' => 'required|string',
 			'sale_price' => 'required|numeric',
 		];
@@ -42,8 +41,7 @@ class PosController extends Controller
 			$validatedData['id'],
 			$validatedData['name'],
 			1,
-			$validatedData['sale_price'],
-			$validatedData['sku'],
+			$validatedData['sale_price'], 
 			1,
 			(array) $options = null
 		);
