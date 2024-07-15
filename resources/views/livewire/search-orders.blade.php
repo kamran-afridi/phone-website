@@ -70,6 +70,7 @@
                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                             <input type="hidden" name="name" value="{{ $product->name }}">
                                             <input type="hidden" name="sale_price" value="{{ $product->sale_price }}">
+                                            <input type="hidden" name="sku" value="{{ $product->sku }}">
 
                                             <button type="submit" class="btn btn-icon btn-outline-primary">
                                                 <x-icon.cart />
