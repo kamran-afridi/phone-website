@@ -72,6 +72,7 @@
                                 <table class="default-table invoice-table">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">SKU</th>
                                             <th class="text-center">Item</th>
                                             <th class="text-center">Price</th>
                                             <th class="text-center">Quantity</th>
@@ -81,6 +82,7 @@
                                     <tbody>
                                         @foreach ($carts as $item)
                                             <tr>
+                                                <td class="text-center">{{ $item->sku }}</td>
                                                 <td class="text-center">{{ $item->name }}</td>
                                                 <td class="text-center">{{ Number::currency($item->price, 'GBP') }}</td>
                                                 <td class="text-center">{{ $item->qty }}</td> 
@@ -88,7 +90,7 @@
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                                            <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
                                             <td class="text-center">
                                                 <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
                                             </td>
@@ -100,7 +102,7 @@
                                             </td>
                                         </tr> --}}
                                         <tr>
-                                            <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                            <td colspan="4" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
                                                 <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
                                             </td>
