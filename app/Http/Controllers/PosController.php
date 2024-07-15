@@ -27,7 +27,7 @@ class PosController extends Controller
 	public function addCartItem(Request $request)
 	{
 		$request->all();
-		//dd($request);
+		dd($request);
 
 		$rules = [
 			'id' => 'required|numeric', 
