@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ asset('fav.png') }}" type="image/x-icon" />
 
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
