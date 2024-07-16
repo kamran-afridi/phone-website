@@ -47,8 +47,8 @@ class OrderController extends Controller
 		if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
 			$customers = Customer::get(['id', 'name']);
 		} else {
-			// $customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
-			$customers = Customer::get(['id', 'name']);
+			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
+			// $customers = Customer::get(['id', 'name']);
 		}
 
 		$carts = Cart::content();
