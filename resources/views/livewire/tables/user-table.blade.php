@@ -6,9 +6,9 @@
             </h3>
         </div>
 
-        {{-- <div class="card-actions">
+        <div class="card-actions">
             <x-action.create route="{{ route('users.create') }}" />
-        </div> --}}
+        </div>
     </div>
 
     <div class="card-body border-bottom py-3">

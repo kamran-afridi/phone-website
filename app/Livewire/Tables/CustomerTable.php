@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class CustomerTable extends Component
 {
     // use WithPagination; 
-	protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $perPage = 5;
 
@@ -34,6 +34,7 @@ class CustomerTable extends Component
     {
         return view('livewire.tables.customer-table', [
             'customers' => Customer::with('orders', 'quotations')
+                ->where('user_id', auth()->user()->id)
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)
