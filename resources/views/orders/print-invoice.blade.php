@@ -80,6 +80,7 @@
                                 <table class="default-table invoice-table">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">SKU</th>
                                             <th class="align-middle">Item</th>
                                             <th class="align-middle text-center">Price</th>
                                             <th class="align-middle text-center">Quantity</th>
@@ -91,6 +92,9 @@
                                         {{--                                            @foreach ($orderDetails as $item) --}}
                                         @foreach ($order->details as $item)
                                             <tr>
+                                                <td class="align-middle">
+                                                    {{ $item->product->sku }}
+                                                </td>
                                                 <td class="align-middle">
                                                     {{ $item->product->name }}
                                                 </td>
@@ -107,7 +111,7 @@
                                         @endforeach
 
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>
                                                     Subtotal
                                                 </strong>
@@ -119,7 +123,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>Tax</strong>
                                             </td>
                                             <td class="align-middle text-center">
@@ -129,7 +133,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>Total</strong>
                                             </td>
                                             <td class="align-middle text-center">

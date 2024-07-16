@@ -80,6 +80,7 @@
                                     <th scope="col" class="align-middle text-center">No.</th>
                                     <th scope="col" class="align-middle text-center">Photo</th>
                                     <th scope="col" class="align-middle text-center">Product Name</th>
+                                    <th scope="col" class="align-middle text-center">SKU</th>
                                     <th scope="col" class="align-middle text-center">Product Code</th>
                                     <th scope="col" class="align-middle text-center">Quantity</th>
                                     <th scope="col" class="align-middle text-center">Price</th>
@@ -103,6 +104,9 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center">
+                                            {{ $item->product->sku }}
+                                        </td>
+                                        <td class="align-middle text-center">
                                             {{ $item->product->name }}
                                         </td>
                                         <td class="align-middle text-center">
@@ -120,21 +124,21 @@
                                     </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="6" class="text-end">
+                                        <td colspan="7" class="text-end">
                                             Payed amount
                                         </td>
                                         <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6" class="text-end">Due</td>
+                                        <td colspan="7" class="text-end">Due</td>
                                         <td class="text-center">{{ number_format($order->due, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6" class="text-end">VAT</td>
+                                        <td colspan="7" class="text-end">VAT</td>
                                         <td class="text-center">{{ number_format($order->vat, 2) }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6" class="text-end">Total</td>
+                                        <td colspan="7" class="text-end">Total</td>
                                         <td class="text-center">{{ number_format($order->total, 2) }}</td>
                                     </tr>
                                 </tbody>
