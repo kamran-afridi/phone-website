@@ -29,7 +29,7 @@ class CustomerTable extends Component
 
         $this->sortField = $field;
     }
-
+ 
     public function render()
     {
         return view('livewire.tables.customer-table', [
