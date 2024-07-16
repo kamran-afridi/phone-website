@@ -95,6 +95,7 @@
                                 <tr>
                                     <th scope="col" class="align-middle text-center">No.</th>
                                     <th scope="col" class="align-middle text-center">Photo</th>
+                                    <th scope="col" class="align-middle text-center">SKU</th>
                                     <th scope="col" class="align-middle text-center">Product Name</th>
                                     <th scope="col" class="align-middle text-center">Product Code</th>
                                     <th scope="col" class="align-middle text-center">Quantity</th>
@@ -113,6 +114,9 @@
                                                 <img class="img-fluid"
                                                     src="{{ $item->product->product_image ? asset('storage/' . $item->product->product_image) : asset('assets/img/products/default.webp') }}">
                                             </div>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ $item->product->sku }}
                                         </td>
                                         <td class="align-middle text-center">
                                             {{ $item->product->name }}
