@@ -137,25 +137,25 @@
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="6" class="text-end">
+                                    <td colspan="7" class="text-end">
                                         Payed amount
                                     </td>
                                     <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Due</td>
+                                    <td colspan="7" class="text-end">Due</td>
                                     <td class="text-center">{{ number_format($order->due, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">VAT</td>
+                                    <td colspan="7" class="text-end">VAT</td>
                                     <td class="text-center">{{ number_format($order->vat, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Total</td>
+                                    <td colspan="7" class="text-end">Total</td>
                                     <td class="text-center">{{ number_format($order->total, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Status</td>
+                                    <td colspan="7" class="text-end">Status</td>
                                     <td class="text-center">
                                         <x-status dot
                                             color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
