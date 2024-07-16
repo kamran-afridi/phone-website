@@ -26,18 +26,29 @@ class CustomerTable extends Component
         } else {
             $this->sortAsc = true;
         }
- 
+
         $this->sortField = $field;
     }
- 
+
     public function render()
     {
-        return view('livewire.tables.customer-table', [
-            'customers' => Customer::with('orders', 'quotations')
-                ->where('user_id', auth()->user()->id)
-                ->search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage)
-        ]);
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'customer') {
+
+            return view('livewire.tables.customer-table', [
+                'customers' => Customer::with('orders', 'quotations')
+                    ->where('user_id', auth()->user()->id)
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage)
+            ]);
+        } else {
+            return view('livewire.tables.customer-table', [
+                'customers' => Customer::with('orders', 'quotations')
+                    ->where('user_id', auth()->user()->id)
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage)
+            ]);
+        }
     }
 }
