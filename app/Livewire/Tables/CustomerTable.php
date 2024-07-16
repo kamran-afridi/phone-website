@@ -26,7 +26,7 @@ class CustomerTable extends Component
         } else {
             $this->sortAsc = true;
         }
-
+ 
         $this->sortField = $field;
     }
  
