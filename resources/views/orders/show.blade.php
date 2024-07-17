@@ -48,13 +48,15 @@
                                 </div>
                             </div>
                         @endif
-                        
+
                         <x-action.close route="{{ route('orders.index') }}" />
                     </div>
                 </div>
 
                 <div class="card-body">
                     <div class="row row-cards mb-3">
+                        
+                        @include('partials.session')
                         <div class="col">
                             <label for="order_date" class="form-label required">
                                 {{ __('Order Date') }}
@@ -79,14 +81,30 @@
                                 disabled>
                         </div>
 
-                        <div class="col">
-                            <label for="payment_type" class="form-label required">
-                                {{ __('Payment Type') }}
-                            </label>
+                        @if ($order->payment_type == 'Due')
+                            <div class="col">
+                                <label for="payment_type" class="form-label required">
+                                    {{ __('Payment Type') }}
+                                </label>
 
-                            <input type="text" id="payment_type" class="form-control" value="{{ $order->payment_type }}"
-                                disabled>
-                        </div>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    <option value="HandCash" {{ $order->payment_type === 'HandCash' ? 'selected' : '' }}>
+                                        HandCash</option>
+                                    <option value="Cheque" {{ $order->payment_type === 'Cheque' ? 'selected' : '' }}>Cheque
+                                    </option>
+                                    <option value="Due" {{ $order->payment_type === 'Due' ? 'selected' : '' }}>Due
+                                    </option>
+                                </select>
+                            </div>
+                        @else
+                            <div class="col">
+                                <label for="payment_type" class="form-label required">
+                                    {{ __('Payment Type') }}
+                                </label>
+                                <input type="text" id="payment_type" class="form-control"
+                                    value="{{ $order->payment_type }}" disabled>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="table-responsive">
@@ -97,7 +115,6 @@
                                     <th scope="col" class="align-middle text-center">Photo</th>
                                     <th scope="col" class="align-middle text-center">SKU</th>
                                     <th scope="col" class="align-middle text-center">Product Name</th>
-                                    <th scope="col" class="align-middle text-center">Product Code</th>
                                     <th scope="col" class="align-middle text-center">Quantity</th>
                                     <th scope="col" class="align-middle text-center">Price</th>
                                     <th scope="col" class="align-middle text-center">Sub Total</th>
@@ -122,11 +139,8 @@
                                             {{ $item->product->name }}
                                         </td>
                                         <td class="align-middle text-center">
-                                            {{ $item->product->code }}
-                                        </td>
-                                        <td class="align-middle text-center">
                                             {{ $item->quantity }}
-                                        </td> 
+                                        </td>
                                         <td class="align-middle text-center">
                                             {{-- {{ number_format($item->unitcost, 2) }} --}}
                                             {{ number_format($item->product->sale_price, 2) }}
@@ -137,25 +151,25 @@
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="7" class="text-end">
+                                    <td colspan="6" class="text-end">
                                         Payed amount
                                     </td>
                                     <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end">Due</td>
+                                    <td colspan="6" class="text-end">Due</td>
                                     <td class="text-center">{{ number_format($order->due, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end">VAT</td>
+                                    <td colspan="6" class="text-end">VAT</td>
                                     <td class="text-center">{{ number_format($order->vat, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end">Total</td>
+                                    <td colspan="6" class="text-end">Total</td>
                                     <td class="text-center">{{ number_format($order->total, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end">Status</td>
+                                    <td colspan="6" class="text-end">Status</td>
                                     <td class="text-center">
                                         <x-status dot
                                             color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
@@ -169,8 +183,10 @@
                     </div>
                 </div>
 
-                <div class="card-footer text-end">
+                <div class="card-footer d-flex">
                     @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
+                    
+                    <div class="col">
                         <form action="{{ route('orders.update', $order->uuid) }}" method="POST">
                             @method('put')
                             @csrf
@@ -180,6 +196,20 @@
                                 {{ __('Complete Order') }}
                             </button>
                         </form>
+                    </div>
+                    @endif
+                    @if ($order->payment_type === 'Due')
+                    
+                    <div class="col  text-end">
+                        <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
+                            @method('put')
+                            @csrf 
+                            <button type="submit" class="btn btn-success"
+                                onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
+                                {{ __('Change Payment Status') }}
+                            </button>
+                        </form>
+                    </div>
                     @endif
                 </div>
             </div>
