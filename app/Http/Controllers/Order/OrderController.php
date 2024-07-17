@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Str;
+use Illuminate\Support\Str;
 use Exception;
 use Twilio\Rest\Client;
 
