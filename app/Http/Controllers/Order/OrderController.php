@@ -94,7 +94,7 @@ class OrderController extends Controller
 			$oDetails['quantity'] = $content->qty;
 			$oDetails['unitcost'] = $content->price;
 			$oDetails['total'] = $content->subtotal;
-			$oDetails['created_at'] = Carbon::now(); 
+			$oDetails['created_at'] = Carbon::now();
 			OrderDetails::insert($oDetails);
 			// dd($oDetails);
 		}
@@ -116,6 +116,18 @@ class OrderController extends Controller
 		]);
 	}
 
+	public function update_payment_status($uuid, Request $request)
+	{
+
+		$order = Order::where('uuid', $uuid)->firstOrFail();
+		$order->update([
+			'payment_type' => 'HandCash',
+		]);
+
+		return redirect()
+			->route('orders.show', $uuid)
+			->with('success', 'Payment type has been updated!');
+	}
 	public function update($uuid, Request $request)
 	{
 

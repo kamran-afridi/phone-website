@@ -117,6 +117,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	// SHOW ORDER
 	Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 	Route::put('/orders/update/{order}', [OrderController::class, 'update'])->name('orders.update');
+	Route::put('/orders/update_payment_status/{order}', [OrderController::class, 'update_payment_status'])->name('orders.update_payment_status');
 	Route::delete('/orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
 
 	// DUES
