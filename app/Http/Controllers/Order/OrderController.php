@@ -70,7 +70,7 @@ class OrderController extends Controller
 			'order_status' => OrderStatus::PENDING->value,
 			'total_products' => Cart::count(),
 			'sub_total' => Cart::subtotal(0 ,'.' ,','),
-			// 'vat' => Cart::tax(),
+			//// 'vat' => Cart::tax(),
 			'vat' => 0, 
 			'total' => Cart::subtotal(0 ,'.' ,','),
 			'invoice_no' => IdGenerator::generate([
