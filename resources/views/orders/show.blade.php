@@ -51,7 +51,7 @@
 
                         <x-action.close route="{{ route('orders.index') }}" />
                     </div>
-                </div> 
+                </div>  
 
                 <div class="card-body">
                     <div class="row row-cards mb-3">
