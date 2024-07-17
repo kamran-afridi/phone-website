@@ -71,7 +71,7 @@ class OrderController extends Controller
 			'total_products' => Cart::count(),
 			'sub_total' => Cart::subtotal(0 ,'.' ,','),
 			// 'vat' => Cart::tax(),
-			'vat' => 0,
+			'vat' => 0, 
 			'total' => Cart::subtotal(0 ,'.' ,','),
 			'invoice_no' => IdGenerator::generate([
 				'table' => 'orders',
