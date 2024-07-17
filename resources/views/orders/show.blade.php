@@ -111,7 +111,7 @@
                         <table class="table table-striped table-bordered align-middle">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="align-middle text-center">No.</th>
+                                    <th scope="col" class="align-middle text-center">No.sss</th>
                                     <th scope="col" class="align-middle text-center">Photo</th>
                                     <th scope="col" class="align-middle text-center">SKU</th>
                                     <th scope="col" class="align-middle text-center">Product Name</th>
