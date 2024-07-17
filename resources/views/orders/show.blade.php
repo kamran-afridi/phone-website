@@ -47,7 +47,7 @@
                                     </form>
                                 </div>
                             </div>
-                        @endif
+                        @endif 
 
                         <x-action.close route="{{ route('orders.index') }}" />
                     </div>
