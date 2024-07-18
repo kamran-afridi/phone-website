@@ -90,6 +90,7 @@
                                     <table class="table table-striped table-bordered align-middle">
                                         <thead class="thead-light">
                                             <tr>
+                                                <th scope="col">{{ __('SKU') }}</th>
                                                 <th scope="col">{{ __('Product') }}</th>
                                                 <th scope="col" class="text-center">{{ __('Quantity') }}</th>
                                                 <th scope="col" class="text-center">{{ __('Price') }}</th>
@@ -102,6 +103,9 @@
                                         <tbody>
                                             @forelse ($carts as $item)
                                                 <tr>
+                                                    <td>
+                                                        {{ $item->sku }}
+                                                    </td>
                                                     <td>
                                                         {{ $item->name }}
                                                     </td>
@@ -168,13 +172,13 @@
                                                     </td>
                                                 </tr>
                                             @empty
-                                                <td colspan="5" class="text-center">
+                                                <td colspan="6" class="text-center">
                                                     {{ __('Add Products') }}
                                                 </td>
                                             @endforelse
 
                                             <tr>
-                                                <td colspan="4" class="text-end">
+                                                <td colspan="5" class="text-end">
                                                     Total Product
                                                 </td>
                                                 <td class="text-center">
@@ -182,19 +186,19 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4" class="text-end">Subtotal</td>
+                                                <td colspan="5" class="text-end">Subtotal</td>
                                                 <td class="text-center">
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }} 
                                                 </td>
                                             </tr>
                                             {{-- <tr>
-                                                <td colspan="4" class="text-end">Tax</td>
+                                                <td colspan="5" class="text-end">Tax</td>
                                                 <td class="text-center">
                                                     {{ Cart::tax() }}
                                                 </td>
                                             </tr> --}}
                                             <tr>
-                                                <td colspan="4" class="text-end">Total</td>
+                                                <td colspan="5" class="text-end">Total</td>
                                                 <td class="text-center">
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}  
                                                 </td>
