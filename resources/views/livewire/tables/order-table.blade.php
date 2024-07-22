@@ -44,12 +44,12 @@
                     <th class="align-middle text-center w-1">
                         {{ __('No.') }}
                     </th>
-                    <th scope="col" class="align-middle text-center">
+                    {{-- <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('invoice_no')" href="#" role="button">
                             {{ __('Invoice No.') }}
                             @include('inclues._sort-icon', ['field' => 'invoice_no'])
                         </a>
-                    </th>
+                    </th> --}}
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
                             {{ __('Customer') }}
@@ -75,6 +75,12 @@
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('pay')" href="#" role="button">
+                            {{ __('Paid') }}
+                            @include('inclues._sort-icon', ['field' => 'pay'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
                             {{ __('Status') }}
                             @include('inclues._sort-icon', ['field' => 'order_status'])
@@ -91,9 +97,9 @@
                         <td class="align-middle text-center">
                             {{ $loop->iteration }}
                         </td>
-                        <td class="align-middle text-center">
+                        {{-- <td class="align-middle text-center">
                             {{ $order->invoice_no }}
-                        </td>
+                        </td> --}}
                         <td class="align-middle text-center">
                             {{ $order->customer->name }}
                         </td>
@@ -105,6 +111,9 @@
                         </td>
                         <td class="align-middle text-center">
                             {{ Number::currency($order->total, 'GBP') }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ Number::currency($order->pay, 'GBP') }}
                         </td>
                         <td class="align-middle text-center">
                             <x-status dot
