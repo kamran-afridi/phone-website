@@ -62,6 +62,7 @@ class OrderController extends Controller
 
 	public function store(OrderStoreRequest $request)
 	{
+		dd(Cart::subtotal(0 ,'.' ,','));
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
@@ -79,7 +80,8 @@ class OrderController extends Controller
 				'length' => 10,
 				'prefix' => 'INV-'
 			]),
-			'due' => (Cart::subtotal(0 ,'.' ,',') - $request->pay),
+			'due' => ($request->pay),
+			// 'due' => (Cart::subtotal(0 ,'.' ,',') - $request->pay),
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
