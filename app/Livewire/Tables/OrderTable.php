@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class OrderTable extends Component
 {
     // use WithPagination; 
-	protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public $perPage = 5;
 
@@ -21,10 +21,8 @@ class OrderTable extends Component
 
     public function sortBy($field): void
     {
-        if($this->sortField === $field)
-        {
-            $this->sortAsc = ! $this->sortAsc;
-
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
@@ -35,19 +33,19 @@ class OrderTable extends Component
     public function render()
     {
 
-		if(auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-			$orders = Order::with(['customer', 'details'])
-			->search($this->search)
-			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-			->paginate($this->perPage); 
-		} else {
+        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
+            $orders = Order::with(['customer', 'details', 'user'])
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+        } else {
             // dd("A");
-            $orders = Order::where("user_id",auth()->id())
-			->with(['customer', 'details'])
-			->search($this->search)
-			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-			->paginate($this->perPage);
-		}
+            $orders = Order::where("user_id", auth()->id())
+                ->with(['customer', 'details', 'user'])
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+        } 
 
         return view('livewire.tables.order-table', [
             'orders' => $orders
