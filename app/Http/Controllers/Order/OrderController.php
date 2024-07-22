@@ -62,7 +62,7 @@ class OrderController extends Controller
 
 	public function store(OrderStoreRequest $request)
 	{
-		dd(Cart::subtotal());
+		// dd(Cart::subtotal());
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
