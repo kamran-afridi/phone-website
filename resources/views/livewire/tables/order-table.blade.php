@@ -79,6 +79,12 @@
                             {{ __('Paid') }}
                             @include('inclues._sort-icon', ['field' => 'pay'])
                         </a>
+                    </th> 
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('user')" href="#" role="button">
+                            {{ __('User') }}
+                            @include('inclues._sort-icon', ['field' => 'user'])
+                        </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
@@ -114,6 +120,9 @@
                         </td>
                         <td class="align-middle text-center">
                             {{ Number::currency($order->pay, 'GBP') }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ $order->user->name}}
                         </td>
                         <td class="align-middle text-center">
                             <x-status dot
