@@ -19,7 +19,7 @@
         <div class="container-xl">
             <div class="row row-cards">
 
-                <form action="{{ route('products.update', $product->uuid) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
 
