@@ -140,9 +140,9 @@
                             {{ $product->item_type }}
                         </td>
                         <td class="align-middle text-center" style="width: 10%">
-                            <x-button.show class="btn-icon" route="{{ route('products.show', $product->uuid) }}" />
-                            <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->uuid) }}" />
-                            <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product->uuid) }}"
+                            <x-button.show class="btn-icon" route="{{ route('products.show', $product->id) }}" />
+                            <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->id) }}" />
+                            <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product->id) }}"
                                 onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
                         </td>
                     </tr>

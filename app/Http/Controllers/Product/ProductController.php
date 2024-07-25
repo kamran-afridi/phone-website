@@ -90,7 +90,7 @@ class ProductController extends Controller
 		// 	return abort(404);
 		// }
 
-		$product = Product::where('products.uuid', $uuid)->firstOrFail();
+		$product = Product::where('products.id', $uuid)->firstOrFail();
 
 		// Generate a barcode
 		// $generator = new BarcodeGeneratorHTML();
@@ -109,7 +109,7 @@ class ProductController extends Controller
 		// 	return abort(404);
 		// }
 
-		$product = Product::where("uuid", $uuid)->firstOrFail();
+		$product = Product::where("id", $uuid)->firstOrFail();
 
 		return view('products.edit', [
 			'product' => $product,
@@ -122,7 +122,7 @@ class ProductController extends Controller
 		// 	return abort(404);
 		// }
 
-		$product = Product::where("uuid", $uuid)->firstOrFail();
+		$product = Product::where("id", $uuid)->firstOrFail();
 		// $product->update($request->except('product_image'));
 
 		$image = $product->product_image;
@@ -163,7 +163,7 @@ class ProductController extends Controller
 		// 	return abort(404);
 		// }
 
-		$product = Product::where("uuid", $uuid)->firstOrFail();
+		$product = Product::where("id", $uuid)->firstOrFail();
 		/**
 		 * Delete photo if exists.
 		 */
