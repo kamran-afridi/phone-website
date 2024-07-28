@@ -149,42 +149,113 @@
                                         <td class="align-middle text-center">
                                             {{ number_format($item->total, 2) }}
                                         </td>
+                                        <td class="align-middle text-center">
 
-                                        <td class="text-center">
-                                            <form action="{{ route('pos.deleteCartItem', 1) }}" method="POST">
-                                                @method('delete')
-                                                @csrf
-                                                <button type="submit" class="btn btn-icon btn-outline-danger "
-                                                    onclick="return confirm('Are you sure you want to delete this record?')">
+                                            @if (auth()->user()->role == 'admin')
+                                                <form action="{{ route('orders.deleteitems', $item->id) }}"
+                                                    class="d-inline-block" method="POST">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <input name="Product_id" value="{{ $item->product->id }}"
+                                                        type="hidden" />
+                                                    <input name="uuid" value="{{ $order->uuid }}" type="hidden" />
+                                                    <input name="order_id" value="{{ $order->id }}" type="hidden" />
+                                                    <button type="submit" class="btn btn-icon btn-outline-danger "
+                                                        onclick="return confirm('Are you sure you want to delete this record?')">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="icon icon-tabler icon-tabler-trash" width="24"
+                                                            height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M4 7l16 0" />
+                                                            <path d="M10 11l0 6" />
+                                                            <path d="M14 11l0 6" />
+                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                <button type="button"
+                                                    class="btn btn-primary btn btn-outline-warning btn-icon"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="{{ '#' . $item->product->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-trash" width="24"
+                                                        class="icon icon-tabler icon-tabler-pencil" width="24"
                                                         height="24" viewBox="0 0 24 24" stroke-width="2"
                                                         stroke="currentColor" fill="none" stroke-linecap="round"
                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M4 7l16 0" />
-                                                        <path d="M10 11l0 6" />
-                                                        <path d="M14 11l0 6" />
-                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4">
+                                                        </path>
+                                                        <path d="M13.5 6.5l4 4"></path>
                                                     </svg>
                                                 </button>
-                                            </form>
-                                            <button type="button" class="btn btn-sm mb-1 btn-primary"
-                                                data-bs-toggle="modal" data-bs-target="#myModal">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-pencil" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4">
-                                                    </path>
-                                                    <path d="M13.5 6.5l4 4"></path>
-                                                </svg>
-                                            </button>
+                                            @endif
                                         </td>
                                     </tr>
+                                    <!-- The modal -->
+                                    <div class="modal modal-lg" id="{{ $item->product->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form
+                                                    action="{{ route('orders.edit_submited_order', $item->product->id) }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('put')
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h3 class="card-title">
+                                                                        {{ __('Product Details') }}
+                                                                    </h3>
+                                                                    <button type="button" class="close btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true"></span>
+                                                                    </button>
+
+                                                                    <div class="row row-cards">
+                                                                        <div class="col-md-12">
+                                                                            <input name="Product_id"
+                                                                                value="{{ $item->product->id }}"
+                                                                                type="hidden" />
+                                                                            <input name="uuid"
+                                                                                value="{{ $order->uuid }}"
+                                                                                type="hidden" />
+                                                                            <input name="order_id"
+                                                                                value="{{ $order->id }}"
+                                                                                type="hidden" />
+                                                                            <x-input name="SKU" label="SKU"
+                                                                                value='{{ $item->product->sku }}'
+                                                                                :required="true" :disabled="true" />
+                                                                            <x-input name="product_name"
+                                                                                label="product_name"
+                                                                                value='{{ $item->product->name }}'
+                                                                                :required="true" :disabled="true" />
+                                                                            <x-input name="quantity" label="QUANTITY"
+                                                                                value='{{ $item->quantity }}'
+                                                                                :required="true" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer text-end">
+
+                                                                    <a class="btn btn-danger" href="#"
+                                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                                        Cancel
+                                                                    </a>
+                                                                    <button class="btn btn-primary" type="submit">
+                                                                        {{ __('Upadte') }}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                                 <tr>
                                     <td colspan="7" class="text-end">
@@ -248,63 +319,7 @@
                 </div>
             </div>
 
-            <!-- The modal -->
-            <div class="modal modal-lg" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h3 class="card-title">
-                                                {{ __('Customer Details') }}
-                                            </h3>
-                                            <button type="button" class="close btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true"></span>
-                                            </button>
 
-                                            <div class="row row-cards">
-                                                <div class="col-md-12">
-                                                    <x-input name="name" :required="true" />
-                                                    <x-input name="email" label="Email address" :required="true" />
-                                                    <x-input name="store_address" label="Shop Name" :required="true" />
-                                                    <x-input label="Phone Number" name="phone" type='tel'
-                                                        :required="true" />
-                                                    {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
-												required> --}}
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="address" class="form-label required">
-                                                        Address
-                                                    </label>
-
-                                                    <textarea name="address" id="address" rows="3"
-                                                        class="form-control form-control-solid @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
-
-                                                    @error('address')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer text-end">
-                                            <button class="btn btn-primary" type="submit">
-                                                {{ __('Save') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

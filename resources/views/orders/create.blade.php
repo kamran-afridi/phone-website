@@ -5,6 +5,10 @@
         <div class="container-xl">
             <div class="row row-cards">
                 <div class="col-lg-7">
+                    @livewire('search-orders', ['products' => $products])
+                </div>
+
+                <div class="col-lg-5">
                     <div class="card">
                         <div class="card-header">
                             <div>
@@ -54,7 +58,7 @@
                                             <option selected="" disabled="">
                                                 Select a customer:
                                             </option>
-                                           
+
                                             @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}" @selected(old('customer_id') == $customer->id)>
                                                     {{ $customer->name }}
@@ -141,10 +145,10 @@
                                                         </form>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ Number::currency($item->price, 'GBP') }} 
+                                                        {{ Number::currency($item->price, 'GBP') }}
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ Number::currency($item->subtotal, 'GBP') }} 
+                                                        {{ Number::currency($item->subtotal, 'GBP') }}
                                                     </td>
                                                     <td class="text-center">
                                                         <form action="{{ route('pos.deleteCartItem', $item->rowId) }}"
@@ -188,7 +192,7 @@
                                             <tr>
                                                 <td colspan="5" class="text-end">Subtotal</td>
                                                 <td class="text-center">
-                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }} 
+                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
                                             {{-- <tr>
@@ -200,7 +204,7 @@
                                             <tr>
                                                 <td colspan="5" class="text-end">Total</td>
                                                 <td class="text-center">
-                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}  
+                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -216,11 +220,6 @@
                             </div>
                         </form>
                     </div>
-                </div>
-
-
-                <div class="col-lg-5">
-                    @livewire('search-orders', ['products' => $products])
                 </div>
 
             </div>
