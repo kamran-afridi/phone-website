@@ -61,7 +61,7 @@ class OrderController extends Controller
 	}
 
 	public function store(OrderStoreRequest $request)
-	{ 
+	{
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
@@ -69,10 +69,10 @@ class OrderController extends Controller
 			'order_date' => Carbon::now()->format('Y-m-d'),
 			'order_status' => OrderStatus::PENDING->value,
 			'total_products' => Cart::count(),
-			'sub_total' => Cart::subtotal(2 ,'.' ,','),
+			'sub_total' => Cart::subtotal(2, '.', ','),
 			//// 'vat' => Cart::tax(),
-			'vat' => 0, 
-			'total' => Cart::subtotal(2 ,'.' ,','),
+			'vat' => 0,
+			'total' => Cart::subtotal(2, '.', ','),
 			'invoice_no' => IdGenerator::generate([
 				'table' => 'orders',
 				'field' => 'invoice_no',
@@ -80,7 +80,7 @@ class OrderController extends Controller
 				'prefix' => 'INV-'
 			]),
 			// 'due' => ($request->pay),
-			'due' => (Cart::subtotal(2 ,'.' ,',') - $request->pay),
+			'due' => (Cart::subtotal(2, '.', ',') - $request->pay),
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
@@ -128,6 +128,26 @@ class OrderController extends Controller
 		return redirect()
 			->route('orders.show', $uuid)
 			->with('success', 'Payment type has been updated!');
+	}
+	public function editsubmitedorder($id, Request $request)
+	{
+		// dd($request->all());
+		$OrderDetails = OrderDetails::where('product_id', $id)->firstOrFail();
+		$Order = Order::where('uuid', $request->uuid)->firstOrFail();
+		$newunitcost = $request->quantity * $OrderDetails->unitcost;
+		$newtotal = $request->quantity * $OrderDetails->total;
+		$OrderDetails->update(['quantity' => $request->quantity, 'unitcost' => $newunitcost, 'total' => $newtotal]);
+		if ($OrderDetails) {
+			$newTotalCost = 0;
+			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
+			foreach ($AllOrderDetails as $AllOrderDetail) {
+				$newTotalCost +=  $AllOrderDetail->unitcost;
+				$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost]);
+			}
+		}
+		return redirect()
+			->route('orders.show', $request->uuid)
+			->with('success', 'Order has been Updated!');
 	}
 	public function update($uuid, Request $request)
 	{
@@ -237,5 +257,25 @@ class OrderController extends Controller
 				'orders' => $orders
 			])
 			->with('success', 'Order has been canceled!');
+	}
+	public function deleteitems($orderdetailsid, Request $request)
+	{
+		$OrderDetails = OrderDetails::where('id', $orderdetailsid)->firstOrFail();
+		$OrderDetails->delete();  
+		if ($OrderDetails) {
+			/* update total price in order table once the product delete form orderdetails table */
+			$Order = Order::where('uuid', $request->uuid)->firstOrFail();
+			$newTotalCost = 0;
+			$TotalProducts = 0;
+			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
+			foreach ($AllOrderDetails as $AllOrderDetail) {
+				$newTotalCost +=  $AllOrderDetail->unitcost;
+				$TotalProducts =  $TotalProducts++;
+				$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
+			}
+		}
+		return redirect()
+			->route('orders.show', $request->uuid)
+			->with('success', 'Order has been deleted!');
 	}
 }
