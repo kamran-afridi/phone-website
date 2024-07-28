@@ -47,15 +47,15 @@
                                     </form>
                                 </div>
                             </div>
-                        @endif  
+                        @endif
 
                         <x-action.close route="{{ route('orders.index') }}" />
                     </div>
-                </div>   
+                </div>
 
                 <div class="card-body">
                     <div class="row row-cards mb-3">
-                        
+
                         @include('partials.session')
                         <div class="col">
                             <label for="order_date" class="form-label required">
@@ -118,6 +118,7 @@
                                     <th scope="col" class="align-middle text-center">Quantity</th>
                                     <th scope="col" class="align-middle text-center">Price</th>
                                     <th scope="col" class="align-middle text-center">Sub Total</th>
+                                    <th scope="col" class="align-middle text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,28 +149,50 @@
                                         <td class="align-middle text-center">
                                             {{ number_format($item->total, 2) }}
                                         </td>
+
+                                        <td class="text-center">
+                                            <form action="{{ route('pos.deleteCartItem', 1) }}" method="POST">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-icon btn-outline-danger "
+                                                    onclick="return confirm('Are you sure you want to delete this record?')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-trash" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M4 7l16 0" />
+                                                        <path d="M10 11l0 6" />
+                                                        <path d="M14 11l0 6" />
+                                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="6" class="text-end">
+                                    <td colspan="7" class="text-end">
                                         Payed amount
                                     </td>
                                     <td class="text-center">{{ number_format($order->pay, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Due</td>
+                                    <td colspan="7" class="text-end">Due</td>
                                     <td class="text-center">{{ number_format($order->due, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">VAT</td>
+                                    <td colspan="7" class="text-end">VAT</td>
                                     <td class="text-center">{{ number_format($order->vat, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Total</td>
+                                    <td colspan="7" class="text-end">Total</td>
                                     <td class="text-center">{{ number_format($order->total, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="text-end">Status</td>
+                                    <td colspan="7" class="text-end">Status</td>
                                     <td class="text-center">
                                         <x-status dot
                                             color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
@@ -185,35 +208,90 @@
 
                 <div class="card-footer d-flex">
                     @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
-                    
-                    <div class="col">
-                        <form action="{{ route('orders.update', $order->uuid) }}" method="POST">
-                            @method('put')
-                            @csrf
+                        <div class="col">
+                            <form action="{{ route('orders.update', $order->uuid) }}" method="POST">
+                                @method('put')
+                                @csrf
 
-                            <button type="submit" class="btn btn-success"
-                                onclick="return confirm('Are you sure you want to complete this order?')">
-                                {{ __('Complete Order') }}
-                            </button>
-                        </form>
-                    </div>
+                                <button type="submit" class="btn btn-success"
+                                    onclick="return confirm('Are you sure you want to complete this order?')">
+                                    {{ __('Complete Order') }}
+                                </button>
+                            </form>
+                        </div>
                     @endif
                     @if ($order->payment_type === 'Due')
-                    
-                    <div class="col  text-end">
-                        <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
-                            @method('put')
-                            @csrf 
-                            <button type="submit" class="btn btn-success"
-                                onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
-                                {{ __('Change Payment Status') }}
-                            </button>
-                        </form>
-                    </div>
+                        <div class="col  text-end">
+                            <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
+                                @method('put')
+                                @csrf
+                                <button type="submit" class="btn btn-success"
+                                    onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
+                                    {{ __('Change Payment Status') }}
+                                </button>
+                            </form>
+                        </div>
                     @endif
                 </div>
             </div>
 
+            <!-- The modal -->
+            <div class="modal modal-lg" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">   
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                {{ __('Customer Details') }}
+                                            </h3>
+                                            <button type="button" class="close btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true"></span>
+                                            </button>
+
+                                            <div class="row row-cards">
+                                                <div class="col-md-12">
+                                                    <x-input name="name" :required="true" />
+                                                    <x-input name="email" label="Email address" :required="true" />
+                                                    <x-input name="store_address" label="Shop Name" :required="true" />
+                                                    <x-input label="Phone Number" name="phone" type='tel'
+                                                        :required="true" />
+                                                    {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
+												required> --}}
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="address" class="form-label required">
+                                                        Address
+                                                    </label>
+
+                                                    <textarea name="address" id="address" rows="3"
+                                                        class="form-control form-control-solid @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
+
+                                                    @error('address')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-end">
+                                            <button class="btn btn-primary" type="submit">
+                                                {{ __('Save') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
