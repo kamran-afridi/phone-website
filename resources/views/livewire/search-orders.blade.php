@@ -17,7 +17,10 @@
             <div class="table-responsive">
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
-                        <tr>
+                        <tr> 
+                            <th scope="col" class="align-middle text-center">
+                                {{ __('Action') }}
+                            </th>
                             <th scope="col" class="align-middle text-center">
                                 <a wire:click.prevent="sortBy('products.sku')" href="#" role="button">
                                     {{ __('Sku') }}
@@ -42,27 +45,12 @@
                                     {{ __('Quantity') }}
                                     @include('inclues._sort-icon', ['field' => 'products.quantity'])
                                 </a>
-                            </th> 
-                            <th scope="col" class="align-middle text-center">
-                                {{ __('Action') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($products as $product)
                             <tr>
-                                <td class="text-center">
-                                    {{ $product->sku }}
-                                </td>
-                                <td class="text-center">
-                                    {{ $product->name }}
-                                </td>
-                                <td class="text-center">
-                                    {{ number_format($product->sale_price, 2) }}
-                                </td>
-                                <td class="text-center">
-                                    {{ $product->quantity }}
-                                </td>
                                 <td>
                                     <div class="d-flex">
                                         <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
@@ -81,6 +69,18 @@
                                             <x-icon.eye />
                                         </button>
                                     </div>
+                                </td>
+                                <td class="text-center">
+                                    {{ $product->sku }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $product->name }}
+                                </td>
+                                <td class="text-center">
+                                    {{ number_format($product->sale_price, 2) }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $product->quantity }}
                                 </td>
                                 {{-- Modal --}}
                                 <div class="modal modal-lg" id="{{ $product->id }}">
