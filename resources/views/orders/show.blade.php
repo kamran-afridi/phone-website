@@ -199,7 +199,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <form
-                                                    action="{{ route('orders.edit_submited_order', $item->product->id) }}"
+                                                    action="{{ route('orders.edit_submited_order', $item->id) }}"
                                                     method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('put')
@@ -225,7 +225,7 @@
                                                                                 type="hidden" />
                                                                             <input name="order_id"
                                                                                 value="{{ $order->id }}"
-                                                                                type="hidden" />
+                                                                                type="hidden" /> 
                                                                             <x-input name="SKU" label="SKU"
                                                                                 value='{{ $item->product->sku }}'
                                                                                 :required="true" :disabled="true" />
