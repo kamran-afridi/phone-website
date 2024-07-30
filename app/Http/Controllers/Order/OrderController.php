@@ -132,18 +132,17 @@ class OrderController extends Controller
 	public function editsubmitedorder($id, Request $request)
 	{
 		// dd($request->all());
-		$OrderDetails = OrderDetails::where('product_id', $id)->firstOrFail();
-		$Order = Order::where('uuid', $request->uuid)->firstOrFail();
-		$newunitcost = $request->quantity * $OrderDetails->unitcost;
-		$newtotal = $request->quantity * $OrderDetails->total;
+		$Product = Product::where('id', $request->Product_id)->firstOrFail();
+		$OrderDetails = OrderDetails::where('id', $id)->firstOrFail();
+		$Order = Order::where('id', $request->order_id)->firstOrFail();
+		$newunitcost = $Product->sale_price;
+		$newtotal = $request->quantity * $Product->sale_price;
 		$OrderDetails->update(['quantity' => $request->quantity, 'unitcost' => $newunitcost, 'total' => $newtotal]);
+		// dd($OrderDetails);
 		if ($OrderDetails) {
-			$newTotalCost = 0;
 			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
-			foreach ($AllOrderDetails as $AllOrderDetail) {
-				$newTotalCost +=  $AllOrderDetail->unitcost;
-				$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost]);
-			}
+			$newTotalCost = $AllOrderDetails->sum('total');
+			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)
@@ -261,7 +260,7 @@ class OrderController extends Controller
 	public function deleteitems($orderdetailsid, Request $request)
 	{
 		$OrderDetails = OrderDetails::where('id', $orderdetailsid)->firstOrFail();
-		$OrderDetails->delete();  
+		$OrderDetails->delete();
 		if ($OrderDetails) {
 			/* update total price in order table once the product delete form orderdetails table */
 			$Order = Order::where('uuid', $request->uuid)->firstOrFail();
