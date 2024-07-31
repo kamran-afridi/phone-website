@@ -66,6 +66,18 @@
 
                                         <div class="mb-3">
                                             <label for="address" class="form-label required">
+                                                Customer Type
+                                            </label>
+                                            <select class="form-control @error('customer_type') is-invalid @enderror"
+                                                id="payment_type" name="payment_type">
+                                                <option value="0">Normal User</option>
+                                                <option value="1">Regular User</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label required">
                                                 Address
                                             </label>
 
@@ -109,6 +121,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <x-input label="Account number" name="account_number" />
                                     </div> --}}
+
                                     </div>
                                 </div>
                                 <div class="card-footer text-end">

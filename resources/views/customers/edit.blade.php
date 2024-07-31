@@ -68,7 +68,23 @@
                                             <x-input label="Shop name" name="store_address" :value="old('store_address', $customer->store_address)"
                                                 :required="true" />
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label required">
+                                                Customer Type
+                                            </label>
+                                            <select class="form-control @error('customer_type') is-invalid @enderror"
+                                                id="customer_type" name="customer_type">
+                                                <option value="0"
+                                                    {{ $customer->customer_type === \App\Enums\CustomerType::Normal ? 'selected' : '' }}>
+                                                    Normal User
+                                                </option>
+                                                <option value="1"
+                                                    {{ $customer->customer_type === \App\Enums\CustomerType::Regular ? 'selected' : '' }}>
+                                                    Regular User
+                                                </option>
+                                            </select>
 
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label for="address" class="form-label required">
