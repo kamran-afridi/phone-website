@@ -17,7 +17,7 @@ class CustomerTable extends Component
 
     public $sortField = 'name';
 
-    public $sortAsc = false;
+    public $sortAsc = 'desc';
 
     public function sortBy($field): void
     {

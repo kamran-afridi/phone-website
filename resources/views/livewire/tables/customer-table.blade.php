@@ -76,6 +76,12 @@
                             {{ __('Shop name') }}
                             @include('inclues._sort-icon', ['field' => 'store_address'])
                         </a>
+                    </th> 
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('customer_type')" href="#" role="button">
+                            {{ __('Customer Type') }}
+                            @include('inclues._sort-icon', ['field' => 'customer_type'])
+                        </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('created_at')" href="#" role="button">
@@ -110,8 +116,15 @@
                             {{ $customer->store_address }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $customer->created_at->diffForHumans() }}
+                            <x-status dot
+                                color="{{ $customer->customer_type === \App\Enums\CustomerType::Normal ? 'green' : ($customer->customer_type === \App\Enums\CustomerType::Regular ? 'orange' : '') }}"
+                                class="text-uppercase">
+                                {{ $customer->customer_type->label() }}
+                            </x-status>
                         </td>
+                        <td class="align-middle text-center">
+                            {{ $customer->created_at->diffForHumans() }}
+                        </td> 
                         <td class="align-middle text-center">
                             <x-button.show class="btn-icon" route="{{ route('customers.show', $customer->uuid) }}" />
                             <x-button.edit class="btn-icon" route="{{ route('customers.edit', $customer->uuid) }}" />

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Enums\CustomerType;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,8 +14,7 @@ class Customer extends Model
 
 	protected $guarded = [
 		'id',
-	];
-
+	]; 
 	protected $fillable = [
 		'name',
 		'email',
@@ -25,11 +25,13 @@ class Customer extends Model
 		// 'account_holder',
 		// 'account_number',
 		// 'bank_name',
+		'customer_type',
 		"user_id",
 		"uuid"
 	];
 
 	protected $casts = [
+		'customer_type' => CustomerType::class,
 		'created_at' => 'datetime',
 		'updated_at' => 'datetime',
 	];

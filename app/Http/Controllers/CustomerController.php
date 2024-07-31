@@ -40,6 +40,7 @@ class CustomerController extends Controller
 			'uuid' => Str::uuid(),
 			'photo' => $image,
 			'name' => $request->name,
+			'customer_type' => $request->customer_type,
 			'email' => $request->email,
 			'store_address' => $request->store_address,
 			'phone' => $request->phone,
@@ -94,9 +95,11 @@ class CustomerController extends Controller
 			'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,
+			'customer_type' => $request->customer_type,
 			'store_address' => $request->store_address,
 			'address' => $request->address,
 		]);
+		// dd($request->customer_type." ".$customer);
 
 		return redirect()
 			->route('customers.index')
