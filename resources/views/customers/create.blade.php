@@ -69,8 +69,8 @@
                                                 Customer Type
                                             </label>
                                             <select class="form-control @error('customer_type') is-invalid @enderror"
-                                                id="payment_type" name="payment_type">
-                                                <option value="0">Normal User</option>
+                                                id="customer_type" name="customer_type">
+                                                <option value="0" selected >Normal User</option>
                                                 <option value="1">Regular User</option>
                                             </select>
 

@@ -49,9 +49,9 @@
                                         <button type="button" class="btn btn-sm mb-1 btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#myModal">
                                             Add customer
-                                        </button>  
+                                        </button>
                                         <!-- Include Livewire Component for Customer Select -->
-                                        @livewire('customer-select', ['customers' => $customers]) 
+                                        @livewire('customer-select', ['customers' => $customers])
 
                                         {{-- <div class="">@json($customer_id)</div> --}}
 
@@ -268,6 +268,17 @@
                                                 :required="true" />
                                             {{-- <input type="tel" pattern="[0-9]{11}" placeholder="Enter UK phone number"
 												required> --}}
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label required">
+                                                Customer Type
+                                            </label>
+                                            <select class="form-control @error('customer_type') is-invalid @enderror"
+                                                id="customer_type" name="customer_type">
+                                                <option value="0" selected >Normal User</option>
+                                                <option value="1">Regular User</option>
+                                            </select>
+
                                         </div>
 
                                         <div class="mb-3">
