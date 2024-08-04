@@ -4,13 +4,14 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\DevicesController;
+use App\Http\Controllers\Email\EmailController;
+use App\Http\Controllers\Expense\ExpenseController;
+use App\Http\Controllers\ExpenseCategory\ExpenseCategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Order\DueOrderController;
 use App\Http\Controllers\Order\OrderCompleteController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderPendingController;
-use App\Http\Controllers\Expense\ExpenseController;
-use App\Http\Controllers\ExpenseCategory\ExpenseCategoryController;
 use App\Http\Controllers\PhoneRepairController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\Product\ProductController;
@@ -18,14 +19,19 @@ use App\Http\Controllers\Product\ProductExportController;
 use App\Http\Controllers\Product\ProductImportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Purchase\PurchaseController;
+use App\Http\Controllers\Quotation\QuotationController;
 use App\Http\Controllers\repairParts\RepairPartsController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Email\EmailController;
+use App\Livewire\Tables\OrderTable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SmsController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -115,6 +121,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
 
 	// SHOW ORDER
+	Route::get('/customer', [OrderController::class, 'save_session'])->name('customer.session');
 	Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 	Route::put('/orders/update/{order}', [OrderController::class, 'update'])->name('orders.update');
 	Route::put('/orders/editsubmitedorder/{order}', [OrderController::class, 'editsubmitedorder'])->name('orders.edit_submited_order');
@@ -161,7 +168,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	// Route::post('/quotations/complete/{quotation}', [QuotationController::class, 'update'])->name('quotations.update');
 	// Route::delete('/quotations/delete/{quotation}', [QuotationController::class, 'destroy'])->name('quotations.delete');
 });
-
+// Route::get('change-event', OrderTable::class);
 require __DIR__ . '/auth.php';
 
 Route::get('test/', function () {

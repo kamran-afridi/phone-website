@@ -45,8 +45,7 @@ class OrderTable extends Component
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
-        } 
-
+        }  
         return view('livewire.tables.order-table', [
             'orders' => $orders
         ]);
