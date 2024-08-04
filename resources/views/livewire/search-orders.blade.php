@@ -71,11 +71,16 @@
                                                     <x-icon.cart />
                                                 </button>
                                             </form>
+                                        @else
+                                            <button class="btn btn-icon btn-outline-primary"
+                                                onclick="return confirm('Please selectt customer first!')">
+                                                <x-icon.cart />
+                                            </button>
                                         @endif
-                                        <button type="button" class="btn btn-icon btn-outline-warning ms-2"
+                                        <bu tton type="button" class="btn btn-icon btn-outline-warning ms-2"
                                             data-bs-toggle="modal" data-bs-target="{{ '#' . $product->id }}">
                                             <x-icon.eye />
-                                        </button>
+                                            </button>
                                     </div>
                                 </td>
                                 <td class="text-center">
