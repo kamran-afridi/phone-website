@@ -17,7 +17,7 @@
             <div class="table-responsive">
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
-                        <tr> 
+                        <tr>
                             <th scope="col" class="align-middle text-center">
                                 {{ __('Action') }}
                             </th>
@@ -53,17 +53,25 @@
                             <tr>
                                 <td>
                                     <div class="d-flex">
-                                        <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $product->id }}">
-                                            <input type="hidden" name="name" value="{{ $product->name }}">
-                                            <input type="hidden" name="sale_price" value="{{ $product->sale_price }}">
-                                            <input type="hidden" name="sku" value="{{ $product->sku }}">
+                                        @if (Session::get('customer_id'))
+                                            <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                <input type="hidden" name="name" value="{{ $product->name }}">
+                                                @if (Session::get('customer_id')->value != 1)
+                                                    <input type="hidden" name="sale_price"
+                                                        value="{{ $product->sale_price }}">
+                                                @else
+                                                    <input type="hidden" name="sale_price"
+                                                        value="{{ $product->whole_sale_price }}">
+                                                @endif
+                                                <input type="hidden" name="sku" value="{{ $product->sku }}">
 
-                                            <button type="submit" class="btn btn-icon btn-outline-primary">
-                                                <x-icon.cart />
-                                            </button>
-                                        </form>
+                                                <button type="submit" class="btn btn-icon btn-outline-primary">
+                                                    <x-icon.cart />
+                                                </button>
+                                            </form>
+                                        @endif
                                         <button type="button" class="btn btn-icon btn-outline-warning ms-2"
                                             data-bs-toggle="modal" data-bs-target="{{ '#' . $product->id }}">
                                             <x-icon.eye />
@@ -76,9 +84,21 @@
                                 <td class="text-center">
                                     {{ $product->name }}
                                 </td>
-                                <td class="text-center">
-                                    {{ number_format($product->sale_price, 2) }}
-                                </td>
+                                @if (Session::get('customer_id'))
+                                    @if (Session::get('customer_id')->value != 1)
+                                        <td class="text-center">
+                                            {{ number_format($product->sale_price, 2) }}
+                                        </td>
+                                    @else
+                                        <td class="text-center">
+                                            {{ number_format($product->whole_sale_price, 2) }}
+                                        </td>
+                                    @endif
+                                @else
+                                    <td class="text-center">
+                                        {{ number_format($product->sale_price, 2) }}
+                                    </td>
+                                @endif
                                 <td class="text-center">
                                     {{ $product->quantity }}
                                 </td>

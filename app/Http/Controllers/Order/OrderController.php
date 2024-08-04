@@ -38,21 +38,17 @@ class OrderController extends Controller
 			'orders' => $orders
 		]);
 	}
-
 	public function create()
 	{
 		// $products = Product::where('user_id', auth()->id())->with(['category_id'])->get();
 		$products = Product::with(['category_id'])->get();
-
 		if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
 			$customers = Customer::get(['id', 'name']);
 		} else {
 			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
-			// $customers = Customer::get(['id', 'name']);
+			// $customers = Customer::get(['id', 'name']); 
 		}
-
 		$carts = Cart::content();
-
 		return view('orders.create', [
 			'products' => $products,
 			'customers' => $customers,
@@ -102,7 +98,9 @@ class OrderController extends Controller
 
 		// Delete Cart Sopping History
 		Cart::destroy();
-
+		/* customer session id remove */
+		session()->forget('customer_id');
+		session()->forget('customer_data'); 
 		return redirect()
 			->route('orders.index')
 			->with('success', 'Order has been created!');

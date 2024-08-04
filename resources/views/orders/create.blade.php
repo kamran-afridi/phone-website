@@ -7,7 +7,6 @@
                 <div class="col-lg-7">
                     @livewire('search-orders', ['products' => $products])
                 </div>
-
                 <div class="col-lg-5">
                     <div class="card">
                         <div class="card-header">
@@ -50,21 +49,11 @@
                                         <button type="button" class="btn btn-sm mb-1 btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#myModal">
                                             Add customer
-                                        </button>
-                                        {{-- {{ dd(old('customer_id')) }} --}}
-                                        <select
-                                            class="form-select form-control-solid @error('customer_id') is-invalid @enderror"
-                                            id="customer_id" name="customer_id">
-                                            <option selected="" disabled="">
-                                                Select a customer:
-                                            </option>
+                                        </button>  
+                                        <!-- Include Livewire Component for Customer Select -->
+                                        @livewire('customer-select', ['customers' => $customers]) 
 
-                                            @foreach ($customers as $customer)
-                                                <option value="{{ $customer->id }}" @selected(old('customer_id') == $customer->id)>
-                                                    {{ $customer->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        {{-- <div class="">@json($customer_id)</div> --}}
 
                                         @error('customer_id')
                                             <div class="invalid-feedback">
