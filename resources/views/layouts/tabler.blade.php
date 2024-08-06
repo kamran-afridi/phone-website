@@ -298,7 +298,7 @@
                                             {{ __('Customers') }}
                                         </span>
                                     </a>
-                                </li>  
+                                </li>
                                 @if (auth()->user()->role == 'admin')
                                     <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-base"
@@ -592,7 +592,25 @@
                                         </div>
                                     </div>
                                 </li>
-
+                                <li class="nav-item {{ request()->is('Map*') ? 'active' : null }}">
+                                    <a class="nav-link" href="{{ route('Map') }}">
+                                        <span
+                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                            </svg>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            {{ __('Map') }}
+                                        </span>
+                                    </a>
+                                </li>
 
 
                                 {{-- <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
@@ -794,11 +812,26 @@
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
-
-    {{-- - Page Scripts - --}}
+    <script>
+        
+        setInterval(function() {
+            getUserlocation();
+        }, 400);
+    </script>
+    {{-- - Page Scripts - --}} 
     @stack('page-scripts')
-
     @livewireScripts
+    <script>
+        const x = document.getElementById("demo"); 
+        function getUserlocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        } 
+        
+    </script>
 </body>
 
 </html>
