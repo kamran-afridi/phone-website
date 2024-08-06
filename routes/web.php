@@ -14,6 +14,7 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderPendingController;
 use App\Http\Controllers\PhoneRepairController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Product\ProductExportController;
 use App\Http\Controllers\Product\ProductImportController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
-use App\Livewire\Tables\OrderTable;
+// use App\Livewire\LocationComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +46,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('php/', function () {
 	return phpinfo();
-}); 
-   
+});
+
 Route::get('/', function () {
 	if (Auth::check()) {
 		return redirect('/dashboard');
@@ -59,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('dashboard/', [DashboardController::class, 'index'])->name('dashboard');
 
 	// User Management
-	Route::resource('/users', UserController::class); 
+	Route::resource('/users', UserController::class);
 	Route::put('/user/change-password/{username}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -167,8 +168,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	// Route::get('/quotations/{quotation}/edit', [QuotationController::class, 'edit'])->name('quotations.edit');
 	// Route::post('/quotations/complete/{quotation}', [QuotationController::class, 'update'])->name('quotations.update');
 	// Route::delete('/quotations/delete/{quotation}', [QuotationController::class, 'destroy'])->name('quotations.delete');
+	/* Tracking user location */
+	Route::get('Map', [LocationController::class, 'index'])->name('Map');
 });
-// Route::get('change-event', OrderTable::class);
+// Route::get('Map', LocationComponent::class)->name('Map');
 require __DIR__ . '/auth.php';
 
 Route::get('test/', function () {
