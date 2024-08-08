@@ -54,7 +54,7 @@ class LoginRequest extends FormRequest
         } else {
             $UsersLog = UsersLog::create([
                 'date' => Carbon::now()->format('Y-m-d'),
-                'time' => Carbon::now()->format('H:i:s'),
+                'time' => Carbon::now("Europe/London")->format('H:i:s'),
                 'status' => 'LOGIN',
                 'user_id' => auth()->id(),
             ]);
