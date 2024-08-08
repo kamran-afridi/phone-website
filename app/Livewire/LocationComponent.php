@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Livewire; 
-use App\Models\UserLocation; 
-use Livewire\Component; 
+namespace App\Livewire;
+
+use App\Models\UserLocation;
+use Livewire\Component;
+
 class LocationComponent extends Component
 {
     public $latitude;
@@ -15,7 +17,14 @@ class LocationComponent extends Component
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
-        $this->dispatch('locationUpdated', ['latitude' => $latitude, 'longitude' => $longitude]);
+        UserLocation::updateOrCreate(
+            ['user_id' => auth()->id()],
+            [
+                'latitude' => $latitude,
+                'longitude' => $longitude
+            ],
+        );
+        $this->dispatch('locationUpdated', ['latitude' =>  $this->latitude, 'longitude' =>  $this->longitude]);
     }
 
     public function render()

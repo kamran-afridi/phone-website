@@ -811,30 +811,17 @@
     @stack('page-libraries')
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-    <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
-    <script>
-        // setInterval(function() {
-        //     getUserlocation();
-        // }, 5000);
-    </script>
+    <script src="{{ asset('dist/js/demo.min.js') }}" defer></script> 
     {{-- - Page Scripts - --}}
     @stack('page-scripts')
     @livewireScripts
     <script>
-        const x = document.getElementById("demo");
-
-        // Function to handle errors from geolocation API
+         // Function to handle errors from geolocation API
         function handleLocationError(error) {
             console.error("Error getting location:", error.message);
         }
         // Function to update marker position with live tracking
         function showPosition(position) {
-            // var lat = position.coords.latitude;
-            // var lng = position.coords.longitude;
-            // var currentCenter = map.getCenter();
-            // marker.setLatLng([lat, lng]);
-            // map.setView(currentCenter); // Center map on the marker's position
-            // alert("I am triger"); 
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
             Livewire.dispatch('customerLocation', {
@@ -847,18 +834,7 @@
             navigator.geolocation.watchPosition(showPosition, handleLocationError);
         } else {
             console.error("Geolocation is not supported by this browser.");
-        }
-
-
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(showPosition);
-        //     var latitude = showPosition.coords.latitude;
-        //     var longitude = showPosition.coords.longitude;
-
-        //     Livewire.emit('setLocation', latitude, longitude);
-        // } else {
-        //     x.innerHTML = "Geolocation is not supported by this browser.";
-        // }
+        } 
     </script>
 </body>
 
