@@ -826,7 +826,7 @@
             var longitude = position.coords.longitude;
             Livewire.dispatch('customerLocation', {
                 latitude: latitude,
-                longitude: longitude
+                longitude: longitude,
             });
         }
         // Get user's current location and update marker position

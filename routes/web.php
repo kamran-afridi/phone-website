@@ -27,7 +27,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
-// use App\Livewire\LocationComponent;
+use App\Livewire\LocationComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -171,7 +171,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	/* Tracking user location */
 	Route::get('Map', [LocationController::class, 'index'])->name('Map');
 });
-// Route::get('Map', LocationComponent::class)->name('Map');
+Route::get('changeEvents', LocationComponent::class)->name('changeEvents');
 require __DIR__ . '/auth.php';
 
 Route::get('test/', function () {
