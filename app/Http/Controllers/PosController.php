@@ -40,8 +40,7 @@ class PosController extends Controller
 
 		Cart::add(
 			$validatedData['id'],
-			$validatedData['name'],
-			1,
+			$validatedData['name'], 
 			$validatedData['sale_price'], 
 			$validatedData['sku'],
 			1,
