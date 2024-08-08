@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Customer;
+use App\Models\User;
 use App\Models\UserLocation;
 use Livewire\Component;
 
@@ -48,7 +48,7 @@ class LocationComponent extends Component
 
     public function render()
     {
-        $customers = Customer::get(['id', 'name']);
+        $customers = User::get(['id', 'name']);
         return view('livewire.location-component', [
             'customers' => $customers,
         ]);
