@@ -758,7 +758,9 @@
             <div>
                 @yield('content')
             </div>
-
+            <div style="display: none;">
+                @livewire('location-component')
+            </div>
             {{-- <footer class="footer footer-transparent d-print-none">
                 <div class="container-xl">
                     <div class="row text-center align-items-center flex-row-reverse">
@@ -828,6 +830,7 @@
                 latitude: latitude,
                 longitude: longitude,
             });
+            
         }
         // Get user's current location and update marker position
         if (navigator.geolocation) {

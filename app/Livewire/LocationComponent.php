@@ -26,7 +26,7 @@ class LocationComponent extends Component
         }
     }
     public function setLocation($latitude, $longitude)
-    {
+    { 
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         UserLocation::updateOrCreate(
@@ -35,15 +35,7 @@ class LocationComponent extends Component
                 'latitude' => $latitude,
                 'longitude' => $longitude
             ],
-        );
-        // if ($this->user_id) {
-
-        //     $this->dispatch('locationUpdated', ['latitude' =>  $this->latitude, 'longitude' =>  $UserLocation->longitude]);
-        // } else {
-
-        //     $this->dispatch('locationUpdated', ['latitude' =>  $this->latitude, 'longitude' =>  $this->longitude]);
-        // }
-        // dd($this->user_id);
+        ); 
     }
 
     public function render()
