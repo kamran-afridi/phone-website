@@ -26,8 +26,7 @@ class LocationComponent extends Component
         }
     }
     public function setLocation($latitude, $longitude)
-    { 
-        dd('ASDA');
+    {  
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         UserLocation::updateOrCreate(
