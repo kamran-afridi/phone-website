@@ -807,7 +807,7 @@
                     </div>
                 </div>
             </footer> --}}
-        </div>
+        </div> 
     </div>
     <!-- Libs JS -->
     @stack('page-libraries')
