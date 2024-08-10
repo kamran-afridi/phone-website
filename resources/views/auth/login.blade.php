@@ -3,6 +3,13 @@
 @section('content')
     <div class="card card-md">
         <div class="card-body">
+            <div class="text-center mb-5">
+                <a href="{{ url('/') }}" class="navbar-brand navbar-brand-autodark">
+                    {{-- <img src="{{ asset('assets/img/logo.PNG') }}" width="121" height="auto" alt="Panther Force"> --}}
+                    <img src="https://pantherforce.co.uk/cdn/shop/files/logo-pf_529ab6b6-8198-41c4-8071-3d610222d418_210x@2x.png?v=1720617728https://pantherforce.co.uk/cdn/shop/files/logo-pf_529ab6b6-8198-41c4-8071-3d610222d418_210x@2x.png?v=1720617728    " width="181" height="auto" alt="Panther Force">
+                </a>
+            </div>
+
             <h2 class="h2 text-center mb-4">
                 Login to your account
             </h2>

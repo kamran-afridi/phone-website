@@ -62,14 +62,9 @@
 <body class="d-flex flex-column">
     <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
 
-    <div class="page page-center">
+    <div class="page page-center bg-white">
         <div class="container container-tight py-4">
-            <div class="text-center mb-4">
-                <a href="{{ url('/') }}" class="navbar-brand navbar-brand-autodark">
-                    <img src="{{ asset('assets/img/logo.PNG') }}" width="121" height="auto" alt="Panther Force">
-                </a>
-            </div>
-
+            
             @include('components.alert')
 
             @if (session('status'))
