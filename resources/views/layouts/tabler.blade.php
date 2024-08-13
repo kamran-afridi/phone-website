@@ -820,6 +820,13 @@
     @stack('page-scripts')
     @livewireScripts
     <script>
+        //  setInterval(function() {
+        //     Livewire.dispatch('customerLocation', { 
+        //         latitude: '53.8149729',
+        //         longitude: '53.8149729',
+        //     });
+        //     console.log("longitude: '53.8149729',");
+        // }, 500);
          // Function to handle errors from geolocation API
         function handleLocationError(error) {
             console.error("Error getting location:", error.message);
@@ -828,10 +835,10 @@
         function showPosition(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-            Livewire.dispatch('customerLocation', {
-                latitude: latitude,
-                longitude: longitude,
-            });
+            // Livewire.dispatch('customerLocation', { 
+            //     latitude: latitude,
+            //     longitude: longitude,
+            // });
             
         }
         // Get user's current location and update marker position

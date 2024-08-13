@@ -12,10 +12,10 @@ class LocationComponent extends Component
     public $longitude;
     public $user_id;
 
-    protected $listeners = ['customerLocation' => 'setLocation'];
+    protected $listeners = ['customerLocation' => 'setLocation', 'locationUpdated' => 'changeEvents'];
     public function changeEvents($user_id)
     {
-        $UserLocation = UserLocation::where('user_id', $user_id)->first(); 
+        $UserLocation = UserLocation::where('user_id', $user_id)->first();
         if ($UserLocation) {  // This checks if $UserLocation is not null
             $this->user_id = $UserLocation->latitude;
             $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
@@ -23,10 +23,13 @@ class LocationComponent extends Component
         } else {
             // Handle the case where no UserLocation was found
             // dd('No location found for this user');
+            $this->latitude = null;
+            $this->longitude = null;
+            $this->user_id = null;
         }
     }
     public function setLocation($latitude, $longitude)
-    {  
+    {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         UserLocation::updateOrCreate(
@@ -35,7 +38,7 @@ class LocationComponent extends Component
                 'latitude' => $latitude,
                 'longitude' => $longitude
             ],
-        ); 
+        );
     }
 
     public function render()

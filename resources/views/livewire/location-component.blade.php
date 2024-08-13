@@ -11,15 +11,14 @@
             </option>
         @endforeach
     </select>
-    {{-- <div>
+    <div>
         <p>Latitude: {{ $latitude }}</p>
         <p>Longitude: {{ $longitude }}</p>
-    </div> --}}
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // let map; 
-            function initializeMap(latitude, longitude) {
-                // map.setView(latitude, longitude);
+            function initializeMap(latitude, longitude) { 
                 //     // console.log(position.coords.longitude);
                 var currentCenter = map.getZoom();
                 console.log(currentCenter);
