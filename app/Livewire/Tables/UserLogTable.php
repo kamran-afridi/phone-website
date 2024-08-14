@@ -12,7 +12,7 @@ class UserLogTable extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $perPage = 5;
+    public $perPage = 15;
     public $search = '';
     public $sortField = 'date';
     public $sortAsc = false;
