@@ -160,21 +160,23 @@
                                                         type="hidden" />
                                                     <input name="uuid" value="{{ $order->uuid }}" type="hidden" />
                                                     <input name="order_id" value="{{ $order->id }}" type="hidden" />
-                                                    <button type="submit" class="btn btn-icon btn-outline-danger "
-                                                        onclick="return confirm('Are you sure you want to delete this record?')">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-trash" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                                            stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M4 7l16 0" />
-                                                            <path d="M10 11l0 6" />
-                                                            <path d="M14 11l0 6" />
-                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                                                        </svg>
-                                                    </button>
+                                                    @if ($order->details->count() > 1)
+                                                        <button type="submit" class="btn btn-icon btn-outline-danger "
+                                                            onclick="return confirm('Are you sure you want to delete this record?')">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="icon icon-tabler icon-tabler-trash" width="24"
+                                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                stroke="currentColor" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M4 7l16 0" />
+                                                                <path d="M10 11l0 6" />
+                                                                <path d="M14 11l0 6" />
+                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                            </svg>
+                                                        </button>
+                                                    @endif
                                                 </form>
                                                 <button type="button"
                                                     class="btn btn-primary btn btn-outline-warning btn-icon"
@@ -198,8 +200,7 @@
                                     <div class="modal modal-lg" id="{{ $item->product->id }}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <form
-                                                    action="{{ route('orders.edit_submited_order', $item->id) }}"
+                                                <form action="{{ route('orders.edit_submited_order', $item->id) }}"
                                                     method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('put')
@@ -225,7 +226,7 @@
                                                                                 type="hidden" />
                                                                             <input name="order_id"
                                                                                 value="{{ $order->id }}"
-                                                                                type="hidden" /> 
+                                                                                type="hidden" />
                                                                             <x-input name="SKU" label="SKU"
                                                                                 value='{{ $item->product->sku }}'
                                                                                 :required="true" :disabled="true" />
@@ -267,31 +268,28 @@
                                             @csrf
                                             @method('put')
                                             <div class="input-group" style="min-width: 170px;">
-                                                <input type="number" class="form-control" name="pay"
-                                                    required value="{{ $order->pay }}" step="any">
+                                                <input type="number" class="form-control" name="pay" required
+                                                    value="{{ $order->pay }}" step="any">
                                                 <input type="hidden" class="form-control" name="order_id"
                                                     value="{{ $order->id }}">
 
                                                 <div class="input-group-append text-center">
-                                                    <button type="submit"
-                                                        class="btn btn-icon btn-success border-none"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="" data-original-title="Sumbit">
+                                                    <button type="submit" class="btn btn-icon btn-success border-none"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Sumbit">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-check"
-                                                            width="24" height="24"
-                                                            viewBox="0 0 24 24" stroke-width="2"
-                                                            stroke="currentColor" fill="none"
-                                                            stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                fill="none" />
+                                                            class="icon icon-tabler icon-tabler-check" width="24"
+                                                            height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                             <path d="M5 12l5 5l10 -10" />
                                                         </svg>
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-                                       
+
                                     </td>
                                 </tr>
                                 <tr>

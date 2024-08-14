@@ -279,7 +279,7 @@ class OrderController extends Controller
 			$newTotalCost = 0;
 			$Duebill = 0;
 			$TotalProducts = 0;
-			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
+			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get(); 
 			foreach ($AllOrderDetails as $AllOrderDetail) {
 
 				$newTotalCost +=  $AllOrderDetail->quantity * $AllOrderDetail->unitcost;
