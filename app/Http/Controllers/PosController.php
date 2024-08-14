@@ -37,7 +37,7 @@ class PosController extends Controller
 		];
 
 		$validatedData = $request->validate($rules);
-
+ 
 		Cart::add(
 			$validatedData['id'],
 			$validatedData['name'],
