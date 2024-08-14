@@ -4,8 +4,9 @@
         <option value="" selected="" disabled="">
             Select a customer:
         </option>
+
         @foreach ($customers as $customer)
-            <option value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
+            <option value="{{ $customer->id }}" @selected(old('customer_id', $customer_id) == $customer->id)>
                 {{ $customer->name }}
             </option>
         @endforeach
@@ -16,6 +17,21 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            // Set an interval to trigger the changeEvents method every 500ms
+            // setInterval(function() {
+            var selectedCustomerId = document.getElementById('customer_id').value;
+
+            if (selectedCustomerId) {
+                // Trigger the Livewire component's changeEvents method
+                // Livewire.on('changeEvents', selectedCustomerId);
+                // Livewire.on('locationUpdated', selectedCustomerId);
+                // Livewire.on('locationUpdated', (latitude, longitude) => {
+                //     initializeMap(latitude, longitude);
+                // });
+                console.log(selectedCustomerId);
+            }
+            // }, 100000); 
             function initializeMap(latitude, longitude) {
                 //     // console.log(position.coords.longitude);
                 var currentCenter = map.getZoom();

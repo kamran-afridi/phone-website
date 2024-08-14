@@ -258,7 +258,7 @@ class OrderController extends Controller
 	public function deleteitems($orderdetailsid, Request $request)
 	{
 		$OrderDetails = OrderDetails::where('id', $orderdetailsid)->firstOrFail();
-		$OrderDetails->delete();
+		// $OrderDetails->delete();
 		if ($OrderDetails) {
 			/* update total price in order table once the product delete form orderdetails table */
 			$Order = Order::where('uuid', $request->uuid)->firstOrFail();
@@ -266,10 +266,11 @@ class OrderController extends Controller
 			$TotalProducts = 0;
 			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
 			foreach ($AllOrderDetails as $AllOrderDetail) {
-				$newTotalCost +=  $AllOrderDetail->unitcost;
+				
+				$newTotalCost =  $AllOrderDetails->sum('unitcost');
 				$TotalProducts =  $TotalProducts++;
-				$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
-			}
+			} 
+			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)

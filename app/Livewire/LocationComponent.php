@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Models\UserLocation;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class LocationComponent extends Component
@@ -20,26 +21,26 @@ class LocationComponent extends Component
     public function mount()
     {
         // Initialize customer_id with old input if it exists, or the current value
-        $this->customer_id = old('customer_id') ?: $this->customer_id;
+        // $this->customer_id = old('customer_id') ?: $this->customer_id;
+        $this->customer_id = session('customer_id', '');
         // dd("customer_id");
     }
     public function changeEvents($customer_id)
-    {
-        $this->customer_id = old('customer_id') ?: $this->customer_id;
+    { 
         $UserLocation = UserLocation::where('user_id', $customer_id)->first();
         if ($UserLocation) {  // This checks if $UserLocation is not null 
             $this->getlatitude = $UserLocation->latitude;
             $this->getlongitude = $UserLocation->longitude;
+            Session::put('customer_id', $customer_id);
             $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
             // dd("asa");
-            // dd($this->user_id);
         } else {
             // Handle the case where no UserLocation was found
             // dd('No location found for this user');
             $this->getlatitude = 'Not detected';
             $this->getlongitude = 'Not detected';
             $this->user_id = 'Not detected';
-        }
+        } 
     }
     public function setLocation($latitude, $longitude)
     {
