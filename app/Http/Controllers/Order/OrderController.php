@@ -269,6 +269,7 @@ class OrderController extends Controller
 				
 				$TotalProducts =  $TotalProducts++;
 			} 
+			dd($request->order_id);
 			$newTotalCost =  $AllOrderDetails->sum('unitcost');
 			dd($newTotalCost );
 			// $Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
