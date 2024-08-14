@@ -152,15 +152,18 @@
                                         <td class="align-middle text-center">
 
                                             @if (auth()->user()->role == 'admin')
-                                                <form action="{{ route('orders.deleteitems', $item->id) }}"
-                                                    class="d-inline-block" method="POST">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <input name="Product_id" value="{{ $item->product->id }}"
-                                                        type="hidden" />
-                                                    <input name="uuid" value="{{ $order->uuid }}" type="hidden" />
-                                                    <input name="order_id" value="{{ $order->id }}" type="hidden" />
-                                                    @if ($order->details->count() > 1)
+                                                @if ($order->details->count() > 1)
+                                                    <form action="{{ route('orders.deleteitems', $item->id) }}"
+                                                        class="d-inline-block" method="POST">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input name="Product_id" value="{{ $item->product->id }}"
+                                                            type="hidden" />
+                                                        <input name="uuid" value="{{ $order->uuid }}"
+                                                            type="hidden" />
+                                                        <input name="order_id" value="{{ $order->id }}"
+                                                            type="hidden" />
+
                                                         <button type="submit" class="btn btn-icon btn-outline-danger "
                                                             onclick="return confirm('Are you sure you want to delete this record?')">
                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -176,8 +179,35 @@
                                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                                             </svg>
                                                         </button>
-                                                    @endif
-                                                </form>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('orders.cancel', $order) }}"
+                                                        class="d-inline-block" method="POST">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input name="Product_id" value="{{ $item->product->id }}"
+                                                            type="hidden" />
+                                                        <input name="uuid" value="{{ $order->uuid }}"
+                                                            type="hidden" />
+                                                        <input name="order_id" value="{{ $order->id }}"
+                                                            type="hidden" />
+                                                        <button type="submit" class="btn btn-icon btn-outline-danger "
+                                                            onclick="return confirm('Please delete this order from the main order page')">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="icon icon-tabler icon-tabler-trash" width="24"
+                                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                stroke="currentColor" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M4 7l16 0" />
+                                                                <path d="M10 11l0 6" />
+                                                                <path d="M14 11l0 6" />
+                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                                 <button type="button"
                                                     class="btn btn-primary btn btn-outline-warning btn-icon"
                                                     data-bs-toggle="modal"
