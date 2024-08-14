@@ -10,7 +10,7 @@ class ExpenseCategoryTable extends Component
 {
     use WithPagination;
 
-    public $perPage = 5;
+    public $perPage = 15;
 
     public $search = '';
 

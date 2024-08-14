@@ -11,7 +11,7 @@ class ProductTable extends Component
 	// use WithPagination;
 	protected $paginationTheme = 'bootstrap';
 
-	public $perPage = 5;
+	public $perPage = 15;
 	public $selectedValue;
 	public $search = '';
 
