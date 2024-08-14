@@ -270,7 +270,8 @@ class OrderController extends Controller
 				$newTotalCost =  $AllOrderDetail->sum('unitcost');
 				$TotalProducts =  $TotalProducts++;
 			} 
-			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
+			dd($newTotalCost );
+			// $Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)
