@@ -10,22 +10,35 @@ class LocationComponent extends Component
 {
     public $latitude;
     public $longitude;
+    public $getlatitude;
+    public $getlongitude;
     public $user_id;
 
-    protected $listeners = ['customerLocation' => 'setLocation', 'locationUpdated' => 'changeEvents'];
-    public function changeEvents($user_id)
+    protected $listeners = ['customerLocation' => 'setLocation'];
+    public $customer_id;
+
+    public function mount()
     {
-        $UserLocation = UserLocation::where('user_id', $user_id)->first();
-        if ($UserLocation) {  // This checks if $UserLocation is not null
-            $this->user_id = $UserLocation->latitude;
+        // Initialize customer_id with old input if it exists, or the current value
+        $this->customer_id = old('customer_id') ?: $this->customer_id;
+        // dd("customer_id");
+    }
+    public function changeEvents($customer_id)
+    {
+        $this->customer_id = old('customer_id') ?: $this->customer_id;
+        $UserLocation = UserLocation::where('user_id', $customer_id)->first();
+        if ($UserLocation) {  // This checks if $UserLocation is not null 
+            $this->getlatitude = $UserLocation->latitude;
+            $this->getlongitude = $UserLocation->longitude;
             $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
+            // dd("asa");
             // dd($this->user_id);
         } else {
             // Handle the case where no UserLocation was found
             // dd('No location found for this user');
-            $this->latitude = null;
-            $this->longitude = null;
-            $this->user_id = null;
+            $this->getlatitude = 'Not detected';
+            $this->getlongitude = 'Not detected';
+            $this->user_id = 'Not detected';
         }
     }
     public function setLocation($latitude, $longitude)
