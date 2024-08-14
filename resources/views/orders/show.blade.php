@@ -206,7 +206,7 @@
                                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                                             </svg>
                                                         </button>
-                                                    </form>
+                                                    </form> 
                                                 @endif
                                                 <button type="button"
                                                     class="btn btn-primary btn btn-outline-warning btn-icon"
