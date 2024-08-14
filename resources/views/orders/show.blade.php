@@ -261,7 +261,38 @@
                                     <td colspan="7" class="text-end">
                                         Payed amount
                                     </td>
-                                    <td class="text-center">{{ number_format($order->pay, 2) }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('orders.update_order_payment', $order->uuid) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('put')
+                                            <div class="input-group" style="min-width: 170px;">
+                                                <input type="number" class="form-control" name="pay"
+                                                    required value="{{ $order->pay }}" step="any">
+                                                <input type="hidden" class="form-control" name="order_id"
+                                                    value="{{ $order->id }}">
+
+                                                <div class="input-group-append text-center">
+                                                    <button type="submit"
+                                                        class="btn btn-icon btn-success border-none"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="" data-original-title="Sumbit">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="icon icon-tabler icon-tabler-check"
+                                                            width="24" height="24"
+                                                            viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" fill="none"
+                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z"
+                                                                fill="none" />
+                                                            <path d="M5 12l5 5l10 -10" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                       
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="text-end">Due</td>

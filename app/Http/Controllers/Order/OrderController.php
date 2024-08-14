@@ -100,7 +100,7 @@ class OrderController extends Controller
 		Cart::destroy();
 		/* customer session id remove */
 		session()->forget('customer_id');
-		session()->forget('customer_data'); 
+		session()->forget('customer_data');
 		return redirect()
 			->route('orders.index')
 			->with('success', 'Order has been created!');
@@ -127,6 +127,19 @@ class OrderController extends Controller
 			->route('orders.show', $uuid)
 			->with('success', 'Payment type has been updated!');
 	}
+
+	public function update_order_payment($uuid, Request $request)
+	{
+		$order = Order::where('uuid', $uuid)->firstOrFail();
+		$Duebill = $order->sub_total - $request->pay;
+		$order->update([
+			'due' => $Duebill,
+			'pay' => $request->pay,
+		]);
+		return redirect()
+			->route('orders.show', $uuid)
+			->with('success', 'Payment has been updated!');
+	}
 	public function editsubmitedorder($id, Request $request)
 	{
 		// dd($request->all());
@@ -140,7 +153,8 @@ class OrderController extends Controller
 		if ($OrderDetails) {
 			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
 			$newTotalCost = $AllOrderDetails->sum('total');
-			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost]);
+			$Duebill = $newTotalCost - $Order->pay;
+			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)
@@ -263,16 +277,18 @@ class OrderController extends Controller
 			/* update total price in order table once the product delete form orderdetails table */
 			$Order = Order::where('uuid', $request->uuid)->firstOrFail();
 			$newTotalCost = 0;
+			$Duebill = 0;
 			$TotalProducts = 0;
 			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
 			foreach ($AllOrderDetails as $AllOrderDetail) {
-				
-				$newTotalCost +=  $AllOrderDetail->quantity*$AllOrderDetail->unitcost;
+
+				$newTotalCost +=  $AllOrderDetail->quantity * $AllOrderDetail->unitcost;
 				$TotalProducts =  $TotalProducts++;
-			} 
+			}
 			// $AllOrderDetail->sum('unitcost');
 			// dd($newTotalCost );
-			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
+			$Duebill = $newTotalCost - $Order->pay;
+			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts, 'due' => $Duebill]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)
