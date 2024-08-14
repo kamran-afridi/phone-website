@@ -267,9 +267,9 @@ class OrderController extends Controller
 			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
 			foreach ($AllOrderDetails as $AllOrderDetail) {
 				
-				$newTotalCost =  $AllOrderDetail->sum('unitcost');
 				$TotalProducts =  $TotalProducts++;
 			} 
+			$newTotalCost =  $AllOrderDetails->sum('unitcost');
 			dd($newTotalCost );
 			// $Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts]);
 		}
