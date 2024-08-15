@@ -4,10 +4,10 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-cards">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     @livewire('search-orders', ['products' => $products])
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
                             <div>
@@ -102,11 +102,11 @@
                                                     <td>
                                                         {{ $item->name }}
                                                     </td>
-                                                    <td style="min-width: 170px;">
-                                                        <form></form>
-                                                        <form action="{{ route('pos.updateCartItem', $item->rowId) }}"
-                                                            method="POST">
-                                                            @csrf
+                                                    <form></form>
+                                                    <form action="{{ route('pos.updateCartItem', $item->rowId) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <td style="min-width: 170px;">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control" name="qty"
                                                                     required value="{{ old('qty', $item->qty) }}">
@@ -131,11 +131,31 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {{ Number::currency($item->price, 'GBP') }}
-                                                    </td>
+                                                        </td>
+                                                        <td style="min-width: 170px;">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" name="price"
+                                                                    required value="{{ old('price', $item->price) }}" step="any">  
+                                                                <div class="input-group-append text-center">
+                                                                    <button type="submit"
+                                                                        class="btn btn-icon btn-success border-none"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        title="" data-original-title="Sumbit">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            class="icon icon-tabler icon-tabler-check"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" stroke-width="2"
+                                                                            stroke="currentColor" fill="none"
+                                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                                            <path stroke="none" d="M0 0h24v24H0z"
+                                                                                fill="none" />
+                                                                            <path d="M5 12l5 5l10 -10" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>  
+                                                        </td>
+                                                    </form>
                                                     <td class="text-center">
                                                         {{ Number::currency($item->subtotal, 'GBP') }}
                                                     </td>
@@ -275,7 +295,7 @@
                                             </label>
                                             <select class="form-control @error('customer_type') is-invalid @enderror"
                                                 id="customer_type" name="customer_type">
-                                                <option value="0" selected >Normal User</option>
+                                                <option value="0" selected>Normal User</option>
                                                 <option value="1">Regular User</option>
                                             </select>
 
