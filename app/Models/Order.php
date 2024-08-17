@@ -26,6 +26,7 @@ class Order extends Model
         'pay',
         'due',
         "user_id",
+        "note",
         "uuid"
     ];
 
