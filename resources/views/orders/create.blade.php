@@ -222,7 +222,7 @@
                                             <tr>
                                                 <td class="text-end">Note:</td>
                                                 <td colspan="5" class="text-center">
-                                                    <textarea name="address" id="address" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea> 
+                                                    <textarea name="note" id="note" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea> 
                                                 </td>
                                             </tr>
                                         </tbody>
