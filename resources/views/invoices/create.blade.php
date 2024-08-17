@@ -84,15 +84,17 @@
                                             <tr>
                                                 <td class="text-center">{{ $item->sku }}</td>
                                                 <td class="text-center">{{ $item->name }}</td>
-                                                <td class="text-center">{{ Number::currency($item->price, 'GBP') }}</td>
-                                                <td class="text-center">{{ $item->qty }}</td> 
-                                                <td class="text-center">{{ Number::currency($item->subtotal, 'GBP') }}</td>
+                                                <td class="text-center">{{ Number::currency($item->price, 'GBP') }}
+                                                </td>
+                                                <td class="text-center">{{ $item->qty }}</td>
+                                                <td class="text-center">{{ Number::currency($item->subtotal, 'GBP') }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                         <tr>
                                             <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
+                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP') }}</strong>
                                             </td>
                                         </tr>
                                         {{-- <tr>
@@ -104,7 +106,7 @@
                                         <tr>
                                             <td colspan="4" class="text-end"><strong>Total</strong></td>
                                             <td class="text-center">
-                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP')  }}</strong>
+                                                <strong>{{ Number::currency(Cart::subtotal(), 'GBP') }}</strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -177,8 +179,8 @@
                                         </div>
                                     @enderror
                                 </div>
-                            </div>
 
+                            </div>
                             <div class="col-lg-12">
                                 <label for="pay" class="form-label required">
                                     {{ __('Pay Now') }}
@@ -186,13 +188,22 @@
 
                                 <input type="number" step="0.01" id="pay" name="pay"
                                     class="form-control @error('pay') is-invalid @enderror"
-                                    value="{{ Cart::subtotal()  }}" required>
+                                    value="{{ Cart::subtotal() }}" required>
 
                                 @error('pay')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="note" class="form-label">
+                                        {{ __('Note') }}
+                                    </label>
+
+                                    <textarea name="note" id="note" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
