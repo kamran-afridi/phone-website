@@ -135,7 +135,8 @@
                                                         <td style="min-width: 170px;">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control" name="price"
-                                                                    required value="{{ old('price', $item->price) }}" step="any">  
+                                                                    required value="{{ old('price', $item->price) }}"
+                                                                    step="any">
                                                                 <div class="input-group-append text-center">
                                                                     <button type="submit"
                                                                         class="btn btn-icon btn-success border-none"
@@ -146,14 +147,15 @@
                                                                             width="24" height="24"
                                                                             viewBox="0 0 24 24" stroke-width="2"
                                                                             stroke="currentColor" fill="none"
-                                                                            stroke-linecap="round" stroke-linejoin="round">
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round">
                                                                             <path stroke="none" d="M0 0h24v24H0z"
                                                                                 fill="none" />
                                                                             <path d="M5 12l5 5l10 -10" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                            </div>  
+                                                            </div>
                                                         </td>
                                                     </form>
                                                     <td class="text-center">
@@ -164,7 +166,8 @@
                                                             method="POST">
                                                             @method('delete')
                                                             @csrf
-                                                            <button type="submit" class="btn btn-icon btn-outline-danger "
+                                                            <button type="submit"
+                                                                class="btn btn-icon btn-outline-danger "
                                                                 onclick="return confirm('Are you sure you want to delete this record?')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     class="icon icon-tabler icon-tabler-trash"
@@ -214,6 +217,12 @@
                                                 <td colspan="5" class="text-end">Total</td>
                                                 <td class="text-center">
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-end">Note:</td>
+                                                <td colspan="5" class="text-center">
+                                                    <textarea name="address" id="address" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea> 
                                                 </td>
                                             </tr>
                                         </tbody>

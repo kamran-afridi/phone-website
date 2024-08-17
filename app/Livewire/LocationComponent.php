@@ -13,20 +13,24 @@ class LocationComponent extends Component
     public $longitude;
     public $getlatitude;
     public $getlongitude;
-    public $user_id;
-
-    protected $listeners = ['customerLocation' => 'setLocation'];
+    public $user_id; 
+    protected $listeners = ['customerLocation' => 'setLocation','refreshComponent' => '$refresh'];
     public $customer_id;
-
-    public function mount()
+ 
+    public function mount($customer_id = null)
     {
-        // Initialize customer_id with old input if it exists, or the current value
-        // $this->customer_id = old('customer_id') ?: $this->customer_id;
-        $this->customer_id = session('customer_id', '');
-        // dd("customer_id");
+        $this->customer_id = session('customer_id', ''); 
+        // Check if a customer_id is passed or already set
+        if ($customer_id) {
+            $this->customer_id = $customer_id;
+            $this->changeEvents($customer_id);
+        } elseif ($this->customer_id) {
+            // If the customer_id is already set, call changeEvents
+            $this->changeEvents($this->customer_id);
+        }
     }
     public function changeEvents($customer_id)
-    { 
+    {  
         $UserLocation = UserLocation::where('user_id', $customer_id)->first();
         if ($UserLocation) {  // This checks if $UserLocation is not null 
             $this->getlatitude = $UserLocation->latitude;
@@ -56,7 +60,7 @@ class LocationComponent extends Component
     }
 
     public function render()
-    {
+    { 
         $customers = User::get(['id', 'name']);
         return view('livewire.location-component', [
             'customers' => $customers,
