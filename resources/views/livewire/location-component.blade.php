@@ -43,7 +43,9 @@
             Livewire.on('locationUpdated', (latitude, longitude) => {
                 initializeMap(latitude, longitude);
             });
-
+            // setInterval(function() {
+            //     @this.$refresh(); 
+            // }, 120000); // 120000 milliseconds = 2 minutes
         });
     </script>
 </div>
