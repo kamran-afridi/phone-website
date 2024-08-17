@@ -206,7 +206,7 @@
                                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                                             </svg>
                                                         </button>
-                                                    </form> 
+                                                    </form>
                                                 @endif
                                                 <button type="button"
                                                     class="btn btn-primary btn btn-outline-warning btn-icon"
@@ -342,6 +342,12 @@
                                             class="text-uppercase">
                                             {{ $order->order_status->label() }}
                                         </x-status>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td class="text-end">Note:</td>
+                                    <td colspan="5" class="text-center">
+                                        <textarea name="note" id="note" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note', $order->note) }}</textarea>
                                     </td>
                                 </tr>
                             </tbody>
