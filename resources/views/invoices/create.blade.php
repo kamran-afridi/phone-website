@@ -197,7 +197,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-12">
-                                <div class="mb-3">
+                                <div class="mt-3">
                                     <label for="note" class="form-label">
                                         {{ __('Note') }}
                                     </label>
