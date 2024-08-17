@@ -192,6 +192,14 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                 
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="note" class="form-label">
+                                    {{ __('Note') }}
+                                </label>
+
+                                <textarea name="note" id="note" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea>
                             </div>
                         </div>
                     </div>

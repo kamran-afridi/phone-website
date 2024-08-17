@@ -219,12 +219,7 @@
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-end">Note:</td>
-                                                <td colspan="5" class="text-center">
-                                                    <textarea name="note" id="note" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note') }}</textarea> 
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
