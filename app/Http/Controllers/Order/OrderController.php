@@ -57,8 +57,7 @@ class OrderController extends Controller
 	}
 
 	public function store(OrderStoreRequest $request)
-	{
-		dd($request->all());
+	{ 
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
