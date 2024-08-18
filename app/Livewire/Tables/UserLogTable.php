@@ -34,6 +34,10 @@ class UserLogTable extends Component
         $this->uuid = $user;
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
     public function render()
     {
         $UsersLogs = UsersLog::with('user')
