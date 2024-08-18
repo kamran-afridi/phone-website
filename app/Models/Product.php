@@ -47,7 +47,7 @@ class Product extends Model
 	{
 		return $this->belongsTo(Device::class);
 	}
-
+ 
 	public function scopeSearch($query, $value): void
 	{
 		$query = $query->where('products.name', 'like', '%' . trim($value) . '%')

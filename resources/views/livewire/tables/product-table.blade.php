@@ -120,7 +120,7 @@
                         <td class="align-middle text-center">
                             {{ $product->name }}
                         </td>
-
+ 
                         <td class="align-middle text-center">
                             {{ $product->cost_price }}
                         </td>
@@ -162,7 +162,7 @@
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{ $products->links('pagination::bootstrap-4') }}
+            {{ $products->links() }}
         </ul>
     </div>
 </div>
