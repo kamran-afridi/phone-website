@@ -8,17 +8,22 @@ use Livewire\WithPagination;
 
 class ProductTable extends Component
 {
-	// use WithPagination;
-	protected $paginationTheme = 'bootstrap';
+	use WithPagination;
+	// protected $paginationTheme = 'bootstrap';
 
 	public $perPage = 15;
-	public $selectedValue;
-	public $search = '';
+	public $selectedValue; 
 
 	public $sortField = 'products.id';
 
-	public $sortAsc = false;
+	public $sortAsc = false; 
 
+    public $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
 	public function sortBy($field): void
 	{
 		if ($this->sortField === $field) {
