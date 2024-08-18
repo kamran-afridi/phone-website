@@ -8,14 +8,14 @@ use Livewire\WithPagination;
 
 class OrderTable extends Component
 {
-    // use WithPagination; 
+    use WithPagination; 
     protected $paginationTheme = 'bootstrap';
 
     public $perPage = 15;
 
     public $search = '';
 
-    public $sortField = 'invoice_no';
+    public $sortField = 'id';
 
     public $sortAsc = false;
 

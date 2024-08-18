@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class ProductTable extends Component
 {
 	use WithPagination;
-	// protected $paginationTheme = 'bootstrap';
+	protected $paginationTheme = 'bootstrap';
 
 	public $perPage = 15;
 	public $selectedValue; 
