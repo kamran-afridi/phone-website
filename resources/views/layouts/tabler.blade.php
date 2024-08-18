@@ -33,6 +33,16 @@
         .form-control:focus {
             box-shadow: none;
         }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination .page-item {
+            flex: 1 0 auto;
+        }
     </style>
 
     {{-- - Page Styles - --}}
@@ -57,8 +67,8 @@
                     <a href="{{ url('/') }}">
                         {{-- <img src="{{ asset('assets/img/logo.PNG') }}" alt="Panther Force" width="60"
                             height="auto"> --}}
-                        <img src="https://pantherforce.co.uk/cdn/shop/files/logo-pf_529ab6b6-8198-41c4-8071-3d610222d418_210x@2x.png?v=1720617728" alt="Panther Force" width="100"
-                            height="auto">
+                        <img src="https://pantherforce.co.uk/cdn/shop/files/logo-pf_529ab6b6-8198-41c4-8071-3d610222d418_210x@2x.png?v=1720617728"
+                            alt="Panther Force" width="100" height="auto">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row order-md-last">
@@ -809,13 +819,13 @@
                     </div>
                 </div>
             </footer> --}}
-        </div> 
+        </div>
     </div>
     <!-- Libs JS -->
     @stack('page-libraries')
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-    <script src="{{ asset('dist/js/demo.min.js') }}" defer></script> 
+    <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
     {{-- - Page Scripts - --}}
     @stack('page-scripts')
     @livewireScripts
@@ -827,7 +837,7 @@
         //     });
         //     console.log("longitude: '53.8149729',");
         // }, 500);
-         // Function to handle errors from geolocation API
+        // Function to handle errors from geolocation API
         function handleLocationError(error) {
             console.error("Error getting location:", error.message);
         }
@@ -835,18 +845,18 @@
         function showPosition(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-            Livewire.dispatch('customerLocation', { 
+            Livewire.dispatch('customerLocation', {
                 latitude: latitude,
                 longitude: longitude,
             });
-            
+
         }
         // Get user's current location and update marker position
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition, handleLocationError);
         } else {
             console.error("Geolocation is not supported by this browser.");
-        } 
+        }
     </script>
 </body>
 
