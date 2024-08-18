@@ -35,6 +35,22 @@ class ProductTable extends Component
 		$this->sortField = $field;
 	}
 
+	public $columns = [
+        'image' => false,
+        'sku' => true,
+        'name' => true,
+        'cost_price' => false,
+        'sale_price' => false,
+        'whole_sale_price' => true,
+        'quantity' => true,
+        'bar_code' => false,
+        'item_type' => false, 
+    ];
+
+	public function toggleColumn($column)
+	{
+		$this->columns[$column] = !$this->columns[$column];
+	}
 	public function render()
 	{
 		$products = Product::search($this->search)

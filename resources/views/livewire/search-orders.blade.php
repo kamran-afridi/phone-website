@@ -13,7 +13,7 @@
 
     <div class="card-body">
         <div class="col-lg-12">
-            <x-spinner.loading-spinner />
+            <x-spinner.loading-spinner /> 
             <div class="table-responsive">
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
@@ -21,12 +21,12 @@
                             <th scope="col" class="align-middle text-center">
                                 {{ __('Action') }}
                             </th>
-                            <th scope="col" class="align-middle text-center">
+                            {{-- <th scope="col" class="align-middle text-center">
                                 <a wire:click.prevent="sortBy('products.sku')" href="#" role="button">
                                     {{ __('Sku') }}
                                     @include('inclues._sort-icon', ['field' => 'products.sku'])
                                 </a>
-                            </th>
+                            </th> --}}
                             <th scope="col" class="align-middle text-center">
                                 <a wire:click.prevent="sortBy('products.name')" href="#" role="button">
                                     {{ __('Name') }}
@@ -40,12 +40,12 @@
                                     @include('inclues._sort-icon', ['field' => 'products.sale_price'])
                                 </a>
                             </th>
-                            <th scope="col" class="align-middle text-center">
+                            {{-- <th scope="col" class="align-middle text-center">
                                 <a wire:click.prevent="sortBy('products.quantity')" href="#" role="button">
                                     {{ __('Quantity') }}
                                     @include('inclues._sort-icon', ['field' => 'products.quantity'])
                                 </a>
-                            </th>
+                            </th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -83,30 +83,30 @@
                                             </button>
                                     </div>
                                 </td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     {{ $product->sku }}
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
-                                    {{ $product->name }}
+                                    <b>{{ $product->sku }}</b> {{ $product->name }}
                                 </td>
                                 @if (Session::get('customer_id'))
                                     @if (Session::get('customer_id')->value != 1)
                                         <td class="text-center">
-                                            {{ number_format($product->sale_price, 2) }}
+                                            £{{ number_format($product->sale_price, 2) }}
                                         </td>
                                     @else
                                         <td class="text-center">
-                                            {{ number_format($product->whole_sale_price, 2) }}
+                                            £{{ number_format($product->whole_sale_price, 2) }}
                                         </td>
                                     @endif
                                 @else
                                     <td class="text-center">
-                                        {{ number_format($product->sale_price, 2) }}
+                                        £{{ number_format($product->sale_price, 2) }}
                                     </td>
                                 @endif
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     {{ $product->quantity }}
-                                </td>
+                                </td> --}}
                                 {{-- Modal --}}
                                 <div class="modal modal-lg" id="{{ $product->id }}">
                                     <div class="modal-dialog">
