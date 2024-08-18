@@ -159,7 +159,7 @@
         </p>
 
         <ul class="pagination m-0 ms-auto">
-            {{ $orders->links('pagination::bootstrap-4') }}
+            {{ $orders->links() }}
         </ul>
     </div>
 </div>

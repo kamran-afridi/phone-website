@@ -30,6 +30,10 @@ class OrderTable extends Component
         $this->sortField = $field;
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
     public function render()
     {
 

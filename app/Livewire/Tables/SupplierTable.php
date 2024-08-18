@@ -31,6 +31,10 @@ class SupplierTable extends Component
         $this->sortField = $field;
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
     public function render()
     {
         return view('livewire.tables.supplier-table', [

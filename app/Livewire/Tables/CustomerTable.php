@@ -30,6 +30,10 @@ class CustomerTable extends Component
         $this->sortField = $field;
     }
 
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
     public function render()
     {
         if (auth()->user()->role == 'admin' || auth()->user()->role == 'customer') {
