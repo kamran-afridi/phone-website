@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use Str;
 
 class ProductImportController extends Controller
 {
@@ -34,24 +34,22 @@ class ProductImportController extends Controller
             foreach ($row_range as $row) {
                 $data[] = [
                     'name'          => $sheet->getCell('A' . $row)->getValue(),
-                    'slug'          => $sheet->getCell('B' . $row)->getValue(),
-                    'category_id'   => $sheet->getCell('C' . $row)->getValue(),
-                    'unit_id'       => $sheet->getCell('D' . $row)->getValue(),
-                    'code'          => $sheet->getCell('E' . $row)->getValue(),
-                    'quantity'      => $sheet->getCell('F' . $row)->getValue(),
-                    "quantity_alert" => $sheet->getCell('G' . $row)->getValue(),
-                    'buying_price'  => $sheet->getCell('H' . $row)->getValue(),
-                    'selling_price' => $sheet->getCell('I' . $row)->getValue(),
+                    'cost_price'          => $sheet->getCell('B' . $row)->getValue(),
+                    'whole_sale_price'   => $sheet->getCell('C' . $row)->getValue(),
+                    'sale_price'       => $sheet->getCell('D' . $row)->getValue(),
+                    'quantity'          => $sheet->getCell('E' . $row)->getValue(),
+                    'sku'      => $sheet->getCell('F' . $row)->getValue(),
+                    "bar_code" => $sheet->getCell('G' . $row)->getValue(),
+                    'item_type'  => $sheet->getCell('H' . $row)->getValue(),
                     'product_image' => $sheet->getCell('J' . $row)->getValue(),
-                    'notes' => $sheet->getCell('K' . $row)->getValue(),
+                    'user_id' => auth()->id(),
+                    'uuid' => Str::uuid(),
                 ];
                 $startcount++;
             }
-
             foreach ($data as $product) {
-                Product::firstOrCreate([
-                    "slug" => $product["slug"],
-                    "code" => $product["code"],
+                Product::firstOrCreate([ 
+                    "sku" => $product["sku"],
                 ], $product);
             }
         } catch (Exception $e) {
