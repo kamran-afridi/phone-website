@@ -42,7 +42,7 @@ class ProductTable extends Component
         'cost_price' => false,
         'sale_price' => false,
         'whole_sale_price' => true,
-        'quantity' => true,
+        'quantity' => false,
         'bar_code' => false,
         'item_type' => false, 
     ];
