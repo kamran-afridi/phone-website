@@ -18,6 +18,7 @@ class Product extends Model
 		'uuid',
 		'user_id',
 		'cost_price',
+		'product_image',
 		'sale_price',
 		'whole_sale_price',
 		'quantity',
