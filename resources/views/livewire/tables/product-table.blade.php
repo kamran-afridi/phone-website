@@ -21,8 +21,7 @@
                         <option value="15">15</option>
                         <option value="25">25</option>
                     </select>
-                </div>
-                entries
+                </div> 
             </div>
             <div class="ms-auto text-secondary">
                 Search:
@@ -169,8 +168,10 @@
                             </td>
                         @endif
                         @if ($columns['name'])
-                            <td class="align-middle text-center w-25" style="width: 117px">
+                            <td class="align-middle w-25" style="max-width: 170px">
+                               <div class="d-flex flex-wrap text-wrap justify-content-center">
                                 {{ $product->name }}
+                               </div>
                             </td>
                         @endif
                         @if ($columns['cost_price'])

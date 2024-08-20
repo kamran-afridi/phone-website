@@ -59,9 +59,12 @@ class ProductController extends Controller
 		// 	return abort(404);
 		//  }
 		// dd($request);
-		$image = "";
+		$imageName = "";
 		if ($request->hasFile('product_image')) {
-			$image = $request->file('product_image')->store('products', 'public');
+			// $image = $request->file('product_image')->store('products', 'public');
+			$image = $request->file('product_image');
+			$imageName = time() . '.' . $image->getClientOriginalExtension();
+			$request->file('product_image')->move(public_path('storage/products'), $imageName);
 		}
 
 		$Product = Product::create([
@@ -72,6 +75,7 @@ class ProductController extends Controller
 			'quantity' => $request->quantity,
 			'sku' => $request->sku,
 			'bar_code' => $request->bar_code,
+			'product_image' => 'products/' . $imageName,
 			'item_type' => $request->item_type,
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
@@ -121,18 +125,20 @@ class ProductController extends Controller
 		// if(auth()->user()->role !== 'admin') {
 		// 	return abort(404);
 		// }
-
+		$imageName = '';
 		$product = Product::where("id", $uuid)->firstOrFail();
-		// $product->update($request->except('product_image'));
+		$product->update($request->except('product_image'));
 
-		$image = $product->product_image;
 		if ($request->hasFile('product_image')) {
+			$image = $request->file('product_image');
 
 			// Delete Old Photo
 			if ($product->product_image) {
 				unlink(public_path('storage/') . $product->product_image);
 			}
-			$image = $request->file('product_image')->store('products', 'public');
+			// $image = $request->file('product_image')->store('products', 'public');
+			$imageName = time() . '.' . $image->getClientOriginalExtension();
+			$request->file('product_image')->move(public_path('storage/products'), $imageName);
 		}
 
 		$product->name = $request->name;
@@ -143,6 +149,7 @@ class ProductController extends Controller
 		$product->sku = $request->sku;
 		$product->item_type = $request->item_type;
 		$product->bar_code = $request->bar_code;
+		$product->product_image = 'products/'.$imageName;
 		$product->user_id = auth()->id();
 		$product->uuid = Str::uuid();
 		$product->save();
@@ -170,7 +177,7 @@ class ProductController extends Controller
 		if ($product->product_image) {
 			// check if image exists in our file system
 			if (file_exists(public_path('storage/') . $product->product_image)) {
-				unlink(public_path('storage/') . $product->product_image);
+				dd(unlink(public_path('storage/') . $product->product_image));
 			}
 		}
 
