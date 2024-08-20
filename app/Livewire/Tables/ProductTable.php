@@ -40,7 +40,7 @@ class ProductTable extends Component
         'sku' => true,
         'name' => true,
         'cost_price' => false,
-        'sale_price' => false,
+        'sale_price' => true,
         'whole_sale_price' => true,
         'quantity' => false,
         'bar_code' => false,
