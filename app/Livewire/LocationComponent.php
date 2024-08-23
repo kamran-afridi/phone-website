@@ -14,7 +14,7 @@ class LocationComponent extends Component
     public $getlatitude;
     public $getlongitude;
     public $user_id; 
-    protected $listeners = ['customerLocation' => 'setLocation','refreshComponent' => '$refresh'];
+    protected $listeners = ['customerLocation' => 'setLocation','refreshComponent' => '$refresh', 'getlocation' => 'changeEvents' ];
     public $customer_id;
  
     public function mount($customer_id = null)
@@ -30,14 +30,13 @@ class LocationComponent extends Component
         }
     }
     public function changeEvents($customer_id)
-    {  
+    {   
         $UserLocation = UserLocation::where('user_id', $customer_id)->first();
         if ($UserLocation) {  // This checks if $UserLocation is not null 
             $this->getlatitude = $UserLocation->latitude;
             $this->getlongitude = $UserLocation->longitude;
             Session::put('customer_id', $customer_id);
-            $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
-            // dd("asa");
+            // $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
         } else {
             // Handle the case where no UserLocation was found
             // dd('No location found for this user');
