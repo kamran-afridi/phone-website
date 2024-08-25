@@ -5,8 +5,24 @@
                 {{ __('Orders') }}
             </h3>
         </div>
+        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') 
+            <div class="m-auto">
+                <select class="form-select form-control-solid @error('user_id') is-invalid @enderror" id="user_id"
+                    name="user_id" wire:model.change="userid">
+                    <option value="" selected="" disabled="">
+                        Select a user:
+                    </option>
 
-        <div class="card-actions">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
+        <div class="card-actions d-flex">
+
             <x-action.create route="{{ route('orders.create') }}" />
         </div>
     </div>
@@ -23,7 +39,6 @@
                         <option value="25">25</option>
                     </select>
                 </div>
-                entries
             </div>
             <div class="ms-auto text-secondary">
                 Search:
@@ -32,6 +47,7 @@
                         aria-label="Search invoice">
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -51,7 +67,7 @@
                         </a>
                     </th> --}}
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
+                        <a wire:click.prevent="sortBy('user_id')" href="#" role="button">
                             {{ __('Customer') }}
                             @include('inclues._sort-icon', ['field' => 'customer_id'])
                         </a>
@@ -79,7 +95,7 @@
                             {{ __('Paid') }}
                             @include('inclues._sort-icon', ['field' => 'pay'])
                         </a>
-                    </th> 
+                    </th>
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('user')" href="#" role="button">
                             {{ __('User') }}
@@ -122,7 +138,7 @@
                             {{ Number::currency($order->pay, 'GBP') }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $order->user->name}}
+                            {{ $order->user->name }}
                         </td>
                         <td class="align-middle text-center">
                             <x-status dot
