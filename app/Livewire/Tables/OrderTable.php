@@ -13,7 +13,7 @@ class OrderTable extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $perPage = 15; 
+    public $perPage = 15;
     public $changeEvents;
     public $search = '';
 
@@ -22,10 +22,16 @@ class OrderTable extends Component
     public $sortAsc = false;
     public $userid;
 
+    public function mount()
+    {
+        $this->userid = session('UserId', ''); 
+    }
+
     public function updatedUserid($value)
-    { 
+    {
+        Session::put('UserId', $value);
         $this->userid = $value;
-    } 
+    }
     public function sortBy($field): void
     {
         if ($this->sortField === $field) {
@@ -35,22 +41,22 @@ class OrderTable extends Component
         }
 
         $this->sortField = $field;
-    } 
+    }
     public function updatingSearch()
     {
         $this->resetPage(); // Reset to the first page when search query changes
     }
- 
+
     public function render()
     {
 
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            if ($this->userid ) { 
+            if ($this->userid) {
                 $orders = Order::with(['customer', 'details', 'user'])
                     ->where("user_id", $this->userid)
                     ->search($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage); 
+                    ->paginate($this->perPage);
             } else {
 
                 $orders = Order::with(['customer', 'details', 'user'])

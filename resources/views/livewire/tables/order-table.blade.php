@@ -5,7 +5,7 @@
                 {{ __('Orders') }}
             </h3>
         </div>
-        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') 
+        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
             <div class="m-auto">
                 <select class="form-select form-control-solid @error('user_id') is-invalid @enderror" id="user_id"
                     name="user_id" wire:model.change="userid">
@@ -14,7 +14,7 @@
                     </option>
 
                     @foreach ($users as $user)
-                        <option value="{{ $user->id }}">
+                        <option value="{{ $user->id }}" @selected(old('UserId', $userid) == $user->id)>
                             {{ $user->name }}
                         </option>
                     @endforeach
