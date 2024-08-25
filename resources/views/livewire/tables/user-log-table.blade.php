@@ -77,7 +77,31 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $previousDate = null;
+                @endphp
+
                 @forelse ($UsersLogs as $userslog)
+                    @php
+                        // Check if the date has changed
+                        $currentDate = $userslog->date;
+                        $date = strtotime($currentDate);
+                        $day = date('l', $date);
+                    @endphp
+                    @if ($previousDate && $previousDate != $currentDate)
+                        <tr class="align-middle text-center">
+                            <td colspan="7" class="">
+                                
+                                <figure class="text-center  p-0 m-0"> 
+                                    <figcaption class="blockquote-footer m-0">
+                                     <i> Next day recode </i>
+                                    </figcaption>
+                                  </figure>
+                            
+                            </td> <!-- Blank row -->
+                            
+                        </tr>
+                    @endif
                     <tr>
                         <td class="align-middle text-center">
                             {{ $loop->index + 1 }}
@@ -86,11 +110,7 @@
                             {{ $userslog->status }}
                         </td>
                         <td class="align-middle text-center">
-                            @php
-                                $date = strtotime($userslog->date);
-                                $day = date('l', $date);
-                            @endphp
-                            {{ $userslog->date }}
+                            {{ $currentDate }}
                         </td>
                         <td class="align-middle text-center">
                             {{ $day }}
@@ -102,6 +122,10 @@
                             <x-button.back class="btn-icon" route="{{ route('users.index') }}" />
                         </td>
                     </tr>
+                    @php
+                        // Update the previous date to the current date
+                        $previousDate = $currentDate;
+                    @endphp
                 @empty
                     <tr>
                         <td class="align-middle text-center" colspan="8">

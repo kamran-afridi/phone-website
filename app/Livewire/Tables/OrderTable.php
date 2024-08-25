@@ -3,22 +3,29 @@
 namespace App\Livewire\Tables;
 
 use App\Models\Order;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class OrderTable extends Component
 {
-    use WithPagination; 
+    use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $perPage = 15;
-
+    public $perPage = 15; 
+    public $changeEvents;
     public $search = '';
 
     public $sortField = 'id';
 
     public $sortAsc = false;
+    public $userid;
 
+    public function updatedUserid($value)
+    { 
+        $this->userid = $value;
+    } 
     public function sortBy($field): void
     {
         if ($this->sortField === $field) {
@@ -28,20 +35,29 @@ class OrderTable extends Component
         }
 
         $this->sortField = $field;
-    }
-
+    } 
     public function updatingSearch()
     {
         $this->resetPage(); // Reset to the first page when search query changes
     }
+ 
     public function render()
     {
 
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            $orders = Order::with(['customer', 'details', 'user'])
-                ->search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage);
+            if ($this->userid ) { 
+                $orders = Order::with(['customer', 'details', 'user'])
+                    ->where("user_id", $this->userid)
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage); 
+            } else {
+
+                $orders = Order::with(['customer', 'details', 'user'])
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+            }
         } else {
             // dd("A");
             $orders = Order::where("user_id", auth()->id())
@@ -49,9 +65,12 @@ class OrderTable extends Component
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
-        }  
+        }
+
+        $users = User::get(['id', 'name']);
         return view('livewire.tables.order-table', [
-            'orders' => $orders
+            'orders' => $orders,
+            'users' => $users,
         ]);
     }
 }
