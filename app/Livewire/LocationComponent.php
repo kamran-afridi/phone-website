@@ -36,7 +36,7 @@ class LocationComponent extends Component
             $this->getlatitude = $UserLocation->latitude;
             $this->getlongitude = $UserLocation->longitude;
             Session::put('customer_id', $customer_id);
-            // $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
+            $this->dispatch('locationUpdated', ['latitude' =>  $UserLocation->latitude, 'longitude' =>  $UserLocation->longitude]);
         } else {
             // Handle the case where no UserLocation was found
             // dd('No location found for this user');
