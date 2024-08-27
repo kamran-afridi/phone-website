@@ -29,9 +29,11 @@ class SearchOrders extends Component
 		}
 
 		$this->sortField = $field;
-	}
-
-
+	}  
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reset to the first page when search query changes
+    }
 	protected $listeners = ['customerChanged' => 'handleCustomerChanged'];
 
 	public function handleCustomerChanged($customerId)
