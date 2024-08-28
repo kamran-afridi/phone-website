@@ -31,6 +31,7 @@ class UserController extends Controller
         $user = User::create([
             'name'  => $request->name,
             'uuid' => Str::uuid(),
+            'username'  =>  $request->email,
             'email'  =>  $request->email,
             'password'  => Hash::make($request->password),
         ]);
@@ -112,6 +113,7 @@ class UserController extends Controller
             'password' => 'required_with:password_confirmation|min:6',
             'password_confirmation' => 'same:password|min:6',
         ]);
+        dd($username);
 
         # Update the new Password
         User::where('username', $username)->update([
