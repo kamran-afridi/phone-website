@@ -32,7 +32,7 @@ class UserController extends Controller
             'name'  => $request->name,
             'uuid' => Str::uuid(),
             'email'  =>  $request->email,
-            'password'  => Hash::make($request['password']),
+            'password'  => Hash::make($request->password),
         ]);
 
 
@@ -115,7 +115,7 @@ class UserController extends Controller
 
         # Update the new Password
         User::where('username', $username)->update([
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($request->password)
         ]);
 
         return redirect()
