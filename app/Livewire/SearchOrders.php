@@ -11,7 +11,7 @@ class SearchOrders extends Component
 {
 	use WithPagination;
 
-	public $perPage = 15;
+	public $perPage = 8;
 	public $selectedValue;
 	public $search = '';
 
