@@ -7,10 +7,7 @@ $(function () {
     $(document).on("click", "#invoice_download_btn", function () {
         var contentWidth = $("#invoice_wrapper").width();
         var contentHeight = $("#invoice_wrapper").height();
-
-        // Detect if the device is an iPhone and adjust the margins accordingly
-        var isIphone = /iPhone/.test(navigator.userAgent);
-        var topLeftMargin = isIphone ? 10 : 20;
+        var topLeftMargin = 20;
         var pdfWidth = contentWidth + topLeftMargin * 2;
         var pdfHeight = pdfWidth * 1.5 + topLeftMargin * 2;
         var canvasImageWidth = contentWidth;
@@ -18,32 +15,32 @@ $(function () {
         var totalPDFPages = Math.ceil(contentHeight / pdfHeight) - 1;
         const dateNow = new Date().toLocaleString().split(",")[0];
 
-        // Generate the PDF using html2canvas and jsPDF
-        html2canvas($("#invoice_wrapper")[0], { allowTaint: true }).then(function (canvas) {
-            canvas.getContext("2d");
-            var imgData = canvas.toDataURL("image/jpeg", 1.0);
-            var pdf = new jsPDF("p", "pt", [pdfWidth, pdfHeight]);
-            pdf.addImage(
-                imgData,
-                "JPG",
-                topLeftMargin,
-                topLeftMargin,
-                canvasImageWidth,
-                canvasImageHeight
-            );
-            for (var i = 1; i <= totalPDFPages; i++) {
-                pdf.addPage(pdfWidth, pdfHeight);
+        html2canvas($("#invoice_wrapper")[0], { allowTaint: true }).then(
+            function (canvas) {
+                canvas.getContext("2d");
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF("p", "pt", [pdfWidth, pdfHeight]);
                 pdf.addImage(
                     imgData,
                     "JPG",
                     topLeftMargin,
-                    -(pdfHeight * i) + topLeftMargin * 4,
+                    topLeftMargin,
                     canvasImageWidth,
                     canvasImageHeight
                 );
+                for (var i = 1; i <= totalPDFPages; i++) {
+                    pdf.addPage(pdfWidth, pdfHeight);
+                    pdf.addImage(
+                        imgData,
+                        "JPG",
+                        topLeftMargin,
+                        -(pdfHeight * i) + topLeftMargin * 4,
+                        canvasImageWidth,
+                        canvasImageHeight
+                    );
+                }
+                pdf.save(`invoice-${dateNow}.pdf`);
             }
-            pdf.save(`invoice-${dateNow}.pdf`);
-        });
+        );
     });
-
 });
