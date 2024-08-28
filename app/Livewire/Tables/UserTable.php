@@ -14,7 +14,7 @@ class UserTable extends Component
 
     public $search = '';
 
-    public $sortField = 'name';
+    public $sortField = 'id';
 
     public $sortAsc = true;
 
