@@ -5,27 +5,18 @@
     <title>
         {{ config('app.name') }}
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/bootstrap.min.css') }}">
-    {{-- <link type="text/css" rel="stylesheet"
-        href="{{ asset('assets/invoice/fonts/font-awesome/css/font-awesome.min.css') }}"> --}}
+    <link type="text/css" rel="stylesheet"
+        href="{{ asset('assets/invoice/fonts/font-awesome/css/font-awesome.min.css') }}">
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/style.css') }}">
-    <style>
-        @media only screen and (max-width: 480px) {
-            #invoice_wrapper {
-                width: 100% !important;
-                padding: 10px;
-                box-sizing: border-box;
-            }
-        }
-    </style>
 </head>
 
 <body>
