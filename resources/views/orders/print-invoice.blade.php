@@ -17,6 +17,15 @@
         rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/style.css') }}">
+    <style>
+        @media only screen and (max-width: 480px) {
+            #invoice_wrapper {
+                width: 100% !important;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+        }
+    </style>
 </head>
 
 <body>
