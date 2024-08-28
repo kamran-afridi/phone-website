@@ -9,8 +9,8 @@
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/bootstrap.min.css') }}">
-    <link type="text/css" rel="stylesheet"
-        href="{{ asset('assets/invoice/fonts/font-awesome/css/font-awesome.min.css') }}">
+    {{-- <link type="text/css" rel="stylesheet"
+        href="{{ asset('assets/invoice/fonts/font-awesome/css/font-awesome.min.css') }}"> --}}
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
