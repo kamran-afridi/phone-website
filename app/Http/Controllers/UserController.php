@@ -106,17 +106,15 @@ class UserController extends Controller
             ->with('success', 'User has been updated!');
     }
 
-    public function updatePassword(Request $request, String $username)
+    public function updatePassword(Request $request, User $user)
     {
         # Validation
         $validated = $request->validate([
             'password' => 'required_with:password_confirmation|min:6',
             'password_confirmation' => 'same:password|min:6',
-        ]);
-        dd($username);
-
+        ]); 
         # Update the new Password
-        User::where('username', $username)->update([
+        User::where('username', $user->email)->update([
             'password' => Hash::make($request->password)
         ]);
 
