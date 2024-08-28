@@ -46,7 +46,7 @@
                             {{ __('ID') }}
                             @include('inclues._sort-icon', ['field' => 'id'])
                         </a>
-                    </th> 
+                    </th>
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('name')" href="#" role="button">
                             {{ __('Name') }}
@@ -75,7 +75,7 @@
                     <tr>
                         <td class="align-middle text-center" style="width: 10%">
                             {{ $user->id }}
-                        </td> 
+                        </td>
                         <td class="align-middle text-center">
                             {{ $user->name }}
                         </td>
@@ -87,8 +87,8 @@
                         </td>
                         <td class="align-middle text-center" style="width: 15%">
                             <x-button.show class="btn-icon" route="{{ route('users.show', $user->uuid) }}" />
-                            <x-button.edit class="btn-icon" route="{{ route('users.edit', $user) }}"/>
-                        {{-- <x-button.delete class="btn-icon" route="{{ route('users.destroy', $user) }}"/> --}}
+                            <x-button.edit class="btn-icon" route="{{ route('users.edit', $user) }}" />
+                            <x-button.delete class="btn-icon" route="{{ route('users.destroy', $user) }}" />
                         </td>
                     </tr>
                 @empty
