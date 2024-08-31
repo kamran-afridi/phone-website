@@ -5,7 +5,7 @@
     <title>
         {{ config('app.name') }}
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/bootstrap.min.css') }}">
