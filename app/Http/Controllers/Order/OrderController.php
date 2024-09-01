@@ -256,6 +256,21 @@ class OrderController extends Controller
 			'order' => $order,
 		]);
 	}
+	public function downloadAdminInvoice($uuid)
+	{
+		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
+		// TODO: Need refactor
+		//dd($order);
+
+		//$order = Order::with('customer')->where('id', $order_id)->first();
+		// $order = Order::
+		//     ->where('id', $order)
+		//     ->first();
+
+		return view('orders.admin-print-invoice', [
+			'order' => $order,
+		]);
+	}
 
 	public function cancel(Order $order)
 	{
