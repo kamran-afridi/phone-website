@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Tables;
 
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +17,7 @@ class OrderTable extends Component
     public $perPage = 15;
     public $changeEvents;
     public $search = '';
+    public $customerid = '';
 
     public $sortField = 'id';
 
@@ -24,13 +26,19 @@ class OrderTable extends Component
 
     public function mount()
     {
-        $this->userid = session('UserId', ''); 
+        $this->userid = session('UserId', '');
+        $this->customerid = '';
     }
 
     public function updatedUserid($value)
     {
-        Session::put('UserId', $value);
+        // Session::put('UserId', $value);
         $this->userid = $value;
+    }
+
+    public function updatedCustomerid($value)
+    {
+        $this->customerid = $value;
     }
     public function sortBy($field): void
     {
@@ -51,9 +59,13 @@ class OrderTable extends Component
     {
 
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            if ($this->userid) {
+            if ($this->userid || $this->customerid) {
+                // dd($this->customerid);
                 $orders = Order::with(['customer', 'details', 'user'])
-                    ->where("user_id", $this->userid)
+                    ->where(function ($query) {
+                        $query->where("user_id", $this->userid)
+                            ->orWhere("customer_id", $this->customerid);
+                    })
                     ->search($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
@@ -74,9 +86,11 @@ class OrderTable extends Component
         }
 
         $users = User::get(['id', 'name']);
+        $customers = Customer::get(['id', 'name']);
         return view('livewire.tables.order-table', [
             'orders' => $orders,
             'users' => $users,
+            'customers' => $customers,
         ]);
     }
 }

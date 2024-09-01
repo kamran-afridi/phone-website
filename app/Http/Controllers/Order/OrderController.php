@@ -57,7 +57,7 @@ class OrderController extends Controller
 	}
 
 	public function store(OrderStoreRequest $request)
-	{ 
+	{
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
@@ -295,7 +295,7 @@ class OrderController extends Controller
 			$newTotalCost = 0;
 			$Duebill = 0;
 			$TotalProducts = 0;
-			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get(); 
+			$AllOrderDetails = OrderDetails::where('order_id', $request->order_id)->get();
 			foreach ($AllOrderDetails as $AllOrderDetail) {
 
 				$newTotalCost +=  $AllOrderDetail->quantity * $AllOrderDetail->unitcost;
