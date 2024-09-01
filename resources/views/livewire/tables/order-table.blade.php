@@ -6,16 +6,29 @@
             </h3>
         </div>
         @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-            <div class="m-auto">
-                <select class="form-select form-control-solid @error('user_id') is-invalid @enderror" id="user_id"
+            <div class="m-auto d-flex">
+                <select class="form-select form-control-solid mr-2 @error('user_id') is-invalid @enderror" id="user_id"
                     name="user_id" wire:model.change="userid">
                     <option value="" selected="" disabled="">
                         Select a user:
                     </option>
 
                     @foreach ($users as $user)
-                        <option value="{{ $user->id }}" @selected(old('UserId', $userid) == $user->id)>
+                        {{-- <option value="{{ $user->id }}" @selected(old('UserId', $userid) == $user->id)> --}}
+                        <option value="{{ $user->id }}">
                             {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <select class="form-select form-control-solid @error('customer_id') is-invalid @enderror"
+                    id="customer_id" name="customer_id" wire:model.change="customerid">
+                    <option value="" selected="" disabled="">
+                        Select a customer:
+                    </option>
+
+                    @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}">
+                            {{ $customer->name }}
                         </option>
                     @endforeach
                 </select>
@@ -151,7 +164,7 @@
                             <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
                             <x-button.print class="btn-icon"
                                 route="{{ route('order.downloadInvoice', $order->uuid) }}" />
-                            <x-button.admin_print class="btn-icon" 
+                            <x-button.admin_print class="btn-icon"
                                 route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
                             @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
                                 <x-button.delete class="btn-icon" route="{{ route('orders.cancel', $order) }}"
@@ -166,6 +179,23 @@
                         </td>
                     </tr>
                 @endforelse
+                @if ($customerid)
+                    <tr>
+                        <td colspan="8" class="text-end">
+                            Payed amount
+                        </td>
+                        <td class="text-center">{{ number_format($orders->sum('pay'), 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="text-end">Due</td>
+                        <td class="text-center">{{ number_format($orders->sum('total') - $orders->sum('pay'), 2) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" class="text-end">Total</td>
+                        <td class="text-center">{{ number_format($orders->sum('total'), 2) }}</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>
