@@ -174,12 +174,12 @@ class ProductController extends Controller
 		/**
 		 * Delete photo if exists.
 		 */
-		if ($product->product_image) {
-			// check if image exists in our file system
-			if (file_exists(public_path('storage/') . $product->product_image)) {
-				dd(unlink(public_path('storage/') . $product->product_image));
-			}
-		}
+		// if ($product->product_image) {
+		// 	// check if image exists in our file system
+		// 	if (file_exists(public_path('storage/') . $product->product_image)) {
+		// 		dd(unlink(public_path('storage/') . $product->product_image));
+		// 	}
+		// }
 
 		$product->delete();
 
