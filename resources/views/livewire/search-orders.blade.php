@@ -13,7 +13,7 @@
 
     <div class="card-body">
         <div class="col-lg-12">
-            <x-spinner.loading-spinner /> 
+            <x-spinner.loading-spinner />
             <div class="table-responsive">
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
@@ -53,12 +53,13 @@
                             <tr>
                                 <td>
                                     <div class="d-flex">
+                                        {{-- if a customer not select --}}
                                         @if (Session::get('customer_id'))
                                             <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
-                                                @csrf
+                                                @csrf 
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="name" value="{{ $product->name }}">
-                                                @if (Session::get('customer_id') != 1)
+                                                @if (Session::get('customer_id') === \App\Enums\CustomerType::Normal)
                                                     <input type="hidden" name="sale_price"
                                                         value="{{ $product->sale_price }}">
                                                 @else
@@ -89,19 +90,13 @@
                                 <td class="text-center">
                                     <b>{{ $product->sku }}</b> {{ $product->name }}
                                 </td>
-                                @if (Session::get('customer_id'))
-                                    @if (Session::get('customer_id') != 1)
-                                        <td class="text-center">
-                                            £{{ number_format($product->sale_price, 2) }}
-                                        </td>
-                                    @else
-                                        <td class="text-center">
-                                            £{{ number_format($product->whole_sale_price, 2) }}
-                                        </td>
-                                    @endif
-                                @else
+                                @if (Session::get('customer_id') === \App\Enums\CustomerType::Normal)
                                     <td class="text-center">
                                         £{{ number_format($product->sale_price, 2) }}
+                                    </td>
+                                @else
+                                    <td class="text-center">
+                                        £{{ number_format($product->whole_sale_price, 2) }}
                                     </td>
                                 @endif
                                 {{-- <td class="text-center">
