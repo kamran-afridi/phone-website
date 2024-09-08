@@ -11,9 +11,6 @@
     </div>
 
 
-    @php
-    dd(Session::get('customer_id'));
-@endphp
     <div class="card-body">
         <div class="col-lg-12">
             <x-spinner.loading-spinner /> 
@@ -61,7 +58,13 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="name" value="{{ $product->name }}">
-                                               
+                                                @if (Session::get('customer_id') != 1)
+                                                    <input type="hidden" name="sale_price"
+                                                        value="{{ $product->sale_price }}">
+                                                @else
+                                                    <input type="hidden" name="sale_price"
+                                                        value="{{ $product->whole_sale_price }}">
+                                                @endif
                                                 <input type="hidden" name="sku" value="{{ $product->sku }}">
 
                                                 <button type="submit" class="btn btn-icon btn-outline-primary">
@@ -87,7 +90,7 @@
                                     <b>{{ $product->sku }}</b> {{ $product->name }}
                                 </td>
                                 @if (Session::get('customer_id'))
-                                    @if (Session::get('customer_id')->value != 1)
+                                    @if (Session::get('customer_id') != 1)
                                         <td class="text-center">
                                             £{{ number_format($product->sale_price, 2) }}
                                         </td>
