@@ -48,8 +48,7 @@ class OrderController extends Controller
 			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
 			// $customers = Customer::get(['id', 'name']); 
 		}
-		$carts = Cart::content();
-		dd($carts);
+		$carts = Cart::content(); 
 		return view('orders.create', [
 			'products' => $products,
 			'customers' => $customers,
