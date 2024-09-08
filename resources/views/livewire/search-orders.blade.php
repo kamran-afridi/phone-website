@@ -85,25 +85,7 @@
                                 </td>
                                 {{-- <td class="text-center">
                                     {{ $product->sku }}
-                                </td> --}}
-                                <td class="text-center">
-                                    <b>{{ $product->sku }}</b> {{ $product->name }}
-                                </td>
-                                @if (Session::get('customer_id'))
-                                    @if (Session::get('customer_id')->value != 1)
-                                        <td class="text-center">
-                                            £{{ number_format($product->sale_price, 2) }}
-                                        </td>
-                                    @else
-                                        <td class="text-center">
-                                            £{{ number_format($product->whole_sale_price, 2) }}
-                                        </td>
-                                    @endif
-                                @else
-                                    <td class="text-center">
-                                        £{{ number_format($product->sale_price, 2) }}
-                                    </td>
-                                @endif
+                                </td> --}} 
                                 {{-- <td class="text-center">
                                     {{ $product->quantity }}
                                 </td> --}}
