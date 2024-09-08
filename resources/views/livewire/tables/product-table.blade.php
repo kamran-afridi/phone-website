@@ -5,7 +5,10 @@
                 {{ __('Products') }}
             </h3>
         </div>
-        <div class="card-actions">
+        <div class="card-actions"> 
+            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                <x-action.createcsv route="{{ route('products.import.view') }}" />
+            @endif
             <x-action.create route="{{ route('products.create') }}" />
         </div>
     </div>
@@ -21,7 +24,7 @@
                         <option value="15">15</option>
                         <option value="25">25</option>
                     </select>
-                </div> 
+                </div>
             </div>
             <div class="ms-auto text-secondary">
                 Search:
@@ -169,9 +172,9 @@
                         @endif
                         @if ($columns['name'])
                             <td class="align-middle w-25" style="max-width: 170px">
-                               <div class="d-flex flex-wrap text-wrap justify-content-center">
-                                {{ $product->name }}
-                               </div>
+                                <div class="d-flex flex-wrap text-wrap justify-content-center">
+                                    {{ $product->name }}
+                                </div>
                             </td>
                         @endif
                         @if ($columns['cost_price'])

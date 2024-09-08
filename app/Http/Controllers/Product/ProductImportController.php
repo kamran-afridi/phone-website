@@ -47,10 +47,18 @@ class ProductImportController extends Controller
                 ];
                 $startcount++;
             }
+            // foreach ($data as $product) {
+            //     $data = Product::firstOrCreate([ 
+            //         "sku" => $product["sku"],
+            //     ], $product); 
+            // }
             foreach ($data as $product) {
-                Product::firstOrCreate([ 
-                    "sku" => $product["sku"],
-                ], $product);
+                $data = Product::updateOrCreate(
+                    [
+                        "sku" => $product["sku"],  // Condition to find existing record
+                    ],
+                    $product  // Data to update or create
+                );
             }
         } catch (Exception $e) {
             throw $e;
