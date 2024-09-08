@@ -16,7 +16,7 @@ class CustomerSelect extends Component
     public function mount($customers)
     {
         $this->customers = $customers;
-        $this->customer_id = session('customer_id', '');
+        // $this->customer_id = session('customer_id', '');
         $this->customer_data = session('customer_data', '');
     }
     public function changeEvent($customerId)
