@@ -11,6 +11,9 @@
     </div>
 
 
+    @php
+    dd(Session::get('customer_id'));
+@endphp
     <div class="card-body">
         <div class="col-lg-12">
             <x-spinner.loading-spinner /> 
@@ -58,7 +61,7 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="name" value="{{ $product->name }}">
-                                                
+                                               
                                                 <input type="hidden" name="sku" value="{{ $product->sku }}">
 
                                                 <button type="submit" class="btn btn-icon btn-outline-primary">
@@ -83,11 +86,21 @@
                                 <td class="text-center">
                                     <b>{{ $product->sku }}</b> {{ $product->name }}
                                 </td>
-                               
+                                @if (Session::get('customer_id'))
+                                    @if (Session::get('customer_id')->value != 1)
+                                        <td class="text-center">
+                                            £{{ number_format($product->sale_price, 2) }}
+                                        </td>
+                                    @else
+                                        <td class="text-center">
+                                            £{{ number_format($product->whole_sale_price, 2) }}
+                                        </td>
+                                    @endif
+                                @else
                                     <td class="text-center">
                                         £{{ number_format($product->sale_price, 2) }}
                                     </td>
-                                
+                                @endif
                                 {{-- <td class="text-center">
                                     {{ $product->quantity }}
                                 </td> --}}
