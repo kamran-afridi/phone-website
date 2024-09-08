@@ -58,13 +58,7 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="name" value="{{ $product->name }}">
-                                                @if (Session::get('customer_id')->value != 1)
-                                                    <input type="hidden" name="sale_price"
-                                                        value="{{ $product->sale_price }}">
-                                                @else
-                                                    <input type="hidden" name="sale_price"
-                                                        value="{{ $product->whole_sale_price }}">
-                                                @endif
+                                                
                                                 <input type="hidden" name="sku" value="{{ $product->sku }}">
 
                                                 <button type="submit" class="btn btn-icon btn-outline-primary">
@@ -85,7 +79,15 @@
                                 </td>
                                 {{-- <td class="text-center">
                                     {{ $product->sku }}
-                                </td> --}} 
+                                </td> --}}
+                                <td class="text-center">
+                                    <b>{{ $product->sku }}</b> {{ $product->name }}
+                                </td>
+                               
+                                    <td class="text-center">
+                                        £{{ number_format($product->sale_price, 2) }}
+                                    </td>
+                                
                                 {{-- <td class="text-center">
                                     {{ $product->quantity }}
                                 </td> --}}
