@@ -41,8 +41,7 @@ class OrderController extends Controller
 	public function create()
 	{
 		// $products = Product::where('user_id', auth()->id())->with(['category_id'])->get();
-		$products = Product::with(['category_id'])->get();
-		dd(auth()->user()->role);
+		$products = Product::with(['category_id'])->get(); 
 		if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
 			$customers = Customer::get(['id', 'name']);
 		} else {
@@ -50,6 +49,7 @@ class OrderController extends Controller
 			// $customers = Customer::get(['id', 'name']); 
 		}
 		$carts = Cart::content();
+		dd($carts);
 		return view('orders.create', [
 			'products' => $products,
 			'customers' => $customers,
