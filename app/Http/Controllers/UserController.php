@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use Str;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -112,7 +113,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'password' => 'required_with:password_confirmation|min:6',
             'password_confirmation' => 'same:password|min:6',
-        ]); 
+        ]);
         # Update the new Password
         User::where('username', $user->email)->update([
             'password' => Hash::make($request->password)
@@ -129,7 +130,9 @@ class UserController extends Controller
          * Delete photo if exists.
          */
         if ($user->photo) {
-            dd($user->photo);
+
+            // Log an info message to the custom log file
+            Log::channel('info_logs')->info($user->photo);
             unlink(public_path('storage/profile/') . $user->photo);
         }
 
