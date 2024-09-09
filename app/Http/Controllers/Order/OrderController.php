@@ -121,7 +121,7 @@ class OrderController extends Controller
 
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		$order->update([
-			'payment_type' => 'HandCash',
+			'payment_type' => 'Cash',
 		]);
 
 		return redirect()

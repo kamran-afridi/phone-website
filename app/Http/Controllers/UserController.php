@@ -132,7 +132,7 @@ class UserController extends Controller
         if ($user->photo) {
 
             // Log an info message to the custom log file
-            Log::channel('info_logs')->info($user->photo);
+            // Log::channel('info_logs')->info($user->photo);
             unlink(public_path('storage/profile/') . $user->photo);
         }
 

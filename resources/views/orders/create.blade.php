@@ -299,8 +299,8 @@
                                             </label>
                                             <select class="form-control @error('customer_type') is-invalid @enderror"
                                                 id="customer_type" name="customer_type">
-                                                <option value="0" selected>Normal User</option>
-                                                <option value="1">Regular User</option>
+                                                <option value="0" selected>Sale Price</option>
+                                                <option value="1">Whole Sale Price</option>
                                             </select>
 
                                         </div>

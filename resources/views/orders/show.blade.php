@@ -81,30 +81,20 @@
                                 disabled>
                         </div>
 
-                        @if ($order->payment_type == 'Due')
-                            <div class="col">
-                                <label for="payment_type" class="form-label required">
-                                    {{ __('Payment Type') }}
-                                </label>
-
-                                <select class="form-control" id="payment_type" name="payment_type" required>
-                                    <option value="HandCash" {{ $order->payment_type === 'HandCash' ? 'selected' : '' }}>
-                                        HandCash</option>
-                                    <option value="Cheque" {{ $order->payment_type === 'Cheque' ? 'selected' : '' }}>Cheque
-                                    </option>
-                                    <option value="Due" {{ $order->payment_type === 'Due' ? 'selected' : '' }}>Due
-                                    </option>
-                                </select>
-                            </div>
-                        @else
-                            <div class="col">
-                                <label for="payment_type" class="form-label required">
-                                    {{ __('Payment Type') }}
-                                </label>
-                                <input type="text" id="payment_type" class="form-control"
-                                    value="{{ $order->payment_type }}" disabled>
-                            </div>
-                        @endif
+                        <div class="col">
+                            <label for="payment_type" class="form-label required">
+                                {{ __('Payment Type') }}
+                            </label>
+                            <select class="form-control" id="payment_type" name="payment_type" required>
+                                <option value="Cash" {{ $order->payment_type === 'Cash' ? 'selected' : '' }}>
+                                    Cash</option>
+                                <option value="Bank" {{ $order->payment_type === 'Bank' ? 'selected' : '' }}>Bank
+                                    Transfer
+                                </option>
+                                <option value="Credit" {{ $order->payment_type === 'Credit' ? 'selected' : '' }}>Credit
+                                </option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="table-responsive">
@@ -343,7 +333,7 @@
                                             {{ $order->order_status->label() }}
                                         </x-status>
                                     </td>
-                                </tr> 
+                                </tr>
                                 <tr>
                                     <td class="text-end">Note:</td>
                                     <td colspan="7" class="text-center">
@@ -369,18 +359,16 @@
                             </form>
                         </div>
                     @endif
-                    @if ($order->payment_type === 'Due')
-                        <div class="col  text-end">
-                            <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
-                                @method('put')
-                                @csrf
-                                <button type="submit" class="btn btn-success"
-                                    onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
-                                    {{ __('Change Payment Status') }}
-                                </button>
-                            </form>
-                        </div>
-                    @endif
+                    <div class="col  text-end">
+                        <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
+                            @method('put')
+                            @csrf
+                            <button type="submit" class="btn btn-success"
+                                onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
+                                {{ __('Change Payment Status') }}
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
