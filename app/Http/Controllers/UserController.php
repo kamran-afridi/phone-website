@@ -129,7 +129,7 @@ class UserController extends Controller
          * Delete photo if exists.
          */
         if ($user->photo) {
-            // dd("asa");
+            dd($user->photo);
             unlink(public_path('storage/profile/') . $user->photo);
         }
 
