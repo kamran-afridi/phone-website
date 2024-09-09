@@ -363,6 +363,9 @@
                         <form action="{{ route('orders.update_payment_status', $order->uuid) }}" method="POST">
                             @method('put')
                             @csrf
+                            <!-- Hidden Input Field to Store Payment Type -->
+                            <input type="hidden" id="hidden_payment_type" name="hidden_payment_type"
+                                value="{{ $order->payment_type }}">
                             <button type="submit" class="btn btn-success"
                                 onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
                                 {{ __('Change Payment Status') }}
@@ -375,4 +378,18 @@
 
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the select dropdown and hidden input field
+            const paymentTypeSelect = document.getElementById('payment_type');
+            const hiddenPaymentType = document.getElementById('hidden_payment_type');
+
+            // Add an event listener for changes in the select dropdown
+            paymentTypeSelect.addEventListener('change', function() {
+                // Update the hidden field with the selected value
+                hiddenPaymentType.value = paymentTypeSelect.value;
+            });
+        });
+    </script>
 @endsection

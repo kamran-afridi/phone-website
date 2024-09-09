@@ -41,14 +41,14 @@ class OrderController extends Controller
 	public function create()
 	{
 		// $products = Product::where('user_id', auth()->id())->with(['category_id'])->get();
-		$products = Product::with(['category_id'])->get(); 
+		$products = Product::with(['category_id'])->get();
 		if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
 			$customers = Customer::get(['id', 'name']);
 		} else {
 			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
 			// $customers = Customer::get(['id', 'name']); 
 		}
-		$carts = Cart::content(); 
+		$carts = Cart::content();
 		return view('orders.create', [
 			'products' => $products,
 			'customers' => $customers,
@@ -121,7 +121,7 @@ class OrderController extends Controller
 
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		$order->update([
-			'payment_type' => 'Cash',
+			'payment_type' => $request->hidden_payment_type,
 		]);
 
 		return redirect()
