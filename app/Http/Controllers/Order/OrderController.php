@@ -58,6 +58,7 @@ class OrderController extends Controller
 
 	public function store(OrderStoreRequest $request)
 	{
+		$subtotal = str_replace(',', '', Cart::subtotal(2, '.', ','));
 		$order = Order::create([
 			'customer_id' => $request->customer_id,
 			'payment_type' => $request->payment_type,
@@ -66,10 +67,10 @@ class OrderController extends Controller
 			'order_date' => Carbon::now()->format('Y-m-d'),
 			'order_status' => OrderStatus::PENDING->value,
 			'total_products' => Cart::count(),
-			'sub_total' => Cart::subtotal(2, '.', ','),
+			'sub_total' => $subtotal,
 			//// 'vat' => Cart::tax(),
 			'vat' => 0,
-			'total' => Cart::subtotal(2, '.', ','),
+			'total' => $subtotal,
 			'invoice_no' => IdGenerator::generate([
 				'table' => 'orders',
 				'field' => 'invoice_no',
@@ -77,7 +78,7 @@ class OrderController extends Controller
 				'prefix' => 'INV-'
 			]),
 			// 'due' => ($request->pay),
-			'due' => (Cart::subtotal(2, '.', ',') - $request->pay),
+			'due' =>  $subtotal - $request->pay,
 			'user_id' => auth()->id(),
 			'uuid' => Str::uuid(),
 		]);
