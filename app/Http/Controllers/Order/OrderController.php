@@ -123,6 +123,7 @@ class OrderController extends Controller
 		$order = Order::where('uuid', $uuid)->firstOrFail();
 		$order->update([
 			'payment_type' => $request->hidden_payment_type,
+			'note' => $request->note,
 		]);
 
 		return redirect()

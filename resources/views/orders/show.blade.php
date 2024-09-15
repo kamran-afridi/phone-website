@@ -337,7 +337,7 @@
                                 <tr>
                                     <td class="text-end">Note:</td>
                                     <td colspan="7" class="text-center">
-                                        <textarea name="note" id="note" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note', $order->note) }}</textarea>
+                                        <textarea name="note" id="notesSelect" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note', $order->note) }}</textarea>
                                     </td>
                                 </tr>
                             </tbody>
@@ -366,6 +366,9 @@
                             <!-- Hidden Input Field to Store Payment Type -->
                             <input type="hidden" id="hidden_payment_type" name="hidden_payment_type"
                                 value="{{ $order->payment_type }}">
+                            <!-- Hidden Input Field to Store Payment Type -->
+                            <input type="hidden" id="hidden_notes" name="hidden_notes"
+                                value="">
                             <button type="submit" class="btn btn-success"
                                 onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
                                 {{ __('Change Payment Status') }}
@@ -383,12 +386,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Get the select dropdown and hidden input field
             const paymentTypeSelect = document.getElementById('payment_type');
+            const notesSelect = document.getElementById('notesSelect');
             const hiddenPaymentType = document.getElementById('hidden_payment_type');
+            const hidden_notes = document.getElementById('hidden_notes');
 
             // Add an event listener for changes in the select dropdown
             paymentTypeSelect.addEventListener('change', function() {
                 // Update the hidden field with the selected value
                 hiddenPaymentType.value = paymentTypeSelect.value;
+                hidden_notes.value = notesSelect.value;
             });
         });
     </script>
