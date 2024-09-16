@@ -9,8 +9,8 @@ enum CustomerType: int
     public function label(): string
     { 
         return match ($this) {
-            self::Normal => __('Normal User'),
-            self::Regular => __('Regular User'), 
+            self::Normal => __('Sale Price'),
+            self::Regular => __('Whole Sale Price'), 
         };
     }
 }

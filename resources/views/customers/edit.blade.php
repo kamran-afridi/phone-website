@@ -76,11 +76,11 @@
                                                 id="customer_type" name="customer_type">
                                                 <option value="0"
                                                     {{ $customer->customer_type === \App\Enums\CustomerType::Normal ? 'selected' : '' }}>
-                                                    Normal User
+                                                    Sale Price
                                                 </option>
                                                 <option value="1"
                                                     {{ $customer->customer_type === \App\Enums\CustomerType::Regular ? 'selected' : '' }}>
-                                                    Regular User
+                                                    Whole Sale Price
                                                 </option>
                                             </select>
 

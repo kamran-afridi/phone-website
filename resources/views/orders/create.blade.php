@@ -112,7 +112,13 @@
                                                                     required value="{{ old('qty', $item->qty) }}">
                                                                 <input type="hidden" class="form-control" name="product_id"
                                                                     value="{{ $item->id }}">
-
+                                                            </div>
+                                                        </td>
+                                                        <td style="min-width: 170px;">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control" name="price"
+                                                                    required value="{{ old('price', $item->price) }}"
+                                                                    step="any">
                                                                 <div class="input-group-append text-center">
                                                                     <button type="submit"
                                                                         class="btn btn-icon btn-success border-none"
@@ -132,31 +138,6 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="min-width: 170px;">
-                                                            <div class="input-group">
-                                                                <input type="number" class="form-control" name="price"
-                                                                    required value="{{ old('price', $item->price) }}"
-                                                                    step="any">
-                                                                <div class="input-group-append text-center">
-                                                                    <button type="submit"
-                                                                        class="btn btn-icon btn-success border-none"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="" data-original-title="Sumbit">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            class="icon icon-tabler icon-tabler-check"
-                                                                            width="24" height="24"
-                                                                            viewBox="0 0 24 24" stroke-width="2"
-                                                                            stroke="currentColor" fill="none"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round">
-                                                                            <path stroke="none" d="M0 0h24v24H0z"
-                                                                                fill="none" />
-                                                                            <path d="M5 12l5 5l10 -10" />
-                                                                        </svg>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                     </form>
                                                     <td class="text-center">
                                                         {{ Number::currency($item->subtotal, 'GBP') }}
@@ -166,8 +147,7 @@
                                                             method="POST">
                                                             @method('delete')
                                                             @csrf
-                                                            <button type="submit"
-                                                                class="btn btn-icon btn-outline-danger "
+                                                            <button type="submit" class="btn btn-icon btn-outline-danger "
                                                                 onclick="return confirm('Are you sure you want to delete this record?')">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     class="icon icon-tabler icon-tabler-trash"
@@ -219,7 +199,7 @@
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
