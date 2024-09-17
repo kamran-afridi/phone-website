@@ -11,7 +11,11 @@ use Illuminate\Support\Carbon;
 use App\Models\UsersLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+<<<<<<< HEAD
 
+=======
+/////////////////////testing
+>>>>>>> 2d065ec26168562ddf3ddabf352b1b0d01808652
 class AuthenticatedSessionController extends Controller
 {
     /**
