@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use App\Models\UsersLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-
+//testing
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
             'date' => Carbon::now()->format('Y-m-d'),
             'time' => Carbon::now()->format('H:i:s'),
             'status' => 'LOGOUT',
-            'user_id' => auth()->id(), 
+            'user_id' => auth()->id(),
         ]);
         Auth::guard('web')->logout();
 
