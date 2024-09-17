@@ -9,7 +9,11 @@
                             {{ __('Order Details') }}
                         </h3>
                     </div>
-
+                    <div>
+                        <h3 class="card-title">
+                            {{ __('Order Details') }}
+                        </h3>
+                    </div>
                     <div class="card-actions btn-actions">
                         @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
                             <div class="dropdown">
