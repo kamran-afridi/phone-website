@@ -46,7 +46,7 @@ class OrderController extends Controller
 			$customers = Customer::get(['id', 'name']);
 		} else {
 			$customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
-			// $customers = Customer::get(['id', 'name']); 
+			// $customers = Customer::get(['id', 'name']);
 		}
 		$carts = Cart::content();
 		return view('orders.create', [
@@ -145,7 +145,7 @@ class OrderController extends Controller
 	}
 	public function editsubmitedorder($id, Request $request)
 	{
-		dd($request->all()); 
+		// dd($request->all());
 		$OrderDetails = OrderDetails::where('id', $id)->firstOrFail();
 		$Order = Order::where('id', $request->order_id)->firstOrFail();
 		$newunitcost = $request->unitcost;
@@ -194,7 +194,7 @@ class OrderController extends Controller
 		}
 		$operation = $order->update([
 			'order_status' => OrderStatus::COMPLETE,
-			// 'due' => '0', 
+			// 'due' => '0',
 			// 'pay' => $order->total
 			'pay' => $order->pay
 		]);
