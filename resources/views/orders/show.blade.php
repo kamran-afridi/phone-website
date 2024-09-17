@@ -1,4 +1,5 @@
-@extends('layouts.tabler') 
+@extends('layouts.tabler')
+{{-- hello word --}}
 @section('content')
     <div class="page-body">
         <div class="container-xl">
