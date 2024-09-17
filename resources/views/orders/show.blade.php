@@ -257,6 +257,9 @@
                                                                             <x-input name="quantity" label="QUANTITY"
                                                                                 value='{{ $item->quantity }}'
                                                                                 :required="true" />
+                                                                            <x-input name="unitcost" label="unitcost"
+                                                                                value='{{ $item->unitcost }}'
+                                                                                :required="true" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -337,7 +340,8 @@
                                 <tr>
                                     <td class="text-end">Note:</td>
                                     <td colspan="7" class="text-center">
-                                        <textarea name="note" id="notesSelect" rows="3" class="form-control form-control-solid" spellcheck="false">{{ old('note', $order->note) }}</textarea>
+                                        <textarea name="note" id="notesSelect" rows="3" class="form-control form-control-solid"
+                                            spellcheck="false">{{ old('note', $order->note) }}</textarea>
                                     </td>
                                 </tr>
                             </tbody>
@@ -367,8 +371,7 @@
                             <input type="hidden" id="hidden_payment_type" name="hidden_payment_type"
                                 value="{{ $order->payment_type }}">
                             <!-- Hidden Input Field to Store Payment Type -->
-                            <input type="hidden" id="hidden_notes" name="hidden_notes"
-                                value="">
+                            <input type="hidden" id="hidden_notes" name="hidden_notes" value="">
                             <button type="submit" class="btn btn-success"
                                 onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
                                 {{ __('Change Payment Status') }}
