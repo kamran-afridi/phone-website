@@ -145,12 +145,11 @@ class OrderController extends Controller
 	}
 	public function editsubmitedorder($id, Request $request)
 	{
-		// dd($request->all());
-		$Product = Product::where('id', $request->Product_id)->firstOrFail();
+		// dd($request->all()); 
 		$OrderDetails = OrderDetails::where('id', $id)->firstOrFail();
 		$Order = Order::where('id', $request->order_id)->firstOrFail();
-		$newunitcost = $Product->sale_price;
-		$newtotal = $request->quantity * $Product->sale_price;
+		$newunitcost = $request->unitcost;
+		$newtotal = $request->quantity * $newunitcost;
 		$OrderDetails->update(['quantity' => $request->quantity, 'unitcost' => $newunitcost, 'total' => $newtotal]);
 		// dd($OrderDetails);
 		if ($OrderDetails) {
