@@ -43,9 +43,10 @@ class Order extends Model
     }
 
     public function details(): HasMany
-    {
-        return $this->hasMany(OrderDetails::class);
-    }
+{
+    return $this->hasMany(OrderDetails::class); // Assuming OrderDetail is the model for the order details
+}
+
 
     public function scopeSearch($query, $value): void
     {

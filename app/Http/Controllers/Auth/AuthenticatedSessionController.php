@@ -11,11 +11,8 @@ use Illuminate\Support\Carbon;
 use App\Models\UsersLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-<<<<<<< HEAD
-
-=======
+use Illuminate\Support\Facades\Log;
 /////////////////////testing
->>>>>>> 2d065ec26168562ddf3ddabf352b1b0d01808652
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -43,12 +40,28 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $UsersLog = UsersLog::create([
-            'date' => Carbon::now()->format('Y-m-d'),
-            'time' => Carbon::now()->format('H:i:s'),
-            'status' => 'LOGOUT',
-            'user_id' => auth()->id(),
-        ]);
+        $userlogCheck = UsersLog::where('user_id', auth()->id())->where('date', Carbon::now()->format('Y-m-d'))->where('status', 'LOGOUT')->first();
+
+        if ($userlogCheck) {
+            $UsersLog = UsersLog::where('user_id', auth()->id())
+                ->where('date', Carbon::now()->format('Y-m-d'))
+                ->where('status', 'LOGOUT')
+                ->update([
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'time' => Carbon::now()->format('H:i:s'),
+                    'status' => 'LOGOUT',
+                    'user_id' => auth()->id(),
+                ]);
+            // Log::channel('stderr')->info('User already logout today!');
+        } else {
+            $UsersLog = UsersLog::create([
+                'date' => Carbon::now()->format('Y-m-d'),
+                'time' => Carbon::now()->format('H:i:s'),
+                'status' => 'LOGOUT',
+                'user_id' => auth()->id(),
+            ]);
+        }
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class LoginRequest extends FormRequest
 {
@@ -52,12 +53,18 @@ class LoginRequest extends FormRequest
             //                $this->email  => trans('auth.failed'),
             //            ]);
         } else {
-            $UsersLog = UsersLog::create([
-                'date' => Carbon::now()->format('Y-m-d'),
-                'time' => Carbon::now("Europe/London")->format('H:i:s'),
-                'status' => 'LOGIN',
-                'user_id' => auth()->id(),
-            ]);
+            $userlogCheck = UsersLog::where('user_id', auth()->id())->where('date', Carbon::now()->format('Y-m-d'))->where('status', 'LOGIN')->first();
+
+            if ($userlogCheck) {
+                Log::channel('stderr')->info('User already logined brfore today!');
+            } else {
+                $UsersLog = UsersLog::create([
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'time' => Carbon::now('Europe/London')->format('H:i:s'),
+                    'status' => 'LOGIN',
+                    'user_id' => auth()->id(),
+                ]);
+            }
         }
         //RateLimiter::clear($this->throttleKey());
     }
