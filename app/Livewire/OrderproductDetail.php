@@ -19,12 +19,19 @@ class OrderproductDetail extends Component
         // dd($this->OrderId[$productId]);
         $newOrderDetailsTotal = $this->productquantity[$productId] * $this->productprice[$productId];
         // dd($this->productquantity[$productId]);
-        OrderDetails::where('id', $productId)->update([
+		$Order = Order::where('id', $this->OrderId[$productId])->firstOrFail();
+        $OrderDetails = OrderDetails::where('id', $productId)->update([
             'quantity' => $this->productquantity[$productId],
             'unitcost' => $this->productprice[$productId],
             'total' => $newOrderDetailsTotal,
         ]);
-
+        if ($OrderDetails) {
+			$AllOrderDetails = OrderDetails::where('order_id', $this->OrderId[$productId])->get();
+			$newTotalCost = $AllOrderDetails->sum('total');
+			$Duebill = $newTotalCost - $Order->pay;
+			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
+		}
+// dd( secon$this->OrderId[$productId]);
         $this->mount();
     }
 
