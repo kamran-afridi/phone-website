@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\DevicesController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RotaController;
 use App\Livewire\LocationComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -179,3 +181,10 @@ require __DIR__ . '/auth.php';
 Route::get('test/', function () {
 	return view('test');
 });
+
+
+//Rota
+Route::get('/rota', [RotaController::class, 'index'])->name('rota.index');
+Route::get('/rota/create', [RotaController::class, 'rotaCreate'])->name('rota.create');
+Route::get('/rota/edit/{rota_id}', [RotaController::class, 'rotaEdit'])->name('rota.edit');
+Route::get('/rota/show/{rota_id}', [RotaController::class, 'rotaShow'])->name('rota.show');

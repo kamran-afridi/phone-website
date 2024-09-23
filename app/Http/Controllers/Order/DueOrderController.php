@@ -9,17 +9,27 @@ use App\Models\Product;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Mail\StockAlert;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class DueOrderController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
         $orders = Order::where('due', '>', '0')
             ->latest()
             ->with('customer')
             ->get();
-
+        }
+        else
+        {
+            $orders = Order::where('due', '>', '0')
+            ->where("user_id", auth()->id())
+            ->latest()
+            ->with('customer')
+            ->get();
+        }
         return view('due.index', [
             'orders' => $orders
         ]);

@@ -76,7 +76,7 @@
                             {{ __('Shop name') }}
                             @include('inclues._sort-icon', ['field' => 'store_address'])
                         </a>
-                    </th> 
+                    </th>
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('customer_type')" href="#" role="button">
                             {{ __('Customer Type') }}
@@ -124,7 +124,7 @@
                         </td>
                         <td class="align-middle text-center">
                             {{ $customer->created_at->diffForHumans() }}
-                        </td> 
+                        </td>
                         <td class="align-middle text-center">
                             <x-button.show class="btn-icon" route="{{ route('customers.show', $customer->uuid) }}" />
                             <x-button.edit class="btn-icon" route="{{ route('customers.edit', $customer->uuid) }}" />
