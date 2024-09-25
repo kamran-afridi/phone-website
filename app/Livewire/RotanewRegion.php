@@ -27,6 +27,7 @@ class RotanewRegion extends Component
         ]);
         $this->dispatch('RegionAdded');
         session()->flash('newcregionsuccess', value: 'Region added successfully!');
+        $this->dispatch('closeregionmodal');
 
         // // Optionally, reset the new city input
         $this->newregion = '';
