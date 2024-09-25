@@ -23,6 +23,7 @@ class RotanewAddress extends Component
         ]);
         $this->dispatch('addressAdded');
         session()->flash('newcaddresssuccess', value: 'Address and PostCode added successfully!');
+        $this->dispatch('closeaddressmodal');
 
         // // Optionally, reset the new city input
         $this->regionSelected = '';

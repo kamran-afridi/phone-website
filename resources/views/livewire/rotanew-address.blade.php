@@ -39,4 +39,14 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
     </form>
+
+    <script>
+
+        document.addEventListener('closeaddressmodal', event => {
+            // Close the modal using Bootstrap's modal instance
+            const modal = document.querySelector(`#addAddress`); // Replace with your modal's actual ID
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+        });
+    </script>
 </div>
