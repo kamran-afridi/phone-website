@@ -53,10 +53,15 @@
         </div>
     </div>
 
-    <x-spinner.loading-spinner />
+    {{-- <x-spinner.loading-spinner /> --}}
+    <div wire:loading wire:target="refreshRender" class="text-center my-4">
+        <x-spinner.loading-spinner />
+    </div>
 
     <div class="table-responsive">
-        <table wire:loading.remove class="table table-bordered card-table table-vcenter text-nowrap datatable">
+        <table wire:loading.remove wire:target="refreshRender"
+            class="table table-bordered card-table table-vcenter text-nowrap datatable"
+            style="display: inline-table !important">
             <thead class="thead-light">
                 <tr>
                     <th scope="col" class="align-middle text-center">
@@ -151,8 +156,8 @@
                             </x-status>
                         </td>
                         <td class="align-middle text-center">
-                            @if ($assignedrota->rotavisit_image instanceof \Illuminate\Http\UploadedFile)
-                                <img src="{{ $assignedrota->rotavisit_image->temporaryUrl() }}" alt="Visit Image"
+                            @if ($assignedrota->rotavisit_image)
+                                <img src="{{ Url(Storage::url($assignedrota->rotavisit_image)) }}" alt="Visit Image"
                                     width="100" height="100">
                             @endif
                         </td>
@@ -170,9 +175,28 @@
                                     route="{{ route('rota.edit', $assignedrota->rota_id) }}" />
                             @else
                                 <button class="btn btn-outline-danger" data-bs-toggle="modal"
-                                    data-bs-target="#updateStatus{{ $assignedrota->rota_id }}">Edit
+                                    data-bs-target="#exampleModal{{ $assignedrota->rota_id }}">Edit
                                     {{-- <img src="{{ asset('assets/img/bin.png') }}" alt="" style="height: 20px"> --}}
                                 </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" wire:loading.attr="disabled"
+                                    id="exampleModal{{ $assignedrota->rota_id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @livewire('usertablestatus', ['thisrota_id' => $assignedrota->rota_id], key($assignedrota->rota_id))
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                             {{-- <x-button.delete class="btn-icon"type='submit' route="{{ route('customers.destroy', $assignedrota->rota_id) }}"
                                 onclick="return confirm('Are you sure to remove {{ $assignedrota->User->name }} ?')" /> --}}
@@ -209,61 +233,11 @@
         </ul>
     </div>
 
-    <!-- Modal -->
 
-    <div class="modal fade" id="updateStatus{{ $assignedrota->rota_id }}" tabindex="-1"
-        aria-labelledby="updateStatusLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
+    <script>
+        Livewire.on('refreshRender', () => {
+    document.querySelector('.datatable').style.display = 'inline-table';
+});
 
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form wire:submit.prevent="statusupdateforms">
-                    @csrf
-                    <div class="modal-body">
-                        {{-- @livewire('usertablestatus', ['assignedrotaid' => $assignedrota->rota_id]) --}}
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="text" wire:model="rotaupdateid" value="{{ $assignedrota->rota_id }}"
-                                    hidden>
-                                <div class="mb-3">
-                                    <label for="rotastatus" class="form-label required">Select
-                                        Status</label>
-                                    <select class="form-control" wire:model="rotastatus">
-                                        <option value="not visited"
-                                            {{ $assignedrota->rota_status === 'not visited' ? 'selected' : '' }}>not
-                                            visited</option>
-                                        <option value="visited"
-                                            {{ $assignedrota->rota_status === 'visited' ? 'selected' : '' }}>
-                                            visited</option>
-                                    </select>
-                                    @error('rotastatus')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="rotavisitimage" class="form-label">Visit Image</label>
-
-                                    {{-- <input type="file" id="rotavisitimage" class="form-control" wire:model="newImage"> --}}
-                                    @error('newImage')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        @if (session('statuupdatesucess'))
-                            <span class="p-2 rounded text-bg-success">{{ session('statuupdatesucess') }}</span>
-                        @endif
-                        <!-- The form submits when this button is clicked -->
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    </script>
 </div>
