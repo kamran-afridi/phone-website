@@ -13,6 +13,7 @@ class RotanewCity extends Component
             'city_name' => $this->newcity,
         ]);
         $this->dispatch('cityAdded');
+        $this->dispatch('closecitymodal');
         session()->flash('newcitysuccess', value: 'City added successfully!');
 
         // // Optionally, reset the new city input
