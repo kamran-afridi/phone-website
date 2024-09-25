@@ -14,7 +14,7 @@ class RotaTable extends Component
     use WithPagination;
     use WithFileUploads;
     // protected $paginationTheme = 'bootstrap';
-    // public $listeners =['rotastatus-updated' =>'refreshRender'];
+    public $listeners =['rotastatus-updated' =>'refreshRender'];
     public $perPage = 15;
 
     public $search = '';
@@ -27,10 +27,12 @@ class RotaTable extends Component
     public $rotavisitimage;
     public $rotastatus;
     public $rotaupdateid;
+    public $saysomething;
 
 
     // public function statusupdateforms()
     // {
+    //     dd($this->saysomething);
         // dd("as");
         // Validate the form data
         // $validatedData = $this->validate([

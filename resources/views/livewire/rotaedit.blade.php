@@ -162,9 +162,9 @@
                                     <img src="{{ $rotavisitimage->temporaryUrl() }}" alt="Visit Image"
                                                 width="100" height="100">
                                     @endif --}}
-                                    @if ($rotavisitimage instanceof \Illuminate\Http\UploadedFile)
+                                    @if ($rotavisitimage)
                                         <div class="mb-2">
-                                            <img src="{{ $rotavisitimage->temporaryUrl() }}" alt="Visit Image"
+                                            <img src="{{ Url(Storage::url($rotavisitimage)) }}" alt="Visit Image"
                                                 width="100" height="100">
                                         </div>
                                     @elseif ($rotavisitimage)
