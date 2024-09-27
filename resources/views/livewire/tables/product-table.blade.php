@@ -5,7 +5,7 @@
                 {{ __('Products') }}
             </h3>
         </div>
-        <div class="card-actions"> 
+        <div class="card-actions">
             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
                 <x-action.createcsv route="{{ route('products.import.view') }}" />
             @endif
@@ -48,9 +48,11 @@
             <button wire:click="toggleColumn('name')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Toggle Name
             </button>
-            <button wire:click="toggleColumn('cost_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
-                Toggle Cost Price
-            </button>
+            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                <button wire:click="toggleColumn('cost_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                    Toggle Cost Price
+                </button>
+            @endif
             <button wire:click="toggleColumn('sale_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Toggle Sale Price
             </button>
