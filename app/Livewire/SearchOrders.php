@@ -6,53 +6,97 @@ use Livewire\Component;
 use App\Models\Product;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class SearchOrders extends Component
 {
-	use WithPagination;
+    use WithPagination;
 
-	public $perPage = 8;
-	public $selectedValue;
-	public $search = '';
+    // public $perPage = 8;
+    public $selectedValue;
+    public $search = '';
 
-	public $sortField = 'products.id';
+    public $sortField = 'products.id';
 
-	public $customer_id;
-	public $sortAsc = 'desc';
+    public $customer_id;
+    public $sortAsc = 'desc';
 
-	public function sortBy($field): void
-	{
-		if ($this->sortField === $field) {
-			$this->sortAsc = !$this->sortAsc;
-		} else {
-			$this->sortAsc = true;
-		}
+    //add to Cart
+    public $productId, $productName, $productsalePrice, $productSKU;
 
-		$this->sortField = $field;
-	}  
+    public function addCartItem($productId, $name, $salePrice, $sku){
+        // $request->all();
+		//dd($request);
+        // dd($productId, $name, $salePrice, $sku);
+        try{
+            Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
+            $this->dispatch('addedTocart');
+            session()->flash('success', value: 'Product has been added to cart!');
+        }
+        catch(\Exception $e){
+            dd($e);
+            Session::flash('error', 'Product already in cart');
+            }
+        $this->dispatch('addedTocart');
+        session()->flash('success', value: 'Product has been added to cart!');
+
+		// $rules = [
+		// 	'productId' => 'required|numeric',
+		// 	'productSKU' => 'required|string',
+		// 	'productName' => 'required|string',
+		// 	'productsalePrice' => 'required|numeric',
+		// ];
+        // // $abc = request()->input('id');
+        // dd(request()->input('id'));
+
+		// // $validatedData = $request->validate($rules);
+        // dd($this->productId,
+        // $this->productName,
+        // 1,
+        // $this->productsalePrice,
+        // $this->productsalePrice,
+        // 1);
+		// Cart::add(
+		// 	$this->productId,
+		// 	$this->productName,
+		// 	1,
+		// 	$this->productsalePrice,
+		// 	$this->productsalePrice,
+		// 	1,
+		// 	(array) $options = null
+		// );
+    }
+    public function sortBy($field): void
+    {
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortAsc = true;
+        }
+
+        $this->sortField = $field;
+    }
     public function updatingSearch()
     {
         $this->resetPage(); // Reset to the first page when search query changes
     }
-	protected $listeners = ['customerChanged' => 'handleCustomerChanged'];
+    protected $listeners = ['customerChanged' => 'handleCustomerChanged'];
 
-	public function handleCustomerChanged($customerId)
-	{
-		$this->customer_id = $customerId;
-		// dd($this->customer_id);
-		// Perform any additional actions, such as updating a list of orders
-	}
-	public function render()
-	{
-		$products = Product::search($this->search)
-			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-			->paginate($this->perPage);
-		return view(
-			'livewire.search-orders',
-			[
-				'products' => $products,
-				'customer_id' => $this->customer_id,
-			]
-		);
-	}
+    public function handleCustomerChanged($customerId)
+    {
+        $this->customer_id = $customerId;
+        // dd($this->customer_id);
+        // Perform any additional actions, such as updating a list of orders
+    }
+    public function render()
+    {
+        $products = Product::search($this->search)
+            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+            ->get();
+        // ->paginate($this->perPage);
+        return view('livewire.search-orders', [
+            'products' => $products,
+            'customer_id' => $this->customer_id,
+        ]);
+    }
 }

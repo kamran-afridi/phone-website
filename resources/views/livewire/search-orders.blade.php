@@ -10,11 +10,53 @@
         </div>
     </div>
 
+    <style>
+        .abctable {
+            height: 450px;
+            overflow-x: auto;
+            overflow-y: scroll;
+        }
 
+        .abctable::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .abctable::-webkit-scrollbar-thumb {
+            background-color: #636363;
+            border-radius: 20px;
+        }
+
+        .abctable::-webkit-scrollbar-thumb {
+        background-color: #636363;
+        border-radius: 10px;
+        }
+
+        .abctable::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+        }
+        .abctable {
+            scrollbar-width: thin;
+            scrollbar-color: #636363 #ecf0f1;
+        }
+    </style>
     <div class="card-body">
         <div class="col-lg-12">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=
+                    "Close"></button>
+                </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label=
+                "Close"></button>
+            </div>
+            @endif
             <x-spinner.loading-spinner />
-            <div class="table-responsive">
+            <div class="table-responsive abctable">
                 <table wire:loading.remove class="table table-striped table-bordered align-middle">
                     <thead class="thead-light">
                         <tr>
@@ -55,30 +97,37 @@
                                     <div class="d-flex">
                                         {{-- if a customer not select --}}
                                         @if (Session::get('customer_id'))
-                                            <form action="{{ route('pos.addCartItem', $product) }}" method="POST">
-                                                @csrf 
-                                                <input type="hidden" name="id" value="{{ $product->id }}">
-                                                <input type="hidden" name="name" value="{{ $product->name }}">
-                                                @if (Session::get('customer_id') === \App\Enums\CustomerType::Normal)
-                                                    <input type="hidden" name="sale_price"
-                                                        value="{{ $product->sale_price }}">
-                                                @else
-                                                    <input type="hidden" name="sale_price"
-                                                        value="{{ $product->whole_sale_price }}">
-                                                @endif
-                                                <input type="hidden" name="sku" value="{{ $product->sku }}">
+                                        <form wire:submit.prevent="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ $customer_id === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')">
+                                            <button type="submit" class="btn btn-icon btn-outline-primary">
+                                                <x-icon.cart />
+                                            </button>
+                                        </form>
+                                        {{-- <form wire:submit.prevent="addCartItem">
+                                            @csrf
+                                            <!-- Correctly bind the Livewire properties to the inputs -->
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
 
-                                                <button type="submit" class="btn btn-icon btn-outline-primary">
-                                                    <x-icon.cart />
-                                                </button>
-                                            </form>
+                                            @if (Session::get('customer_id') === \App\Enums\CustomerType::Normal)
+                                                <input type="hidden" name="sale_price" value="{{ $product->sale_price }}">
+                                            @else
+                                                <input type="hidden" name="sale_price" value="{{ $product->whole_sale_price }}">
+                                            @endif
+
+                                            <input type="hidden" name="sku" value="{{ $product->sku }}">
+
+                                            <button type="submit" class="btn btn-icon btn-outline-primary">
+                                                <x-icon.cart />
+                                            </button>
+                                        </form> --}}
+
                                         @else
                                             <button class="btn btn-icon btn-outline-primary"
                                                 onclick="return confirm('Please selectt customer first!')">
                                                 <x-icon.cart />
                                             </button>
                                         @endif
-                                        <bu tton type="button" class="btn btn-icon btn-outline-warning ms-2"
+                                        <button type="button" class="btn btn-icon btn-outline-warning ms-2"
                                             data-bs-toggle="modal" data-bs-target="{{ '#' . $product->id }}">
                                             <x-icon.eye />
                                             </button>
@@ -166,9 +215,9 @@
                         to <span>{{ $products->lastItem() }}</span> of <span>{{ $products->total() }}</span> entries
                     </p> --}}
 
-                    <ul class="pagination m-0 ms-auto mb-0">
+                    {{-- <ul class="pagination m-0 ms-auto mb-0">
                         {{ $products->links() }}
-                    </ul>
+                    </ul> --}}
                 </div>
             </div>
         </div>
