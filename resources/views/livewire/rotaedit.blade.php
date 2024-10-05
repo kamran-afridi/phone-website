@@ -174,8 +174,7 @@
                                         </div>
                                     @endif
 
-                                    <input type="file" wire:model="newImage" class="form-control"
-                                        wire:model="newImage">
+                                    <input type="file" wire:model="newImage" class="form-control">
                                     @error('newImage')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

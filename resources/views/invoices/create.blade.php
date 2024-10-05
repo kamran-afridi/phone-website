@@ -82,7 +82,13 @@
                                     <tbody>
                                         @foreach ($carts as $item)
                                             <tr>
-                                                <td class="text-center">{{ $item->sku }}</td>
+                                                <td>
+                                                    @if (is_array($item->sku))
+                                                        {{ implode(', ', $item->sku) }} {{-- Join array elements as a comma-separated string --}}
+                                                    @else
+                                                        {{ $item->sku }} {{-- Display the sku if it's a string --}}
+                                                    @endif
+                                                </td>
                                                 <td class="text-center">{{ $item->name }}</td>
                                                 <td class="text-center">{{ Number::currency($item->price, 'GBP') }}
                                                 </td>

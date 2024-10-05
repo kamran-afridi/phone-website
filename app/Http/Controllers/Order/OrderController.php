@@ -49,11 +49,7 @@ class OrderController extends Controller
 			// $customers = Customer::get(['id', 'name']);
 		}
 		$carts = Cart::content();
-		return view('orders.create', [
-			'products' => $products,
-			'customers' => $customers,
-			'carts' => $carts,
-		]);
+		return view('orders.create');
 	}
 
 	public function store(OrderStoreRequest $request)
