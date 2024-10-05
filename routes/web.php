@@ -30,7 +30,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RotaController;
 use App\Livewire\LocationComponent;
-use App\Livewire\CreateNewOrder;
+// use App\Livewire\CreateNewOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -177,7 +177,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('Map', [LocationController::class, 'index'])->name('Map');
 });
 Route::get('changeEvents', LocationComponent::class)->name('changeEvents');
-Route::get('create-new-order', CreateNewOrder::class)->name('create-new-order');
+// Route::get('create-new-order', CreateNewOrder::class)->name('create-new-order');
 require __DIR__ . '/auth.php';
 
 Route::get('test/', function () {

@@ -24,22 +24,22 @@ class SearchOrders extends Component
     //add to Cart
     public $productId, $productName, $productsalePrice, $productSKU;
 
-    public function addCartItem($productId, $name, $salePrice, $sku)
-    {
+    public function addCartItem($productId, $name, $salePrice, $sku){
         // $request->all();
-        try {
-            Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku],1,(array) $options = null);
-            // dd('create-new-order');
+		//dd($request);
+        // dd($productId, $name, $salePrice, $sku);
+        try{
+            Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
+            $this->dispatch('addedTocart');
             session()->flash('success', value: 'Product has been added to cart!');
-            redirect ('/orders/create');
-            // $this->dispatch('addedTocart');
-
-        } catch (\Exception $e) {
+        }
+        catch(\Exception $e){
             dd($e);
             Session::flash('error', 'Product already in cart');
-        }
-        // $this->dispatch('addedTocart');
-        // session()->flash('success', value: 'Product has been added to cart!');
+            }
+        $this->dispatch('addedTocart');
+        session()->flash('success', value: 'Product has been added to cart!');
+
     }
     public function sortBy($field): void
     {
@@ -61,6 +61,7 @@ class SearchOrders extends Component
     {
         $this->customer_id = $customerId;
         // dd($this->customer_id);
+        // Perform any additional actions, such as updating a list of orders
     }
     public function render()
     {

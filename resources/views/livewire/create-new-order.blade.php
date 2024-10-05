@@ -133,7 +133,7 @@
 
                                                                 @csrf
                                                                 <div class="row">
-                                                                    <div class="col-md-4 col-sm-4">
+                                                                    <div class="col-md-4 col-sm-4 mr-1">
                                                                         <div class="input-group">
                                                                             <input type="number" class="form-control"
                                                                                 name="qty" required
@@ -144,7 +144,7 @@
                                                                                 wire:model="cartId.{{ $item->rowId }}">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-5 col-sm-5">
+                                                                    <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                                         <div class="input-group">
                                                                             <input type="number" class="form-control"
                                                                                 name="price" required
@@ -153,7 +153,7 @@
                                                                                 step="any">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-3 col-sm-3">
+                                                                    <div class="col-md-3 col-sm-3 ml-0">
                                                                         <div class="input-group-append text-center">
                                                                             <button
                                                                                 wire:click.prevent="EditQtyPrice('{{ $item->rowId }}')"
