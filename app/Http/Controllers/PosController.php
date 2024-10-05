@@ -37,12 +37,12 @@ class PosController extends Controller
 		];
 
 		$validatedData = $request->validate($rules);
-  
+
 		Cart::add(
 			$validatedData['id'],
 			$validatedData['name'],
 			1,
-			$validatedData['sale_price'], 
+			$validatedData['sale_price'],
 			$validatedData['sku'],
 			1,
 			(array) $options = null
@@ -59,7 +59,7 @@ class PosController extends Controller
 			'qty' => 'required|numeric',
 			'product_id' => 'numeric',
 			'price' => 'numeric'
-		]; 
+		];
 		$validatedData = $request->validate($rules);
 		if ($validatedData['qty'] > Product::where('id', intval($validatedData['product_id']))->value('quantity')) {
 			return redirect()

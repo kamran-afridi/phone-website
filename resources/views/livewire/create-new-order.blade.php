@@ -1,34 +1,5 @@
 <div>
-    <style>
-        /* .catTable {
-            height: 280px;
-            width: 100%;
-            overflow-x:hidden;
-            overflow-y: scroll;
-        }
 
-        .catTable::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .catTable::-webkit-scrollbar-thumb {
-            background-color: #636363;
-            border-radius: 20px;
-        }
-
-        .catTable::-webkit-scrollbar-thumb {
-        background-color: #636363;
-        border-radius: 10px;
-        }
-
-        .catTable::-webkit-scrollbar-thumb:hover {
-            background-color: #888888;
-        }
-        .catTable {
-            scrollbar-width: thin;
-            scrollbar-color: #636363 #ecf0f1;
-        } */
-    </style>
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <div class="page-body">
         <div class="container-xl">
@@ -110,6 +81,7 @@
                                     </div>
                                 </div>
 
+                                {{-- <x-spinner.loading-spinner /> --}}
                                 <div class="table-responsive catTable">
                                     @if (session('cartsuccess'))
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -125,6 +97,8 @@
                                                 aria-label="Close"></button>
                                         </div>
                                     @endif
+
+                                    {{-- <table wire:loading.remove class="table table-striped table-bordered align-middle"> --}}
                                     <table class="table table-striped table-bordered align-middle">
                                         <thead class="thead-light">
                                             <tr>
@@ -139,10 +113,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- {{dd($carts)}} --}}
+                                            {{-- {{dd($newcartitem)}} --}}
                                             @if ($newcartitem)
                                                 @forelse ($newcartitem as $item)
-                                                    <tr>
+                                                    <tr wire:key="{{ $item->rowId }}">
                                                         <td>
                                                             @if (is_array($item->sku))
                                                                 {{ implode(', ', $item->sku) }} {{-- Join array elements as a comma-separated string --}}
@@ -211,7 +185,8 @@
                                                             {{ Number::currency($item->subtotal, 'GBP') }}
                                                         </td>
                                                         <td class="text-center">
-                                                            <form  wire:submit.prevent="RemoveItem('{{ $item->rowId }}')">
+                                                            <form
+                                                                wire:submit.prevent="RemoveItem('{{ $item->rowId }}')">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button type="submit"
@@ -263,12 +238,6 @@
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
-                                            {{-- <tr>
-                                                <td colspan="5" class="text-end">Tax</td>
-                                                <td class="text-center">
-                                                    {{ Cart::tax() }}
-                                                </td>
-                                            </tr> --}}
                                             <tr>
                                                 <td colspan="5" class="text-end">Total</td>
                                                 <td class="text-center">
@@ -389,4 +358,9 @@
             </div>
         </div>
     </div>
+    {{-- @if ($cartlength)
+        <script>
+            window.location.reload();
+        </script>
+    @endif --}}
 </div>

@@ -24,47 +24,22 @@ class SearchOrders extends Component
     //add to Cart
     public $productId, $productName, $productsalePrice, $productSKU;
 
-    public function addCartItem($productId, $name, $salePrice, $sku){
+    public function addCartItem($productId, $name, $salePrice, $sku)
+    {
         // $request->all();
-		//dd($request);
-        // dd($productId, $name, $salePrice, $sku);
-        try{
-            Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
-            $this->dispatch('addedTocart');
+        try {
+            Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku],1,(array) $options = null);
+            // dd('create-new-order');
             session()->flash('success', value: 'Product has been added to cart!');
-        }
-        catch(\Exception $e){
+            redirect ('/orders/create');
+            // $this->dispatch('addedTocart');
+
+        } catch (\Exception $e) {
             dd($e);
             Session::flash('error', 'Product already in cart');
-            }
-        $this->dispatch('addedTocart');
-        session()->flash('success', value: 'Product has been added to cart!');
-
-		// $rules = [
-		// 	'productId' => 'required|numeric',
-		// 	'productSKU' => 'required|string',
-		// 	'productName' => 'required|string',
-		// 	'productsalePrice' => 'required|numeric',
-		// ];
-        // // $abc = request()->input('id');
-        // dd(request()->input('id'));
-
-		// // $validatedData = $request->validate($rules);
-        // dd($this->productId,
-        // $this->productName,
-        // 1,
-        // $this->productsalePrice,
-        // $this->productsalePrice,
-        // 1);
-		// Cart::add(
-		// 	$this->productId,
-		// 	$this->productName,
-		// 	1,
-		// 	$this->productsalePrice,
-		// 	$this->productsalePrice,
-		// 	1,
-		// 	(array) $options = null
-		// );
+        }
+        // $this->dispatch('addedTocart');
+        // session()->flash('success', value: 'Product has been added to cart!');
     }
     public function sortBy($field): void
     {
@@ -86,7 +61,6 @@ class SearchOrders extends Component
     {
         $this->customer_id = $customerId;
         // dd($this->customer_id);
-        // Perform any additional actions, such as updating a list of orders
     }
     public function render()
     {
