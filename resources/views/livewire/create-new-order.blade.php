@@ -116,7 +116,7 @@
                                             {{-- {{dd($newcartitem)}} --}}
                                             @if ($newcartitem)
                                                 @forelse ($newcartitem as $item)
-                                                    <tr wire:key="{{ $item->rowId }}">
+                                                    <tr>
                                                         <td>
                                                             @if (is_array($item->sku))
                                                                 {{ implode(', ', $item->sku) }} {{-- Join array elements as a comma-separated string --}}
