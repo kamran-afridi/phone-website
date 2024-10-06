@@ -39,7 +39,8 @@ class CreateNewOrder extends Component
 
         $this->render(); // Refresh the component
     }
-    public function RemoveItem($cartid){
+    public function RemoveItem($cartid)
+    {
         Cart::remove($cartid);
         session()->flash('cartsuccess', 'The item has been removed from the cart.');
     }
@@ -53,7 +54,12 @@ class CreateNewOrder extends Component
     {
         $products = Product::with(['category_id'])->get();
 
-        $customers = Customer::all()->sortBy('name');
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
+            $customers = Customer::get(['id', 'name']);
+        } else {
+            $customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
+            // $customers = Customer::get(['id', 'name']);
+        }
 
         $carts = Cart::content();
         // dd($carts);
