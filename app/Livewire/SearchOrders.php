@@ -40,7 +40,7 @@ class SearchOrders extends Component
             }
         }
         catch(\Exception $e){
-            dd($e);
+            // dd($e);
             Session::flash('error', 'Product already in cart');
             }
         $this->dispatch('addedTocart');
