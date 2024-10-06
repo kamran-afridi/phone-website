@@ -32,12 +32,12 @@ class SearchOrders extends Component
             $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
             $this->dispatch('addedTocart');
             session()->flash('success', value: 'Product has been added to cart!');
-            if ($addItemToCart) {
-                $carts = Cart::content();
-                if ($carts->count() == 1) {
-                    return redirect('/orders/create');
-                }
-            }
+            // if ($addItemToCart) {
+            //     $carts = Cart::content();
+            //     if ($carts->count() == 1) {
+            //         return redirect('/orders/create');
+            //     }
+            // }
         }
         catch(\Exception $e){
             // dd($e);

@@ -114,7 +114,7 @@
                                         </thead>
                                         <tbody>
                                             {{-- {{dd($newcartitem)}} --}}
-                                            @if ($newcartitem)
+                                            {{-- @if ($newcartitem) --}}
                                                 @forelse ($newcartitem as $item)
                                                     <tr>
                                                         <td>
@@ -218,11 +218,11 @@
                                                         {{ __('Add Products') }}
                                                     </td>
                                                 @endforelse
-                                            @else
+                                            {{-- @else
                                                 <td colspan="6" class="text-center">
                                                     {{ __('Add Products') }}
                                                 </td>
-                                            @endif
+                                            @endif --}}
 
                                             <tr>
                                                 <td colspan="5" class="text-end">
