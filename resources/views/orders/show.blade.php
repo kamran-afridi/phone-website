@@ -93,10 +93,19 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="col">
+                            <label for="addproduct" class="form-label">
+                                {{ __('Add Product') }}
+                            </label>
+                            <a id="addproduct" class="btn btn-icon btn-outline-success" data-bs-toggle="modal" data-bs-target="#addProduct" style="width: 100%">
+                                Add Product &nbsp;&nbsp;&nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                            </a>
+                        </div>
                     </div>
-
+                    {{-- {{dd($order->customer_id)}} --}}
                     <div class="table-responsive">
-                        @livewire('OrderproductDetail', ['order' => $order])
+                        @livewire('OrderproductDetail', ['order' => $order, 'customer_id' => $order->customer_id])
 
                     </div>
                 </div>
@@ -136,6 +145,27 @@
 
         </div>
     </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addProductLabel">Add Product to the cart</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            @livewire('add-product', ['order' => $order, 'customer_id' => $order->customer_id])
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

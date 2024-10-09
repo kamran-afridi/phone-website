@@ -14,6 +14,12 @@ class OrderproductDetail extends Component
     public $OrderId = [];
     public $order;
 
+    protected $listeners = ['addedTocart' => 'refreshorderlist'];
+
+    public function refreshorderlist()
+    {
+        $this->mount();
+    }
     public function submitData($productId)
     {
         // dd($this->OrderId[$productId]);
