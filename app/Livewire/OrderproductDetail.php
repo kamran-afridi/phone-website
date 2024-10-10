@@ -18,7 +18,7 @@ class OrderproductDetail extends Component
 
     public function refreshorderlist()
     {
-        $this->mount();
+        $this->render();
     }
     public function submitData($productId)
     {
@@ -38,10 +38,10 @@ class OrderproductDetail extends Component
 			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
 		}
 // dd( secon$this->OrderId[$productId]);
-        $this->mount();
+        $this->abc();
     }
 
-    public function mount()
+    public function abc()
     {
         $this->order = Order::where('uuid', $this->order->uuid)->firstOrFail();
         $this->order->loadMissing(['customer', 'details']);
@@ -55,6 +55,7 @@ class OrderproductDetail extends Component
 
     public function render()
     {
+        $this->abc();
         return view('livewire.orderproduct-detail', ['order' => $this->order]);
     }
 }
