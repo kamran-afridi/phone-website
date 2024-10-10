@@ -60,7 +60,7 @@ class AddProduct extends Component
                 // Dispatch a Livewire event and show success message
                 $this->dispatch('addedTocart');
                 session()->flash('success', 'Product has been added to cart!');
-                dd($getorderID,OrderDetails::where('order_id', $getorderID->id)->get());
+                // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)->get());
             }
         } catch (\Exception $e) {
             // Handle any exceptions and show an error message
