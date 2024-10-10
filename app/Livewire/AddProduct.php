@@ -32,7 +32,8 @@ class AddProduct extends Component
     {
         // Retrieve the order based on the customer ID
         $getorderID = Order::where('customer_id', $this->customer_id)->firstOrFail();
-
+        // $orderID = $getorderID->id;
+        // dd($getorderID->id,$this->customer_id, $productId );
         try {
             // Create a new order detail entry
             $addItemToCart = OrderDetails::create([
@@ -59,6 +60,7 @@ class AddProduct extends Component
                 // Dispatch a Livewire event and show success message
                 $this->dispatch('addedTocart');
                 session()->flash('success', 'Product has been added to cart!');
+                dd($getorderID,OrderDetails::where('order_id', $getorderID->id)->get());
             }
         } catch (\Exception $e) {
             // Handle any exceptions and show an error message
