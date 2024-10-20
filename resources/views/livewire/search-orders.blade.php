@@ -101,7 +101,7 @@
                                             {{-- if a customer not select --}}
                                             @if (Session::get('customer_id'))
                                                 <form
-                                                    wire:submit.prevent="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ $customer_id === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')">
+                                                    wire:submit.prevent="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')">
                                                     <button type="submit" class="btn btn-icon btn-outline-primary">
                                                         <x-icon.cart />
                                                     </button>
