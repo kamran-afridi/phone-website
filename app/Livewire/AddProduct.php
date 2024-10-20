@@ -30,12 +30,13 @@ class AddProduct extends Component
 
     public function addCartItem($productId, $name, $salePrice, $sku)
     {
+        // dd($productId, $salePrice);
         // Retrieve the order based on the customer ID
-        $getorderID = Order::where('customer_id', $this->customer_id)->firstOrFail();
         // $orderID = $getorderID->id;
         // dd($getorderID->id,$this->customer_id, $productId );
         try {
             // Create a new order detail entry
+            $getorderID = Order::where('customer_id', $this->customer_id)->firstOrFail();
             $addItemToCart = OrderDetails::create([
                 'order_id' => $getorderID->id,
                 'product_id' => $productId,
@@ -43,9 +44,9 @@ class AddProduct extends Component
                 'unitcost' => $salePrice,
                 'total' => $salePrice,
             ]);
-
+            $addItemToCart->save();
             // If the item is added to the cart, update the order totals
-            if ($addItemToCart) {
+            if ($addItemToCart->save()) {
                 $AllOrderDetails = OrderDetails::where('order_id', $getorderID->id)->get();
                 $newTotalCost = $AllOrderDetails->sum('total');
                 $Duebill = $newTotalCost - $getorderID->pay;
@@ -62,6 +63,9 @@ class AddProduct extends Component
                 session()->flash('success', 'Product has been added to cart!');
                 // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)
                 // ->where('id', $AllOrderDetails->id)->get());
+            }
+            else{
+                session()->flash('error', 'Failed to add product to cart!');
             }
         } catch (\Exception $e) {
             // Handle any exceptions and show an error message
@@ -98,6 +102,7 @@ class AddProduct extends Component
         $products = Product::search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->get();
+
         // ->paginate($this->perPage);
         return view('livewire.add-product', [
             'products' => $products,
