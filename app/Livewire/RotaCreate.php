@@ -17,7 +17,13 @@ class RotaCreate extends Component
         $addresses = [],
         $postcode = [];
 
-    protected $listeners = ['cityAdded' => 'refreshCities', 'RegionAdded' => 'refreshRegions', 'addressAdded' => 'refreshAddress'];
+    protected $listeners = ['cityAdded' => 'refreshCities', 'RegionAdded' => 'refreshRegions', 'addressAdded' => 'refreshAddress', 'newDetailsadded' => 'refreshAll'];
+
+    public function refreshAll(){
+        $this->refreshCities();
+        $this->refreshRegions();
+        $this->refreshAddress();
+    }
     public function refreshCities()
     {
         $this->render();
