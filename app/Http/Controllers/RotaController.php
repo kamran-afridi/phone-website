@@ -26,4 +26,7 @@ class RotaController extends Controller
         $rota = Rota::with('User', 'Cities','Regions', 'Addresses')->find($rota_id);
         return view('rota.show',['rota'=>$rota]);
     }
+    public function addnewregion(){
+        return view('rota.addnewregion');
+    }
 }
