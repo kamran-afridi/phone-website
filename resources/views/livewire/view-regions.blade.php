@@ -1,11 +1,11 @@
 <div>
-    @if (auth()->user()->role == 'admin')
+    {{-- @if (auth()->user()->role == 'admin')
         <div class="col-md-12">
             <div class="d-flex justify-content-end mb-3">
-                <button class="btn btn-primary" onclick="window.location.href='rota/viewregions'">View Area/Regions</button>
+                <button class="btn btn-primary" onclick="window.location.href='rota/addnewregion'">View Area/Regions</button>
             </div>
         </div>
-    @endif
+    @endif --}}
     <div class="card">
         @if (session()->has('success'))
             <div class="col-md-12">
@@ -31,7 +31,7 @@
             </div>
             @if (auth()->user()->role == 'admin')
                 <div class="card-actions">
-                    <x-action.create route="{{ route('rota.create') }}" />
+                    <x-action.create route="{{ route('rota.addnewregion') }}" />
                 </div>
             @endif
         </div>
@@ -79,51 +79,33 @@
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('name')" href="#" role="button">
-                                {{ __('Name') }}
-                                @include('inclues._sort-icon', ['field' => 'name'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('email')" href="#" role="button">
-                                {{ __('Email') }}
-                                @include('inclues._sort-icon', ['field' => 'email'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('city_name')" href="#" role="button">
-                                {{ __('Assigned City') }}
+                                {{ __('City') }}
                                 @include('inclues._sort-icon', ['field' => 'city_name'])
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('region_name')" href="#" role="button">
-                                {{ __('Assigned Region') }}
+                                {{ __('Region') }}
                                 @include('inclues._sort-icon', ['field' => 'region_name'])
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('rota_address')" href="#" role="button">
-                                {{ __('Assigned Address') }}
+                                {{ __('Address') }}
                                 @include('inclues._sort-icon', ['field' => 'rota_address'])
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('rota_status')" href="#" role="button">
-                                {{ __('Status') }}
-                                @include('inclues._sort-icon', ['field' => 'rota_status'])
+                            <a wire:click.prevent="sortBy('postcode')" href="#" role="button">
+                                {{ __('Postcode') }}
+                                @include('inclues._sort-icon', ['field' => 'postcode'])
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('rotavisit_image')" href="#" role="button">
-                                {{ __('Visit Picture') }}
-                                @include('inclues._sort-icon', ['field' => 'rotavisit_image'])
-                            </a>
-                        </th>
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('date_assigned')" href="#" role="button">
-                                {{ __('Assigned Date') }}
-                                @include('inclues._sort-icon', ['field' => 'date_assigned'])
+                            <a wire:click.prevent="sortBy('created_at')" href="#" role="button">
+                                {{ __('Created At') }}
+                                @include('inclues._sort-icon', ['field' => 'created_at'])
                             </a>
                         </th>
                         <th scope="col" class="align-middle text-center">
@@ -132,51 +114,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($rota as $assignedrota)
+                    @forelse ($viewRecords as $viewrecord)
                         <tr>
                             <td class="align-middle text-center">
                                 {{ $loop->index + 1 }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->name }}
+                                {{ $viewrecord->Regions->Cities->city_name }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->email }}
+                                {{ $viewrecord->Regions->region_name }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->Cities->city_name }}
+                                {{ $viewrecord->rota_address }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->Regions->region_name }}
+                                {{ $viewrecord->postcode }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->Addresses->rota_address }}
+                                {{ $viewrecord->created_at }}
                             </td>
+                            <td>.</td>
 
-                            {{-- <td class="align-middle text-center">
-                                {{ $assignedrota->rota_status }}
-                            </td> --}}
-                            <td class="align-middle text-center">
-                                <x-status dot
-                                    color="{{ $assignedrota->rota_status === 'visited' ? 'green' : ($assignedrota->rota_status === 'not visited' ? 'orange' : '') }}"
-                                    class="text-uppercase">
-                                    {{ ucfirst($assignedrota->rota_status) }}
-                                </x-status>
-                            </td>
-                            <td class="align-middle text-center">
-                                @if ($assignedrota->rotavisit_image)
-                                    <img src="{{ Url(Storage::url($assignedrota->rotavisit_image)) }}"
-                                        alt="Visit Image" width="100" height="100">
-                                @endif
-                            </td>
-                            <td class="align-middle text-center">
-                                {{ $assignedrota->date_assigned }}
-                            </td>
 
                             {{-- <td class="align-middle text-center">
                                 {{ $assignedrota->created_at->diffForHumans() }}
                             </td> --}}
-                            <td class="align-middle text-center">
+                            {{-- <td class="align-middle text-center">
                                 <x-button.show class="btn-icon"
                                     route="{{ route('rota.show', $assignedrota->rota_id) }}" />
                                 @if (auth()->user()->role == 'admin')
@@ -185,7 +149,6 @@
                                 @else
                                     <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal{{ $assignedrota->rota_id }}">Edit
-                                        {{-- <img src="{{ asset('assets/img/bin.png') }}" alt="" style="height: 20px"> --}}
                                     </button>
 
                                     <!-- Modal -->
@@ -208,8 +171,6 @@
                                         </div>
                                     </div>
                                 @endif
-                                {{-- <x-button.delete class="btn-icon"type='submit' route="{{ route('customers.destroy', $assignedrota->rota_id) }}"
-                                    onclick="return confirm('Are you sure to remove {{ $assignedrota->User->name }} ?')" /> --}}
                                 @if (auth()->user()->role == 'admin')
                                     <button class="btn btn-outline-danger"
                                         wire:click="deleteRota({{ $assignedrota->rota_id }})"
@@ -218,7 +179,7 @@
                                             style="height: 20px">
                                     </button>
                                 @endif
-                            </td>
+                            </td> --}}
                         </tr>
 
                     @empty
@@ -234,12 +195,12 @@
 
         <div class="card-footer d-flex align-items-center">
             <p class="m-0 text-secondary">
-                Showing <span>{{ $rota->firstItem() }}</span> to <span>{{ $rota->lastItem() }}</span> of
-                <span>{{ $rota->total() }}</span> entries
+                Showing <span>{{ $viewRecords->firstItem() }}</span> to <span>{{ $viewRecords->lastItem() }}</span> of
+                <span>{{ $viewRecords->total() }}</span> entries
             </p>
 
             <ul class="pagination m-0 ms-auto">
-                {{ $rota->links() }}
+                {{ $viewRecords->links() }}
             </ul>
         </div>
 

@@ -192,3 +192,7 @@ Route::get('/rota/create', [RotaController::class, 'rotaCreate'])->name('rota.cr
 Route::get('/rota/edit/{rota_id}', [RotaController::class, 'rotaEdit'])->name('rota.edit');
 Route::get('/rota/show/{rota_id}', [RotaController::class, 'rotaShow'])->name('rota.show');
 Route::get('/rota/addnewregion', [RotaController::class, 'addnewregion'])->name('rota.addnewregion');
+// Route::match(['GET', 'POST'], '/rota/viewregions', [RotaController::class, 'viewRegions'])->name('rota.viewregions');
+Route::any('/rota/viewregions', [RotaController::class, 'viewRegions'])->name('rota.viewregions');
+
+
