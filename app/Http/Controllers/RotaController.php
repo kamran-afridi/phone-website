@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rota;
+use App\Models\Addresses;
 class RotaController extends Controller
 {
     public function index(){
@@ -28,5 +29,9 @@ class RotaController extends Controller
     }
     public function addnewregion(){
         return view('rota.addnewregion');
+    }
+    public function viewRegions(){
+        $viewRecords = Addresses::with('Regions', 'Regions.Cities')->get();
+        return view('rota.viewregions', ['viewRecords'=> $viewRecords]);
     }
 }
