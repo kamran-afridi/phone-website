@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class ViewRegions extends Component
 {
     use WithPagination;
-    public $perPage = 15;
+    public $perPage = 10;
 
     public $search = '';
     public $sortField = 'rota_address';

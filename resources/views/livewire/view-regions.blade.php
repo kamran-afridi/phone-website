@@ -43,10 +43,12 @@
                     <div class="mx-2 d-inline-block">
                         <select wire:model.live="perPage" class="form-select form-select-sm"
                             aria-label="result per page">
-                            <option value="5">5</option>
                             <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="25">25</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="75">75</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
                         </select>
                     </div>
                     entries
