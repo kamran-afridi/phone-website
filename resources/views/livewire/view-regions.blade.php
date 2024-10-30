@@ -26,7 +26,7 @@
 
             <div>
                 <h3 class="card-title">
-                    {{ __('Rota') }}
+                    {{ __('Address') }}
                 </h3>
             </div>
             @if (auth()->user()->role == 'admin')
@@ -136,7 +136,49 @@
                             <td class="align-middle text-center">
                                 {{ $viewrecord->created_at }}
                             </td>
-                            <td>.</td>
+                            <td class="align-middle text-center">
+
+                                    <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{ $viewrecord->address_id }}">Edit
+                                        {{-- <img src="{{ asset('assets/img/bin.png') }}" alt="" style="height: 20px"> --}}
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" wire:loading.attr="disabled"
+                                        id="exampleModal{{ $viewrecord->address_id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{-- @livewire('usertablestatus', ['thisaddress_id' => $viewrecord->address_id], key($viewrecord->address_id)) --}}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {{-- <x-button.delete class="btn-icon"type='submit' route="{{ route('customers.destroy', $assignedrota->rota_id) }}"
+                                    onclick="return confirm('Are you sure to remove {{ $assignedrota->User->name }} ?')" /> --}}
+                                @if (auth()->user()->role == 'admin')
+                                    <button class="btn btn-outline-danger"
+                                        wire:click="deleteregion({{ $viewrecord->address_id }})">
+                                        <img src="{{ asset('assets/img/bin.png') }}" alt=""
+                                            style="height: 20px">
+                                    </button>
+                                    {{-- <button class="btn btn-outline-danger"
+                                        wire:click="deleteregion({{ $viewrecord->address_id }})"
+                                        onclick="return confirm('Are you sure to remove address against {{ $viewrecord->postcode }} postcode?')">
+                                        <img src="{{ asset('assets/img/bin.png') }}" alt=""
+                                            style="height: 20px">
+                                    </button> --}}
+                                @endif
+                            </td>
 
 
                             {{-- <td class="align-middle text-center">
