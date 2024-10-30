@@ -2,7 +2,8 @@
     @if (auth()->user()->role == 'admin')
         <div class="col-md-12">
             <div class="d-flex justify-content-end mb-3">
-                <button class="btn btn-primary" onclick="window.location.href='rota/viewregions'">View Area/Regions</button>
+                <button class="btn btn-primary" onclick="window.location.href='rota/viewregions'">View
+                    Area/Regions</button>
             </div>
         </div>
     @endif
@@ -150,7 +151,11 @@
                                 {{ $assignedrota->Regions->region_name }}
                             </td>
                             <td class="align-middle text-center">
-                                {{ $assignedrota->Addresses->rota_address }}
+                                @if ($assignedrota->Addresses && $assignedrota->Addresses->rota_address)
+                                    {{ $assignedrota->Addresses->rota_address }}
+                                @else
+                                    <span class="text-danger">No Address</span>
+                                @endif
                             </td>
 
                             {{-- <td class="align-middle text-center">

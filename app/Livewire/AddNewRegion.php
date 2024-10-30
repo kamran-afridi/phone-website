@@ -43,12 +43,10 @@ class AddNewRegion extends Component
         ]);
 
         // Check if address already exists
-        if (Addresses::where('region_id', $this->regionSelected)
-            ->where('rota_address', $this->newaddress)
-            ->where('postcode', $this->newpostcode)
+        if (Addresses::where('postcode', $this->newpostcode)
             ->exists())
         {
-            session()->flash('erralreadyexist', 'Address already exists!');
+            session()->flash('erralreadyexist', 'Postcode already exists!');
         } else {
             try {
                 // Insert new address
@@ -64,7 +62,8 @@ class AddNewRegion extends Component
                     $this->dispatch('newDetailsadded');  // Proper dispatch
                 }
             } catch (\Exception $e) {
-                session()->flash('erralreadyexist', $e->getMessage());  // Display error message
+                session()->flash('erralreadyexist', 'something went wrong');  // Display error message
+                // session()->flash('erralreadyexist', $e->getMessage());  // Display error message
             }
         }
     }
