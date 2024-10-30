@@ -42,7 +42,8 @@ class ViewRegions extends Component
                 $query
                     ->where('cities.city_name', 'like', '%' . $this->search . '%') // Searching in cities' city_name
                     ->orWhere('regions.region_name', 'like', '%' . $this->search . '%') // Searching in regions' region_name
-                    ->orWhere('addresses.rota_address', 'like', '%' . $this->search . '%'); // Searching in addresses' rota_address
+                    ->orWhere('addresses.rota_address', 'like', '%' . $this->search . '%') // Searching in addresses' rota_address
+                    ->orWhere('addresses.postcode', 'like', '%' . $this->search . '%'); // Searching in addresses' postcode
             })
             ->orderBy($this->sortField === 'city_name' ? 'cities.city_name' : ($this->sortField === 'region_name' ? 'regions.region_name' : 'addresses.' . $this->sortField), $this->sortAsc === 'asc' ? 'asc' : 'desc')
             ->select('addresses.*') // Selecting addresses fields
