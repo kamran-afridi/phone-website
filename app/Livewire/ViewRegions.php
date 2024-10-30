@@ -31,6 +31,16 @@ class ViewRegions extends Component
     {
         $this->resetPage(); // Reset to the first page when search query changes
     }
+    public function deleteregion($addID){
+        $findaddress = Addresses::find($addID);
+
+        if ($findaddress) {
+            $findaddress->delete();
+            session()->flash('success', 'Address deleted successfully!');
+        } else {
+            session()->flash('error', 'Address not found!');
+        }
+    }
     public function render()
     {
         // Fetching the records with sorting and search functionality
