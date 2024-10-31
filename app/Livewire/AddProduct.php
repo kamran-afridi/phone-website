@@ -22,21 +22,22 @@ class AddProduct extends Component
     public $sortField = 'products.id';
 
     public $customer_id;
+    public $order;
     public $sortAsc = 'desc';
 
     //add to Cart
     public $productId, $productName, $productsalePrice, $productSKU;
-
 
     public function addCartItem($productId, $name, $salePrice, $sku)
     {
         // dd($productId, $salePrice);
         // Retrieve the order based on the customer ID
         // $orderID = $getorderID->id;
-        // dd($getorderID->id,$this->customer_id, $productId );
         try {
             // Create a new order detail entry
-            $getorderID = Order::where('customer_id', $this->customer_id)->firstOrFail();
+            // dd($this->order);
+            $getorderID = Order::where('id', $this->order->id)->firstOrFail();
+            // dd($getorderID->id,$this->customer_id, $productId );
             $addItemToCart = OrderDetails::create([
                 'order_id' => $getorderID->id,
                 'product_id' => $productId,
@@ -44,9 +45,10 @@ class AddProduct extends Component
                 'unitcost' => $salePrice,
                 'total' => $salePrice,
             ]);
-            $addItemToCart->save();
+            $addItemSaved = $addItemToCart->save();
+            // dd($addItemToCart);
             // If the item is added to the cart, update the order totals
-            if ($addItemToCart->save()) {
+            if ($addItemSaved) {
                 $AllOrderDetails = OrderDetails::where('order_id', $getorderID->id)->get();
                 $newTotalCost = $AllOrderDetails->sum('total');
                 $Duebill = $newTotalCost - $getorderID->pay;
@@ -57,14 +59,17 @@ class AddProduct extends Component
                     'sub_total' => $newTotalCost,
                     'due' => $Duebill,
                 ]);
+                $getOrderSaved = $getorderID->save();
+                // dd($getorderID);
 
-                // Dispatch a Livewire event and show success message
-                $this->dispatch('addedTocart');
-                session()->flash('success', 'Product has been added to cart!');
-                // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)
-                // ->where('id', $AllOrderDetails->id)->get());
-            }
-            else{
+                if ($addItemSaved && $getOrderSaved) {
+                    // Dispatch a Livewire event and show success message
+                    $this->dispatch('addedTocart');
+                    session()->flash('success', 'Product has been added to cart!');
+                    // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)
+                    // ->where('id', $AllOrderDetails->id)->get());
+                }
+            } else {
                 session()->flash('error', 'Failed to add product to cart!');
             }
         } catch (\Exception $e) {
@@ -109,5 +114,4 @@ class AddProduct extends Component
             'customer_id' => $this->customer_id,
         ]);
     }
-
 }

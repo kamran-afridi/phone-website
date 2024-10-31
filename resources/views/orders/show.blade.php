@@ -102,6 +102,7 @@
                         </div>
                     </div>
                     {{-- {{dd($order->customer_id)}} --}}
+                    {{-- {{dd($order->id)}} --}}
                     <div class="table-responsive">
                         @livewire('OrderproductDetail', ['order' => $order, 'customer_id' => $order->customer_id])
 
