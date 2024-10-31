@@ -34,4 +34,8 @@ class RotaController extends Controller
         $viewRecords = Addresses::with('Regions', 'Regions.Cities')->get();
         return view('rota.viewregions', ['viewRecords'=> $viewRecords]);
     }
+    public function editaddress($address_id){
+        $thisaddress = Addresses::find($address_id);
+        return view('rota.editaddress', ['thisaddress'=> $thisaddress]);
+    }
 }

@@ -1,12 +1,12 @@
 @extends('layouts.tabler')
 
 @section('content')
-<style>
-    td{
-        padding-top: 25px;
-        padding-bottom: 25px;
-    }
-</style>
+    <style>
+        td {
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+    </style>
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center mb-3">
@@ -56,11 +56,23 @@
 
                                         <tr>
                                             <td>Assigned Address</td>
-                                            <td>{{ $rota->Addresses->rota_address }}</td>
+                                            <td>
+                                                @if ($rota->Addresses && $rota->Addresses->rota_address)
+                                                    {{ $rota->Addresses->rota_address }}
+                                                @else
+                                                    <span class="text-danger">No Address</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Assigned PostCode</td>
-                                            <td>{{ $rota->Addresses->postcode }}</td>
+                                            <td>
+                                                @if ($rota->Addresses && $rota->Addresses->postcode)
+                                                    {{ $rota->Addresses->postcode }}
+                                                @else
+                                                    <span class="text-danger">No Postcode</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Rota Status</td>
@@ -71,7 +83,7 @@
                                                     class="text-uppercase">
                                                     {{ ucfirst($rota->rota_status) }}
                                                 </x-status>
-                                                </td>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Assigned Date</td>

@@ -138,10 +138,12 @@
                             </td>
                             <td class="align-middle text-center">
 
-                                    <button class="btn btn-outline-danger" data-bs-toggle="modal"
+                                <x-button.edit class="btn-icon"
+                                        route="{{ route('rota.editaddress', $viewrecord->address_id) }}" />
+
+                                    {{-- <button class="btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal{{ $viewrecord->address_id }}">Edit
-                                        {{-- <img src="{{ asset('assets/img/bin.png') }}" alt="" style="height: 20px"> --}}
-                                    </button>
+                                    </button> --}}
 
                                     <!-- Modal -->
                                     <div class="modal fade" wire:loading.attr="disabled"
