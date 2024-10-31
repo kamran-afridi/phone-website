@@ -194,5 +194,6 @@ Route::get('/rota/show/{rota_id}', [RotaController::class, 'rotaShow'])->name('r
 Route::get('/rota/addnewregion', [RotaController::class, 'addnewregion'])->name('rota.addnewregion');
 // Route::match(['GET', 'POST'], '/rota/viewregions', [RotaController::class, 'viewRegions'])->name('rota.viewregions');
 Route::any('/rota/viewregions', [RotaController::class, 'viewRegions'])->name('rota.viewregions');
+Route::get('/rota/editaddress/{address_id}', [RotaController::class, 'editaddress'])->name('rota.editaddress');
 
 
