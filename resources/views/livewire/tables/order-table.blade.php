@@ -150,9 +150,15 @@
                         <td class="align-middle text-center">
                             {{ Number::currency($order->pay, 'GBP') }}
                         </td>
-                        <td class="align-middle text-center">
-                            {{ $order->user->name }}
-                        </td>
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                            <td class="align-middle text-center">
+                                {{ $order->user->name }}
+                            </td>
+                        @else
+                            <td class="align-middle text-center">
+                                {{ $order->note }}
+                            </td>
+                        @endif
                         <td class="align-middle text-center">
                             <x-status dot
                                 color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
