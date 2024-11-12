@@ -127,6 +127,7 @@
                 </tr>
             </thead>
             <tbody>
+                @dd($orders);
                 @forelse ($orders as $order)
                     <tr>
                         <td class="align-middle text-center">
