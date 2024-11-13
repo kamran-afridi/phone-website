@@ -86,6 +86,15 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>Visit Picture</td>
+                                            <td>
+                                                @if ($rota->rotavisit_image)
+                                                    <img src="{{ Url(Storage::url($rota->rotavisit_image)) }}"
+                                                        alt="Visit Image" width="100" height="100">
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Assigned Date</td>
                                             <td>{{ $rota->date_assigned }}</td>
                                         </tr>
