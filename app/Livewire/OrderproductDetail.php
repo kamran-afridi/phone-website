@@ -13,6 +13,8 @@ class OrderproductDetail extends Component
     public $productprice = [];
     public $OrderId = [];
     public $order;
+    public $paytoorder_id;
+    public $payto;
 
     protected $listeners = ['addedTocart' => 'refreshorderlist'];
 
@@ -22,26 +24,25 @@ class OrderproductDetail extends Component
     }
     public function submitData($productId)
     {
-        // dd($this->OrderId[$productId]);
         $newOrderDetailsTotal = $this->productquantity[$productId] * $this->productprice[$productId];
-        // dd($this->productquantity[$productId]);
-		$Order = Order::where('id', $this->OrderId[$productId])->firstOrFail();
+
+        $Order = Order::where('id', $this->OrderId[$productId])->firstOrFail();
         $OrderDetails = OrderDetails::where('id', $productId)->update([
             'quantity' => $this->productquantity[$productId],
             'unitcost' => $this->productprice[$productId],
             'total' => $newOrderDetailsTotal,
         ]);
         if ($OrderDetails) {
-			$AllOrderDetails = OrderDetails::where('order_id', $this->OrderId[$productId])->get();
-			$newTotalCost = $AllOrderDetails->sum('total');
-			$Duebill = $newTotalCost - $Order->pay;
-			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
-		}
-// dd( secon$this->OrderId[$productId]);
-        $this->abc();
+            $AllOrderDetails = OrderDetails::where('order_id', $this->OrderId[$productId])->get();
+            $newTotalCost = $AllOrderDetails->sum('total');
+            $Duebill = $newTotalCost - $Order->pay;
+            $Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
+        }
+
+        $this->updatingOrder();
     }
 
-    public function abc()
+    public function updatingOrder()
     {
         $this->order = Order::where('uuid', $this->order->uuid)->firstOrFail();
         $this->order->loadMissing(['customer', 'details']);
@@ -52,10 +53,26 @@ class OrderproductDetail extends Component
             $this->productprice[$detail->id] = $detail->unitcost;
         }
     }
+    public function savepayto($uuid)
+    {
+        $order = Order::where('uuid', $uuid)->firstOrFail();
+
+        try {
+            // Update the payment field in the order
+            $order->payto = $this->payto;
+            $order->save();
+
+            // Flash success message
+            session()->flash('success', 'Paid to '.$this->payto.' has been added to the order');
+        } catch (\Exception $e) {
+            // Flash error message in case of failure
+            session()->flash('error', 'Faild to add paid to, try later! error: ' . $e->getMessage());
+        }
+    }
 
     public function render()
     {
-        $this->abc();
+        $this->updatingOrder();
         return view('livewire.orderproduct-detail', ['order' => $this->order]);
     }
 }

@@ -9,8 +9,8 @@
     @endif
     <div class="card">
         @if (session()->has('success'))
-            <div class="col-md-12">
-                <div class="alert alert-danger">
+            <div class="col-md-12 mb-1">
+                <div class="alert alert-success alert-dismissible" role="alert">
                     {{ session('success') }}
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
         @if (session()->has('error'))
             <div class="col-md-12">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible" role="alert">
                     {{ session('error') }}
                 </div>
             </div>
@@ -103,7 +103,7 @@
                                 @include('inclues._sort-icon', ['field' => 'region_name'])
                             </a>
                         </th>
-                        <th scope="col" class="align-middle text-center">
+                        {{-- <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('rota_address')" href="#" role="button">
                                 {{ __('Assigned Address') }}
                                 @include('inclues._sort-icon', ['field' => 'rota_address'])
@@ -120,7 +120,7 @@
                                 {{ __('Visit Picture') }}
                                 @include('inclues._sort-icon', ['field' => 'rotavisit_image'])
                             </a>
-                        </th>
+                        </th> --}}
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('date_assigned')" href="#" role="button">
                                 {{ __('Assigned Date') }}
@@ -150,18 +150,14 @@
                             <td class="align-middle text-center">
                                 {{ $assignedrota->Regions->region_name }}
                             </td>
-                            <td class="align-middle text-center">
+                            {{-- <td class="align-middle text-center">
                                 @if ($assignedrota->Addresses && $assignedrota->Addresses->rota_address)
                                     {{ $assignedrota->Addresses->rota_address }}
                                 @else
                                     <span class="text-danger">No Address</span>
                                 @endif
-                            </td>
-
-                            {{-- <td class="align-middle text-center">
-                                {{ $assignedrota->rota_status }}
                             </td> --}}
-                            <td class="align-middle text-center">
+                            {{-- <td class="align-middle text-center">
                                 <x-status dot
                                     color="{{ $assignedrota->rota_status === 'visited' ? 'green' : ($assignedrota->rota_status === 'not visited' ? 'orange' : '') }}"
                                     class="text-uppercase">
@@ -173,7 +169,7 @@
                                     <img src="{{ Url(Storage::url($assignedrota->rotavisit_image)) }}"
                                         alt="Visit Image" width="100" height="100">
                                 @endif
-                            </td>
+                            </td> --}}
                             <td class="align-middle text-center">
                                 {{ $assignedrota->date_assigned }}
                             </td>
