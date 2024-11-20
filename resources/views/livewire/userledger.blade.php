@@ -2,7 +2,7 @@
     <div class="card-header">
         <div>
             <h3 class="card-title">
-                {{ __('Orders') }}
+                {{ __('User Ledger') }}
             </h3>
         </div>
         @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
@@ -63,6 +63,28 @@
         </div>
     </div>
 
+    <!-- Show/Hide Columns Buttons -->
+    <div class="card-body border-bottom py-3">
+        <!-- Responsive Button Group -->
+        <div class="btn-group d-flex flex-wrap" role="group">
+            <button wire:click="toggleColumn('payment')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                Payment
+            </button>
+            <button wire:click="toggleColumn('payto')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                Pay To
+            </button>
+            <button wire:click="toggleColumn('user')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                User
+            </button>
+            <button wire:click="toggleColumn('status')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                Status
+            </button>
+            <button wire:click="toggleColumn('actions')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                Actions
+            </button>
+        </div>
+    </div>
+
     <x-spinner.loading-spinner />
 
     <div class="table-responsive">
@@ -79,7 +101,7 @@
                         </a>
                     </th> --}}
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('user_id')" href="#" role="button">
+                        <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
                             {{ __('Customer') }}
                             @include('inclues._sort-icon', ['field' => 'customer_id'])
                         </a>
@@ -90,12 +112,14 @@
                             @include('inclues._sort-icon', ['field' => 'order_date'])
                         </a>
                     </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('payment_type')" href="#" role="button">
-                            {{ __('Payment') }}
-                            @include('inclues._sort-icon', ['field' => 'payment_type'])
-                        </a>
-                    </th>
+                    @if ($columns['payment'])
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('payment_type')" href="#" role="button">
+                                {{ __('Payment') }}
+                                @include('inclues._sort-icon', ['field' => 'payment_type'])
+                            </a>
+                        </th>
+                    @endif
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('total')" href="#" role="button">
                             {{ __('Total') }}
@@ -108,27 +132,35 @@
                             @include('inclues._sort-icon', ['field' => 'pay'])
                         </a>
                     </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('payto')" href="#" role="button">
-                            {{ __('Pay To') }}
-                            @include('inclues._sort-icon', ['field' => 'payto'])
-                        </a>
-                    </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('user')" href="#" role="button">
-                            {{ __('User') }}
-                            @include('inclues._sort-icon', ['field' => 'user'])
-                        </a>
-                    </th>
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
-                            {{ __('Status') }}
-                            @include('inclues._sort-icon', ['field' => 'order_status'])
-                        </a>
-                    </th>
-                    <th scope="col" class="align-middle text-center">
-                        {{ __('Action') }}
-                    </th>
+                    @if ($columns['payto'])
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('payto')" href="#" role="button">
+                                {{ __('Pay To') }}
+                                @include('inclues._sort-icon', ['field' => 'payto'])
+                            </a>
+                        </th>
+                    @endif
+                    @if ($columns['user'])
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('user')" href="#" role="button">
+                                {{ __('User') }}
+                                @include('inclues._sort-icon', ['field' => 'user'])
+                            </a>
+                        </th>
+                    @endif
+                    @if ($columns['status'])
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
+                                {{ __('Status') }}
+                                @include('inclues._sort-icon', ['field' => 'order_status'])
+                            </a>
+                        </th>
+                    @endif
+                    @if ($columns['actions'])
+                        <th scope="col" class="align-middle text-center">
+                            {{ __('Action') }}
+                        </th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -146,47 +178,57 @@
                         <td class="align-middle text-center">
                             {{ $order->order_date->format('d-m-Y') }}
                         </td>
-                        <td class="align-middle text-center">
-                            {{ $order->payment_type }}
-                        </td>
+                        @if ($columns['payment'])
+                            <td class="align-middle text-center">
+                                {{ $order->payment_type }}
+                            </td>
+                        @endif
                         <td class="align-middle text-center">
                             {{ Number::currency($order->total, 'GBP') }}
                         </td>
                         <td class="align-middle text-center">
                             {{ Number::currency($order->pay, 'GBP') }}
                         </td>
-                        <td class="align-middle text-center">
-                            {{ $order->payto }}
-                        </td>
-                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                        @if ($columns['payto'])
                             <td class="align-middle text-center">
-                                {{ $order->user->name }}
-                            </td>
-                        @else
-                            <td class="align-middle text-center">
-                                {{ $order->note }}
+                                {{ $order->payto }}
                             </td>
                         @endif
-                        <td class="align-middle text-center">
-                            <x-status dot
-                                color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
-                                class="text-uppercase">
-                                {{ $order->order_status->label() }}
-                            </x-status>
-                        </td>
-                        <td class="align-middle text-center">
-                            <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
-                            <x-button.print class="btn-icon"
-                                route="{{ route('order.downloadInvoice', $order->uuid) }}" />
+                        @if ($columns['user'])
                             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-                                <x-button.admin_print class="btn-icon"
-                                    route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
+                                <td class="align-middle text-center">
+                                    {{ $order->user->name }}
+                                </td>
+                            @else
+                                <td class="align-middle text-center">
+                                    {{ $order->note }}
+                                </td>
                             @endif
-                            @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
-                                <x-button.delete class="btn-icon" route="{{ route('orders.cancel', $order) }}"
-                                    onclick="return confirm('Are you sure to cancel invoice no. {{ $order->invoice_no }} ?')" />
-                            @endif
-                        </td>
+                        @endif
+                        @if ($columns['status'])
+                            <td class="align-middle text-center">
+                                <x-status dot
+                                    color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
+                                    class="text-uppercase">
+                                    {{ $order->order_status->label() }}
+                                </x-status>
+                            </td>
+                        @endif
+                        @if ($columns['actions'])
+                            <td class="align-middle text-center">
+                                <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
+                                <x-button.print class="btn-icon"
+                                    route="{{ route('order.downloadInvoice', $order->uuid) }}" />
+                                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                                    <x-button.admin_print class="btn-icon"
+                                        route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
+                                @endif
+                                @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
+                                    <x-button.delete class="btn-icon" route="{{ route('orders.cancel', $order) }}"
+                                        onclick="return confirm('Are you sure to cancel invoice no. {{ $order->invoice_no }} ?')" />
+                                @endif
+                            </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>
@@ -195,7 +237,7 @@
                         </td>
                     </tr>
                 @endforelse
-                {{-- @if ($customerid) --}}
+                @if ($customerid)
                     <tr>
                         <td colspan="8" class="text-end">
                             Payed amount
@@ -211,7 +253,7 @@
                         <td colspan="8" class="text-end">Total</td>
                         <td class="text-center">{{ number_format($orders->sum('total'), 2) }}</td>
                     </tr>
-                {{-- @endif --}}
+                @endif
             </tbody>
         </table>
     </div>
