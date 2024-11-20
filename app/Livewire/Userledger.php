@@ -27,7 +27,7 @@ class Userledger extends Component
     public $columns = [
         'payment' => true,
         'payto' => true,
-        'user' => true,
+        'customer' => true,
         'status' => true,
         'actions' => true,
     ];
