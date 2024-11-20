@@ -31,6 +31,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RotaController;
 use App\Http\Controllers\AddNewRegion;
 use App\Http\Controllers\CustomerLedger;
+use App\Http\Controllers\UserLedger;
 use App\Livewire\LocationComponent;
 // use App\Livewire\CreateNewOrder;
 use Illuminate\Support\Facades\Auth;
@@ -198,6 +199,7 @@ Route::any('/rota/viewregions', [RotaController::class, 'viewRegions'])->name('r
 Route::get('/rota/editaddress/{address_id}', [RotaController::class, 'editaddress'])->name('rota.editaddress');
 
 // Customer Ledger
-Route::get('/customer-ledger', [CustomerLedger::class, 'index'])->name('customerledger.index');
+Route::get('/customer-ledger', [CustomerLedger::class, 'index'])->name('ledger.customer');
+Route::get('/user-ledger', [UserLedger::class, 'index'])->name('ledger.userledger');
 
 

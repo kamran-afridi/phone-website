@@ -709,8 +709,13 @@
                                                     {{ __('Customers') }}
                                                 </a>
                                                 @if (auth()->user()->role == 'admin')
-                                                    <a class="dropdown-item" href="{{ route('customerledger.index') }}">
+                                                    <a class="dropdown-item" href="{{ route('ledger.customer') }}">
                                                         {{ __('Customer Ledger') }}
+                                                    </a>
+                                                @endif
+                                                @if (auth()->user()->role == 'admin')
+                                                    <a class="dropdown-item" href="{{ route('ledger.userledger') }}">
+                                                        {{ __('User Ledger') }}
                                                     </a>
                                                 @endif
                                                 @if (auth()->user()->role == 'admin')
