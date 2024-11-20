@@ -95,6 +95,7 @@ class Customerledger extends Component
             'orders' => $orders,
             'users' => $users,
             'customers' => $customers,
+            'ordersQuery'=> $ordersQuery,
         ]);
     }
 }
