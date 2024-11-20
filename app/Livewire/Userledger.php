@@ -9,7 +9,7 @@ use App\Models\User;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
-class Customerledger extends Component
+class Userledger extends Component
 {
     use WithPagination;
 
@@ -53,14 +53,14 @@ class Customerledger extends Component
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
             // Filter by user ID if provided
-            // if ($this->userid) {
-            //     $ordersQuery->where('user_id', $this->userid);
-            // }
+            if ($this->userid) {
+                $ordersQuery->where('user_id', $this->userid);
+            }
 
             // Filter by customer ID if provided
-            if ($this->customerid) {
-                $ordersQuery->where('customer_id', $this->customerid);
-            }
+            // if ($this->customerid) {
+            //     $ordersQuery->where('customer_id', $this->customerid);
+            // }
 
             // Apply date range filter if both dates are selected
             if ($this->datefrom && $this->dateto) {
@@ -80,10 +80,11 @@ class Customerledger extends Component
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
 
-        return view('livewire.customerledger', [
+        return view('livewire.userledger', [
             'orders' => $orders,
             'users' => $users,
             'customers' => $customers,
         ]);
     }
 }
+

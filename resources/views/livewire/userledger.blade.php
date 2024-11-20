@@ -8,20 +8,20 @@
         @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
             <div class="m-auto d-flex align-items-center">
                 <!-- User Selection -->
-                {{-- <select class="form-select form-control-solid mr-2" wire:model.change="userid">
+                <select class="form-select form-control-solid mr-2" wire:model.change="userid">
                     <option value="" selected disabled>Select a user:</option>
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
-                </select> --}}
+                </select>
 
                 <!-- Customer Selection -->
-                <select class="form-select form-control-solid mr-2" wire:model.change="customerid">
+                {{-- <select class="form-select form-control-solid mr-2" wire:model.change="customerid">
                     <option value="" selected disabled>Select a customer:</option>
                     @foreach ($customers as $customer)
                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                     @endforeach
-                </select>
+                </select> --}}
 
                 <!-- Date Range Inputs -->
                 <label class="mx-2">Date From</label>
