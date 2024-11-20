@@ -67,15 +67,18 @@
     <div class="card-body border-bottom py-3">
         <!-- Responsive Button Group -->
         <div class="btn-group d-flex flex-wrap" role="group">
+            <button wire:click="toggleColumn('customer')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                Customer
+            </button>
             <button wire:click="toggleColumn('payment')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Payment
             </button>
             <button wire:click="toggleColumn('payto')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Pay To
             </button>
-            <button wire:click="toggleColumn('user')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+            {{-- <button wire:click="toggleColumn('user')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 User
-            </button>
+            </button> --}}
             <button wire:click="toggleColumn('status')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Status
             </button>
@@ -100,12 +103,14 @@
                             @include('inclues._sort-icon', ['field' => 'invoice_no'])
                         </a>
                     </th> --}}
+                    @if ($columns['customer'])
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
                             {{ __('Customer') }}
                             @include('inclues._sort-icon', ['field' => 'customer_id'])
                         </a>
                     </th>
+                    @endif
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('order_date')" href="#" role="button">
                             {{ __('Date') }}
@@ -140,14 +145,14 @@
                             </a>
                         </th>
                     @endif
-                    @if ($columns['user'])
+                    {{-- @if ($columns['user']) --}}
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('user')" href="#" role="button">
                                 {{ __('User') }}
                                 @include('inclues._sort-icon', ['field' => 'user'])
                             </a>
                         </th>
-                    @endif
+                    {{-- @endif --}}
                     @if ($columns['status'])
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('order_status')" href="#" role="button">
@@ -172,9 +177,11 @@
                         {{-- <td class="align-middle text-center">
                             {{ $order->invoice_no }}
                         </td> --}}
+                        @if ($columns['customer'])
                         <td class="align-middle text-center">
                             {{ $order->customer->name }}
                         </td>
+                        @endif
                         <td class="align-middle text-center">
                             {{ $order->order_date->format('d-m-Y') }}
                         </td>
@@ -194,7 +201,7 @@
                                 {{ $order->payto }}
                             </td>
                         @endif
-                        @if ($columns['user'])
+                        {{-- @if ($columns['user']) --}}
                             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
                                 <td class="align-middle text-center">
                                     {{ $order->user->name }}
@@ -204,7 +211,7 @@
                                     {{ $order->note }}
                                 </td>
                             @endif
-                        @endif
+                        {{-- @endif --}}
                         @if ($columns['status'])
                             <td class="align-middle text-center">
                                 <x-status dot
@@ -237,7 +244,7 @@
                         </td>
                     </tr>
                 @endforelse
-                @if ($customerid)
+                {{-- @if ($customerid) --}}
                     <tr>
                         <td colspan="8" class="text-end">
                             Payed amount
@@ -253,7 +260,7 @@
                         <td colspan="8" class="text-end">Total</td>
                         <td class="text-center">{{ number_format($orders->sum('total'), 2) }}</td>
                     </tr>
-                @endif
+                {{-- @endif --}}
             </tbody>
         </table>
     </div>
