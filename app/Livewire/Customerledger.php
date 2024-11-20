@@ -24,7 +24,18 @@ class Customerledger extends Component
 
     public $sortField = 'id';
     public $sortAsc = false;
+    public $columns = [
+        'payment' => true,
+        'payto' => true,
+        'user' => true,
+        'status' => true,
+        'actions' => true,
+    ];
 
+	public function toggleColumn($column)
+	{
+		$this->columns[$column] = !$this->columns[$column];
+	}
     public function mount()
     {
         $this->userid = session('UserId', '');
