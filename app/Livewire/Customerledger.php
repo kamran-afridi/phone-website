@@ -19,6 +19,8 @@ class Customerledger extends Component
     public $search = '';
     public $userid = '';
     public $customerid = '';
+    public $paymentStatus = '';
+    public $paymentMethod = '';
     public $datefrom = null;
     public $dateto = null;
 
@@ -72,7 +74,12 @@ class Customerledger extends Component
             if ($this->customerid) {
                 $ordersQuery->where('customer_id', $this->customerid);
             }
-
+            if ($this->paymentStatus){
+                $ordersQuery->where('order_status', $this->paymentStatus);
+            }
+            if ($this->paymentMethod){
+                $ordersQuery->where('payment_type', $this->paymentMethod);
+            }
             // Apply date range filter if both dates are selected
             if ($this->datefrom && $this->dateto) {
                 $ordersQuery->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto]);
