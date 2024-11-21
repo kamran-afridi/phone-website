@@ -23,6 +23,22 @@
                     @endforeach
                 </select> --}}
 
+                {{-- Status --}}
+                <select class="form-select form-control-solid mr-2" wire:model.change="paymentStatus">
+                    <option value="" selected disabled>Select Payment Status:</option>
+                    <option value="pending">Pending</option>
+                    <option value="1">Complete</option>
+                    <option value="2">Cancel</option>
+                </select>
+
+                {{-- Payment Method --}}
+                <select class="form-select form-control-solid mr-2" wire:model.change="paymentMethod">
+                    <option value="" selected disabled>Select Payment Method:</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Credit">Credit</option>
+                    <option value="Bank">Bank</option>
+                </select>
+
                 <!-- Date Range Inputs -->
                 <label class="mx-2">Date From</label>
                 <input type="date" class="form-select form-control-solid mr-2" wire:model.change="datefrom">
@@ -33,10 +49,10 @@
         @endif
 
 
-        <div class="card-actions d-flex">
+        {{-- <div class="card-actions d-flex">
 
             <x-action.create route="{{ route('orders.create') }}" />
-        </div>
+        </div> --}}
     </div>
 
     <div class="card-body border-bottom py-3">

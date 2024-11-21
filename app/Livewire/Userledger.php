@@ -19,6 +19,8 @@ class Userledger extends Component
     public $search = '';
     public $userid = '';
     public $customerid = '';
+    public $paymentStatus = '';
+    public $paymentMethod = '';
     public $datefrom = null;
     public $dateto = null;
 
@@ -66,6 +68,12 @@ class Userledger extends Component
             // Filter by user ID if provided
             if ($this->userid) {
                 $ordersQuery->where('user_id', $this->userid);
+            }
+            if ($this->paymentStatus){
+                $ordersQuery->where('order_status', $this->paymentStatus);
+            }
+            if ($this->paymentMethod){
+                $ordersQuery->where('payment_type', $this->paymentMethod);
             }
 
             // Filter by customer ID if provided
