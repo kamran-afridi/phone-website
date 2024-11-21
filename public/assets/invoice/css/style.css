@@ -4221,7 +4221,7 @@ table th{
 
 .invoice-16 .default-table thead th {
     position: relative;
-    padding: 20px 30px;
+    padding: 10px 15px;
     font-size: 16px;
     color: #25cc7e;
     font-weight: 500;
@@ -4236,7 +4236,7 @@ table th{
 
 .invoice-16 .default-table tr td {
     position: relative;
-    padding: 21px 30px;
+    padding: 5px 10px;
     font-size: 14px;
     color: #535353;
     font-weight: 400;
@@ -4270,7 +4270,7 @@ table th{
 }
 
 .invoice-16 .invoice-info {
-    padding: 0 150px 50px;
+    padding: 0 150px;
 }
 
 .invoice-16 .invoice-info .inv-from-2 {
