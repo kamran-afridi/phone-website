@@ -134,6 +134,26 @@
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-end">
+                                                <strong>Paid</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->pay, 'GBP') }}
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-end">
+                                                <strong>Pending</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->total - $order->pay, 'GBP') }}
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-end">
                                                 <strong>Total</strong>
                                             </td>
                                             <td class="align-middle text-center">
