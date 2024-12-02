@@ -10,7 +10,7 @@
                         <!-- Responsive Button Group -->
                         <div class="btn-group d-flex flex-wrap" role="group">
                             <div class="row w-100">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     @if ($columns['productslist'])
                                         <button wire:click="toggleColumn('productslist')"
                                             class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
@@ -23,7 +23,7 @@
                                         </button>
                                     @endif
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     @if ($columns['orderlist'])
                                         <button wire:click="toggleColumn('orderlist')"
                                             class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
