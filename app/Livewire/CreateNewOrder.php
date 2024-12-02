@@ -14,6 +14,15 @@ class CreateNewOrder extends Component
         $cartItemprice = [];
     // public $products, $customers, $carts;
     protected $listeners = ['addedTocart' => 'refreshneworderlist'];
+    public $columns = [
+        'productslist' => true,
+        'orderlist' => true,
+    ];
+
+	public function toggleColumn($column)
+	{
+		$this->columns[$column] = !$this->columns[$column];
+	}
 
     public function EditQtyPrice($cartid)
     {
