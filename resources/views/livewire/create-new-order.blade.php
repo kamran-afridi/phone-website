@@ -4,117 +4,150 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-cards">
-                <div class="col-lg-6">
-                    @livewire('search-orders', ['products' => $products])
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div>
-                                <h3 class="card-title">
-                                    {{ __('New Order') }}
-                                </h3>
-                            </div>
-
-                            <div class="card-actions btn-actions">
-                                <x-action.close route="{{ route('orders.index') }}" />
-                            </div>
+                <div class="col-md-12">
+                    <!-- Show/Hide Columns Buttons -->
+                    <div class="card-body border-bottom py-3">
+                        <!-- Responsive Button Group -->
+                        <div class="btn-group d-flex flex-wrap" role="group">
+                            @if ($columns['productslist'])
+                            <button wire:click="toggleColumn('productslist')"
+                                class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2">
+                                Products Lists
+                            </button>
+                            @else
+                            <button wire:click="toggleColumn('productslist')"
+                                class="btn btn-outline-primary btn-sm p-2 flex-grow-1 mb-2">
+                            Products Lists
+                            </button>
+                            @endif
+                            @if ($columns['orderlist'])
+                            <button wire:click="toggleColumn('orderlist')"
+                                class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2">
+                                Products Lists
+                            </button>
+                            @else
+                            <button wire:click="toggleColumn('orderlist')"
+                                class="btn btn-outline-primary btn-sm p-2 flex-grow-1 mb-2">
+                            Products Lists
+                            </button>
+                            @endif
                         </div>
-                        <form action="{{ route('invoice.create') }}" method="POST">
-                            @csrf
-                            <div class="card-body">
-                                <div class="row gx-3 mb-3">
-                                    @include('partials.session')
-                                    <div class="col-md-4">
-                                        <label for="purchase_date" class="small my-1">
-                                            {{ __('Date') }}
-                                            <span class="text-danger">*</span>
-                                        </label>
-
-                                        <input name="purchase_date" id="purchase_date" type="date"
-                                            class="form-control example-date-input @error('purchase_date') is-invalid @enderror"
-                                            value="{{ old('purchase_date') ?? now()->format('Y-m-d') }}" required>
-
-                                        @error('purchase_date')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="small mb-1" for="customer_id">
-                                            {{ __('Customer') }}
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <button type="button" class="btn btn-sm mb-1 btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#myModal">
-                                            Add customer
-                                        </button>
-
-                                        <!-- Include Livewire Component for Customer Select -->
-                                        @livewire('customer-select', ['customers' => $allcustomers])
-
-                                        {{-- <div class="">@json($customer_id)</div> --}}
-
-                                        @error('customer_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-
-                                    <div class="col-md-4">
-                                        <label class="small mb-1" for="reference">
-                                            {{ __('Reference') }}
-                                        </label>
-
-                                        <input type="text" class="form-control" id="reference" name="reference"
-                                            value="ORD" readonly>
-
-                                        @error('reference')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
+                    </div>
+                </div>
+                @if ($columns['productslist'])
+                    <div class="col-lg-6">
+                        @livewire('search-orders', ['products' => $products])
+                    </div>
+                @endif
+                @if ($columns['orderlist'])
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">
+                                        {{ __('New Order') }}
+                                    </h3>
                                 </div>
 
-                                {{-- <x-spinner.loading-spinner /> --}}
-                                <div class="table-responsive catTable">
-                                    @if (session('cartsuccess'))
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            {{ session('cartsuccess') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                    @if (session('carterror'))
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            {{ session('carterror') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close"></button>
-                                        </div>
-                                    @endif
+                                <div class="card-actions btn-actions">
+                                    <x-action.close route="{{ route('orders.index') }}" />
+                                </div>
+                            </div>
+                            <form action="{{ route('invoice.create') }}" method="POST">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="row gx-3 mb-3">
+                                        @include('partials.session')
+                                        <div class="col-md-4">
+                                            <label for="purchase_date" class="small my-1">
+                                                {{ __('Date') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
 
-                                    {{-- <table wire:loading.remove class="table table-striped table-bordered align-middle"> --}}
-                                    <table class="table table-striped table-bordered align-middle">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">{{ __('SKU') }}</th>
-                                                <th scope="col">{{ __('Product') }}</th>
-                                                <th scope="col" class="text-center">{{ __('Quantity') }}</th>
-                                                <th scope="col" class="text-center">{{ __('Price') }}</th>
-                                                <th scope="col" class="text-center">{{ __('SubTotal') }}</th>
-                                                <th scope="col" class="text-center">
-                                                    {{ __('Action') }}
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{-- {{dd($newcartitem)}} --}}
-                                            {{-- @if ($newcartitem) --}}
+                                            <input name="purchase_date" id="purchase_date" type="date"
+                                                class="form-control example-date-input @error('purchase_date') is-invalid @enderror"
+                                                value="{{ old('purchase_date') ?? now()->format('Y-m-d') }}" required>
+
+                                            @error('purchase_date')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="customer_id">
+                                                {{ __('Customer') }}
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <button type="button" class="btn btn-sm mb-1 btn-primary"
+                                                data-bs-toggle="modal" data-bs-target="#myModal">
+                                                Add customer
+                                            </button>
+
+                                            <!-- Include Livewire Component for Customer Select -->
+                                            @livewire('customer-select', ['customers' => $allcustomers])
+
+                                            {{-- <div class="">@json($customer_id)</div> --}}
+
+                                            @error('customer_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="reference">
+                                                {{ __('Reference') }}
+                                            </label>
+
+                                            <input type="text" class="form-control" id="reference" name="reference"
+                                                value="ORD" readonly>
+
+                                            @error('reference')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    {{-- <x-spinner.loading-spinner /> --}}
+                                    <div class="table-responsive catTable">
+                                        @if (session('cartsuccess'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                {{ session('cartsuccess') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                        @if (session('carterror'))
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{ session('carterror') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endif
+
+                                        {{-- <table wire:loading.remove class="table table-striped table-bordered align-middle"> --}}
+                                        <table class="table table-striped table-bordered align-middle">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">{{ __('SKU') }}</th>
+                                                    <th scope="col">{{ __('Product') }}</th>
+                                                    <th scope="col" class="text-center">{{ __('Quantity') }}</th>
+                                                    <th scope="col" class="text-center">{{ __('Price') }}</th>
+                                                    <th scope="col" class="text-center">{{ __('SubTotal') }}</th>
+                                                    <th scope="col" class="text-center">
+                                                        {{ __('Action') }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{-- {{dd($newcartitem)}} --}}
+                                                {{-- @if ($newcartitem) --}}
                                                 @forelse ($newcartitem as $item)
                                                     <tr>
                                                         <td>
@@ -218,47 +251,48 @@
                                                         {{ __('Add Products') }}
                                                     </td>
                                                 @endforelse
-                                            {{-- @else
+                                                {{-- @else
                                                 <td colspan="6" class="text-center">
                                                     {{ __('Add Products') }}
                                                 </td>
                                             @endif --}}
 
-                                            <tr>
-                                                <td colspan="5" class="text-end">
-                                                    Total Product
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ Cart::count() }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5" class="text-end">Subtotal</td>
-                                                <td class="text-center">
-                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5" class="text-end">Total</td>
-                                                <td class="text-center">
-                                                    {{ Number::currency(Cart::subtotal(), 'GBP') }}
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="5" class="text-end">
+                                                        Total Product
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ Cart::count() }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5" class="text-end">Subtotal</td>
+                                                    <td class="text-center">
+                                                        {{ Number::currency(Cart::subtotal(), 'GBP') }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5" class="text-end">Total</td>
+                                                    <td class="text-center">
+                                                        {{ Number::currency(Cart::subtotal(), 'GBP') }}
+                                                    </td>
+                                                </tr>
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
-
-                            </div>
-                            <div class="card-footer text-end">
-                                <button type="submit"
-                                    class="btn btn-success add-list mx-1 {{ Cart::count() > 0 ? '' : 'disabled' }}">
-                                    {{ __('Create Invoice') }}
-                                </button>
-                            </div>
-                        </form>
+                                <div class="card-footer text-end">
+                                    <button type="submit"
+                                        class="btn btn-success add-list mx-1 {{ Cart::count() > 0 ? '' : 'disabled' }}">
+                                        {{ __('Create Invoice') }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
 
             </div>
         </div>
