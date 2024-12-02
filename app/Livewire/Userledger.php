@@ -34,10 +34,10 @@ class Userledger extends Component
         'actions' => true,
     ];
 
-	public function toggleColumn($column)
-	{
-		$this->columns[$column] = !$this->columns[$column];
-	}
+    public function toggleColumn($column)
+    {
+        $this->columns[$column] = !$this->columns[$column];
+    }
     public function mount()
     {
         $this->userid = session('UserId', '');
@@ -69,11 +69,19 @@ class Userledger extends Component
             if ($this->userid) {
                 $ordersQuery->where('user_id', $this->userid);
             }
-            if ($this->paymentStatus){
-                $ordersQuery->where('order_status', $this->paymentStatus);
+            if ($this->paymentStatus) {
+                if ($this->paymentStatus == 'allstatus') {
+                    $ordersQuery->whereNot('order_status', 'cancel');
+                } else {
+                    $ordersQuery->where('order_status', $this->paymentStatus)->whereNot('order_status', '2');
+                }
             }
-            if ($this->paymentMethod){
-                $ordersQuery->where('payment_type', $this->paymentMethod);
+            if ($this->paymentMethod) {
+                if ($this->paymentMethod == 'allpayment') {
+                    $ordersQuery->whereNot('order_status', '2');
+                } else {
+                    $ordersQuery->where('payment_type', $this->paymentMethod)->whereNot('order_status', '2');
+                }
             }
 
             // Filter by customer ID if provided
@@ -107,4 +115,3 @@ class Userledger extends Component
         ]);
     }
 }
-

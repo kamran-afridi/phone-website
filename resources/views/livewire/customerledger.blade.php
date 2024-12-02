@@ -1,52 +1,65 @@
 <div class="card">
     <div class="card-header">
-        <div>
-            <h3 class="card-title">
-                {{ __('Customer Ledger') }}
-            </h3>
-        </div>
-        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-            <div class="m-auto d-flex align-items-center">
-                <!-- User Selection -->
-                {{-- <select class="form-select form-control-solid mr-2" wire:model.change="userid">
-                    <option value="" selected disabled>Select a user:</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select> --}}
-
-                <!-- Customer Selection -->
-                <select class="form-select form-control-solid mr-2" wire:model.change="customerid">
-                    <option value="" selected disabled>Select a customer:</option>
-                    @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                    @endforeach
-                </select>
-
-                {{-- Status --}}
-                <select class="form-select form-control-solid mr-2" wire:model.change="paymentStatus">
-                    <option value="" selected disabled>Select Payment Status:</option>
-                    <option value="pending">Pending</option>
-                    <option value="1">Complete</option>
-                    <option value="2">Cancel</option>
-                </select>
-
-                {{-- Payment Method --}}
-                <select class="form-select form-control-solid mr-2" wire:model.change="paymentMethod">
-                    <option value="" selected disabled>Select Payment Method:</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Credit">Credit</option>
-                    <option value="Bank">Bank</option>
-                </select>
-
-                <!-- Date Range Inputs -->
-                <label class="mx-2">Date From</label>
-                <input type="date" class="form-select form-control-solid mr-2" wire:model.change="datefrom">
-
-                <label class="mx-2">To</label>
-                <input type="date" class="form-select form-control-solid" wire:model.change="dateto">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="card-title">
+                        {{ __('Customer Ledger') }}
+                    </h3>
+                </div>
+                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                    {{-- <div class="m-auto d-flex align-items-center"> --}}
+                    <div class="col-md-3">
+                        <!-- Customer Selection -->
+                        <select class="form-select form-control-solid m-1 w-100" wire:model.change="customerid">
+                            <option value="" selected disabled>Select a customer:</option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        {{-- Status --}}
+                        <select class="form-select form-control-solid m-1" wire:model.change="paymentStatus">
+                            <option value="" selected disabled>Select Payment Status:</option>
+                            <option value="allstatus">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="1">Complete</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        {{-- Payment Method --}}
+                        <select class="form-select form-control-solid m-1" wire:model.change="paymentMethod">
+                            <option value="" selected disabled>Select Payment Method:</option>
+                            <option value="allpayment">All</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
+                            <option value="Bank">Bank</option>
+                        </select>
+                    </div>
             </div>
-        @endif
+            <div class="row mt-3">
+                <div class="col-md-1 offset-md-3 d-flex align-items-center">
+
+                    <label class="mx-2">Date From</label>
+                </div>
+                <div class="col-md-3">
+                    <!-- Date Range Inputs -->
+                    {{-- <label class="mx-2">Date From</label> --}}
+                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="datefrom">
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                    <label class="mx-2">To</label>
+                </div>
+                <div class="col-md-3">
+
+                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="dateto">
+                </div>
+            </div>
+            @endif
+        </div>
+        {{-- </div> --}}
+
 
 
         {{-- <div class="card-actions d-flex">
