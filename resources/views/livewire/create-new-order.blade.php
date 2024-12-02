@@ -23,12 +23,12 @@
                             @if ($columns['orderlist'])
                             <button wire:click="toggleColumn('orderlist')"
                                 class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2">
-                                Products Lists
+                                Order Lists
                             </button>
                             @else
                             <button wire:click="toggleColumn('orderlist')"
                                 class="btn btn-outline-primary btn-sm p-2 flex-grow-1 mb-2">
-                            Products Lists
+                            Order Lists
                             </button>
                             @endif
                         </div>
