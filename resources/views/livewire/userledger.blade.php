@@ -1,52 +1,64 @@
 <div class="card">
     <div class="card-header">
-        <div>
-            <h3 class="card-title">
-                {{ __('User Ledger') }}
-            </h3>
-        </div>
-        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-            <div class="m-auto d-flex align-items-center">
-                <!-- User Selection -->
-                <select class="form-select form-control-solid mr-2" wire:model.change="userid">
-                    <option value="" selected disabled>Select a user:</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-
-                <!-- Customer Selection -->
-                {{-- <select class="form-select form-control-solid mr-2" wire:model.change="customerid">
-                    <option value="" selected disabled>Select a customer:</option>
-                    @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                    @endforeach
-                </select> --}}
-
-                {{-- Status --}}
-                <select class="form-select form-control-solid mr-2" wire:model.change="paymentStatus">
-                    <option value="" selected disabled>Select Payment Status:</option>
-                    <option value="pending">Pending</option>
-                    <option value="1">Complete</option>
-                    <option value="2">Cancel</option>
-                </select>
-
-                {{-- Payment Method --}}
-                <select class="form-select form-control-solid mr-2" wire:model.change="paymentMethod">
-                    <option value="" selected disabled>Select Payment Method:</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Credit">Credit</option>
-                    <option value="Bank">Bank</option>
-                </select>
-
-                <!-- Date Range Inputs -->
-                <label class="mx-2">Date From</label>
-                <input type="date" class="form-select form-control-solid mr-2" wire:model.change="datefrom">
-
-                <label class="mx-2">To</label>
-                <input type="date" class="form-select form-control-solid" wire:model.change="dateto">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="card-title">
+                        {{ __('User Ledger') }}
+                    </h3>
+                </div>
+                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                    {{-- <div class="m-auto d-flex align-items-center"> --}}
+                    <div class="col-md-3">
+                        <!-- Customer Selection -->
+                        <select class="form-select form-control-solid mr-2" wire:model.change="userid">
+                            <option value="" selected disabled>Select a user:</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        {{-- Status --}}
+                        <select class="form-select form-control-solid m-1" wire:model.change="paymentStatus">
+                            <option value="" selected disabled>Select Payment Status:</option>
+                            <option value="allstatus">All</option>
+                            <option value="pending">Pending</option>
+                            <option value="1">Complete</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        {{-- Payment Method --}}
+                        <select class="form-select form-control-solid m-1" wire:model.change="paymentMethod">
+                            <option value="" selected disabled>Select Payment Method:</option>
+                            <option value="allpayment">All</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
+                            <option value="Bank">Bank</option>
+                        </select>
+                    </div>
             </div>
-        @endif
+            <div class="row mt-3">
+                <div class="col-md-1 offset-md-3 d-flex align-items-center">
+
+                    <label class="mx-2">Date From</label>
+                </div>
+                <div class="col-md-3">
+                    <!-- Date Range Inputs -->
+                    {{-- <label class="mx-2">Date From</label> --}}
+                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="datefrom">
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                    <label class="mx-2">To</label>
+                </div>
+                <div class="col-md-3">
+
+                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="dateto">
+                </div>
+            </div>
+            @endif
+        </div>
+
 
 
         {{-- <div class="card-actions d-flex">
@@ -120,12 +132,12 @@
                         </a>
                     </th> --}}
                     @if ($columns['customer'])
-                    <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
-                            {{ __('Customer') }}
-                            @include('inclues._sort-icon', ['field' => 'customer_id'])
-                        </a>
-                    </th>
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('customer_id')" href="#" role="button">
+                                {{ __('Customer') }}
+                                @include('inclues._sort-icon', ['field' => 'customer_id'])
+                            </a>
+                        </th>
                     @endif
                     <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('order_date')" href="#" role="button">
@@ -162,12 +174,12 @@
                         </th>
                     @endif
                     {{-- @if ($columns['user']) --}}
-                        <th scope="col" class="align-middle text-center">
-                            <a wire:click.prevent="sortBy('user')" href="#" role="button">
-                                {{ __('User') }}
-                                @include('inclues._sort-icon', ['field' => 'user'])
-                            </a>
-                        </th>
+                    <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('user')" href="#" role="button">
+                            {{ __('User') }}
+                            @include('inclues._sort-icon', ['field' => 'user'])
+                        </a>
+                    </th>
                     {{-- @endif --}}
                     @if ($columns['status'])
                         <th scope="col" class="align-middle text-center">
@@ -194,9 +206,9 @@
                             {{ $order->invoice_no }}
                         </td> --}}
                         @if ($columns['customer'])
-                        <td class="align-middle text-center">
-                            {{ $order->customer->name }}
-                        </td>
+                            <td class="align-middle text-center">
+                                {{ $order->customer->name }}
+                            </td>
                         @endif
                         <td class="align-middle text-center">
                             {{ $order->order_date->format('d-m-Y') }}
@@ -218,15 +230,15 @@
                             </td>
                         @endif
                         {{-- @if ($columns['user']) --}}
-                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-                                <td class="align-middle text-center">
-                                    {{ $order->user->name }}
-                                </td>
-                            @else
-                                <td class="align-middle text-center">
-                                    {{ $order->note }}
-                                </td>
-                            @endif
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                            <td class="align-middle text-center">
+                                {{ $order->user->name }}
+                            </td>
+                        @else
+                            <td class="align-middle text-center">
+                                {{ $order->note }}
+                            </td>
+                        @endif
                         {{-- @endif --}}
                         @if ($columns['status'])
                             <td class="align-middle text-center">
@@ -261,21 +273,22 @@
                     </tr>
                 @endforelse
                 {{-- @if ($customerid) --}}
-                    <tr>
-                        <td colspan="8" class="text-end">
-                            Payed amount
-                        </td>
-                        <td class="text-center">{{ number_format($ordersQuery->sum('pay'), 2) }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="8" class="text-end">Due</td>
-                        <td class="text-center">{{ number_format($ordersQuery->sum('total') - $ordersQuery->sum('pay'), 2) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="8" class="text-end">Total</td>
-                        <td class="text-center">{{ number_format($ordersQuery->sum('total'), 2) }}</td>
-                    </tr>
+                <tr>
+                    <td colspan="8" class="text-end">
+                        Payed amount
+                    </td>
+                    <td class="text-center">{{ number_format($ordersQuery->sum('pay'), 2) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="text-end">Due</td>
+                    <td class="text-center">
+                        {{ number_format($ordersQuery->sum('total') - $ordersQuery->sum('pay'), 2) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="text-end">Total</td>
+                    <td class="text-center">{{ number_format($ordersQuery->sum('total'), 2) }}</td>
+                </tr>
                 {{-- @endif --}}
             </tbody>
         </table>

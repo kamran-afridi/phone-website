@@ -34,10 +34,10 @@ class Customerledger extends Component
         'actions' => true,
     ];
 
-	public function toggleColumn($column)
-	{
-		$this->columns[$column] = !$this->columns[$column];
-	}
+    public function toggleColumn($column)
+    {
+        $this->columns[$column] = !$this->columns[$column];
+    }
     public function mount()
     {
         $this->userid = session('UserId', '');
@@ -61,7 +61,7 @@ class Customerledger extends Component
 
     public function render()
     {
-        $ordersQuery = Order::with(['customer', 'details', 'user']);
+        $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', 'cancel');
 
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
@@ -72,21 +72,29 @@ class Customerledger extends Component
 
             // Filter by customer ID if provided
             if ($this->customerid) {
-                $ordersQuery->where('customer_id', $this->customerid);
+                $ordersQuery->where('customer_id', $this->customerid)->whereNot('order_status', '2');
             }
-            if ($this->paymentStatus){
-                $ordersQuery->where('order_status', $this->paymentStatus);
+            if ($this->paymentStatus) {
+                if ($this->paymentStatus == 'allstatus') {
+                    $ordersQuery->whereNot('order_status', 'cancel');
+                } else {
+                    $ordersQuery->where('order_status', $this->paymentStatus)->whereNot('order_status', '2');
+                }
             }
-            if ($this->paymentMethod){
-                $ordersQuery->where('payment_type', $this->paymentMethod);
+            if ($this->paymentMethod) {
+                if($this->paymentMethod == 'allpayment'){
+                $ordersQuery->whereNot('order_status', '2');
+            }else{
+                    $ordersQuery->where('payment_type', $this->paymentMethod)->whereNot('order_status', '2');
+                }
             }
             // Apply date range filter if both dates are selected
             if ($this->datefrom && $this->dateto) {
-                $ordersQuery->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto]);
+                $ordersQuery->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto])->whereNot('order_status', '2');
             }
         } else {
             // For regular users, filter only by their user ID
-            $ordersQuery->where('user_id', auth()->id());
+            $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', 'cancel');
         }
 
         // Apply search, sorting, and pagination
@@ -102,7 +110,7 @@ class Customerledger extends Component
             'orders' => $orders,
             'users' => $users,
             'customers' => $customers,
-            'ordersQuery'=> $ordersQuery,
+            'ordersQuery' => $ordersQuery,
         ]);
     }
 }
