@@ -44,9 +44,9 @@
                         <form wire:submit.prevent="submitData({{ $item->id }})">
                             <input type="hidden" class="form-control" wire:model="OrderId.{{ $item->id }}"
                                 placeholder="Order Id" readonly>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="input-group">
+                            <div class="row p-1">
+                                <div class="col-md-5 col-sm-12">
+                                    <div class="input-group m-1">
                                         @error('productquantity')
                                             <span class="text-danger"
                                                 style="font-size: 12px; margin-left: 5px;">*{{ $message }}</span>
@@ -56,8 +56,8 @@
                                             placeholder="Quantity" value="{{ $productquantity[$item->id] ?? '' }}">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="input-group">
+                                <div class="col-md-5 col-sm-12">
+                                    <div class="input-group m-1">
                                         @error('productprice')
                                             <span class="text-danger"
                                                 style="font-size: 12px; margin-left: 5px;">*{{ $message }}</span>
@@ -67,8 +67,8 @@
                                             value="{{ number_format($item->unitcost, 2) }}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-primary btn-icon">
+                                <div class="col-md-2 col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-icon m-1 w-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -151,8 +151,7 @@
                     {{-- <form action="{{ route('orders.update_order_payment', $order->uuid) }}" method="POST"> --}}
                         @csrf
                         <div class="input-group" style="min-width: 170px;">
-                            <input type="text" class="form-control" name="payto" wire:model='payto' required
-                                value="{{ $order->payto }}" step="any">
+                            <input type="text" class="form-control" name="payto" wire:model='payto' required step="any">
                             <input type="hidden" class="form-control" name="paytoorder_id" wire:model='orderID' value="{{ $order->id }}">
 
                             <div class="input-group-append text-center">
@@ -175,7 +174,7 @@
                 <td class="text-end">
                     Payed amount
                 </td>
-                <td class="text-center" >
+                <td class="text-center" colspan="2">
                     <form action="{{ route('orders.update_order_payment', $order->uuid) }}" method="POST">
                         @csrf
                         @method('put')

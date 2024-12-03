@@ -52,6 +52,7 @@ class OrderproductDetail extends Component
             $this->productquantity[$detail->id] = $detail->quantity;
             $this->productprice[$detail->id] = $detail->unitcost;
         }
+        $payto = $this->order->payto;
     }
     public function savepayto($uuid)
     {
