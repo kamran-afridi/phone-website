@@ -15,7 +15,7 @@ class Userledger extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $perPage = 30;
+    public $perPage = 15;
     public $search = '';
     public $userid = '';
     public $customerid = '';
