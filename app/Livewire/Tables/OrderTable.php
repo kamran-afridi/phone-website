@@ -14,7 +14,7 @@ class OrderTable extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $perPage = 30;
+    public $perPage = 15;
     public $changeEvents;
     public $search = '';
     public $customerid = '';
