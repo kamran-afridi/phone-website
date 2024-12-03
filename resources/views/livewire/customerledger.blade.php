@@ -39,23 +39,15 @@
                     </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-1 offset-md-3 d-flex align-items-center">
-
+                <div class="offset-md-3 col-md-9 d-flex align-items-center justify-content-center">
                     <label class="mx-2">Date From</label>
-                </div>
-                <div class="col-md-3">
-                    <!-- Date Range Inputs -->
-                    {{-- <label class="mx-2">Date From</label> --}}
-                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="datefrom">
-                </div>
-                <div class="col-md-1 d-flex align-items-center justify-content-center">
-                    <label class="mx-2">To</label>
-                </div>
-                <div class="col-md-3">
+                    <input type="date" class="form-control form-control-solid m-1" wire:model.change="datefrom">
 
-                    <input type="date" class="form-select form-control-solid m-1" wire:model.change="dateto">
+                    <label class="mx-2">To</label>
+                    <input type="date" class="form-control form-control-solid m-1" wire:model.change="dateto">
                 </div>
             </div>
+
             @endif
         </div>
         {{-- </div> --}}
