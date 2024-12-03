@@ -61,7 +61,7 @@ class Userledger extends Component
 
     public function render()
     {
-        $ordersQuery = Order::with(['customer', 'details', 'user']);
+        $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', '2');
 
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
@@ -71,7 +71,7 @@ class Userledger extends Component
             }
             if ($this->paymentStatus) {
                 if ($this->paymentStatus == 'allstatus') {
-                    $ordersQuery->whereNot('order_status', 'cancel');
+                    $ordersQuery->whereNot('order_status', '2');
                 } else {
                     $ordersQuery->where('order_status', $this->paymentStatus)->whereNot('order_status', '2');
                 }
@@ -91,11 +91,11 @@ class Userledger extends Component
 
             // Apply date range filter if both dates are selected
             if ($this->datefrom && $this->dateto) {
-                $ordersQuery->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto]);
+                $ordersQuery->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto])->whereNot('order_status', '2');
             }
         } else {
             // For regular users, filter only by their user ID
-            $ordersQuery->where('user_id', auth()->id());
+            $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', '2');
         }
 
         // Apply search, sorting, and pagination

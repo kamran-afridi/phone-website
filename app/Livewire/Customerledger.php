@@ -61,7 +61,7 @@ class Customerledger extends Component
 
     public function render()
     {
-        $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', 'cancel');
+        $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', '2');
 
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
@@ -76,7 +76,7 @@ class Customerledger extends Component
             }
             if ($this->paymentStatus) {
                 if ($this->paymentStatus == 'allstatus') {
-                    $ordersQuery->whereNot('order_status', 'cancel');
+                    $ordersQuery->whereNot('order_status', '2');
                 } else {
                     $ordersQuery->where('order_status', $this->paymentStatus)->whereNot('order_status', '2');
                 }
@@ -94,7 +94,7 @@ class Customerledger extends Component
             }
         } else {
             // For regular users, filter only by their user ID
-            $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', 'cancel');
+            $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', '2');
         }
 
         // Apply search, sorting, and pagination
