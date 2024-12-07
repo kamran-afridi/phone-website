@@ -1,4 +1,36 @@
 <div class="card">
+    <style>
+        .blinking-warning-circle {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background-color: #f76707;
+            animation: blink 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+
+            75% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
     <div class="card-header">
         <div class="col-md-12">
             <div class="row">
@@ -188,6 +220,9 @@
                 @forelse ($orders as $order)
                     <tr>
                         <td class="align-middle text-center">
+                            @if ($order->payment_type === 'Credit' && $order->order_date->diffInDays(now()) >= 30)
+                                <div class="blinking-warning-circle mt-1" title="Payment overdue!"></div>
+                            @endif
                             {{ $loop->iteration }}
                         </td>
                         {{-- <td class="align-middle text-center">
@@ -201,6 +236,9 @@
                         </td>
                         @if ($columns['payment'])
                             <td class="align-middle text-center">
+                                @if ($order->payment_type === 'Credit' && $order->order_date->diffInDays(now()) >= 30)
+                                    <div class="blinking-warning-circle mt-1" title="Payment overdue!"></div>
+                                @endif
                                 {{ $order->payment_type }}
                             </td>
                         @endif
