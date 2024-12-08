@@ -199,7 +199,7 @@
                         </td>
                     </tr>
                 @endforelse
-                @if ($customerid)
+                {{-- @if ($customerid)
                     <tr>
                         <td colspan="8" class="text-end">
                             Payed amount
@@ -215,7 +215,7 @@
                         <td colspan="8" class="text-end">Total</td>
                         <td class="text-center">{{ number_format($orders->sum('total'), 2) }}</td>
                     </tr>
-                @endif
+                @endif --}}
             </tbody>
         </table>
     </div>
