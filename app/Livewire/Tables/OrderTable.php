@@ -59,7 +59,17 @@ class OrderTable extends Component
     {
 
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            if ($this->userid || $this->customerid) {
+            if ($this->userid && $this->customerid) {
+                // dd($this->customerid);
+                $orders = Order::with(['customer', 'details', 'user'])
+                    ->where(function ($query) {
+                        $query->where("user_id", $this->userid)
+                            ->AndWhere("customer_id", $this->customerid);
+                    })
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+            } elseif ($this->userid || $this->customerid) {
                 // dd($this->customerid);
                 $orders = Order::with(['customer', 'details', 'user'])
                     ->where(function ($query) {
