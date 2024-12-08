@@ -57,38 +57,22 @@ class OrderTable extends Component
 
     public function render()
     {
-
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            if ($this->userid && $this->customerid) {
-                // dd($this->customerid);
-                $orders = Order::with(['customer', 'details', 'user'])
-                    ->where(function ($query) {
-                        $query->where("user_id", $this->userid)
-                            ->AndWhere("customer_id", $this->customerid);
-                    })
-                    ->search($this->search)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
-            } elseif ($this->userid || $this->customerid) {
-                // dd($this->customerid);
-                $orders = Order::with(['customer', 'details', 'user'])
-                    ->where(function ($query) {
-                        $query->where("user_id", $this->userid)
-                            ->orWhere("customer_id", $this->customerid);
-                    })
-                    ->search($this->search)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
-            } else {
+            $query = Order::with(['customer', 'details', 'user'])
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
 
-                $orders = Order::with(['customer', 'details', 'user'])
-                    ->search($this->search)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
+            if ($this->userid && $this->userid !== 'all') {
+                $query->where('user_id', $this->userid);
             }
+
+            if ($this->customerid && $this->customerid !== 'all') {
+                $query->where('customer_id', $this->customerid);
+            }
+
+            $orders = $query->paginate($this->perPage);
         } else {
-            // dd("A");
-            $orders = Order::where("user_id", auth()->id())
+            $orders = Order::where('user_id', auth()->id())
                 ->with(['customer', 'details', 'user'])
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')

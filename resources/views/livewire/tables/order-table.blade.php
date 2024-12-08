@@ -13,6 +13,7 @@
                         Select a user:
                     </option>
 
+                    <option value="all">All</option>
                     @foreach ($users as $user)
                         {{-- <option value="{{ $user->id }}" @selected(old('UserId', $userid) == $user->id)> --}}
                         <option value="{{ $user->id }}">
@@ -26,6 +27,7 @@
                         Select a customer:
                     </option>
 
+                    <option value="all">All</option>
                     @foreach ($customers as $customer)
                         <option value="{{ $customer->id }}">
                             {{ $customer->name }}
