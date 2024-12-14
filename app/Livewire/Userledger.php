@@ -97,6 +97,7 @@ class Userledger extends Component
         } else {
             // For regular users, filter only by their user ID
             $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', '2');
+            $sub_total = $ordersQuery->sum('sub_total');
         }
 
         // Apply search, sorting, and pagination
