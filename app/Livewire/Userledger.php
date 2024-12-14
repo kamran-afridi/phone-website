@@ -112,6 +112,7 @@ class Userledger extends Component
             'users' => $users,
             'customers' => $customers,
             'ordersQuery' => $ordersQuery,
+            'sub_total' => $sub_total,
         ]);
     }
 }
