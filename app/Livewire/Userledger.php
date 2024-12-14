@@ -103,7 +103,7 @@ class Userledger extends Component
             ->search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
-        dd(vars: $orders->sum('sub_total'));
+        $sub_total = $orders->sum('sub_total');
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
 

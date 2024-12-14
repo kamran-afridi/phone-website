@@ -317,7 +317,7 @@
                 </tr>
                 <tr>
                     <td colspan="8" class="text-end">Total</td>
-                    <td class="text-center">{{ number_format($ordersQuery->sum('total'), 2) }}</td>
+                    <td class="text-center">{{ number_format($sub_total, 2) }}</td>
                 </tr>
                 {{-- @endif --}}
             </tbody>
