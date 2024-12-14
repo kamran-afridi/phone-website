@@ -102,6 +102,7 @@ class Userledger extends Component
         }
 
         // Apply search, sorting, and pagination
+        $this->sub_total = $ordersQuery->sum('sub_total');
         $orders = $ordersQuery
             ->search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -109,7 +110,6 @@ class Userledger extends Component
 
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
-        $this->sub_total = $ordersQuery->sum('sub_total');
 
         return view('livewire.userledger', [
             'orders' => $orders,
