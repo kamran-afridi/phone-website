@@ -54,6 +54,8 @@ class Order extends Model
         $query->where('invoice_no', 'like', "%{$value}%")
             ->orWhere('order_status', 'like', "%{$value}%")
             ->orWhere('payment_type', 'like', "%{$value}%")
+            ->orWhere('payto', 'like', "%{$value}%")
+            ->orWhere('note', 'like', "%{$value}%")
             ->orWhereHas('customer', function ($q) use ($value) {
                 $q->where('name', 'like', "%{$value}%");
             });
