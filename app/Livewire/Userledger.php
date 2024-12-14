@@ -21,6 +21,7 @@ class Userledger extends Component
     public $customerid = '';
     public $paymentStatus = '';
     public $paymentMethod = '';
+    public $sub_total = '';
     public $datefrom = null;
     public $dateto = null;
 
@@ -62,13 +63,13 @@ class Userledger extends Component
     public function render()
     {
         $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', '2');
-        $sub_total = '';
+         
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
             // Filter by user ID if provided
             if ($this->userid) {
                 $ordersQuery->where('user_id', $this->userid);
-                $sub_total = $ordersQuery->sum('sub_total');
+                $this->sub_total = $ordersQuery->sum('sub_total');
             }
             if ($this->paymentStatus) {
                 if ($this->paymentStatus == 'allstatus') {
@@ -97,7 +98,7 @@ class Userledger extends Component
         } else {
             // For regular users, filter only by their user ID
             $ordersQuery->where('user_id', auth()->id())->whereNot('order_status', '2');
-            $sub_total = $ordersQuery->sum('sub_total');
+            $this->sub_total = $ordersQuery->sum('sub_total');
         }
 
         // Apply search, sorting, and pagination
@@ -114,7 +115,7 @@ class Userledger extends Component
             'users' => $users,
             'customers' => $customers,
             'ordersQuery' => $ordersQuery,
-            'sub_total' => $sub_total,
+            'sub_total' => $this->sub_total,
         ]);
     }
 }
