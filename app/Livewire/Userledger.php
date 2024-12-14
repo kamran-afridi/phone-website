@@ -62,7 +62,7 @@ class Userledger extends Component
     public function render()
     {
         $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', '2');
-
+        $sub_total = '';
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
             // Filter by user ID if provided
@@ -104,7 +104,7 @@ class Userledger extends Component
             ->search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
-      
+
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
 
