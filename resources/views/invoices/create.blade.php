@@ -80,6 +80,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $totalqty = 0;
+                                            $totalitems = 0;
+                                        @endphp
                                         @foreach ($carts as $item)
                                             <tr>
                                                 <td>
@@ -96,7 +100,24 @@
                                                 <td class="text-center">{{ Number::currency($item->subtotal, 'GBP') }}
                                                 </td>
                                             </tr>
+                                            @php
+                                                $totalqty += $item->qty;
+                                                $totalitems= $loop->iteration;
+                                                // $totalitems++;
+                                            @endphp
                                         @endforeach
+                                        <tr>
+                                            <td colspan="4" class="text-end"><strong>Total Items</strong></td>
+                                            <td class="text-center">
+                                                <strong>{{$totalitems}}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-end"><strong>Total Qty</strong></td>
+                                            <td class="text-center">
+                                                <strong>{{ $totalqty }}</strong>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td colspan="4" class="text-end"><strong>Subtotal</strong></td>
                                             <td class="text-center">

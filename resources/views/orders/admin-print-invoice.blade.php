@@ -90,7 +90,11 @@
                                     </thead>
 
                                     <tbody>
-                                        {{--                                            @foreach ($orderDetails as $item) --}}
+                                        {{--@foreach ($orderDetails as $item) --}}
+                                        @php
+                                            $totalqty = 0;
+                                            $totalitems = 0;
+                                        @endphp
                                         @foreach ($order->details as $item)
                                             <tr>
                                                 <td class="align-middle">
@@ -113,22 +117,35 @@
                                                     {{ Number::currency($sub_total, 'GBP') }}
                                                 </td>
                                             </tr>
+                                            @php
+                                                $totalqty += $item->quantity;
+                                                $totalitems= $loop->iteration;
+                                                // $totalitems++;
+                                            @endphp
                                         @endforeach
 
                                         <tr>
-                                            <td colspan="4" class="text-end">
+                                            <td colspan="2" class="text-end"><strong>Total Items</strong></td>
+                                            <td class="text-center">
+                                                <strong>{{$totalitems}}</strong>
+                                            </td>
+                                            <td  class="text-end">
                                                 <strong>
                                                     Subtotal
                                                 </strong>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($total_price, 'GBP') }}
+                                                    {{ Number::currency($order->sub_total, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-end">
+                                            <td colspan="2" class="text-end"><strong>Total Qty</strong></td>
+                                            <td class="text-center">
+                                                <strong>{{ $totalqty }}</strong>
+                                            </td>
+                                            <td  class="text-end">
                                                 <strong>Tax</strong>
                                             </td>
                                             <td class="align-middle text-center">
