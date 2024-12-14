@@ -109,6 +109,7 @@ class Userledger extends Component
 
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
+        $this->sub_total = $ordersQuery->sum('sub_total');
 
         return view('livewire.userledger', [
             'orders' => $orders,
