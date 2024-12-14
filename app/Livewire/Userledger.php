@@ -68,6 +68,7 @@ class Userledger extends Component
             // Filter by user ID if provided
             if ($this->userid) {
                 $ordersQuery->where('user_id', $this->userid);
+                $sub_total = $ordersQuery->sum('sub_total');
             }
             if ($this->paymentStatus) {
                 if ($this->paymentStatus == 'allstatus') {
@@ -103,7 +104,7 @@ class Userledger extends Component
             ->search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
-        $sub_total = $orders->sum('sub_total');
+      
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
 
