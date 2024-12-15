@@ -301,17 +301,17 @@
                     <td colspan="8" class="text-end">
                         Payed amount
                     </td>
-                    <td class="text-center">{{ number_format($ordersQuery->sum('pay'), 2) }}</td>
+                    <td class="text-center">{{ number_format($total_payedamt, 2) }}</td>
                 </tr>
                 <tr>
                     <td colspan="8" class="text-end">Due</td>
                     <td class="text-center">
-                        {{ number_format($ordersQuery->sum('total') - $ordersQuery->sum('pay'), 2) }}
+                        {{ number_format($total_due, 2) }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="8" class="text-end">Total</td>
-                    <td class="text-center">{{ number_format($ordersQuery->sum('total'), 2) }}</td>
+                    <td class="text-center">{{ number_format($sub_total, 2) }}</td>
                 </tr>
                 {{-- @endif --}}
             </tbody>
