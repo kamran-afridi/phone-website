@@ -43,12 +43,12 @@
                     </div>
                 </div>
                 @if ($columns['productslist'])
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-4 col-sm-12">
                         @livewire('search-orders', ['products' => $products])
                     </div>
                 @endif
                 @if ($columns['orderlist'])
-                    <div class="col-lg-6">
+                    <div class="col-lg-6  col-md-8 col-sm-12">
                         <div class="card">
                             <div class="card-header">
                                 <div>
