@@ -3750,7 +3750,7 @@ table th{
 }
 
 .invoice-14 .order-summary tbody, td, tfoot, th, thead, tr {
-    border: solid 2px #eaeaea;
+    border: solid 1px #000000;
 }
 
 .invoice-14 p{
