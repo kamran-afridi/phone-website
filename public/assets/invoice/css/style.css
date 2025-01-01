@@ -4255,7 +4255,7 @@ table th{
 }
 
 .invoice-16 .invoice-top {
-    padding: 100px 150px 50px;
+    padding: 100px 150px 20px;
 }
 
 .invoice-16 .invoice-top .invoice {
@@ -4533,7 +4533,7 @@ table th{
 
 .invoice-17 .inv-title-1 {
     color: #11bbb0;
-    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .invoice-17 .name {
