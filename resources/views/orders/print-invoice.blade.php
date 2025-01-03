@@ -65,7 +65,7 @@
                                 </div>
                             </div> --}}
                             <div class="row">
-                                <div class="col-sm-6 mb-50">
+                                <div class="col-sm-6 mb-30">
                                     <h4 class="inv-title-1">Customer</h4>
                                     <p class="inv-from-1">{{ $order->customer->name }}</p>
                                     <p class="inv-from-1">{{ $order->customer->phone }}</p>
@@ -74,7 +74,7 @@
                                 @php
                                     $user = auth()->user();
                                 @endphp
-                                <div class="col-sm-6 text-end mb-50">
+                                <div class="col-sm-6 text-end mb-30">
                                     <h4 class="inv-title-1">Store</h4>
                                     <p class="inv-from-1">{{ Str::title($order->customer->store_address) }}</p>
                                     <p class="inv-from-1">{{ $order->customer->address }}</p>
@@ -131,7 +131,7 @@
                                             <td class="text-center">
                                                 <strong>{{$totalitems}}</strong>
                                             </td>
-                                            <td  class="text-end">
+                                            {{-- <td  class="text-end">
                                                 <strong>
                                                     Subtotal
                                                 </strong>
@@ -140,6 +140,14 @@
                                                 <strong>
                                                     {{ Number::currency($order->sub_total, 'GBP') }}
                                                 </strong>
+                                            </td> --}}
+                                            <td class="text-end">
+                                                <strong>Paid</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->pay, 'GBP') }}
+                                                </strong>
                                             </td>
                                         </tr>
                                         <tr>
@@ -147,16 +155,24 @@
                                             <td class="text-center">
                                                 <strong>{{ $totalqty }}</strong>
                                             </td>
-                                            <td  class="text-end">
+                                            {{-- <td  class="text-end">
                                                 <strong>Tax</strong>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
                                                     {{ Number::currency($order->vat, 'GBP') }}
                                                 </strong>
+                                            </td> --}}
+                                            <td class="text-end">
+                                                <strong>Pending</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->total - $order->pay, 'GBP') }}
+                                                </strong>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td colspan="4" class="text-end">
                                                 <strong>Paid</strong>
                                             </td>
@@ -175,7 +191,7 @@
                                                     {{ Number::currency($order->total - $order->pay, 'GBP') }}
                                                 </strong>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td colspan="4" class="text-end">
                                                 <strong>Total</strong>
