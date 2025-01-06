@@ -28,6 +28,31 @@ Version:    1.1.0
 -------------------------------------------------------------------*/
 /** GLOBAL CLASSES **/
 
+@media print {
+    .invoice-16 {
+        zoom: 65%; /* Adjust scale (works in some browsers) */
+    }
+    .invoice-16 .invoice-top{
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    .invoice-16 .mb-30{
+        margin-bottom: 10px;
+    }
+    .invoice-16 .invoice-info{
+        margin-top: 0;
+    }
+    .invoice-16 .default-table thead th{
+        padding: 5px !important;
+        margin: 5px;
+        font-size: 14px;
+    }
+    .invoice-16 .default-table tbody td{
+        padding: 5px !important;
+        margin: 5px;
+        font-size: 14px;
+    }
+}
 .table {
     color: #535353;
 }
