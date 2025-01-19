@@ -28,6 +28,12 @@ Version:    1.1.0
 -------------------------------------------------------------------*/
 /** GLOBAL CLASSES **/
 
+.invoice_details .inv-title-1{
+    font-size: 12px !important;
+}
+.invoice_details .invo-addr-1{
+    font-size: 12px !important;
+}
 @media print {
     .invoice-16 {
         zoom: 65%; /* Adjust scale (works in some browsers) */
