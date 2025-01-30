@@ -19,13 +19,11 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/style.css') }}">
 </head>
 <style>
-    .invoice-number{
-        float: right;
-    }
-    .invoice{
+    .invoice {
         text-align: right;
     }
 </style>
+
 <body>
     <div class="invoice-16 invoice-content">
         <div class="container">
@@ -47,7 +45,7 @@
                                             Invoice # <span>{{ $order->invoice_no }}</span>
                                         </h1>
                                         <div class="invoice_details">
-                                            <div class="invoice-number d-flex mt-3">
+                                            <div class="invoice-number d-flex justify-content-end">
                                                 <h4 class="inv-title-1">
                                                     Invoice date:&nbsp;
                                                 </h4>
@@ -55,15 +53,7 @@
                                                     {{ $order->order_date }}
                                                 </p>
                                             </div>
-                                            <div class="invoice-number d-flex mt-0">
-                                                <h4 class="inv-title-1">
-                                                    Bank Title:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    PANTHER FORCE RETAIL LIMITED
-                                                </p>
-                                            </div>
-                                            <div class="invoice-number d-flex mt-0">
+                                            <div class="invoice-number d-flex justify-content-end">
                                                 <h4 class="inv-title-1">
                                                     Bank Name:&nbsp;
                                                 </h4>
@@ -71,7 +61,15 @@
                                                     LLOYDS BANK
                                                 </p>
                                             </div>
-                                            <div class="invoice-number d-flex mt-0">
+                                            <div class="invoice-number d-flex justify-content-end">
+                                                <h4 class="inv-title-1">
+                                                    Bank Title:&nbsp;
+                                                </h4>
+                                                <p class="invo-addr-1">
+                                                    PANTHER FORCE RETAIL LIMITED
+                                                </p>
+                                            </div>
+                                            <div class="invoice-number d-flex justify-content-end">
                                                 <h4 class="inv-title-1">
                                                     Sort Code:&nbsp;
                                                 </h4>
@@ -145,7 +143,7 @@
                                     </thead>
 
                                     <tbody>
-                                        {{--@foreach ($orderDetails as $item) --}}
+                                        {{-- @foreach ($orderDetails as $item) --}}
                                         @php
                                             $totalqty = 0;
                                             $totalitems = 0;
@@ -174,7 +172,7 @@
                                             </tr>
                                             @php
                                                 $totalqty += $item->quantity;
-                                                $totalitems= $loop->iteration;
+                                                $totalitems = $loop->iteration;
                                                 // $totalitems++;
                                             @endphp
                                         @endforeach
@@ -182,7 +180,7 @@
                                         <tr>
                                             <td colspan="2" class="text-end"><strong>Total Items</strong></td>
                                             <td class="text-center">
-                                                <strong>{{$totalitems}}</strong>
+                                                <strong>{{ $totalitems }}</strong>
                                             </td>
                                             {{-- <td  class="text-end">
                                                 <strong>
