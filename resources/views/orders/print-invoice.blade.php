@@ -18,7 +18,14 @@
     <!-- Custom Stylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/invoice/css/style.css') }}">
 </head>
-
+<style>
+    .invoice-number{
+        float: right;
+    }
+    .invoice{
+        text-align: right;
+    }
+</style>
 <body>
     <div class="invoice-16 invoice-content">
         <div class="container">
@@ -40,12 +47,20 @@
                                             Invoice # <span>{{ $order->invoice_no }}</span>
                                         </h1>
                                         <div class="invoice_details">
-                                            <div class="invoice-number d-flex mt-3">
+                                                <div class="invoice-number d-flex mt-3">
+                                                    <h4 class="inv-title-1">
+                                                        Invoice date:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        {{ $order->order_date }}
+                                                    </p>
+                                                </div>
+                                            <div class="invoice-number d-flex mt-0">
                                                 <h4 class="inv-title-1">
-                                                    Invoice date:&nbsp;
+                                                    Bank Title:&nbsp;
                                                 </h4>
                                                 <p class="invo-addr-1">
-                                                    {{ $order->order_date }}
+                                                    PANTHER FORCE RETAIL LIMITED
                                                 </p>
                                             </div>
                                             <div class="invoice-number d-flex mt-0">
@@ -54,14 +69,6 @@
                                                 </h4>
                                                 <p class="invo-addr-1">
                                                     LLOYDS BANK
-                                                </p>
-                                            </div>
-                                            <div class="invoice-number d-flex mt-0">
-                                                <h4 class="inv-title-1">
-                                                    Bank Title:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    PANTHER FORCE RETAIL LIMITED
                                                 </p>
                                             </div>
                                             <div class="invoice-number d-flex mt-0">
