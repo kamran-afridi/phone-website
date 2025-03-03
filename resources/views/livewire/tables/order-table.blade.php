@@ -180,10 +180,10 @@
                         </td>
                         <td class="align-middle text-center">
                             <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
-                            <x-button.print class="btn-icon"
+                            <x-button.print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Sale Price"
                                 route="{{ route('order.downloadInvoice', $order->uuid) }}" />
                             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
-                                <x-button.admin_print class="btn-icon"
+                                <x-button.admin_print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Cost Price"
                                     route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
                             @endif
                             @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
