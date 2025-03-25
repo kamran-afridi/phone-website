@@ -71,9 +71,17 @@ class SearchOrders extends Component
     }
     public function render()
     {
-        $products = Product::search($this->search)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->get();
+        $products = collect(); // Default to an empty collection
+
+        if (!empty($this->search)) {
+            $products = Product::where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('sku', 'like', '%' . $this->search . '%')
+                ->get(); // or ->paginate(10) if needed
+        }
+
+        // $products = Product::search($this->search)
+        //     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+        //     ->get();
         // ->paginate($this->perPage);
         return view('livewire.search-orders', [
             'products' => $products,

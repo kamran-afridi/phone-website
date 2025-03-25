@@ -1,18 +1,18 @@
 <div class="card mb-4 mb-xl-0">
     <div class="card-header">
         List Product
-        <div class="ms-auto text-secondary">
+        {{-- <div class="ms-auto text-secondary">
             Search:
             <div class="ms-2 d-inline-block">
                 <input type="text" wire:model.live="search" class="form-control form-control-sm"
                     aria-label="Search product">
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <style>
         .abctable {
-            height: 450px;
+            max-height: 253px;
             overflow-x: auto;
             overflow-y: scroll;
         }
@@ -58,6 +58,11 @@
                 "Close"></button>
                 </div>
             @endif
+
+            <div class="col-md-12 my-2 text-secondary">
+                    <input type="text" wire:model.live="search" class="form-control"
+                        aria-label="Search product" placeholder="Search product">
+            </div>
             <x-spinner.loading-spinner />
                 <div class="table-responsive abctable">
                     <table wire:loading.remove class="table table-striped table-bordered align-middle">
