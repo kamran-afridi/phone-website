@@ -4,7 +4,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-cards">
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <!-- Show/Hide Columns Buttons -->
                     <div class="card-body border-bottom py-3">
                         <!-- Responsive Button Group -->
@@ -41,14 +41,14 @@
 
                         </div>
                     </div>
-                </div>
-                @if ($columns['productslist'])
+                </div> --}}
+                {{-- @if ($columns['productslist'])
                     <div class="col-lg-6 col-md-4 col-sm-12">
                         @livewire('search-orders', ['products' => $products])
                     </div>
-                @endif
-                @if ($columns['orderlist'])
-                    <div class="col-lg-6  col-md-8 col-sm-12">
+                @endif --}}
+                {{-- @if ($columns['orderlist']) --}}
+                    <div class="col-lg-12  col-md-12 col-sm-12">
                         <div class="card">
                             <div class="card-header">
                                 <div>
@@ -57,13 +57,17 @@
                                     </h3>
                                 </div>
 
-                                <div class="card-actions btn-actions">
+                                {{-- <div class="card-actions btn-actions">
                                     <x-action.close route="{{ route('orders.index') }}" />
-                                </div>
+                                </div> --}}
                             </div>
+
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    @livewire('search-orders', ['products' => $products])
+                                </div>
                             <form action="{{ route('invoice.create') }}" method="POST">
                                 @csrf
-                                <div class="card-body">
                                     <div class="row gx-3 mb-3">
                                         @include('partials.session')
                                         <div class="col-md-4">
@@ -290,17 +294,17 @@
                                         </table>
                                     </div>
 
-                                </div>
-                                <div class="card-footer text-end">
                                     <button type="submit"
                                         class="btn btn-success add-list mx-1 {{ Cart::count() > 0 ? '' : 'disabled' }}">
                                         {{ __('Create Invoice') }}
                                     </button>
-                                </div>
                             </form>
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
                         </div>
                     </div>
-                @endif
+                {{-- @endif --}}
 
             </div>
         </div>
