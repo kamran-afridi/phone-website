@@ -39,6 +39,14 @@
             scrollbar-width: thin;
             scrollbar-color: #636363 #ecf0f1;
         }
+        .searchproducts{
+            max-height: 253px;
+            overflow-x: auto;
+            overflow-y: scroll;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 5px;
+        }
         .searchproductcard:hover{
             background-color: #f0f0f0;
         }
@@ -67,9 +75,9 @@
                         aria-label="Search product" placeholder="Search product">
             </div>
             <x-spinner.loading-spinner />
-            <div class="col-md-12">
+            <div class="col-md-12 searchproducts">
                 @forelse ($products as $product)
-                    <div class="card searchproductcard m-2 p-2 cursor-pointer"
+                    <div class="card searchproductcard m-2 p-0 cursor-pointer"
                         wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')"
                         style="cursor: pointer;">
                         <div class="card-body">
