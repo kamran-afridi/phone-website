@@ -28,23 +28,31 @@ class SearchOrders extends Component
         // $request->all();
 		//dd($request);
         // dd($productId, $name, $salePrice, $sku);
-        try{
-            $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
+        if (!is_null($this->customer_id)) {
+            // Retrieve the order based on the customer ID
+            try{
+                $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
+                $this->dispatch('addedTocart');
+                session()->flash('success', value: 'Product has been added to cart!');
+                // if ($addItemToCart) {
+                //     $carts = Cart::content();
+                //     if ($carts->count() == 1) {
+                //         return redirect('/orders/create');
+                //     }
+                // }
+            }
+            catch(\Exception $e){
+                // dd($e);
+                Session::flash('error', 'Product already in cart');
+                }
             $this->dispatch('addedTocart');
             session()->flash('success', value: 'Product has been added to cart!');
-            // if ($addItemToCart) {
-            //     $carts = Cart::content();
-            //     if ($carts->count() == 1) {
-            //         return redirect('/orders/create');
-            //     }
-            // }
         }
-        catch(\Exception $e){
-            // dd($e);
-            Session::flash('error', 'Product already in cart');
-            }
-        $this->dispatch('addedTocart');
-        session()->flash('success', value: 'Product has been added to cart!');
+        else{
+            // dd($this->customer_id);
+            session()->flash('error', 'Please select a customer first!');
+            return;
+        }
 
     }
     public function sortBy($field): void
