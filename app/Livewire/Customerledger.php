@@ -27,6 +27,8 @@ class Customerledger extends Component
     public $datefrom = null;
     public $dateto = null;
 
+    public $totalOrders = 0;
+
     public $sortField = 'id';
     public $sortAsc = false;
     public $columns = [
@@ -112,6 +114,8 @@ class Customerledger extends Component
         $users = User::get(['id', 'name']);
         $customers = Customer::get(['id', 'name']);
 
+        $this->totalOrders = $orders->total();
+
         return view('livewire.customerledger', [
             'orders' => $orders,
             'users' => $users,
@@ -120,6 +124,7 @@ class Customerledger extends Component
             'sub_total' => $this->sub_total,
             'total_due' => $this->total_due,
             'total_payedamt' => $this->total_payedamt,
+            'totalOrders' => $this->totalOrders,
         ]);
     }
 }
