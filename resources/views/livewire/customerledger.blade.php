@@ -298,12 +298,20 @@
                 @endforelse
                 {{-- @if ($customerid) --}}
                 <tr>
-                    <td colspan="8" class="text-end">
+                    <td colspan="6" class="text-end">
+                        No of Orders
+                    </td>
+                    <td class="text-center">{{ $totalOrders }}</td>
+                    <td  class="text-end">
                         Payed amount
                     </td>
                     <td class="text-center">{{ number_format($total_payedamt, 2) }}</td>
                 </tr>
                 <tr>
+                    {{-- <td colspan="6" class="text-end">
+                        Profit/Loss
+                    </td>
+                    <td class="text-center">{{ $orders->count() }}</td> --}}
                     <td colspan="8" class="text-end">Due</td>
                     <td class="text-center">
                         {{ number_format($total_due, 2) }}
