@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\ReturnProduct;
 use App\Mail\StockAlert;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -241,7 +242,13 @@ class OrderController extends Controller
 
 	public function downloadInvoice($uuid)
 	{
+        $totalreturns = 0;
+        $thissubtotal = 0;
+
 		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
+        $returnProtucts = ReturnProduct::where('order_id', $order->id)->get();
+        $totalreturns = $returnProtucts->sum('subtotal');
+        $thissubtotal = $order->total + $totalreturns;
 		// TODO: Need refactor
 		//dd($order);
 
@@ -252,11 +259,21 @@ class OrderController extends Controller
 
 		return view('orders.print-invoice', [
 			'order' => $order,
+            'totalreturns' => $totalreturns,
+            'thissubtotal' => $thissubtotal,
+
 		]);
 	}
 	public function downloadAdminInvoice($uuid)
 	{
+        $totalreturns = 0;
+        $thissubtotal = 0;
+
 		$order = Order::with(['customer', 'details'])->where('uuid', $uuid)->firstOrFail();
+
+        $returnProtucts = ReturnProduct::where('order_id', $order->id)->get();
+        $totalreturns = $returnProtucts->sum('subtotal');
+        $thissubtotal = $order->total + $totalreturns;
 		// TODO: Need refactor
 		//dd($order);
 
@@ -268,6 +285,8 @@ class OrderController extends Controller
 
 		return view('orders.admin-print-invoice', [
 			'order' => $order,
+            'totalreturns' => $totalreturns,
+            'thissubtotal' => $thissubtotal,
 		]);
 	}
 
