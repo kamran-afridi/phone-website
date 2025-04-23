@@ -23,6 +23,14 @@
                             aria-label="Create new report">
                             <x-icon.plus />
                         </a>
+                        <a href="{{ route('return.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                            <x-icon.plus />
+                            Return Items
+                        </a>
+                        <a href="{{ route('return.create') }}" class="btn btn-primary d-sm-none btn-icon"
+                            aria-label="Create new report">
+                            <x-icon.plus />
+                        </a>
                     </div>
                 </div>
             </div>

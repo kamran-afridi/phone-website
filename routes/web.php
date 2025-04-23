@@ -12,6 +12,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Order\DueOrderController;
 use App\Http\Controllers\Order\OrderCompleteController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\Order\OrderPendingController;
 use App\Http\Controllers\PhoneRepairController;
 use App\Http\Controllers\PosController;
@@ -136,6 +137,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::put('/orders/update_order_payment/{order}', [OrderController::class, 'update_order_payment'])->name('orders.update_order_payment');
 	Route::delete('/orders/cancel/{order}', [OrderController::class, 'cancel'])->name('orders.cancel');
 	Route::delete('/orders/deleteitems/{orderdetailsid}', [OrderController::class, 'deleteitems'])->name('orders.deleteitems');
+
+    // Return Order
+	Route::get('/retuen/orderitem', [ReturnController::class, 'returncreate'])->name('return.create');
+
 
 	// DUES
 	Route::get('due/orders/', [DueOrderController::class, 'index'])->name('due.index');
