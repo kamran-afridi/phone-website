@@ -37,194 +37,198 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <div class="card">
+                                                <div class="card my-2">
                                                     <div class="card-header">Returned Products</div>
                                                     <div class="card-body p-2">
-                                                        <table class="table table-striped table-bordered align-middle">
-                                                            <thead class="thead-light">
-                                                                <tr>
-                                                                    <th scope="col" class="align-middle text-center">Product</th>
-                                                                    <th scope="col" class="align-middle text-center">Price</th>
-                                                                    <th scope="col" class="align-middle text-center">Qty</th>
-                                                                    <th scope="col" class="align-middle text-center">Total</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @if (!empty($returnedProducts))
-                                                                    @foreach ($returnedProducts as $returnproduct)
-                                                                        <tr>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ $returnproduct->product->sku }}
-                                                                                {{ $returnproduct->product->name }}</td>
-                                                                            </td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ number_format($returnproduct->price, 2) }}
-                                                                            </td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ $returnproduct->quantity }}</td>
-                                                                            </td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ number_format($returnproduct->subtotal, 2) }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                @else
-                                                                <tr>
-                                                                    <td colspan="7" class="text-center">
-                                                                        <p class="text">No Returned Product Found</p>
-                                                                    </td>
-                                                                </tr>
-                                                                @endif
-                                                            </tbody>
-                                                        </table>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-bordered align-middle">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th scope="col" class="align-middle text-center">Product</th>
+                                                                        <th scope="col" class="align-middle text-center">Price</th>
+                                                                        <th scope="col" class="align-middle text-center">Qty</th>
+                                                                        <th scope="col" class="align-middle text-center">Total</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if (!empty($returnedProducts))
+                                                                        @foreach ($returnedProducts as $returnproduct)
+                                                                            <tr>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ $returnproduct->product->sku }}
+                                                                                    {{ $returnproduct->product->name }}</td>
+                                                                                </td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ number_format($returnproduct->price, 2) }}
+                                                                                </td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ $returnproduct->quantity }}</td>
+                                                                                </td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ number_format($returnproduct->subtotal, 2) }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @else
+                                                                    <tr>
+                                                                        <td colspan="7" class="text-center">
+                                                                            <p class="text">No Returned Product Found</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endif
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="card">
+                                                <div class="card my-2">
                                                     <div class="card-header">Select Products</div>
                                                     <div class="card-body p-2">
-                                                        <table class="table table-striped table-bordered align-middle">
-                                                            <thead class="thead-light">
-                                                                <tr>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        No.</th>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        Name</th>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        Quantity</th>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        Price</th>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        Sub Total</th>
-                                                                    <th scope="col" class="align-middle text-center">
-                                                                        Return Quantity</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @if ($order)
-                                                                    @foreach ($order->details as $item)
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-bordered align-middle">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            No.</th>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            Name</th>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            Qty</th>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            Price</th>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            Sub Total</th>
+                                                                        <th scope="col" class="align-middle text-center">
+                                                                            Return Qty</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @if ($order)
+                                                                        @foreach ($order->details as $item)
+                                                                            <tr>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ $loop->iteration }}</td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ $item->product->sku }}
+                                                                                    {{ $item->product->name }}</td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ $item->quantity }}</td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ number_format($item->unitcost, 2) }}
+                                                                                </td>
+                                                                                <td class="align-middle text-center">
+                                                                                    {{ number_format($item->total, 2) }}
+                                                                                </td>
+                                                                                <td class="align-middle text-center">
+                                                                                    <input type="number" min="0"
+                                                                                        max="{{ $item->quantity }}"
+                                                                                        wire:model.defer="returnQuantities.{{ $item->id }}"
+                                                                                        class="form-control text-center" />
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+
+
                                                                         <tr>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ $loop->iteration }}</td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ $item->product->sku }}
-                                                                                {{ $item->product->name }}</td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ $item->quantity }}</td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ number_format($item->unitcost, 2) }}
+
+                                                                            <td class="text-end" colspan="5">
+                                                                                Payed amount
                                                                             </td>
-                                                                            <td class="align-middle text-center">
-                                                                                {{ number_format($item->total, 2) }}
-                                                                            </td>
-                                                                            <td class="align-middle text-center">
-                                                                                <input type="number" min="0"
-                                                                                    max="{{ $item->quantity }}"
-                                                                                    wire:model.defer="returnQuantities.{{ $item->id }}"
-                                                                                    class="form-control text-center" />
+                                                                            <td class="text-center">
+                                                                                <form
+                                                                                    action="{{ route('orders.update_order_payment', $order->uuid) }}"
+                                                                                    method="POST">
+                                                                                    @csrf
+                                                                                    @method('put')
+                                                                                    <div class="input-group"
+                                                                                        style="min-width: 170px;">
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            name="pay" required
+                                                                                            value="{{ $order->pay }}"
+                                                                                            step="any">
+                                                                                        <input type="hidden"
+                                                                                            class="form-control"
+                                                                                            name="order_id"
+                                                                                            value="{{ $order->id }}">
+
+                                                                                        <div
+                                                                                            class="input-group-append text-center">
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-icon btn-success border-none"
+                                                                                                data-toggle="tooltip"
+                                                                                                data-placement="top"
+                                                                                                title=""
+                                                                                                data-original-title="Sumbit">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                    class="icon icon-tabler icon-tabler-check"
+                                                                                                    width="24"
+                                                                                                    height="24"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke-width="2"
+                                                                                                    stroke="currentColor"
+                                                                                                    fill="none"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-linejoin="round">
+                                                                                                    <path stroke="none"
+                                                                                                        d="M0 0h24v24H0z"
+                                                                                                        fill="none" />
+                                                                                                    <path
+                                                                                                        d="M5 12l5 5l10 -10" />
+                                                                                                </svg>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+
                                                                             </td>
                                                                         </tr>
-                                                                    @endforeach
-
-
-                                                                    <tr>
-
-                                                                        <td class="text-end" colspan="5">
-                                                                            Payed amount
-                                                                        </td>
-                                                                        <td class="text-center">
-                                                                            <form
-                                                                                action="{{ route('orders.update_order_payment', $order->uuid) }}"
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                @method('put')
-                                                                                <div class="input-group"
-                                                                                    style="min-width: 170px;">
-                                                                                    <input type="number"
-                                                                                        class="form-control"
-                                                                                        name="pay" required
-                                                                                        value="{{ $order->pay }}"
-                                                                                        step="any">
-                                                                                    <input type="hidden"
-                                                                                        class="form-control"
-                                                                                        name="order_id"
-                                                                                        value="{{ $order->id }}">
-
-                                                                                    <div
-                                                                                        class="input-group-append text-center">
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-icon btn-success border-none"
-                                                                                            data-toggle="tooltip"
-                                                                                            data-placement="top"
-                                                                                            title=""
-                                                                                            data-original-title="Sumbit">
-                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                class="icon icon-tabler icon-tabler-check"
-                                                                                                width="24"
-                                                                                                height="24"
-                                                                                                viewBox="0 0 24 24"
-                                                                                                stroke-width="2"
-                                                                                                stroke="currentColor"
-                                                                                                fill="none"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round">
-                                                                                                <path stroke="none"
-                                                                                                    d="M0 0h24v24H0z"
-                                                                                                    fill="none" />
-                                                                                                <path
-                                                                                                    d="M5 12l5 5l10 -10" />
-                                                                                            </svg>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" class="text-end">Due</td>
-                                                                        <td class="text-center" colspan="2">
-                                                                            {{ number_format($order->due, 2) }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" class="text-end">VAT</td>
-                                                                        <td class="text-center" colspan="2">
-                                                                            {{ number_format($order->vat, 2) }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" class="text-end">Total</td>
-                                                                        <td class="text-center" colspan="2">
-                                                                            {{ number_format($order->total, 2) }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" class="text-end">Status
-                                                                        </td>
-                                                                        <td class="text-center" colspan="2">
-                                                                            <x-status dot
-                                                                                color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
-                                                                                class="text-uppercase">
-                                                                                {{ $order->order_status->label() }}
-                                                                            </x-status>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="6" class="text-end">
-                                                                            <button class="btn btn-warning"
-                                                                                wire:click="processReturn">Return
-                                                                                Selected Products</button>
-                                                                        </td>
-                                                                    </tr>
-                                                                @else
-                                                                    <tr>
-                                                                        <td colspan="7" class="text-center">
-                                                                            <p class="text-danger">No order
-                                                                                found</p>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
-                                                            </tbody>
-                                                        </table>
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-end">Due</td>
+                                                                            <td class="text-center" colspan="2">
+                                                                                {{ number_format($order->due, 2) }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-end">VAT</td>
+                                                                            <td class="text-center" colspan="2">
+                                                                                {{ number_format($order->vat, 2) }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-end">Total</td>
+                                                                            <td class="text-center" colspan="2">
+                                                                                {{ number_format($order->total, 2) }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="5" class="text-end">Status
+                                                                            </td>
+                                                                            <td class="text-center" colspan="2">
+                                                                                <x-status dot
+                                                                                    color="{{ $order->order_status === \App\Enums\OrderStatus::COMPLETE ? 'green' : ($order->order_status === \App\Enums\OrderStatus::PENDING ? 'orange' : '') }}"
+                                                                                    class="text-uppercase">
+                                                                                    {{ $order->order_status->label() }}
+                                                                                </x-status>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="6" class="text-end">
+                                                                                <button class="btn btn-warning"
+                                                                                    wire:click="processReturn">Return
+                                                                                    Selected Products</button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @else
+                                                                        <tr>
+                                                                            <td colspan="7" class="text-center">
+                                                                                <p class="text-danger">No order
+                                                                                    found</p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endif
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

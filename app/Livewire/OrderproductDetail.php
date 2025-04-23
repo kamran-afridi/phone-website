@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\OrderDetails;
 use App\Models\Order;
+use App\Models\ReturnProduct;
 
 class OrderproductDetail extends Component
 {
@@ -13,6 +14,8 @@ class OrderproductDetail extends Component
     public $productprice = [];
     public $OrderId = [];
     public $order;
+    public $totalreturns = 0;
+    public $thissubtotal = 0;
     public $paytoorder_id;
     public $payto;
 
@@ -53,6 +56,10 @@ class OrderproductDetail extends Component
             $this->productprice[$detail->id] = $detail->unitcost;
         }
         $payto = $this->order->payto;
+
+        $returnProtucts = ReturnProduct::where('order_id', $this->order->id)->get();
+        $this->totalreturns = $returnProtucts->sum('subtotal');
+        $this->thissubtotal = $this->order->total + $this->totalreturns;
     }
     public function savepayto($uuid)
     {
@@ -74,6 +81,6 @@ class OrderproductDetail extends Component
     public function render()
     {
         $this->updatingOrder();
-        return view('livewire.orderproduct-detail', ['order' => $this->order]);
+        return view('livewire.orderproduct-detail', ['order' => $this->order, 'totalreturns' => $this->totalreturns, 'thissubtotal' => $this->thissubtotal]);
     }
 }

@@ -205,9 +205,17 @@
                 <td colspan="5" class="text-end">Due</td>
                 <td class="text-center" colspan="2">{{ number_format($order->due, 2) }}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td colspan="5" class="text-end">VAT</td>
                 <td class="text-center" colspan="2">{{ number_format($order->vat, 2) }}</td>
+            </tr> --}}
+            <tr>
+                <td colspan="5" class="text-end">Sub Total</td>
+                <td class="text-center" colspan="2">{{ number_format($thissubtotal, 2) }}</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-end">Returns</td>
+                <td class="text-center" colspan="2">{{ number_format($totalreturns, 2) }}</td>
             </tr>
             <tr>
                 <td colspan="5" class="text-end">Total</td>
