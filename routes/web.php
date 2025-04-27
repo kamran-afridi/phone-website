@@ -68,6 +68,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	// User Management
 	Route::resource('/users', UserController::class);
+
+	Route::get('/user/customers', [UserController::class, 'usercustomers'])->name('users.usercustomers');
+
 	Route::put('/user/change-password/{username}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
