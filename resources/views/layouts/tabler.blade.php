@@ -705,6 +705,9 @@
                                                 <a class="dropdown-item" href="{{ route('suppliers.index') }}">
                                                     {{ __('Suppliers') }}
                                                 </a>
+                                                <a class="dropdown-item" href="{{ route('users.usercustomers') }}">
+                                                    {{ __('User Customers list') }}
+                                                </a>
                                                 <a class="dropdown-item" href="{{ route('customers.index') }}">
                                                     {{ __('Customers') }}
                                                 </a>
