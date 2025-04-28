@@ -9,4 +9,7 @@ class ReturnController extends Controller
     public function returncreate(){
         return view('return.create');
     }
+    public function returnindex(){
+        return view('return.index');
+    }
 }

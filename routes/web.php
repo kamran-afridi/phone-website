@@ -143,6 +143,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Return Order
 	Route::get('/retuen/orderitem', [ReturnController::class, 'returncreate'])->name('return.create');
+	Route::get('/retuen', [ReturnController::class, 'returnindex'])->name('return.index');
 
 
 	// DUES
