@@ -17,7 +17,6 @@ class CreateReturnOrder extends Component
     public $orderUuid, $orderInvoiceNo, $orderCudtomerId;
     public $returnQuantities = [];
 
-
     public function RemoveItem($cartid)
     {
         Cart::remove($cartid);
@@ -59,6 +58,8 @@ class CreateReturnOrder extends Component
                     $existingReturn->quantity += $returnQty;
                     $existingReturn->subtotal += $returnSubtotal;
                     $existingReturn->save();
+                    // Dispatch to other components
+                    // $this->dispatch('product-returned');
                 } else {
                     // If no return record exists, create a new return record
                     ReturnProduct::create([
@@ -71,6 +72,7 @@ class CreateReturnOrder extends Component
                         'subtotal' => $returnSubtotal,
                     ]);
                 }
+                // $this->dispatch('product-returned');
 
                 // Update order details: decrease the product quantity and recalculate the total for the item
                 $item->quantity -= $returnQty;
@@ -100,9 +102,9 @@ class CreateReturnOrder extends Component
     public function render()
     {
         $order = Order::where('uuid', $this->orderUuid)->first();
-        if($order){
+        if ($order) {
             $returnedProducts = ReturnProduct::where('order_id', $order->id)->get();
-        }else{
+        } else {
             $returnedProducts = [];
         }
 
