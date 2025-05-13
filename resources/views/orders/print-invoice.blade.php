@@ -176,6 +176,24 @@
                                             <td class="text-center">
                                                 <strong>{{ $totalitems }}</strong>
                                             </td>
+                                            <td class="text-end">
+                                                <strong>Discount</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    @if ($order->discount == 0)
+                                                        -
+                                                    @else
+                                                        {{ $order->discount }}%
+                                                    @endif
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-end"><strong>Total Qty</strong></td>
+                                            <td class="text-center">
+                                                <strong>{{ $totalqty }}</strong>
+                                            </td>
                                             {{-- <td  class="text-end">
                                                 <strong>
                                                     Subtotal
@@ -196,10 +214,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="text-end"><strong>Total Qty</strong></td>
-                                            <td class="text-center">
-                                                <strong>{{ $totalqty }}</strong>
-                                            </td>
                                             {{-- <td  class="text-end">
                                                 <strong>Tax</strong>
                                             </td>
@@ -208,7 +222,7 @@
                                                     {{ Number::currency($order->vat, 'GBP') }}
                                                 </strong>
                                             </td> --}}
-                                            <td class="text-end">
+                                            <td colspan="4" class="text-end">
                                                 <strong>Sub Total</strong>
                                             </td>
                                             <td class="align-middle text-center">

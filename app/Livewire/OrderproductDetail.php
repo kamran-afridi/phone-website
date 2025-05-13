@@ -16,11 +16,31 @@ class OrderproductDetail extends Component
     public $order;
     public $totalreturns = 0;
     public $thissubtotal = 0;
+    Public $thisdiscount = 0;
     public $paytoorder_id;
     public $payto;
-
+    public $discount = 0;
+    public $orderID;
     protected $listeners = ['addedTocart' => 'refreshorderlist'];
 
+    public function mount(Order $order)
+    {
+        $this->orderID = $order->id;
+        $this->discount = $order->discount ?? 0;
+    }
+    public function submitDiscount($uuid)
+    {
+        $order = Order::where('uuid', $uuid)->firstOrFail();
+        if($order->org_total == 0){
+            $order->org_total = $order->total;
+        }
+        $order->total = $order->org_total - ($order->org_total * $this->discount / 100);
+        $order->discount = $this->discount;
+        $order->due = $order->total - $order->pay;
+        $order->save();
+
+        session()->flash('success', 'Discount updated!');
+    }
     public function refreshorderlist()
     {
         $this->render();

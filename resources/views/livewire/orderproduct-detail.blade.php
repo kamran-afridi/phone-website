@@ -69,9 +69,10 @@
                                 </div>
                                 <div class="col-md-2 col-sm-12">
                                     <button type="submit" class="btn btn-primary btn-icon m-1 w-100">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check"
-                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-check" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M5 12l5 5l10 -10" />
                                         </svg>
@@ -136,11 +137,9 @@
                                     </button>
                                 </form>
                             @endif
-
                         @endif
                     </td>
                 </tr>
-
             @endforeach
             <tr>
                 <td colspan="3" class="text-end">
@@ -148,11 +147,13 @@
                 </td>
                 <td class="text-center" colspan="1">
                     <form wire:submit.prevent="savepayto('{{ $order->uuid }}')">
-                    {{-- <form action="{{ route('orders.update_order_payment', $order->uuid) }}" method="POST"> --}}
+                        {{-- <form action="{{ route('orders.update_order_payment', $order->uuid) }}" method="POST"> --}}
                         @csrf
                         <div class="input-group" style="min-width: 170px;">
-                            <input type="text" class="form-control" name="payto" wire:model='payto' required step="any">
-                            <input type="hidden" class="form-control" name="paytoorder_id" wire:model='orderID' value="{{ $order->id }}">
+                            <input type="text" class="form-control" name="payto" wire:model='payto' required
+                                step="any">
+                            <input type="hidden" class="form-control" name="paytoorder_id" wire:model='orderID'
+                                value="{{ $order->id }}">
 
                             <div class="input-group-append text-center">
                                 <button type="submit" class="btn btn-icon btn-success border-none"
@@ -199,6 +200,32 @@
                         </div>
                     </form>
 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="text-end">
+                    Discount (%)
+                </td>
+                <td class="text-center" colspan="2">
+                    <form wire:submit.prevent="submitDiscount('{{ $order->uuid }}')">
+                        @csrf
+                        <div class="input-group" style="min-width: 170px;">
+                            <input type="number" step="0.1" min="0" max="100"
+                                wire:model="discount" value="{{ $order->discount }}" class="form-control" required>
+                            <input type="hidden" wire:model="orderID" value="{{ $order->id }}">
+                            <div class="input-group-append text-center">
+                                <button type="submit" class="btn btn-icon btn-success border-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M5 12l5 5l10 -10" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </td>
             </tr>
             <tr>

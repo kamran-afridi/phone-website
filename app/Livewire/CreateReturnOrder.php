@@ -16,6 +16,7 @@ class CreateReturnOrder extends Component
     protected $listeners = ['selectedOrder' => 'loadSelectedOrder'];
     public $orderUuid, $orderInvoiceNo, $orderCudtomerId;
     public $returnQuantities = [];
+    public $totalreturns = 0;
 
     public function RemoveItem($cartid)
     {
@@ -88,10 +89,19 @@ class CreateReturnOrder extends Component
             }
         }
 
+
         // After processing all returns, recalculate the order's subtotal and total
-        $order->sub_total = $order->details->sum('total');
-        $order->total = $order->sub_total + $order->vat;
-        $order->due = $order->total - $order->pay;
+        if($order->org_total > 0){
+            $order->org_total = $order->details->sum('total');
+            $order->sub_total = $order->org_total - ($order->org_total * $order->discount / 100);
+            $order->total = $order->org_total - ($order->org_total * $order->discount / 100);
+            $order->due = $order->total - $order->pay;
+        }
+        else{
+            $order->sub_total = $order->details->sum('total');
+            $order->total = $order->sub_total + $order->vat;
+            $order->due = $order->total - $order->pay;
+        }
         $order->save();
 
         // Flash a success message to the session
