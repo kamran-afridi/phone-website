@@ -18,6 +18,8 @@ class CreateNewOrder extends Component
         'productslist' => true,
         'orderlist' => true,
     ];
+    public $discount = 0;
+    public $thistotal = 0;
 
 	public function toggleColumn($column)
 	{
@@ -79,10 +81,13 @@ class CreateNewOrder extends Component
             $this->cartItemprice[$item->rowId] = $item->price;
         }
         // dd($carts);
+        $this->thistotal =  Cart::subtotal() * ((100 - (float)$this->discount) / 100);
         return view('livewire.create-new-order', [
             'products' => $products,
             'allcustomers' => $customers,
             'newcartitem' => $carts,
+            'discount' => $this->discount,
+            'thistotal' => $this->thistotal,
         ]);
     }
 }
