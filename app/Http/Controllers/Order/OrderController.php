@@ -321,8 +321,29 @@ class OrderController extends Controller
 			}
 			// $AllOrderDetail->sum('unitcost');
 			// dd($newTotalCost );
-			$Duebill = $newTotalCost - $Order->pay;
-			$Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'total_products' => $TotalProducts, 'due' => $Duebill]);
+
+			// $Duebill = $newTotalCost - $Order->pay;
+
+            if($Order->org_total != null){
+                    $lastPrice = $newTotalCost;
+                    $lastSub_total = $lastPrice - ($lastPrice * $Order->discount / 100);
+                    $lastTotal = $lastPrice - ($lastPrice * $Order->discount / 100);
+                    $lastDue = $lastTotal - $Order->pay;
+            }
+
+			$Order->update([
+                'total' => $lastTotal,
+                'sub_total' => $lastSub_total,
+                'total_products' => $TotalProducts,
+                'due' => $lastDue,
+                'org_total' => $lastPrice
+            ]);
+			// $Order->update([
+            //     'total' => $newTotalCost,
+            //     'sub_total' => $newTotalCost,
+            //     'total_products' => $TotalProducts,
+            //     'due' => $Duebill
+            // ]);
 		}
 		return redirect()
 			->route('orders.show', $request->uuid)
