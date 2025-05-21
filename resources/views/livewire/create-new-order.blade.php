@@ -278,7 +278,7 @@
                                                     {{ Number::currency(Cart::subtotal(), 'GBP') }}
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td colspan="5" class="text-end">Add Discount (%)</td>
                                                 <td class="text-center">
                                                     <input type="number" step="0.1" min="0"
@@ -287,7 +287,7 @@
                                                         id="discount">
 
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
                                                 <td colspan="5" class="text-end">Total</td>
                                                 <td class="text-center">

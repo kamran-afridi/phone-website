@@ -60,7 +60,22 @@ class AddProduct extends Component
                     'due' => $Duebill,
                 ]);
                 $getOrderSaved = $getorderID->save();
-                // dd($getorderID);
+
+                if($getorderID->org_total != null){
+                    $lastPrice = $salePrice + $getorderID->org_total;
+                    $lastSub_total = $lastPrice - ($lastPrice * $getorderID->discount / 100);
+                    $lastTotal = $lastPrice - ($lastPrice * $getorderID->discount / 100);
+                    $lastDue = $lastTotal - $getorderID->pay;
+
+                    $getorderID->update([
+                        'org_total' => $lastPrice,
+                        'total' => $lastTotal,
+                        'sub_total' =>  $lastSub_total,
+                        'due' => $lastDue,
+                    ]);
+                }
+                $lastGetOrderSaved = $getorderID->save();
+                // dd($lastGetOrderSaved);
 
                 if ($addItemSaved && $getOrderSaved) {
                     // Dispatch a Livewire event and show success message
@@ -68,6 +83,9 @@ class AddProduct extends Component
                     session()->flash('success', 'Product has been added to cart!');
                     // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)
                     // ->where('id', $AllOrderDetails->id)->get());
+                }
+                if($lastGetOrderSaved){
+                    session()->flash('success', 'discount Updated!!');
                 }
             } else {
                 session()->flash('error', 'Failed to add product to cart!');
