@@ -58,8 +58,29 @@ class OrderproductDetail extends Component
         if ($OrderDetails) {
             $AllOrderDetails = OrderDetails::where('order_id', $this->OrderId[$productId])->get();
             $newTotalCost = $AllOrderDetails->sum('total');
-            $Duebill = $newTotalCost - $Order->pay;
-            $Order->update(['total' => $newTotalCost, 'sub_total' => $newTotalCost, 'due' => $Duebill]);
+
+
+            if($Order->org_total != null){
+                    $lastPrice = $newTotalCost + $Order->org_total;
+                    $lastSub_total = $lastPrice - ($lastPrice * $Order->discount / 100);
+                    $lastTotal = $lastPrice - ($lastPrice * $Order->discount / 100);
+                    $lastDue = $lastTotal - $Order->pay;
+
+                    $Order->update([
+                        'org_total' => $lastPrice,
+                        'total' => $lastTotal,
+                        'sub_total' =>  $lastSub_total,
+                        'due' => $lastDue,
+                    ]);
+            }
+            else{
+                $Duebill = $newTotalCost - $Order->pay;
+                $Order->update([
+                    'total' => $newTotalCost,
+                    'sub_total' => $newTotalCost,
+                    'due' => $Duebill
+                ]);
+            }
         }
 
         $this->updatingOrder();
