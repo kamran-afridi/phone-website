@@ -58,10 +58,10 @@ class OrderproductDetail extends Component
         if ($OrderDetails) {
             $AllOrderDetails = OrderDetails::where('order_id', $this->OrderId[$productId])->get();
             $newTotalCost = $AllOrderDetails->sum('total');
-
+            // dd($newTotalCost);
 
             if($Order->org_total != null){
-                    $lastPrice = $newTotalCost + $Order->org_total;
+                    $lastPrice = $newTotalCost;
                     $lastSub_total = $lastPrice - ($lastPrice * $Order->discount / 100);
                     $lastTotal = $lastPrice - ($lastPrice * $Order->discount / 100);
                     $lastDue = $lastTotal - $Order->pay;
