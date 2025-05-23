@@ -210,5 +210,6 @@ Route::get('/rota/editaddress/{address_id}', [RotaController::class, 'editaddres
 // Customer Ledger
 Route::get('/customer-ledger', [CustomerLedger::class, 'index'])->name('ledger.customer');
 Route::get('/user-ledger', [UserLedger::class, 'index'])->name('ledger.userledger');
+Route::get('/current-user-ledger', [UserLedger::class, 'userAuthLedger'])->name('ledger.userauthledger');
 
 
