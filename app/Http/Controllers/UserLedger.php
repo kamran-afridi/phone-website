@@ -18,4 +18,15 @@ class UserLedger extends Controller
 			'orders' => $orders
 		]);
     }
+    public function userAuthLedger(){
+        if (auth()->user()->role === 'user') {
+			// dd("asd");
+			$orders = Order::where('user_id', auth()->id())->count();
+            return view('ledger.userauthledger', [
+                'orders' => $orders
+            ]);
+		} else {
+            return 'login';
+		}
+    }
 }
