@@ -31,9 +31,9 @@ class UserSelect extends Component
     }
     public function render()
     {
-        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
+        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier'|| auth()->user()->role === 'superAdmin') {
             if (empty($this->search)) {
-                $ordersQuery = User::get();
+                $ordersQuery = User::where('wearhouse_id', auth()->user()->wearhouse_id);
             }
             if ($this->search) {
                 $ordersQuery = User::where('name', 'like', '%' . $this->search . '%')->get();

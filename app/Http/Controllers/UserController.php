@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\WearhouseLocations;
 use Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -24,18 +26,36 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $wearhouselocations = WearhouseLocations::all();
+        return view('users.create', [
+            'wearhouselocations' => $wearhouselocations
+        ]);
     }
 
     public function store(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name'  => $request->name,
-            'uuid' => Str::uuid(),
-            'username'  =>  $request->email,
-            'email'  =>  $request->email,
-            'password'  => Hash::make($request->password),
-        ]);
+        if (Auth::user()->role == 'superAdmin') {
+            // dd($request->all());
+            $user = User::create([
+                'name'  => $request->name,
+                'uuid' => Str::uuid(),
+                'username'  =>  $request->email,
+                'email'  =>  $request->email,
+                'role' => $request->role,
+                'password'  => Hash::make($request->password),
+                'wearhouse_id' => $request->wearhouselocations,
+            ]);
+        }
+        else{
+            $user = User::create([
+                'name'  => $request->name,
+                'uuid' => Str::uuid(),
+                'username'  =>  $request->email,
+                'email'  =>  $request->email,
+                'password'  => Hash::make($request->password),
+                'wearhouse_id' => $request->wearhouselocations,
+            ]);
+        }
 
 
         /**

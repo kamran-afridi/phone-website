@@ -20,10 +20,8 @@ class UserTable extends Component
 
     public function sortBy($field): void
     {
-        if($this->sortField === $field)
-        {
-            $this->sortAsc = ! $this->sortAsc;
-
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
         } else {
             $this->sortAsc = true;
         }
@@ -37,11 +35,22 @@ class UserTable extends Component
     }
     public function render()
     {
-        return view('livewire.tables.user-table', [
-            'users' => User::query()
+        if (auth()->user()->role == 'admin'){
+            // dd(auth()->user()->wearhouse_id);
+            $users = User::with('wearhouselocations')
+                ->where('wearhouse_id', auth()->user()->wearhouse_id)
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate($this->perPage)
+                ->paginate($this->perPage);
+        }
+        else{
+            $users = User::with('wearhouselocations')
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+        }
+        return view('livewire.tables.user-table', [
+            'users' => $users,
         ]);
     }
 }

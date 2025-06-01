@@ -60,6 +60,12 @@
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
+                        <a wire:click.prevent="sortBy('wearhouse_id')" href="#" role="button">
+                            {{ __('Wearhouse') }}
+                            @include('inclues._sort-icon', ['field' => 'wearhouse_id'])
+                        </a>
+                    </th>
+                    <th scope="col" class="align-middle text-center">
                         <a wire:click.prevent="sortBy('created_at')" href="#" role="button">
                             {{ __('Created at') }}
                             @include('inclues._sort-icon', ['field' => 'created_at'])
@@ -81,6 +87,9 @@
                         </td>
                         <td class="align-middle text-center">
                             {{ $user->email }}
+                        </td>
+                        <td class="align-middle text-center">
+                            {{ $user->wearhouselocations->name }}
                         </td>
                         <td class="align-middle text-center d-none d-sm-table-cell" style="width: 15%">
                             {{ $user->created_at->format('d-m-Y') }}

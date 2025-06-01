@@ -48,7 +48,7 @@ class UserCustomers extends Component
     }
     public function render()
     {
-        if (auth()->user()->role == 'admin') {
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin') {
             $customers = Customer::with('orders', 'quotations')
             ->where('user_id', $this->userId)
             ->search($this->search)

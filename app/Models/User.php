@@ -6,6 +6,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\WearhouseLocations;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -15,9 +19,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'uuid',
         'photo',
+        'wearhouse_id',
         'name',
         'username',
         'email',
+        'role',
         'password',
         "store_name",
         "store_address",
@@ -29,7 +35,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
@@ -46,4 +51,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'name';
     }
+    public function wearhouselocations(){
+        return $this->belongsTo(WearhouseLocations::class, 'wearhouse_id', 'id');
+    }
+
 }

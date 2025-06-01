@@ -19,7 +19,7 @@ class UserLedger extends Controller
 		]);
     }
     public function userAuthLedger(){
-        if (auth()->user()->role === 'user') {
+        if (auth()->user()->role === 'user' || auth()->user()->role == 'superAdmin') {
 			// dd("asd");
 			$orders = Order::where('user_id', auth()->id())->count();
             return view('ledger.userauthledger', [

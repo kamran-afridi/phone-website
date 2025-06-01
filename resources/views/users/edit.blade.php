@@ -63,6 +63,22 @@
                                             <x-input name="name" :value="old('name', $user->name)" required="true"/>
 
                                             <x-input name="email" :value="old('name', $user->email)" label="Email address" required="true"/>
+                                                <select name="wearhouse_id" id="wearhouselocations"  class="form-control">
+                                                    <option value="" disabled>Select Warehouse</option>
+                                                    @if (!empty($user->wearhouse_id))
+                                                        @if ( $user->wearhouse_id == 1)
+                                                            <option value="{{$user->wearhouse_id}}" selected>Leeds</option>
+                                                        @elseif ( $user->wearhouse_id == 2)
+                                                            <option value="{{$user->wearhouse_id}}" selected>London</option>
+                                                        @elseif ( $user->wearhouse_id == 3)
+                                                            <option value="{{$user->wearhouse_id}}" selected>Manchester</option>
+                                                        @endif
+                                                        {{-- <option value="{{$user->wearhouse_id}}" selected>{{$user->wearhouse_id}}</option> --}}
+                                                    @endif
+                                                    @foreach ($wearhouselocations as $location)
+                                                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
                                     </div>
                                 </div>

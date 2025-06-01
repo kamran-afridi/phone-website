@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-			$table->enum('role', ['user', 'superAdmin', 'admin', 'customer'])->default('user');
-
+        Schema::create('wearhouse_locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('user', function (Blueprint $table) {
-			$table->dropColumn('role');
-        });
+        Schema::dropIfExists('wearhouse_locations');
     }
 };

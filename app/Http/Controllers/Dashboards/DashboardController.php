@@ -15,16 +15,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-		if (auth()->user()->role !== 'admin') {   
+		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin') {
 			return redirect()->route('orders.index');
-		} 
+		}
         $orders = Order::where("user_id", auth()->id())->count();
-        $products = Product::where("user_id", auth()->id())->count(); 
+        $products = Product::where("user_id", auth()->id())->count();
         $purchases = Purchase::where("user_id", auth()->id())->count();
         $todayPurchases = Purchase::whereDate('date', today()->format('Y-m-d'))->count();
         $todayProducts = Product::whereDate('created_at', today()->format('Y-m-d'))->count();
         $todayQuotations = Quotation::whereDate('created_at', today()->format('Y-m-d'))->count();
-        $todayOrders = Order::whereDate('created_at', today()->format('Y-m-d'))->count(); 
+        $todayOrders = Order::whereDate('created_at', today()->format('Y-m-d'))->count();
         $categories = Category::where("user_id", auth()->id())->count();
         $quotations = Quotation::where("user_id", auth()->id())->count();
         return view('dashboard', [

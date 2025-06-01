@@ -67,7 +67,7 @@ class Userledger extends Component
         $ordersQuery = Order::with(['customer', 'details', 'user'])->whereNot('order_status', '2');
 
         // Apply filters for admin or supplier roles
-        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
+        if (auth()->user()->role === 'admin' || auth()->user()->role == 'superAdmin' || auth()->user()->role === 'supplier') {
             // Filter by user ID if provided
             if ($this->userid) {
                 $ordersQuery->where('user_id', $this->userid);
@@ -112,7 +112,16 @@ class Userledger extends Component
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
 
-        $users = User::get(['id', 'name']);
+        // $users = User::get(['id', 'name']);
+        if (auth()->user()->role == 'admin') {
+            $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
+        }
+        elseif(auth()->user()->role == 'superAdmin') {
+            $users = User::get(['id', 'name']);
+        }
+        else{
+            $users = User::get(['id', 'name']);
+        }
         $customers = Customer::get(['id', 'name']);
 
         return view('livewire.userledger', [
