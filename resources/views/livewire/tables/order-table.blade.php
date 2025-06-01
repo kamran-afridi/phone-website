@@ -5,7 +5,7 @@
                 {{ __('Orders') }}
             </h3>
         </div>
-        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
             <div class="m-auto d-flex">
                 <select class="form-select form-control-solid mr-2 @error('user_id') is-invalid @enderror" id="user_id"
                     name="user_id" wire:model.change="userid">
@@ -162,7 +162,7 @@
                         <td class="align-middle text-center">
                             {{ $order->payto }}
                         </td>
-                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                             <td class="align-middle text-center">
                                 {{ $order->user->name }}
                             </td>
@@ -182,7 +182,7 @@
                             <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
                             <x-button.print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Sale Price"
                                 route="{{ route('order.downloadInvoice', $order->uuid) }}" />
-                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                                 <x-button.admin_print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Cost Price"
                                     route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
                             @endif

@@ -57,10 +57,22 @@ class OrderTable extends Component
 
     public function render()
     {
-        if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
-            $query = Order::with(['customer', 'details', 'user'])
-                ->search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+        if (auth()->user()->role === 'admin' || auth()->user()->role == 'superAdmin' || auth()->user()->role === 'supplier') {
+            // $query = Order::with(['customer', 'details', 'user'])
+            //     ->search($this->search)
+            //     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            if (auth()->user()->role === 'admin') {
+                $query = Order::with(['customer', 'details', 'user'])
+                    ->whereHas('user', function ($q) {
+                        $q->where('wearhouse_id', auth()->user()->wearhouse_id);
+                    })
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            } else {
+                $query = Order::with(['customer', 'details', 'user'])
+                    ->search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+            }
 
             if ($this->userid && $this->userid !== 'all') {
                 $query->where('user_id', $this->userid);
@@ -79,7 +91,13 @@ class OrderTable extends Component
                 ->paginate($this->perPage);
         }
 
-        $users = User::get(['id', 'name']);
+        // $users = User::get(['id', 'name']);
+        if (auth()->user()->role == 'admin') {
+            $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
+        }
+        elseif(auth()->user()->role == 'superAdmin') {
+           $users = User::get(['id', 'name']);
+        }
         $customers = Customer::get(['id', 'name']);
         return view('livewire.tables.order-table', [
             'orders' => $orders,

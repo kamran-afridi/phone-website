@@ -26,6 +26,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('photo')->nullable();
+            $table->integer('wearhouse_id')->unsigned();
+            $table->foreign('wearhouse_id')->references('id')->on('wearhouse_locations')->onDelete('cascade');
         });
     }
 

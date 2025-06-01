@@ -39,7 +39,7 @@
                         {{ __('User Ledger') }}
                     </h3>
                 </div>
-                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                     {{-- <div class="m-auto d-flex align-items-center"> --}}
                     <div class="col-md-3">
                         <!-- Customer Selection -->
@@ -260,7 +260,7 @@
                             </td>
                         @endif
                         {{-- @if ($columns['user']) --}}
-                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                             <td class="align-middle text-center">
                                 {{ $order->user->name }}
                             </td>
@@ -284,7 +284,7 @@
                                 <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
                                 <x-button.print class="btn-icon"
                                     route="{{ route('order.downloadInvoice', $order->uuid) }}" />
-                                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+                                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                                     <x-button.admin_print class="btn-icon"
                                         route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
                                 @endif
