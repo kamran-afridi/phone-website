@@ -92,7 +92,7 @@ class OrderTable extends Component
         }
 
         // $users = User::get(['id', 'name']);
-        if (auth()->user()->role == 'admin') {
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'user') {
             $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
         }
         elseif(auth()->user()->role == 'superAdmin') {
