@@ -65,7 +65,7 @@ class CreateNewOrder extends Component
     {
         $products = Product::with(['category_id'])->get();
 
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'superAdmin') {
             $customers = Customer::get(['id', 'name']);
         } else {
             $customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
