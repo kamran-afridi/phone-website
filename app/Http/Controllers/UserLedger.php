@@ -22,7 +22,7 @@ class UserLedger extends Controller
         if (auth()->user()->role === 'user' || auth()->user()->role == 'superAdmin') {
 			// dd("asd");
 			$orders = Order::where('user_id', auth()->id())->count();
-            return view('ledger.userauthledger', [
+            return view('ledger.userAuthLedger', [
                 'orders' => $orders
             ]);
 		} else {
