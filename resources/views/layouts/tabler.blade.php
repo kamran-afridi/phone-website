@@ -186,7 +186,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="navbar">
                     <div class="container-xl">
-                        @if (auth()->user()->role != 'admin' || auth()->user()->role != 'superAdmin')
+                        @if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin')
                             <ul class="navbar-nav">
                                 <li class="nav-item {{ request()->is('products*') ? 'active' : null }}">
                                     <a class="nav-link" href="{{ route('products.index') }}">
@@ -773,22 +773,22 @@
                                                 <a class="dropdown-item" href="{{ route('customers.index') }}">
                                                     {{ __('Customers') }}
                                                 </a>
-                                                @if (auth()->user()->role == 'admin' && auth()->user()->role != 'superAdmin')
+                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                                     <a class="dropdown-item" href="{{ route('ledger.customer') }}">
                                                         {{ __('Customer Ledger') }}
                                                     </a>
                                                 @endif
-                                                @if (auth()->user()->role == 'admin' && auth()->user()->role != 'superAdmin')
+                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                                     <a class="dropdown-item" href="{{ route('ledger.userledger') }}">
                                                         {{ __('User Ledger') }}
                                                     </a>
                                                 @endif
-                                                @if (auth()->user()->role == 'admin' && auth()->user()->role != 'superAdmin')
+                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                                     <a class="dropdown-item" href="{{ route('users.index') }}">
                                                         {{ __('Users') }}
                                                     </a>
                                                 @endif
-                                                @if (auth()->user()->role == 'admin' && auth()->user()->role != 'superAdmin')
+                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                                     <a class="dropdown-item" href="{{ route('rota.index') }}">
                                                         {{ __('Rota') }}
                                                     </a>
