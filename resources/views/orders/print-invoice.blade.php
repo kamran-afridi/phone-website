@@ -227,7 +227,11 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($thissubtotal, 'GBP') }}
+                                                    @if (isset($order->org_total) && $order->org_total > 0)
+                                                        {{ Number::currency($order->org_total, 'GBP') }}
+                                                    @else
+                                                        {{ Number::currency($thissubtotal, 'GBP') }}
+                                                    @endif
                                                 </strong>
                                             </td>
                                         </tr>
