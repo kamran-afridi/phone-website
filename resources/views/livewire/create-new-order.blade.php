@@ -223,7 +223,11 @@
                                                         </form>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ Number::currency($item->subtotal, 'GBP') }}
+                                                        @if (isset($order->org_total) && $order->org_total > 0)
+                                                            {{ Number::currency($order->org_total, 'GBP') }}
+                                                        @else
+                                                            {{ Number::currency($thissubtotal, 'GBP') }}
+                                                        @endif
                                                     </td>
                                                     <td class="text-center">
                                                         <form wire:submit.prevent="RemoveItem('{{ $item->rowId }}')">
