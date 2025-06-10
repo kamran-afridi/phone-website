@@ -186,7 +186,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="navbar">
                     <div class="container-xl">
-                        @if (auth()->user()->role != 'admin')
+                        @if (auth()->user()->role != 'admin' || auth()->user()->role != 'superAdmin')
                             <ul class="navbar-nav">
                                 <li class="nav-item {{ request()->is('products*') ? 'active' : null }}">
                                     <a class="nav-link" href="{{ route('products.index') }}">
@@ -368,7 +368,7 @@
                                         </a>
                                     </li>
                                 @endif
-                                @if (auth()->user()->role == 'admin' && auth()->user()->role != 'superAdmin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role != 'superAdmin')
                                     <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-base"
                                             data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
@@ -719,27 +719,27 @@
 
 
                                 {{-- <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
-							<a class="nav-link" href="{{ route('phone-repairs.index') }}">
-								<span
-									class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-									<svg xmlns="http://www.w3.org/2000/svg"
-										class="icon icon-tabler icon-tabler-file" width="24" height="24"
-										viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-										fill="none" stroke-linecap="round" stroke-linejoin="round">
-										<path fill="#607D8B"
-											d="M52,2H12a4,4,0,0,0-4,4V58a4,4,0,0,0,4,4H52a4,4,0,0,0,4-4V6A4,4,0,0,0,52,2ZM50,56H14V6H50Z" />
-										<rect fill="#78909C" x="22" y="2" width="20" height="4" />
-										<rect fill="#78909C" x="18" y="8" width="28" height="46" />
-										<circle fill="#546E7A" cx="32" cy="54" r="2" />
-									</svg>
+                                        <a class="nav-link" href="{{ route('phone-repairs.index') }}">
+                                            <span
+                                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-file" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path fill="#607D8B"
+                                                        d="M52,2H12a4,4,0,0,0-4,4V58a4,4,0,0,0,4,4H52a4,4,0,0,0,4-4V6A4,4,0,0,0,52,2ZM50,56H14V6H50Z" />
+                                                    <rect fill="#78909C" x="22" y="2" width="20" height="4" />
+                                                    <rect fill="#78909C" x="18" y="8" width="28" height="46" />
+                                                    <circle fill="#546E7A" cx="32" cy="54" r="2" />
+                                                </svg>
 
 
-								</span>
-								<span class="nav-link-title">
-									{{ __('Phone repair') }}
-								</span>
-							</a>
-						</li> --}}
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Phone repair') }}
+                                            </span>
+                                        </a>
+                                    </li> --}}
                                 <li
                                     class="nav-item dropdown {{ request()->is('suppliers*', 'customers*') ? 'active' : null }}">
                                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
