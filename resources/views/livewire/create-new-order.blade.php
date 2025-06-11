@@ -226,7 +226,7 @@
                                                         @if (isset($order->org_total) && $order->org_total > 0)
                                                             {{ Number::currency($order->org_total, 'GBP') }}
                                                         @else
-                                                            {{ Number::currency($thissubtotal, 'GBP') }}
+                                                            {{ Number::currency($item->subtotal, 'GBP') }}
                                                         @endif
                                                     </td>
                                                     <td class="text-center">

@@ -28,7 +28,7 @@ class SearchOrders extends Component
         // $request->all();
 		//dd($request);
         // dd($productId, $name, $salePrice, $sku);
-        if (!is_null($this->customer_id)) {
+        if (!is_null($this->customer_id) || Session::get('customer_id')) {
             // Retrieve the order based on the customer ID
             try{
                 $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
