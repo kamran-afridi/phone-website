@@ -88,7 +88,7 @@
                     </td>
                     <td class="align-middle text-center" style="max-width: 50px">
 
-                        @if (auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                             @if ($order->details->count() > 1)
                                 <form action="{{ route('orders.deleteitems', $item->id) }}" class="d-inline-block"
                                     method="POST">
