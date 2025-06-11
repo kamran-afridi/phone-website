@@ -186,7 +186,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <div class="navbar">
                     <div class="container-xl">
-                        @if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin')
+                        @if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user() == 'customer' || auth()->user() == 'supplier' || auth()->user() == 'user' )
                             <ul class="navbar-nav">
                                 <li class="nav-item {{ request()->is('products*') ? 'active' : null }}">
                                     <a class="nav-link" href="{{ route('products.index') }}">

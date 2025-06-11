@@ -98,7 +98,12 @@ class OrderTable extends Component
         elseif(auth()->user()->role == 'superAdmin') {
            $users = User::get(['id', 'name']);
         }
+
+        if (auth()->user()->role == 'customer'){
+            $users = user::where('id', auth()->user()->id)->get(['id', 'name']);
+        }
         $customers = Customer::get(['id', 'name']);
+
         return view('livewire.tables.order-table', [
             'orders' => $orders,
             'users' => $users,
