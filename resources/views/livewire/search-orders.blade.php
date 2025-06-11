@@ -76,6 +76,11 @@
             </div>
             <x-spinner.loading-spinner />
             <div class="col-md-12 searchproducts">
+                @php
+                // if (Session::get('customer_id')){
+                //     dd(Session::get('customer_id'));
+                // }
+                @endphp
                 @forelse ($products as $product)
                     <div class="card searchproductcard m-2 p-0 cursor-pointer"
                         wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')"
