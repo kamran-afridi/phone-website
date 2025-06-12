@@ -369,7 +369,7 @@
                                         </a>
                                     </li>
                                 @endif
-                                @if (auth()->user()->role == 'admin' || auth()->user()->role != 'superAdmin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                     <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-base"
                                             data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
@@ -658,198 +658,259 @@
                                         </div>
                                     </div>
                                 </li>
-
-                                <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
-                                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-package-import" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M12 21l-8 -4.5v-9l8 -4.5l8 4.5v4.5" />
-                                                <path d="M12 12l8 -4.5" />
-                                                <path d="M12 12v9" />
-                                                <path d="M12 12l-8 -4.5" />
-                                                <path d="M22 18h-7" />
-                                                <path d="M18 15l-3 3l3 3" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            {{ __('Purchases') }}
-                                        </span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="dropdown-menu-columns">
-                                            <div class="dropdown-menu-column">
-                                                <a class="dropdown-item" href="{{ route('purchases.index') }}">
-                                                    {{ __('All') }}
-                                                </a>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('purchases.approvedPurchases') }}">
-                                                    {{ __('Approval') }}
-                                                </a>
-                                                {{-- <a class="dropdown-item" href="{{ route('purchases.purchaseReport') }}">
-											{{ __('Daily Purchase Report') }}
-										</a> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav-item {{ request()->is('Map*') ? 'active' : null }}">
-                                    <a class="nav-link" href="{{ route('Map') }}">
-                                        <span
-                                            class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            {{ __('Map') }}
-                                        </span>
-                                    </a>
-                                </li>
+                                @if (!in_array(auth()->user()->role, ['user', 'customer', 'supplier']))
 
 
-                                {{-- <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
-                                        <a class="nav-link" href="{{ route('phone-repairs.index') }}">
-                                            <span
-                                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                    <li class="nav-item dropdown {{ request()->is('purchases*') ? 'active' : null }}">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-file" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path fill="#607D8B"
-                                                        d="M52,2H12a4,4,0,0,0-4,4V58a4,4,0,0,0,4,4H52a4,4,0,0,0,4-4V6A4,4,0,0,0,52,2ZM50,56H14V6H50Z" />
-                                                    <rect fill="#78909C" x="22" y="2" width="20" height="4" />
-                                                    <rect fill="#78909C" x="18" y="8" width="28" height="46" />
-                                                    <circle fill="#546E7A" cx="32" cy="54" r="2" />
+                                                    class="icon icon-tabler icon-tabler-package-import" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M12 21l-8 -4.5v-9l8 -4.5l8 4.5v4.5" />
+                                                    <path d="M12 12l8 -4.5" />
+                                                    <path d="M12 12v9" />
+                                                    <path d="M12 12l-8 -4.5" />
+                                                    <path d="M22 18h-7" />
+                                                    <path d="M18 15l-3 3l3 3" />
                                                 </svg>
-
-
                                             </span>
                                             <span class="nav-link-title">
-                                                {{ __('Phone repair') }}
+                                                {{ __('Purchases') }}
                                             </span>
                                         </a>
-                                    </li> --}}
-                                <li
-                                    class="nav-item dropdown {{ request()->is('suppliers*', 'customers*') ? 'active' : null }}">
-                                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-layers-subtract" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M8 4m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                                <path
-                                                    d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            {{ __('Pages') }}
-                                        </span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="dropdown-menu-columns">
-                                            <div class="dropdown-menu-column">
-                                                <a class="dropdown-item" href="{{ route('suppliers.index') }}">
-                                                    {{ __('Suppliers') }}
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('users.usercustomers') }}">
-                                                    {{ __('User Customers list') }}
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('customers.index') }}">
-                                                    {{ __('Customers') }}
-                                                </a>
-                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
-                                                    <a class="dropdown-item" href="{{ route('ledger.customer') }}">
-                                                        {{ __('Customer Ledger') }}
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="{{ route('purchases.index') }}">
+                                                        {{ __('All') }}
                                                     </a>
-                                                @endif
-                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
-                                                    <a class="dropdown-item" href="{{ route('ledger.userledger') }}">
-                                                        {{ __('User Ledger') }}
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('purchases.approvedPurchases') }}">
+                                                        {{ __('Approval') }}
                                                     </a>
-                                                @endif
-                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
-                                                    <a class="dropdown-item" href="{{ route('users.index') }}">
-                                                        {{ __('Users') }}
-                                                    </a>
-                                                @endif
-                                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
-                                                    <a class="dropdown-item" href="{{ route('rota.index') }}">
-                                                        {{ __('Rota') }}
-                                                    </a>
-                                                @endif
-                                                <a class="dropdown-item" href="{{ route('expenses.index') }}">
-                                                    {{ __('Expenses') }}
-                                                </a>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('expensescategory.index') }}">
-                                                    {{ __('Expenses Category') }}
-                                                </a>
+                                                    {{-- <a class="dropdown-item" href="{{ route('purchases.purchaseReport') }}">
+                                                {{ __('Daily Purchase Report') }}
+                                            </a> --}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li
-                                    class="nav-item dropdown {{ request()->is('users*', 'categories*', 'units*') ? 'active' : null }}">
-                                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                                        data-bs-auto-close="outside" role="button" aria-expanded="false">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="icon icon-tabler icon-tabler-settings" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path
-                                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            {{ __('Settings') }}
-                                        </span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="dropdown-menu-columns">
-                                            <div class="dropdown-menu-column">
-                                                {{-- <a class="dropdown-item" href="{{ route('users.index') }}">
-												{{ __('Users') }}
-											</a> --}}
-                                                <a class="dropdown-item" href="{{ route('categories.index') }}">
-                                                    {{ __('Categories') }}
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('subcategories.index') }}">
-                                                    {{ __('Sub categories') }}
-                                                </a>
-                                                {{-- <a class="dropdown-item" href="{{ route('repair-parts.index') }}">
-											{{ __('Repair Parts') }}
-										</a> --}}
-                                                <a class="dropdown-item" href="{{ route('devices.index') }}">
-                                                    {{ __('Devices') }}
-                                                </a>
-                                                {{-- <a class="dropdown-item" href="{{ route('units.index') }}">
-											{{ __('Units') }}
-										</a> --}}
+                                    </li>
+                                    <li class="nav-item {{ request()->is('Map*') ? 'active' : null }}">
+                                        <a class="nav-link" href="{{ route('Map') }}">
+                                            <span
+                                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Map') }}
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+                                    {{-- <li class="nav-item {{ request()->is('Phone-repairs*') ? 'active' : null }}">
+                                            <a class="nav-link" href="{{ route('phone-repairs.index') }}">
+                                                <span
+                                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-file" width="24" height="24"
+                                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path fill="#607D8B"
+                                                            d="M52,2H12a4,4,0,0,0-4,4V58a4,4,0,0,0,4,4H52a4,4,0,0,0,4-4V6A4,4,0,0,0,52,2ZM50,56H14V6H50Z" />
+                                                        <rect fill="#78909C" x="22" y="2" width="20" height="4" />
+                                                        <rect fill="#78909C" x="18" y="8" width="28" height="46" />
+                                                        <circle fill="#546E7A" cx="32" cy="54" r="2" />
+                                                    </svg>
+
+
+                                                </span>
+                                                <span class="nav-link-title">
+                                                    {{ __('Phone repair') }}
+                                                </span>
+                                            </a>
+                                        </li> --}}
+                                    <li
+                                        class="nav-item dropdown {{ request()->is('suppliers*', 'customers*') ? 'active' : null }}">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-layers-subtract" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M8 4m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                                    <path
+                                                        d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Pages') }}
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="{{ route('suppliers.index') }}">
+                                                        {{ __('Suppliers') }}
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('users.usercustomers') }}">
+                                                        {{ __('User Customers list') }}
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('customers.index') }}">
+                                                        {{ __('Customers') }}
+                                                    </a>
+                                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                                                        <a class="dropdown-item" href="{{ route('ledger.customer') }}">
+                                                            {{ __('Customer Ledger') }}
+                                                        </a>
+                                                    @endif
+                                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                                                        <a class="dropdown-item" href="{{ route('ledger.userledger') }}">
+                                                            {{ __('User Ledger') }}
+                                                        </a>
+                                                    @endif
+                                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                                                        <a class="dropdown-item" href="{{ route('users.index') }}">
+                                                            {{ __('Users') }}
+                                                        </a>
+                                                    @endif
+                                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                                                        <a class="dropdown-item" href="{{ route('rota.index') }}">
+                                                            {{ __('Rota') }}
+                                                        </a>
+                                                    @endif
+                                                    <a class="dropdown-item" href="{{ route('expenses.index') }}">
+                                                        {{ __('Expenses') }}
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('expensescategory.index') }}">
+                                                        {{ __('Expenses Category') }}
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                    <li
+                                        class="nav-item dropdown {{ request()->is('users*', 'categories*', 'units*') ? 'active' : null }}">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-settings" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                                    <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Settings') }}
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    {{-- <a class="dropdown-item" href="{{ route('users.index') }}">
+                                                    {{ __('Users') }}
+                                                </a> --}}
+                                                    <a class="dropdown-item" href="{{ route('categories.index') }}">
+                                                        {{ __('Categories') }}
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('subcategories.index') }}">
+                                                        {{ __('Sub categories') }}
+                                                    </a>
+                                                    {{-- <a class="dropdown-item" href="{{ route('repair-parts.index') }}">
+                                                {{ __('Repair Parts') }}
+                                            </a> --}}
+                                                    <a class="dropdown-item" href="{{ route('devices.index') }}">
+                                                        {{ __('Devices') }}
+                                                    </a>
+                                                    {{-- <a class="dropdown-item" href="{{ route('units.index') }}">
+                                                {{ __('Units') }}
+                                            </a> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endif
+                                @if (auth()->user()->role == 'user')
+                                    {{-- <a class="dropdown-item" href="{{ route('rota.index') }}">
+                                        {{ __('Rota') }}
+                                    </a> --}}
+                                    <li class="nav-item {{ request()->is('rota*') ? 'active' : null }}">
+                                        <a class="nav-link" href="{{ route('rota.index') }}">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-packages" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                                    <path d="M2 13.5v5.5l5 3" />
+                                                    <path d="M7 16.545l5 -3.03" />
+                                                    <path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                                    <path d="M12 19l5 3" />
+                                                    <path d="M17 16.5l5 -3" />
+                                                    <path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5" />
+                                                    <path d="M7 5.03v5.455" />
+                                                    <path d="M12 8l5 -3" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Rota') }}
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item {{ request()->is('ledger*') ? 'active' : null }}">
+                                        <a class="nav-link" href="{{ route('ledger.userauthledger') }}">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-packages" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                                    <path d="M2 13.5v5.5l5 3" />
+                                                    <path d="M7 16.545l5 -3.03" />
+                                                    <path d="M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3z" />
+                                                    <path d="M12 19l5 3" />
+                                                    <path d="M17 16.5l5 -3" />
+                                                    <path d="M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5" />
+                                                    <path d="M7 5.03v5.455" />
+                                                    <path d="M12 8l5 -3" />
+                                                </svg>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ __('Ledger') }}
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         @endif
 
