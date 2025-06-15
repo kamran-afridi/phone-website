@@ -44,7 +44,7 @@ class SearchCustomerOrders extends Component
     $orders = collect(); // Empty collection by default
     $this->totalOrders = 0;
 
-    if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier') {
+    if (auth()->user()->role) {
         if ($this->customerid) {
             $ordersQuery = Order::with(['customer', 'details', 'user'])
                 ->where('order_status', '!=', 2)
