@@ -968,7 +968,7 @@
                         @endif
 
 
-                        <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                        {{-- <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                             <form action="./" method="get" autocomplete="off" novalidate>
                                 <div class="input-icon">
                                     <span class="input-icon-addon">
@@ -986,7 +986,7 @@
                                         class="form-control" placeholder="Search…" aria-label="Search in website">
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
