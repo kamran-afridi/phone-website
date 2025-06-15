@@ -225,7 +225,7 @@
                                                     {{ $products }} Products
                                                 </div>
                                                 <div class="text-muted">
-                                                    {{ $categories }} categories
+                                                    {{ $productsQuantity }} Stock
                                                 </div>
                                             </div>
                                         </div>
@@ -258,7 +258,7 @@
                                                     {{ $orders }} Orders
                                                 </div>
                                                 <div class="text-muted">
-                                                    {{ $todayOrders }} shipped
+                                                    {{ Number::currency($totalSales, 'GBP') }} Sales
                                                 </div>
                                             </div>
                                         </div>
