@@ -15,11 +15,45 @@ class DashboardController extends Controller
 {
     public function index()
     {
-		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin') {
+		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user()->role !== 'user') {
 			return redirect()->route('orders.index');
 		}
-        $orders = Order::where("user_id", auth()->id())->count();
-        $products = Product::where("user_id", auth()->id())->count();
+        if (auth()->user()->role === 'user'){
+            $orders = Order::where("user_id", auth()->id())
+            ->where('created_at', today()->format('Y-m-d'))
+            ->count();
+        }
+        else {
+            $orders = Order::where('created_at', today()->format('Y-m-d'))
+            ->count();
+        }
+        if (auth()->user()->role === 'user') {
+            $thisorders = Order::where("user_id", auth()->id())
+            ->where('created_at', today()->format('Y-m-d'))
+            ->get();
+            $totalSales = 0;
+            foreach ($thisorders as $order){
+                if (!empty($order->org_total) && $order->org_total > 0) {
+                    $totalSales += $order->org_total;
+                }
+                if (!empty($order->total) && $order->total > 0) {
+                    $totalSales += $order->total;
+                }
+            }
+        } else {
+            $thisorders = Order::where('created_at', today()->format('Y-m-d'))->get();
+            $totalSales = 0;
+            foreach ($thisorders as $order){
+                if (!empty($order->org_total) && $order->org_total > 0) {
+                    $totalSales += $order->org_total;
+                }
+                if (!empty($order->total) && $order->total > 0) {
+                    $totalSales += $order->total;
+                }
+            }
+        }
+        $products = Product::count();
+        $productsQuantity = Product::sum('quantity');
         $purchases = Purchase::where("user_id", auth()->id())->count();
         $todayPurchases = Purchase::whereDate('date', today()->format('Y-m-d'))->count();
         $todayProducts = Product::whereDate('created_at', today()->format('Y-m-d'))->count();
@@ -29,7 +63,9 @@ class DashboardController extends Controller
         $quotations = Quotation::where("user_id", auth()->id())->count();
         return view('dashboard', [
             'products' => $products,
+            'productsQuantity' => $productsQuantity,
             'orders' => $orders,
+            'totalSales' => $totalSales,
             'purchases' => $purchases,
             'todayPurchases' => $todayPurchases,
             'todayProducts' => $todayProducts,
