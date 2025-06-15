@@ -255,7 +255,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="font-weight-medium">
-                                                    {{ $orders }} Orders
+                                                    {{ $orders }} Orders Today
                                                 </div>
                                                 <div class="text-muted">
                                                     {{ Number::currency($totalSales, 'GBP') }} Sales
@@ -267,39 +267,128 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-lg-4">
-                            <a href="{{ route('purchases.index') }}">
+                            <a href="{{ route('customers.index') }}">
                                 <div class="card card-sm">
                                     <div class="card-body">
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <span
                                                     class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-truck-delivery" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                        <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                                        <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
-                                                        <path d="M3 9l4 0" />
-                                                    </svg>
+                                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users-group">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                        <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                                                        <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                        <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                                                        <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                                        <path d="M3 13v-1a2 2 0 0 1 2 -2h2" /></svg>
                                                 </span>
                                             </div>
                                             <div class="col">
-                                                <div class="font-weight-medium">
-                                                    {{ $purchases }} Purchases
+                                                <div class="font-weight-medium"> Customers
                                                 </div>
-                                                <div class="text-muted">
+                                                {{-- <div class="text-muted">
                                                     {{ $todayPurchases }} today
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
+                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                            <div class="col-sm-6 col-lg-4">
+                                <a href="{{ route('ledger.userledger') }}">
+                                    <div class="card card-sm">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <span
+                                                        class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-dollar">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h3" />
+                                                            <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" /><path d="M19 21v1m0 -8v1" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="font-weight-medium"> User Ledger
+                                                    </div>
+                                                    {{-- <div class="text-muted">
+                                                        {{ $todayPurchases }} today
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <a href="{{ route('ledger.customer') }}">
+                                    <div class="card card-sm">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <span
+                                                        class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user-dollar">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h3" />
+                                                            <path d="M21 15h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5" /><path d="M19 21v1m0 -8v1" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="font-weight-medium"> Customer Ledger
+                                                    </div>
+                                                    {{-- <div class="text-muted">
+                                                        {{ $todayPurchases }} today
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @elseif (auth()->user()->role == 'user')
+
+                            <div class="col-sm-6 col-lg-4">
+                                <a href="{{ route('ledger.userauthledger') }}">
+                                    <div class="card card-sm">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <span
+                                                        class="bg-twitter text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="icon icon-tabler icon-tabler-truck-delivery" width="24"
+                                                            height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                            <path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+                                                            <path d="M3 9l4 0" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="font-weight-medium"> Ledger
+                                                    </div>
+                                                    {{-- <div class="text-muted">
+                                                        {{ $todayPurchases }} today
+                                                    </div> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endif
                         {{-- <div class="col-sm-6 col-lg-3">
                             <div class="card card-sm">
                                 <div class="card-body">
