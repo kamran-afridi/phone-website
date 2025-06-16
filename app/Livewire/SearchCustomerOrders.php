@@ -40,7 +40,13 @@ class SearchCustomerOrders extends Component
 
     public function render()
 {
-    $customers = Customer::select('id', 'name')->get();
+    if (auth()->user() === 'user') {
+        $customers = Customer::select('id', 'name')
+        ->where('user_id', auth()->user()->id)->get();
+    }
+    else {
+        $customers = Customer::select('id', 'name')->get();
+    }
     $orders = collect(); // Empty collection by default
     $this->totalOrders = 0;
 
@@ -56,7 +62,9 @@ class SearchCustomerOrders extends Component
                 });
             }
 
-            $orders = $ordersQuery->get();
+            $orders = $ordersQuery
+                        ->orderBy('created_at', 'desc')
+                        ->get();
 
             $this->totalOrders = $orders->count();
         }
