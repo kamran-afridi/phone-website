@@ -19,7 +19,7 @@ class DashboardController extends Controller
 			return redirect()->route('orders.index');
 		}
         if (auth()->user()->role === 'user'){
-            $orders = Order::where("user_id", auth()->id())
+            $orders = Order::where("user_id", auth()->user()->id)
             ->where('created_at', today()->format('Y-m-d'))
             ->count();
         }
