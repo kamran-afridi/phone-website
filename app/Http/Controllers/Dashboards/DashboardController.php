@@ -18,15 +18,15 @@ class DashboardController extends Controller
 		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user()->role !== 'user') {
 			return redirect()->route('orders.index');
 		}
-        if (auth()->user()->role === 'user'){
+        if (auth()->user()->role === 'user') {
             $orders = Order::where("user_id", auth()->user()->id)
-            ->where('created_at', today())
-            ->count();
+                ->whereDate('created_at', today())
+                ->count();
+        } else {
+            $orders = Order::whereDate('created_at', today())
+                ->count();
         }
-        else {
-            $orders = Order::where('created_at', today())
-            ->count();
-        }
+
 
         if (auth()->user()->role === 'user') {
             $thisorders = Order::where('user_id', auth()->user()->id)
