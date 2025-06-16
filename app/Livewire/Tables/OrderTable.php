@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class OrderTable extends Component
 {
@@ -50,6 +51,56 @@ class OrderTable extends Component
 
         $this->sortField = $field;
     }
+
+    public function exportCsv(): StreamedResponse
+    {
+        $fileName = 'orders_' . now()->format('Ymd_His') . '.csv';
+
+        $orders = $this->getExportOrders();
+
+        return response()->streamDownload(function () use ($orders) {
+            $handle = fopen('php://output', 'w');
+
+            // Add CSV headers
+            fputcsv($handle, ['Invoice No', 'Customer', 'Date', 'Payment Type', 'Total', 'Paid', 'Pay To', 'User', 'Status']);
+
+            foreach ($orders as $order) {
+                fputcsv($handle, [$order->invoice_no, $order->customer->name ?? '', optional($order->order_date)->format('d-m-Y'), $order->payment_type, $order->total, $order->pay, $order->payto, $order->user->name ?? '', $order->order_status->label() ?? '']);
+            }
+
+            fclose($handle);
+        }, $fileName);
+    }
+
+    protected function getExportOrders()
+    {
+        $query = Order::with(['customer', 'details', 'user']);
+
+        if (auth()->user()->role === 'admin') {
+            $query->whereHas('user', function ($q) {
+                $q->where('wearhouse_id', auth()->user()->wearhouse_id);
+            });
+        }
+
+        if ($this->userid && $this->userid !== 'all') {
+            $query->where('user_id', $this->userid);
+        }
+
+        if ($this->customerid && $this->customerid !== 'all') {
+            $query->where('customer_id', $this->customerid);
+        }
+
+        if (auth()->user()->role === 'user') {
+            $query->where('user_id', auth()->id());
+        }
+
+        if ($this->search) {
+            $query->search($this->search); // Assuming you have a `search` scope
+        }
+
+        return $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')->get();
+    }
+
     public function updatingSearch()
     {
         $this->resetPage(); // Reset to the first page when search query changes
@@ -94,12 +145,11 @@ class OrderTable extends Component
         // $users = User::get(['id', 'name']);
         if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'user') {
             $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
-        }
-        elseif(auth()->user()->role == 'superAdmin') {
-           $users = User::get(['id', 'name']);
+        } elseif (auth()->user()->role == 'superAdmin') {
+            $users = User::get(['id', 'name']);
         }
 
-        if (auth()->user()->role == 'customer'){
+        if (auth()->user()->role == 'customer') {
             $users = user::where('id', auth()->user()->id)->get(['id', 'name']);
         }
         $customers = Customer::get(['id', 'name']);

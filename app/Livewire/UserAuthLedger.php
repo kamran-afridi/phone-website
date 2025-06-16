@@ -8,10 +8,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserAuthLedger extends Component
 {
-
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
@@ -39,6 +40,55 @@ class UserAuthLedger extends Component
         'status' => true,
         'actions' => true,
     ];
+
+    public function exportCsv(): StreamedResponse
+    {
+        $orders = $this->buildOrdersQuery()->get(); // Extracted query logic for reuse
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="ledger_export.csv"',
+        ];
+
+        $callback = function () use ($orders) {
+            $handle = fopen('php://output', 'w');
+
+            // Define CSV columns
+            fputcsv($handle, ['Invoice No', 'Customer Name', 'Order Date', 'Payment Type', 'Total', 'Paid Amount', 'Pay To', 'Status']);
+
+            foreach ($orders as $order) {
+                fputcsv($handle, [$order->invoice_no, $order->customer->name ?? '', $order->order_date->format('d-m-Y'), $order->payment_type, $order->total, $order->pay, $order->payto, $order->order_status->label()]);
+            }
+
+            fclose($handle);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function buildOrdersQuery()
+    {
+        $query = Order::with(['customer', 'details', 'user'])
+            ->whereNot('order_status', '2')
+            ->where('user_id', auth()->id());
+
+        if (auth()->user()->role === 'user') {
+            if ($this->customerid) {
+                $query->where('customer_id', $this->customerid);
+            }
+            if ($this->paymentStatus && $this->paymentStatus != 'allstatus') {
+                $query->where('order_status', $this->paymentStatus);
+            }
+            if ($this->paymentMethod && $this->paymentMethod != 'allpayment') {
+                $query->where('payment_type', $this->paymentMethod);
+            }
+            if ($this->datefrom && $this->dateto) {
+                $query->whereBetween(DB::raw('DATE(created_at)'), [$this->datefrom, $this->dateto]);
+            }
+        }
+
+        return $query;
+    }
 
     public function toggleColumn($column)
     {
@@ -69,8 +119,8 @@ class UserAuthLedger extends Component
     {
         // dd(auth()->user()->id);
         $ordersQuery = Order::with(['customer', 'details', 'user'])
-        ->whereNot('order_status', '2')
-        ->where('user_id', auth()->user()->id);
+            ->whereNot('order_status', '2')
+            ->where('user_id', auth()->user()->id);
 
         // Apply filters for admin or supplier roles
         if (auth()->user()->role === 'user') {
@@ -91,9 +141,9 @@ class UserAuthLedger extends Component
                 }
             }
             if ($this->paymentMethod) {
-                if($this->paymentMethod == 'allpayment'){
-                $ordersQuery->whereNot('order_status', '2');
-            }else{
+                if ($this->paymentMethod == 'allpayment') {
+                    $ordersQuery->whereNot('order_status', '2');
+                } else {
                     $ordersQuery->where('payment_type', $this->paymentMethod)->whereNot('order_status', '2');
                 }
             }
@@ -115,8 +165,7 @@ class UserAuthLedger extends Component
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
 
-        $users = User::get(['id', 'name'])
-        ->where ('id', auth()->user()->id);
+        $users = User::get(['id', 'name'])->where('id', auth()->user()->id);
         $customers = Customer::get(['id', 'name']);
         // ->where ('user_id', auth()->user()->id);
 
