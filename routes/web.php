@@ -142,8 +142,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::delete('/orders/deleteitems/{orderdetailsid}', [OrderController::class, 'deleteitems'])->name('orders.deleteitems');
 
     // Return Order
-	Route::get('/retuen/orderitem', [ReturnController::class, 'returncreate'])->name('return.create');
-	Route::get('/retuen', [ReturnController::class, 'returnindex'])->name('return.index');
+	Route::get('/return/orderitem', [ReturnController::class, 'returncreate'])->name('return.create');
+	Route::get('/return', [ReturnController::class, 'returnindex'])->name('return.index');
 
 
 	// DUES
