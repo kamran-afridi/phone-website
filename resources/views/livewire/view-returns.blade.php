@@ -131,15 +131,16 @@
             </tbody>
         </table>
     </div>
+    @if (!empty($returns))
+        <div class="card-footer d-flex align-items-center">
+            <p class="m-0 text-secondary">
+                Showing <span>{{ $returns->firstItem() }}</span> to <span>{{ $returns->lastItem() }}</span> of
+                <span>{{ $returns->total() }}</span> entries
+            </p>
 
-    <div class="card-footer d-flex align-items-center">
-        <p class="m-0 text-secondary">
-            Showing <span>{{ $returns->firstItem() }}</span> to <span>{{ $returns->lastItem() }}</span> of
-            <span>{{ $returns->total() }}</span> entries
-        </p>
-
-        <ul class="pagination m-0 ms-auto">
-            {{ $returns->links() }}
-        </ul>
-    </div>
+            <ul class="pagination m-0 ms-auto">
+                {{ $returns->links() }}
+            </ul>
+        </div>
+    @endif
 </div>
