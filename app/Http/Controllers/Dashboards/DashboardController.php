@@ -20,47 +20,42 @@ class DashboardController extends Controller
 		}
         if (auth()->user()->role === 'user'){
             $orders = Order::where("user_id", auth()->user()->id)
-            ->where('created_at', today()->format('Y-m-d'))
+            ->where('created_at', today())
             ->count();
         }
         else {
-            $orders = Order::where('created_at', today()->format('Y-m-d'))
+            $orders = Order::where('created_at', today())
             ->count();
         }
+
         if (auth()->user()->role === 'user') {
-            $thisorders = Order::where("user_id", auth()->id())
-            ->where('created_at', today()->format('Y-m-d'))
-            ->get();
-            $totalSales = 0;
-            foreach ($thisorders as $order){
-                if (!empty($order->org_total) && $order->org_total > 0) {
-                    $totalSales += $order->org_total;
-                }
-                if (!empty($order->total) && $order->total > 0) {
-                    $totalSales += $order->total;
-                }
-            }
+            $thisorders = Order::where('user_id', auth()->user()->id)
+                ->whereDate('created_at', today())
+                ->get();
         } else {
-            $thisorders = Order::where('created_at', today()->format('Y-m-d'))->get();
-            $totalSales = 0;
-            foreach ($thisorders as $order){
-                if (!empty($order->org_total) && $order->org_total > 0) {
-                    $totalSales += $order->org_total;
-                }
-                if (!empty($order->total) && $order->total > 0) {
-                    $totalSales += $order->total;
-                }
+            $thisorders = Order::whereDate('created_at', today())->get();
+        }
+
+        $totalSales = 0;
+        foreach ($thisorders as $order) {
+            if (!empty($order->org_total) && $order->org_total > 0) {
+                $totalSales += $order->org_total;
+            }
+
+            if (!empty($order->total) && $order->total > 0) {
+                $totalSales += $order->total;
             }
         }
+
         $products = Product::count();
         $productsQuantity = Product::sum('quantity');
-        $purchases = Purchase::where("user_id", auth()->id())->count();
+        $purchases = Purchase::where("user_id", auth()->user()->id)->count();
         $todayPurchases = Purchase::whereDate('date', today()->format('Y-m-d'))->count();
         $todayProducts = Product::whereDate('created_at', today()->format('Y-m-d'))->count();
         $todayQuotations = Quotation::whereDate('created_at', today()->format('Y-m-d'))->count();
         $todayOrders = Order::whereDate('created_at', today()->format('Y-m-d'))->count();
-        $categories = Category::where("user_id", auth()->id())->count();
-        $quotations = Quotation::where("user_id", auth()->id())->count();
+        $categories = Category::where("user_id", auth()->user()->id)->count();
+        $quotations = Quotation::where("user_id", auth()->user()->id)->count();
         return view('dashboard', [
             'products' => $products,
             'productsQuantity' => $productsQuantity,
