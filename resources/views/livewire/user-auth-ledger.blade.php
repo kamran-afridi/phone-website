@@ -105,6 +105,12 @@
                         <option value="500">500</option>
                     </select>
                 </div>
+
+            </div>
+            <div class="mb-3">
+                <button wire:click="exportCsv" class="btn btn-sm btn-outline-success">
+                    Export CSV
+                </button>
             </div>
             <div class="ms-auto text-secondary">
                 Search:
@@ -302,7 +308,7 @@
                         No of Orders
                     </td>
                     <td class="text-center">{{ $totalOrders }}</td>
-                    <td  class="text-end">
+                    <td class="text-end">
                         Payed amount
                     </td>
                     <td class="text-center">{{ number_format($total_payedamt, 2) }}</td>

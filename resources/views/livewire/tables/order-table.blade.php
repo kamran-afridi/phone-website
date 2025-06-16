@@ -55,6 +55,12 @@
                         <option value="500">500</option>
                     </select>
                 </div>
+
+            </div>
+            <div class="ms-2">
+                <button wire:click="exportCsv" class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-file-csv"></i> Export CSV
+                </button>
             </div>
             <div class="ms-auto text-secondary">
                 Search:
@@ -180,10 +186,12 @@
                         </td>
                         <td class="align-middle text-center">
                             <x-button.show class="btn-icon" route="{{ route('orders.show', $order->uuid) }}" />
-                            <x-button.print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Sale Price"
+                            <x-button.print class="btn-icon" data-bs-toggle="tooltip"
+                                data-bs-original-title="Sale Price"
                                 route="{{ route('order.downloadInvoice', $order->uuid) }}" />
                             @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
-                                <x-button.admin_print class="btn-icon" data-bs-toggle="tooltip" data-bs-original-title="Cost Price"
+                                <x-button.admin_print class="btn-icon" data-bs-toggle="tooltip"
+                                    data-bs-original-title="Cost Price"
                                     route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
                             @endif
                             @if ($order->order_status === \App\Enums\OrderStatus::PENDING)
