@@ -36,7 +36,7 @@ class ViewReturns extends Component
     }
     public function render()
     {
-        if (auth()->user()->role === 'admin') {
+        if (auth()->user()->role) {
             $returns = ReturnProduct::with('order', 'product')
                 ->where(function ($query) {
                     $query->where('invoice_no', 'like', '%' . $this->search . '%');
