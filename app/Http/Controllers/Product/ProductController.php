@@ -134,7 +134,11 @@ class ProductController extends Controller
 
 			// Delete Old Photo
 			if ($product->product_image) {
-				unlink(public_path('storage/') . $product->product_image);
+				// unlink(public_path('storage/') . $product->product_image);
+                $imagePath = public_path('storage/') . $product->product_image;
+                if (is_file($imagePath)) {
+                    unlink($imagePath);
+                }
 			}
 			// $image = $request->file('product_image')->store('products', 'public');
 			$imageName = time() . '.' . $image->getClientOriginalExtension();
