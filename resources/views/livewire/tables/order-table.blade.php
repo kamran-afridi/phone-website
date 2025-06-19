@@ -65,8 +65,8 @@
                     }
                 }
             </style>
-            <div class=" d-flex align-items-center">
-                <button wire:click="exportCsv" class="btn btn-sm btn-outline-success exportCsvbtn py-2 px-1">
+            <div class="d-flex align-items-center">
+                <button wire:click="exportCsv" class="btn btn-sm btn-outline-success exportCsvbtn">
                     <i class="fas fa-file-csv"></i> Export CSV
                 </button>
             </div>
