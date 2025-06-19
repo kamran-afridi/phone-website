@@ -34,6 +34,16 @@
                                        value="{{ Number::currency($order->due, 'GBP') }}" disabled>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="due" class="form-label required">
+                                    {{ __('Total') }}
+                                </label>
+
+                                <input type="text" id="total" class="form-control"
+                                       value="{{ Number::currency($order->total, 'GBP') }}" disabled>
+                            </div>
+                        </div>
 
                         <div class="col-lg-12">
                             <label for="pay_now" class="form-label required">
