@@ -36,7 +36,7 @@ class CustomerTable extends Component
     }
     public function render()
     {
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'customer') {
+        if (auth()->user()->role == 'superAdmin' || auth()->user()->role == 'admin' || auth()->user()->role == 'customer') {
 
             return view('livewire.tables.customer-table', [
                 'customers' => Customer::with('orders', 'quotations') 
