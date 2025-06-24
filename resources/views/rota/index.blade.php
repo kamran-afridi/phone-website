@@ -3,7 +3,7 @@
 @section('content')
 <div class="page-body">
     @if(!$rota)
-        @if (auth()->user()->role == 'admin')
+        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
             <x-empty
                 title="No Rota found"
                 message="Try adjusting your search or filter to find what you're looking for."

@@ -1,5 +1,5 @@
 <div>
-    {{-- @if (auth()->user()->role == 'admin')
+    {{-- @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
         <div class="col-md-12">
             <div class="d-flex justify-content-end mb-3">
                 <button class="btn btn-primary" onclick="window.location.href='rota/addnewregion'">View Area/Regions</button>
@@ -29,7 +29,7 @@
                     {{ __('Address') }}
                 </h3>
             </div>
-            @if (auth()->user()->role == 'admin')
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                 <div class="card-actions">
                     <x-action.create route="{{ route('rota.addnewregion') }}" />
                 </div>
@@ -167,7 +167,7 @@
 
                                 {{-- <x-button.delete class="btn-icon"type='submit' route="{{ route('customers.destroy', $assignedrota->rota_id) }}"
                                     onclick="return confirm('Are you sure to remove {{ $assignedrota->User->name }} ?')" /> --}}
-                                @if (auth()->user()->role == 'admin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                     <button class="btn btn-outline-danger"
                                         wire:click="deleteregion({{ $viewrecord->address_id }})">
                                         <img src="{{ asset('assets/img/bin.png') }}" alt=""
@@ -189,7 +189,7 @@
                             {{-- <td class="align-middle text-center">
                                 <x-button.show class="btn-icon"
                                     route="{{ route('rota.show', $assignedrota->rota_id) }}" />
-                                @if (auth()->user()->role == 'admin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                     <x-button.edit class="btn-icon"
                                         route="{{ route('rota.edit', $assignedrota->rota_id) }}" />
                                 @else
@@ -217,7 +217,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if (auth()->user()->role == 'admin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                     <button class="btn btn-outline-danger"
                                         wire:click="deleteRota({{ $assignedrota->rota_id }})"
                                         onclick="return confirm('Are you sure to remove {{ $assignedrota->User->name }}?')">

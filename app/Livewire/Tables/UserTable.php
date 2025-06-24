@@ -35,7 +35,7 @@ class UserTable extends Component
     }
     public function render()
     {
-        if (auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin' || auth()->user()->role == 'supplier') {
             // dd(auth()->user()->wearhouse_id);
             $users = User::with('wearhouselocations')
                 ->where('wearhouse_id', auth()->user()->wearhouse_id)
