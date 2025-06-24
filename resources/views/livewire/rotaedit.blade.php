@@ -10,7 +10,7 @@
                         <!-- Existing form fields for editing -->
                         <div class="row row-cards">
                             <div class="col-md-12">
-                                @if (auth()->user()->role == 'admin')
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                     <!-- User Selection -->
                                     <div class="mb-3">
                                         <label for="customer_type" class="form-label required">Select User</label>
