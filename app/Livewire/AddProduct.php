@@ -2,13 +2,14 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\Product;
 use App\Models\Order;
 use App\Models\OrderDetails;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\Session;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class AddProduct extends Component
 {
@@ -61,7 +62,7 @@ class AddProduct extends Component
                 ]);
                 $getOrderSaved = $getorderID->save();
 
-                if($getorderID->org_total != null){
+                if ($getorderID->org_total != null) {
                     $lastPrice = $salePrice + $getorderID->org_total;
                     $lastSub_total = $lastPrice - ($lastPrice * $getorderID->discount / 100);
                     $lastTotal = $lastPrice - ($lastPrice * $getorderID->discount / 100);
@@ -84,7 +85,7 @@ class AddProduct extends Component
                     // dd($getorderID,OrderDetails::where('order_id', $getorderID->id)
                     // ->where('id', $AllOrderDetails->id)->get());
                 }
-                if($lastGetOrderSaved){
+                if ($lastGetOrderSaved) {
                     session()->flash('success', 'discount Updated!!');
                 }
             } else {
@@ -122,10 +123,14 @@ class AddProduct extends Component
     {
         // dd($this->customer_id);
         // Session::put('customer_id', $this->customer_id);
-        $products = Product::search($this->search)
-            ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->paginate(20);
-
+        // $products = Product::search($this->search)
+        //     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+        //     ->paginate(20);
+        $products = Cache::remember('product_list_' . $this->search . $this->sortField . $this->sortAsc, function () {
+            return Product::search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate(20);
+        });
         // ->paginate($this->perPage);
         return view('livewire.add-product', [
             'products' => $products,
