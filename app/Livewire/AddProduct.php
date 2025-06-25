@@ -126,11 +126,15 @@ class AddProduct extends Component
         // $products = Product::search($this->search)
         //     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
         //     ->paginate(20);
-        $products = Cache::remember('product_list_' . $this->search . $this->sortField . $this->sortAsc, function () {
-            return Product::search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                ->paginate(20);
-        });
+        $products = Cache::remember(
+            'product_list_' . $this->search . '_' . $this->sortField . '_' . ($this->sortAsc ? 'asc' : 'desc'),
+            60, // cache for 60 seconds
+            function () {
+                return Product::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate(20);
+            }
+        );
         // ->paginate($this->perPage);
         return view('livewire.add-product', [
             'products' => $products,
