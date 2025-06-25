@@ -40,7 +40,7 @@ class SearchCustomerOrders extends Component
 
     public function render()
 {
-    if (auth()->user() === 'user') {
+    if (auth()->user()->role === 'user') {
         $customers = Customer::select('id', 'name')
         ->where('user_id', auth()->user()->id)->get();
     }
