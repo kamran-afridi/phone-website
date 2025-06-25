@@ -124,7 +124,7 @@ class AddProduct extends Component
         // Session::put('customer_id', $this->customer_id);
         $products = Product::search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-            ->get();
+            ->paginate(20);
 
         // ->paginate($this->perPage);
         return view('livewire.add-product', [
