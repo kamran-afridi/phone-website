@@ -102,6 +102,43 @@
             </div>
 
 
+            {{-- when enter to select  --}}
+            {{-- <div class="col-md-12 my-2 text-secondary" x-data="{
+                selectFirst() {
+                    @this.call('addCartItem',
+                        {{ $products->first()?->id ?? 'null' }},
+                        '{{ $products->first()?->name ?? '' }}',
+                        {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $products->first()?->sale_price ?? 0 : $products->first()?->whole_sale_price ?? 0 }},
+                        '{{ $products->first()?->sku ?? '' }}'
+                    );
+                }
+            }">
+                <input type="text" wire:model.live="search" class="form-control" aria-label="Search product"
+                    placeholder="Search product" @keydown.enter.prevent="selectFirst()">
+            </div>
+
+            <div class="col-md-12 searchproducts">
+                @forelse ($products as $product)
+                    <div class="card searchproductcard m-2 p-0 cursor-pointer"
+                        wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')"
+                        style="cursor: pointer;">
+                        <div class="card-body">
+                            <p class="text-center">
+                                <b>{{ $product->sku }}</b> {{ $product->name }} &nbsp;&nbsp;
+                                @if (Session::get('customer_id') === \App\Enums\CustomerType::Normal)
+                                    <b>£{{ number_format($product->sale_price, 2) }}</b>
+                                @else
+                                    <b>£{{ number_format($product->whole_sale_price, 2) }}</b>
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                @empty
+                    <p class="text-center my-2">No products found.</p>
+                @endforelse
+            </div> --}}
+
+
         </div>
     </div>
 
