@@ -126,7 +126,7 @@
                                             </form> --}}
                                         @else
                                             <button class="btn btn-icon btn-outline-primary"
-                                                onclick="return confirm('Please selectt customer first!')">
+                                                onclick="return confirm('Please select customer first!')">
                                                 <x-icon.cart />
                                             </button>
                                         @endif

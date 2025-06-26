@@ -24,13 +24,14 @@ class SearchOrders extends Component
     //add to Cart
     public $productId, $productName, $productsalePrice, $productSKU;
 
-    public function addCartItem($productId, $name, $salePrice, $sku){
+    public function addCartItem($productId, $name, $salePrice, $sku)
+    {
         // $request->all();
-		//dd($request);
+        //dd($request);
         // dd($productId, $name, $salePrice, $sku);
         if (!is_null($this->customer_id) || Session::get('customer_id')) {
             // Retrieve the order based on the customer ID
-            try{
+            try {
                 $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
                 $this->dispatch('addedTocart');
                 session()->flash('success', value: 'Product has been added to cart!');
@@ -40,20 +41,17 @@ class SearchOrders extends Component
                 //         return redirect('/orders/create');
                 //     }
                 // }
-            }
-            catch(\Exception $e){
+            } catch (\Exception $e) {
                 // dd($e);
                 Session::flash('error', 'Product already in cart');
-                }
+            }
             $this->dispatch('addedTocart');
             session()->flash('success', value: 'Product has been added to cart!');
-        }
-        else{
+        } else {
             // dd($this->customer_id);
             session()->flash('error', 'Please select a customer first!');
             return;
         }
-
     }
     public function sortBy($field): void
     {
@@ -82,9 +80,13 @@ class SearchOrders extends Component
         $products = collect(); // Default to an empty collection
 
         if (!empty($this->search)) {
-            $products = Product::where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('sku', 'like', '%' . $this->search . '%')
-                ->get(); // or ->paginate(10) if needed
+            $cacheKey = 'search_products_' . md5($this->search);
+            $products = cache()->remember($cacheKey, 60, function () {
+                return Product::where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('sku', 'like', '%' . $this->search . '%')
+                    ->limit(6)
+                    ->get();
+            });
         }
 
         // $products = Product::search($this->search)
