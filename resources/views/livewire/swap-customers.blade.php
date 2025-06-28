@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <h3 class="card-title">
-                        {{ __('User Ledger') }}
+                        {{ __('Swap Customer') }}
                     </h3>
                 </div>
                 @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
