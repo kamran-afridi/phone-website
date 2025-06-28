@@ -8,6 +8,10 @@ class SwapCustomers extends Controller
 {
     public function swapCustomers()
     {
-        return view('Swap.swapCustomers');
+        if (auth()->user()->role == 'superAdmin' || auth()->user()->role == 'admin') {
+            return view('Swap.swapCustomers');
+        }else {
+            return redirect()->route('login')->with('error', 'You do not have permission to access this page.');
+        }
     }
 }
