@@ -27,6 +27,7 @@ use App\Http\Controllers\repairParts\RepairPartsController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SwapCustomers;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RotaController;
@@ -211,5 +212,8 @@ Route::get('/rota/editaddress/{address_id}', [RotaController::class, 'editaddres
 Route::get('/customer-ledger', [CustomerLedger::class, 'index'])->name('ledger.customer');
 Route::get('/user-ledger', [UserLedger::class, 'index'])->name('ledger.userledger');
 Route::get('/current-user-ledger', [UserLedger::class, 'userAuthLedger'])->name('ledger.userauthledger');
+
+// Swap Customers
+Route::get('/swap-customers', [SwapCustomers::class, 'swapCustomers'])->name('swap.swapCustomers');
 
 
