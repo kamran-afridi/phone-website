@@ -796,7 +796,7 @@
                                                     <a class="dropdown-item" href="{{ route('suppliers.index') }}">
                                                         {{ __('Suppliers') }}
                                                     </a>
-                                                    
+
                                                     {{-- <a class="dropdown-item" href="{{ route('users.usercustomers') }}">
                                                         {{ __('User Customers list') }}
                                                     </a> --}}
@@ -806,6 +806,11 @@
                                                     @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
                                                         <a class="dropdown-item" href="{{ route('ledger.customer') }}">
                                                             {{ __('Customer Ledger') }}
+                                                        </a>
+                                                    @endif
+                                                    @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
+                                                        <a class="dropdown-item" href="{{ route('swap.swapCustomers') }}">
+                                                            {{ __('Customer Swap') }}
                                                         </a>
                                                     @endif
                                                     @if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin')
