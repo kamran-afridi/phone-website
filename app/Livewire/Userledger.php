@@ -113,7 +113,7 @@ class Userledger extends Component
             ->paginate($this->perPage);
 
         // $users = User::get(['id', 'name']);
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin' || auth()->user()->role == 'supplier') {
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
             $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
         }
         elseif(auth()->user()->role == 'superAdmin') {

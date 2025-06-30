@@ -35,15 +35,19 @@ class UserTable extends Component
     }
     public function render()
     {
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'superAdmin' || auth()->user()->role == 'supplier') {
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier') {
             // dd(auth()->user()->wearhouse_id);
             $users = User::with('wearhouselocations')
                 ->where('wearhouse_id', auth()->user()->wearhouse_id)
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
-        }
-        else{
+        } elseif (auth()->user()->role == 'superAdmin') {
+            $users = User::with('wearhouselocations')
+                ->search($this->search)
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->paginate($this->perPage);
+        } else {
             $users = User::with('wearhouselocations')
                 ->search($this->search)
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')

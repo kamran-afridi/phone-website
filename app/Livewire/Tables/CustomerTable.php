@@ -36,8 +36,7 @@ class CustomerTable extends Component
     }
     public function render()
     {
-        if (auth()->user()->role == 'superAdmin') {
-
+        if (auth()->user()->role == 'superAdmin') { 
             return view('livewire.tables.customer-table', [
                 'customers' => Customer::with('orders', 'quotations', 'user')
                     ->search($this->search)
