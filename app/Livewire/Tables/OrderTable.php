@@ -22,7 +22,7 @@ class OrderTable extends Component
 
     public $sortField = 'id';
 
-    public $sortAsc = false;
+    public $sortAsc = true;
     public $userid;
 
     public function mount()
@@ -138,7 +138,7 @@ class OrderTable extends Component
             $orders = Order::where('user_id', auth()->id())
                 ->with(['customer', 'details', 'user'])
                 ->search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
                 ->paginate($this->perPage);
         }
 
