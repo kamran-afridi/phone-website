@@ -22,7 +22,7 @@ class OrderTable extends Component
 
     public $sortField = 'id';
 
-    public $sortAsc = false;
+    public $sortAsc = true;
     public $userid;
 
     public function mount()
@@ -91,14 +91,14 @@ class OrderTable extends Component
         }
 
         if (auth()->user()->role === 'user') {
-            $query->where('user_id', auth()->id());
+            $query->where('user_id', operator: auth()->id());
         }
 
         if ($this->search) {
             $query->search($this->search); // Assuming you have a `search` scope
         }
 
-        return $query->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')->get();
+        return $query->orderBy('name', 'asc')->get();
     }
 
     public function updatingSearch()
@@ -143,16 +143,37 @@ class OrderTable extends Component
         }
 
         // $users = User::get(['id', 'name']);
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'user' || auth()->user()->role == 'superAdmin') {
-            $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->get(['id', 'name']);
+        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'user') {
+            $users = User::where('wearhouse_id', auth()->user()->wearhouse_id)->orderBy('name' ,'ASC')->get(['id', 'name']);
         } elseif (auth()->user()->role == 'superAdmin') {
-            $users = User::get(['id', 'name']);
+            // dd($this->sortAsc);
+            $users = User::orderBy('name' ,'ASC')->get(['id', 'name']);
         }
 
         if (auth()->user()->role == 'customer') {
-            $users = user::where('id', auth()->user()->id)->get(['id', 'name']);
+            $users = user::where('id', auth()->user()->id)->orderBy('name' ,'ASC')->get(['id', 'name']);
         }
-        $customers = Customer::get(['id', 'name']);
+        // Get customers based on the user role
+        if (auth()->user()->role == 'superAdmin') {
+            // dd($this->sortAsc);
+            $customers = Customer::orderBy('name' ,'ASC')->get(['id', 'name']); 
+        } elseif (auth()->user()->role == 'admin' && auth()->user()->wearhouse_id == 1) {
+            $customers = Customer::with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('wearhouse_id', 1);
+                }) 
+                ->orderBy('name' ,'ASC')->get(['id', 'name']);
+        } elseif (auth()->user()->role == 'admin' && auth()->user()->wearhouse_id == 2) {
+            
+            $customers = Customer::with('user','orders', 'quotations')
+                ->whereHas('user', function ($query) {
+                    $query->where('wearhouse_id', 2);
+                })->orderBy('name' ,'ASC')->get(['id', 'name']);
+        } else {
+            $customers = Customer::with('user')
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('name' ,'ASC')->get(['id', 'name']);
+        } 
 
         return view('livewire.tables.order-table', [
             'orders' => $orders,

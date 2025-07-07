@@ -21,10 +21,10 @@ class CreateNewOrder extends Component
     public $discount = 0;
     public $thistotal = 0;
 
-	public function toggleColumn($column)
-	{
-		$this->columns[$column] = !$this->columns[$column];
-	}
+    public function toggleColumn($column)
+    {
+        $this->columns[$column] = !$this->columns[$column];
+    }
 
     public function EditQtyPrice($cartid)
     {
@@ -65,10 +65,26 @@ class CreateNewOrder extends Component
     {
         $products = Product::with(['category_id'])->get();
 
-        if (auth()->user()->role == 'admin' || auth()->user()->role == 'supplier' || auth()->user()->role == 'superAdmin') {
-            $customers = Customer::get(['id', 'name']);
-        } else {
-            $customers = Customer::where('user_id', auth()->id())->get(['id', 'name']);
+        if (auth()->user()->role == 'superAdmin') {
+            $customers = Customer::orderBy('name', 'ASC')->get(['id', 'name']);
+        } else if (auth()->user()->role == 'admin' && auth()->user()->wearhouse_id == 1) {
+            $customers = Customer::with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('wearhouse_id', 1);
+                })->orderBy('name', 'ASC')
+                ->get(['id', 'name']);
+        } elseif (auth()->user()->role == 'admin' && auth()->user()->wearhouse_id == 2) {
+            $customers = Customer::with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('wearhouse_id', 2);
+                })->orderBy('name', 'ASC')
+                ->get(['id', 'name']);
+        } elseif (auth()->user()->role == 'user') {
+            $customers = Customer::where('user_id', auth()->id())->orderBy('name', 'ASC')->get(['id', 'name']);
+        }
+        // For other roles, we can simply get all customers
+        else {
+            $customers = Customer::where('user_id', auth()->id())->orderBy('name', 'ASC')->get(['id', 'name']);
             // $customers = Customer::get(['id', 'name']);
         }
 
