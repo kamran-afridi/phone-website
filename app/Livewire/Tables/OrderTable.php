@@ -22,7 +22,7 @@ class OrderTable extends Component
 
     public $sortField = 'id';
 
-    public $sortAsc = true;
+    public $sortAsc = false;
     public $userid;
 
     public function mount()
