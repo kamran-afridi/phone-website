@@ -21,8 +21,8 @@ class CustomerSelect extends Component
     }
     public function changeEvent($customerId)
     {
-        $this->customer_id = $customerId;
-        $customers = Customer::where('id', $customerId)->firstOrFail();
+        $this->customer_id = $customerId; 
+        $customers = Customer::where('id', $customerId)->orderBy('name' ,'ASC')->firstOrFail();
         Session::put('customer_id', $customers->customer_type);
         Session::put('customer_data', $customerId);
         // Delete Cart Sopping History
