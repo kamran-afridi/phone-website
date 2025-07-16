@@ -126,7 +126,7 @@ class OrderTable extends Component
             } else {
                 $query = Order::with(['customer', 'details', 'user'])
                     ->search($this->search)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
+                    ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc');
             }
 
             if ($this->userid && $this->userid !== 'all') {
