@@ -142,7 +142,7 @@ class OrderTable extends Component
             $orders = Order::where('user_id', auth()->id())
                 ->with(['customer', 'details', 'user'])
                 ->search($this->search)
-                ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc')
+                ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
         }
 
