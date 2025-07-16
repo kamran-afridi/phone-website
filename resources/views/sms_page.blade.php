@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body>  
     <div class="container text-center mt-5">
         <h2>How to Send SMS Using Laravel 9</h2>
         <hr style="color:#ff0000;height:5px;">
