@@ -44,6 +44,7 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+        
         $this->ensureIsNotRateLimited();
 
         if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
@@ -58,12 +59,12 @@ class LoginRequest extends FormRequest
             if ($userlogCheck) {
                 Log::channel('stderr')->info('User already logined brfore today!');
             } else {
-                $UsersLog = UsersLog::create([
-                    'date' => Carbon::now()->format('Y-m-d'),
-                    'time' => Carbon::now('Europe/London')->format('H:i:s'),
-                    'status' => 'LOGIN',
-                    'user_id' => auth()->id(),
-                ]);
+                // $UsersLog = UsersLog::create([
+                //     'date' => Carbon::now()->format('Y-m-d'),
+                //     'time' => Carbon::now('Europe/London')->format('H:i:s'),
+                //     'status' => 'LOGIN',
+                //     'user_id' => auth()->id(),
+                // ]);
             }
         }
         //RateLimiter::clear($this->throttleKey());
