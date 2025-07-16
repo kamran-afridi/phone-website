@@ -122,7 +122,7 @@ class OrderTable extends Component
                         $q->where('wearhouse_id', auth()->user()->wearhouse_id);
                     })
                     ->search($this->search)
-                    ->orderBy($this->sortField, $this->sortAsc ? 'desc' : 'asc');
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc');
             } else {
                 $query = Order::with(['customer', 'details', 'user'])
                     ->search($this->search)
