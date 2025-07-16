@@ -25,3 +25,4 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('api.login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']); 
 });
+ 
