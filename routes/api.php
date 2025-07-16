@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\ProductController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('products/', [ProductController::class, 'index'])->name('api.product.index');
+Route::middleware('guest')->group(function () { 
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('api.login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']); 
+});

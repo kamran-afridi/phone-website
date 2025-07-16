@@ -28,6 +28,9 @@ class OrderController extends Controller
 {
     public function index()
     {
+
+
+        return response()->json(Order::get());
         if (auth()->user()->role === 'supplier' or auth()->user()->role !== 'supplier') {
             // dd("asd");
             $orders = Order::all()->count();
@@ -131,6 +134,8 @@ class OrderController extends Controller
             'due' => $Duebill,
             'pay' => $request->pay,
         ]);
+
+
         return redirect()->route('orders.show', $uuid)->with('success', 'Payment has been updated!');
     }
     public function editsubmitedorder($id, Request $request)
