@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\ProductController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | API Routes
