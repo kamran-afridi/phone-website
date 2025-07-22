@@ -261,7 +261,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($order->total-, 'GBP') }}
+                                                    {{ Number::currency($order->total, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>
