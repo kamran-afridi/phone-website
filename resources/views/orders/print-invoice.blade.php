@@ -234,27 +234,7 @@
                                                     @endif
                                                 </strong>
                                             </td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td colspan="4" class="text-end">
-                                                <strong>Paid</strong>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <strong>
-                                                    {{ Number::currency($order->pay, 'GBP') }}
-                                                </strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="text-end">
-                                                <strong>Pending</strong>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <strong>
-                                                    {{ Number::currency($order->total - $order->pay, 'GBP') }}
-                                                </strong>
-                                            </td>
-                                        </tr> --}}
+                                        </tr> 
                                         <tr>
                                             <td colspan="4" class="text-end">
                                                 <strong>Returns</strong>
@@ -281,7 +261,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($order->total, 'GBP') }}
+                                                    {{ Number::currency($order->total-, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>

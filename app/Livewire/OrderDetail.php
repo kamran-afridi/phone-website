@@ -19,7 +19,7 @@ class OrderDetail extends Component
         ]);
 
         // Debugging
-        dd($this->productprice, $this->productquantity);
+        // dd($this->productprice, $this->productquantity);
 
         // Updating product details
         OrderDetails::where('id', $this->product_id)->update([
