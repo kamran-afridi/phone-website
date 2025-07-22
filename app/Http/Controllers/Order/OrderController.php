@@ -264,7 +264,7 @@ class OrderController extends Controller
         $totalreturns = 0;
         $thissubtotal = 0;
 
-        $order = Order::with(['customer', 'details'])
+        $order = Order::with(['customer', 'details', 'product'])
             ->where('uuid', $uuid)
             ->firstOrFail();
 
