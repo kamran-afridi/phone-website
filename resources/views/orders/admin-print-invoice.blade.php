@@ -206,7 +206,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                             <td colspan="2" class="text-end"><strong>Total Qty</strong></td>
+                                            <td colspan="2" class="text-end"><strong>Total Qty</strong></td>
                                             <td class="text-center">
                                                 <strong>{{ $totalqty }}</strong>
                                             </td>
@@ -285,6 +285,16 @@
                                             <td class="align-middle text-center">
                                                 <strong>
                                                     {{ Number::currency($order->total - $order->pay, 'GBP') }}
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-end">
+                                                <strong>Profit</strong>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <strong>
+                                                    {{ Number::currency($order->total - $total_price, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>
