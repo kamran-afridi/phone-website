@@ -244,7 +244,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($thissubtotal, 'GBP') }}
+                                                    {{ Number::currency($total_price, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>
@@ -294,7 +294,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <strong>
-                                                    {{ Number::currency($order->total, 'GBP') }}
+                                                    {{ Number::currency($total_price, 'GBP') }}
                                                 </strong>
                                             </td>
                                         </tr>
