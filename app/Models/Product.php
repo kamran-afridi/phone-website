@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -48,13 +49,17 @@ class Product extends Model
 	{
 		return $this->belongsTo(Device::class);
 	}
- 
+	public function orders(): HasMany
+	{
+		return $this->hasMany(Order::class); // Assuming OrderDetail is the model for the order details
+	}
+
 	public function scopeSearch($query, $value): void
 	{
 		$query = $query->where('products.name', 'like', '%' . trim($value) . '%')
 			->orWhere('products.sku', 'like', '%' . trim($value) . '%')
-			->orWhere('products.bar_code', 'like', '%' . trim($value) . '%'); 
-			// dd($query);
+			->orWhere('products.bar_code', 'like', '%' . trim($value) . '%');
+		// dd($query);
 
 	}
 	/**
