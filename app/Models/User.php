@@ -51,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'name';
     }
-    public function wearhouselocations(){
+    public function wearhouselocations(): BelongsTo{
         return $this->belongsTo(WearhouseLocations::class, 'wearhouse_id', 'id');
     }
 

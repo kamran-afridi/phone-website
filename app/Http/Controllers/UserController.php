@@ -45,8 +45,7 @@ class UserController extends Controller
                 'password'  => Hash::make($request->password),
                 'wearhouse_id' => $request->wearhouselocations,
             ]);
-        }
-        else{
+        } else {
             $user = User::create([
                 'name'  => $request->name,
                 'uuid' => Str::uuid(),
@@ -85,8 +84,10 @@ class UserController extends Controller
     }
     public function edit(User $user)
     {
+        $wearhouselocations = WearhouseLocations::all();
         return view('users.edit', [
-            'user' => $user
+            'user' => $user,
+            'wearhouselocations' => $wearhouselocations
         ]);
     }
 
@@ -163,7 +164,8 @@ class UserController extends Controller
             ->with('success', 'User has been deleted!');
     }
 
-    public function usercustomers(){
+    public function usercustomers()
+    {
         return view('users.usercustomers');
     }
 }
