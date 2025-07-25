@@ -133,7 +133,7 @@ class UserController extends Controller
         # Validation
         $validated = $request->validate([
             'password' => 'required_with:password_confirmation|min:6',
-            'password_confirmation' => 'same:password|min:6',
+            'password_confirmation' => 'same:password|min:6', 
         ]);
         # Update the new Password
         User::where('username', $user->email)->update([
