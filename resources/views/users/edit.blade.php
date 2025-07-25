@@ -108,7 +108,7 @@
 
                                     <div class="row row-cards">
                                         <div class="col-sm-6 col-md-6">
-                                            <x-input type="password" name="password"/>
+                                            <x-input type="password" name="password" value="{{ $user->password }}"/>
                                         </div>
 
                                         <div class="col-sm-6 col-md-6">

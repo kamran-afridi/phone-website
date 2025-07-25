@@ -6,7 +6,7 @@
             </h3>
         </div>
         <div class="card-actions">
-            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier')
+            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'superAdmin')
                 <x-action.createcsv route="{{ route('products.import.view') }}" />
             @endif
             <x-action.create route="{{ route('products.create') }}" />
