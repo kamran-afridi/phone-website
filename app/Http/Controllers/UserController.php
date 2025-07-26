@@ -35,7 +35,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         if (Auth::user()->role == 'superAdmin') {
-            // dd($request->all());
+            dd($request->all());
             $user = User::create([
                 'name'  => $request->name,
                 'uuid' => Str::uuid(),
