@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class UserTable extends Component
 {
     use WithPagination;
-
+    protected $paginationTheme = 'bootstrap';
     public $perPage = 15;
 
     public $search = '';
