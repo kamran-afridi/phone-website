@@ -43,9 +43,9 @@ class UserController extends Controller
                 'email'  =>  $request->email,
                 'role' => $request->role,
                 'password'  => Hash::make($request->password),
-                'wearhouse_id' => $request->wearhouselocations,
+                'email_verified_at' => '2025-06-26 21:46:20',
             ]);
-        } else {
+        } else { 
             $user = User::create([
                 'name'  => $request->name,
                 'uuid' => Str::uuid(),
@@ -53,6 +53,7 @@ class UserController extends Controller
                 'email'  =>  $request->email,
                 'password'  => Hash::make($request->password),
                 'wearhouse_id' => $request->wearhouselocations,
+                'email_verified_at' => '2025-06-26 21:46:20',
             ]);
         }
 
@@ -136,7 +137,7 @@ class UserController extends Controller
             'password_confirmation' => 'same:password|min:6', 
         ]);
         # Update the new Password
-        User::where('username', $user->email)->update([
+        User::where('email', $user->email)->update([
             'password' => Hash::make($request->password)
         ]);
 
