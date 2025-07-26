@@ -184,6 +184,9 @@
                                             <input type="password" id="password_confirmation" name="password_confirmation"
                                                 class="form-control @error('password_confirmation') is-invalid @enderror">
 
+                                            <input type="hidden" id="email_verified_at" name="email_verified_at"
+                                                class="form-control" value="{{ now() }}">
+
                                             @error('password_confirmation')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
