@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-            // dd($request->all());
+        // dd($request->all());
         if (Auth::user()->role == 'superAdmin') {
             $user = User::create([
                 'name'  => $request->name,
@@ -43,9 +43,9 @@ class UserController extends Controller
                 'email'  =>  $request->email,
                 'role' => $request->role,
                 'password'  => Hash::make($request->password),
-                'email_verified_at' => '2025-06-26 21:46:20',
+                'email_verified_at' => now(),
             ]);
-        } else { 
+        } else {
             $user = User::create([
                 'name'  => $request->name,
                 'uuid' => Str::uuid(),
@@ -53,7 +53,7 @@ class UserController extends Controller
                 'email'  =>  $request->email,
                 'password'  => Hash::make($request->password),
                 'wearhouse_id' => $request->wearhouselocations,
-                'email_verified_at' => '2025-06-26 21:46:20',
+                'email_verified_at' => now(),
             ]);
         }
 
@@ -134,7 +134,7 @@ class UserController extends Controller
         # Validation
         $validated = $request->validate([
             'password' => 'required_with:password_confirmation|min:6',
-            'password_confirmation' => 'same:password|min:6', 
+            'password_confirmation' => 'same:password|min:6',
         ]);
         # Update the new Password
         User::where('email', $user->email)->update([
