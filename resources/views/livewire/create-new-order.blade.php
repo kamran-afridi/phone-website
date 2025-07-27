@@ -3,50 +3,7 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <div class="page-body">
         <div class="container-xl">
-            <div class="row row-cards">
-                {{-- <div class="col-md-12">
-                    <!-- Show/Hide Columns Buttons -->
-                    <div class="card-body border-bottom py-3">
-                        <!-- Responsive Button Group -->
-                        <div class="btn-group d-flex flex-wrap" role="group">
-                            <div class="row w-100">
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    @if ($columns['productslist'])
-                                        <button wire:click="toggleColumn('productslist')"
-                                            class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
-                                            Products Lists
-                                        </button>
-                                    @else
-                                        <button wire:click="toggleColumn('productslist')"
-                                            class="btn btn-outline-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
-                                            Products Lists
-                                        </button>
-                                    @endif
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                    @if ($columns['orderlist'])
-                                        <button wire:click="toggleColumn('orderlist')"
-                                            class="btn btn-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
-                                            Order Lists
-                                        </button>
-                                    @else
-                                        <button wire:click="toggleColumn('orderlist')"
-                                            class="btn btn-outline-primary btn-sm p-2 flex-grow-1 mb-2 w-100">
-                                            Order Lists
-                                        </button>
-                                    @endif
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div> --}}
-                {{-- @if ($columns['productslist'])
-                    <div class="col-lg-6 col-md-4 col-sm-12">
-                        @livewire('search-orders', ['products' => $products])
-                    </div>
-                @endif --}}
+            <div class="row row-cards"> 
                 {{-- @if ($columns['orderlist']) --}}
                 <div class="col-lg-12  col-md-12 col-sm-12">
                     <div class="card">

@@ -34,7 +34,7 @@ class AddProduct extends Component
         // dd($productId, $salePrice);
         // Retrieve the order based on the customer ID
         // $orderID = $getorderID->id;
-        try {
+        try { 
             // Create a new order detail entry
             // dd($this->order);
             $getorderID = Order::where('id', $this->order->id)->firstOrFail();
