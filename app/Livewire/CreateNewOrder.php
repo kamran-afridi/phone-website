@@ -19,6 +19,7 @@ class CreateNewOrder extends Component
         'orderlist' => true,
     ];
     public $discount = 0;
+    public $qty = 0;
     public $thistotal = 0;
 
     public function toggleColumn($column)
@@ -27,15 +28,16 @@ class CreateNewOrder extends Component
     }
 
     public function EditQtyPrice($cartid)
-    {
+    { 
         // Check if requested quantity is greater than available stock
-        $productId = Cart::get($cartid); // Fetch the product ID from the cart item
-        $availableStock = Product::where('id', intval($cartid))->value('quantity');
-
-        // if ($this->cartItemquantity[$cartid] > $availableStock) {
-        //     session()->flash('carterror', 'The requested quantity is not available in stock.');
-        //     return;
-        // }
+        $productId = Cart::get($cartid); // Fetch the product ID from the cart item 
+        $availableStock = Product::where('id', $productId->id)->value('quantity'); 
+        $availableStock = (int) $availableStock;
+        // dd($this->cartItemquantity[$cartid]);
+        if ($availableStock < $this->cartItemquantity[$cartid]) { 
+            session()->flash('carterror', 'The requested quantity is not available in stock.');
+            return;
+        }
 
         try {
             // Update both the quantity and the price

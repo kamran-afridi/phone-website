@@ -19,6 +19,7 @@ class SearchOrders extends Component
     public $sortField = 'products.id';
 
     public $customer_id;
+    public $qty;
     public $sortAsc = 'desc';
 
     //add to Cart
@@ -32,6 +33,15 @@ class SearchOrders extends Component
         if (!is_null($this->customer_id) || Session::get('customer_id')) {
             // Retrieve the order based on the customer ID
             try {
+                $carts = Cart::content();
+                foreach ($carts as $cartItem) {
+                    $this->qty = $cartItem->qty; 
+                }  
+                $product_stock = Product::where('id', $productId)->firstOrFail();
+                if ($product_stock->quantity <= $this->qty) {
+                    session()->flash('error', 'Product is out of stock!');
+                    return;
+                }
                 $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
                 $this->dispatch('addedTocart');
                 session()->flash('success', value: 'Product has been added to cart!');
