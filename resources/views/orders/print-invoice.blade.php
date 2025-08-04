@@ -61,6 +61,31 @@
                                                     LLOYDS BANK
                                                 </p>
                                             </div>
+                                            @if (auth()->user()->name == 'Adminss')
+                                                
+                                            <div class="invoice-number d-flex justify-content-end">
+                                                <h4 class="inv-title-1">
+                                                    Bank Title:&nbsp;
+                                                </h4>
+                                                <p class="invo-addr-1">
+                                                    T&S BUSINESS SOLUTIONS LTD
+                                                </p>
+                                            </div>
+                                            <div class="invoice-number d-flex justify-content-end">
+                                                <h4 class="inv-title-1">
+                                                    Sort Code:&nbsp;
+                                                </h4>
+                                                <p class="invo-addr-1">
+                                                    30-99-50
+                                                </p>&nbsp; &nbsp;
+                                                <h4 class="inv-title-1">
+                                                    Account No:&nbsp;
+                                                </h4>
+                                                <p class="invo-addr-1">
+                                                    83581860
+                                                </p>
+                                            </div>
+                                            @else
                                             <div class="invoice-number d-flex justify-content-end">
                                                 <h4 class="inv-title-1">
                                                     Bank Title:&nbsp;
@@ -83,6 +108,7 @@
                                                     50539663
                                                 </p>
                                             </div>
+                                            @endif
                                             {{-- <div class="invoice-number d-flex mt-0">
                                                 <h4 class="inv-title-1">
                                                     Account No:&nbsp;
