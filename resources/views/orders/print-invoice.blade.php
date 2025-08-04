@@ -34,9 +34,14 @@
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6">
                                     <div class="logo">
-                                        {{-- <h1>{{ Str::title(auth()->user()->name) }}</h1> --}}
-                                        <img src="{{ asset('assets/img/logo.PNG') }}" style="width: 125px; height:125px"
-                                            alt="Panther Force">
+                                        {{-- <h1>{{ Str::title(auth()->user()->name) }}</h1> --}} 
+                                        @if (auth()->user()->name == 'Adminss')
+                                            <img src="https://ven-dens.co.uk/wp-content/uploads/2021/08/logo-white-bg.png"
+                                                style="width: 150px; height:100px" alt="Panther Force">
+                                        @else
+                                            <img src="{{ asset('assets/img/logo.PNG') }}"
+                                                style="width: 125px; height:125px" alt="Panther Force">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-6">
@@ -62,52 +67,51 @@
                                                 </p>
                                             </div>
                                             @if (auth()->user()->name == 'Adminss')
-                                                
-                                            <div class="invoice-number d-flex justify-content-end">
-                                                <h4 class="inv-title-1">
-                                                    Bank Title:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    T&S BUSINESS SOLUTIONS LTD
-                                                </p>
-                                            </div>
-                                            <div class="invoice-number d-flex justify-content-end">
-                                                <h4 class="inv-title-1">
-                                                    Sort Code:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    30-99-50
-                                                </p>&nbsp; &nbsp;
-                                                <h4 class="inv-title-1">
-                                                    Account No:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    83581860
-                                                </p>
-                                            </div>
+                                                <div class="invoice-number d-flex justify-content-end">
+                                                    <h4 class="inv-title-1">
+                                                        Bank Title:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        T&S BUSINESS SOLUTIONS LTD
+                                                    </p>
+                                                </div>
+                                                <div class="invoice-number d-flex justify-content-end">
+                                                    <h4 class="inv-title-1">
+                                                        Sort Code:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        30-99-50
+                                                    </p>&nbsp; &nbsp;
+                                                    <h4 class="inv-title-1">
+                                                        Account No:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        83581860
+                                                    </p>
+                                                </div>
                                             @else
-                                            <div class="invoice-number d-flex justify-content-end">
-                                                <h4 class="inv-title-1">
-                                                    Bank Title:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    PANTHER FORCE RETAIL LIMITED
-                                                </p>
-                                            </div>
-                                            <div class="invoice-number d-flex justify-content-end">
-                                                <h4 class="inv-title-1">
-                                                    Sort Code:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    30-99-50
-                                                </p>&nbsp; &nbsp;
-                                                <h4 class="inv-title-1">
-                                                    Account No:&nbsp;
-                                                </h4>
-                                                <p class="invo-addr-1">
-                                                    50539663
-                                                </p>
-                                            </div>
+                                                <div class="invoice-number d-flex justify-content-end">
+                                                    <h4 class="inv-title-1">
+                                                        Bank Title:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        PANTHER FORCE RETAIL LIMITED
+                                                    </p>
+                                                </div>
+                                                <div class="invoice-number d-flex justify-content-end">
+                                                    <h4 class="inv-title-1">
+                                                        Sort Code:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        30-99-50
+                                                    </p>&nbsp; &nbsp;
+                                                    <h4 class="inv-title-1">
+                                                        Account No:&nbsp;
+                                                    </h4>
+                                                    <p class="invo-addr-1">
+                                                        50539663
+                                                    </p>
+                                                </div>
                                             @endif
                                             {{-- <div class="invoice-number d-flex mt-0">
                                                 <h4 class="inv-title-1">
@@ -260,7 +264,7 @@
                                                     @endif
                                                 </strong>
                                             </td>
-                                        </tr> 
+                                        </tr>
                                         <tr>
                                             <td colspan="4" class="text-end">
                                                 <strong>Returns</strong>
