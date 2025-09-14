@@ -127,9 +127,9 @@
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
-                        <a wire:click.prevent="sortBy('payto')" href="#" role="button">
-                            {{ __('Pay To') }}
-                            @include('inclues._sort-icon', ['field' => 'payto'])
+                        <a wire:click.prevent="sortBy('note')" href="#" role="button">
+                            {{ __('Note') }}
+                            @include('inclues._sort-icon', ['field' => 'note'])
                         </a>
                     </th>
                     <th scope="col" class="align-middle text-center">
@@ -143,7 +143,7 @@
                             {{ __('Status') }}
                             @include('inclues._sort-icon', ['field' => 'order_status'])
                         </a>
-                    </th>
+                    </th>   
                     <th scope="col" class="align-middle text-center">
                         {{ __('Action') }}
                     </th>
@@ -174,7 +174,7 @@
                             {{ Number::currency($order->pay, 'GBP') }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $order->payto }}
+                            {{ $order->note }}
                         </td>
                         @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                             <td class="align-middle text-center">
