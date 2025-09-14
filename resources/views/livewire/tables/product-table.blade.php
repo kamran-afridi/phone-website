@@ -48,7 +48,7 @@
             <button wire:click="toggleColumn('name')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Toggle Name
             </button>
-            @if (auth()->user()->role !== 'admin')
+            @if (auth()->user()->name == 'Adminss')
                 <button wire:click="toggleColumn('cost_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                     Toggle Cost Price
                 </button>
