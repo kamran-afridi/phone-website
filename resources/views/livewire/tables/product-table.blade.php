@@ -48,7 +48,11 @@
             <button wire:click="toggleColumn('name')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Toggle Name
             </button>
-           
+            @if (auth()->user()->role != 'admin' || auth()->user()->role != 'superAdmin' || auth()->user()->name === 'Adminss')
+                <button wire:click="toggleColumn('cost_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
+                    Toggle Cost Price
+                </button>
+            @endif
             <button wire:click="toggleColumn('sale_price')" class="btn btn-outline-primary btn-sm flex-grow-1 mb-2">
                 Toggle Sale Price
             </button>
@@ -97,7 +101,14 @@
                             </a>
                         </th>
                     @endif
-                   
+                    @if ($columns['cost_price'])
+                        <th scope="col" class="align-middle text-center">
+                            <a wire:click.prevent="sortBy('products.cost_price')" href="#" role="button">
+                                {{ __('Cost Price') }}
+                                @include('inclues._sort-icon', ['field' => 'products.cost_price'])
+                            </a>
+                        </th>
+                    @endif
                     @if ($columns['sale_price'])
                         <th scope="col" class="align-middle text-center">
                             <a wire:click.prevent="sortBy('products.sale_price')" href="#" role="button">
