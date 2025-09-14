@@ -174,7 +174,7 @@
                         {{ Number::currency($order->pay, 'GBP') }}
                     </td>
                     <td class="align-middle text-center">
-                        @if (auth->user()->name === 'Adminss' ) 
+                        @if (auth()->user()->name === 'Adminss')
                         {{ $order->payto }}
                         @else
                         {{ $order->note }}
