@@ -197,7 +197,7 @@
                             <x-button.print class="btn-icon" data-bs-toggle="tooltip"
                                 data-bs-original-title="Sale Price"
                                 route="{{ route('order.downloadInvoice', $order->uuid) }}" />
-                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
+                            @if (auth()->user()->name === 'Adminss')
                                 <x-button.admin_print class="btn-icon" data-bs-toggle="tooltip"
                                     data-bs-original-title="Cost Price"
                                     route="{{ route('order.downloadAdminInvoice', $order->uuid) }}" />
