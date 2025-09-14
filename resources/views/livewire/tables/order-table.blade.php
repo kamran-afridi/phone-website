@@ -174,7 +174,11 @@
                             {{ Number::currency($order->pay, 'GBP') }}
                         </td>
                         <td class="align-middle text-center">
-                            {{ $order->note }}
+                            @if (strlen($order->note) > 25 && auth->user()->name !== 'Adminss' )
+                                {{ substr($order->note, 0, 25) . '...' }}
+                            @else   
+                            {{ $order->payto }}
+                            @endif
                         </td>
                         @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier' || auth()->user()->role === 'superAdmin')
                             <td class="align-middle text-center">
