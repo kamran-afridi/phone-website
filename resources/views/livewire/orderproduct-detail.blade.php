@@ -151,7 +151,7 @@
                         @csrf
                         <div class="input-group" style="min-width: 170px;">
                             <input type="text" class="form-control" name="payto" wire:model='payto' required
-                                step="any">
+                                step="any" placeholder="Pay To" value="{{ $order->payto }}">
                             <input type="hidden" class="form-control" name="paytoorder_id" wire:model='orderID'
                                 value="{{ $order->id }}">
 
