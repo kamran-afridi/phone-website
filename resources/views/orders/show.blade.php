@@ -140,7 +140,7 @@
                             value="{{ $order->payment_type }}">
                         <!-- Hidden Input Field to Store Payment Type -->
                         <input type="hidden" id="hidden_notes" name="hidden_notes" value="">
-                        <button type="submit" class="btn btn-success"
+                        <button type="submit" class="btn btn-success" id="change_payment_status"
                             onclick="return confirm('Are you sure you want to change the payemnt type of this order?')">
                             {{ __('Change Payment Status') }}
                         </button>
@@ -188,7 +188,7 @@
             hiddenPaymentType.value = paymentTypeSelect.value;
             hidden_notes.value = notesSelect.value;
         });
-        document.getElementById("payment_type").onclick = function() {
+        document.getElementById("change_payment_status").onclick = function() {
             hidden_notes.value = notesSelect.value;
             console.log(hidden_notes.value);
             
