@@ -149,7 +149,6 @@
                     <form wire:submit.prevent="savepayto('{{ $order->uuid }}')">
                         {{-- <form action="{{ route('orders.update_order_payment', $order->uuid) }}" method="POST"> --}}
                         @csrf
-                        @dd($order->payto)
                         <div class="input-group" style="min-width: 170px;">
                             <input type="text" class="form-control" name="payto" wire:model='payto' required
                                 step="any" placeholder="Pay To" value="{{ $order->payto }}">
