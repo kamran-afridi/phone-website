@@ -143,7 +143,7 @@
             @endforeach
             <tr>
                 <td colspan="3" class="text-end">
-                    Pay To
+                    Pay To :{{ $order->payto }}
                 </td>
                 <td class="text-center" colspan="1">
                     <form wire:submit.prevent="savepayto('{{ $order->uuid }}')">
