@@ -141,7 +141,7 @@
                     </td>
                 </tr>
             @endforeach
-            @dd(order)
+            @dd($order)
             <tr>
                 <td colspan="3" class="text-end">
                     Pay To
