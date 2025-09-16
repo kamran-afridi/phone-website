@@ -82,7 +82,7 @@ class ProductExportController extends Controller
 		$imageName = ""; 
 		$Product = Product::create([
 			'name' => $request->name,
-			'cost_price' => 0,
+			'cost_price' => '0',
 			'whole_sale_price' => $request->whole_sale_price,
 			'sale_price' => $request->whole_sale_price,
 			'quantity' => $request->quantity,
