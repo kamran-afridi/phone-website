@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="row mb-3">
+                            <div class="row mb-3"> 
                                 @livewire('search-orders', ['products' => $products])
                             </div>
                             <form action="{{ route('invoice.create') }}" method="POST">

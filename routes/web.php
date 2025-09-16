@@ -95,6 +95,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('products/import/', [ProductImportController::class, 'create'])->name('products.import.view');
 	Route::post('products/import/', [ProductImportController::class, 'store'])->name('products.import.store');
 	Route::get('products/export/', [ProductExportController::class, 'create'])->name('products.export.store');
+	Route::post('products/manual-product-creation/', [ProductExportController::class, 'ManualProductCreation'])->name('manual.product.creation');
 	Route::resource('/products', ProductController::class);
 
 	// Route POS

@@ -7,6 +7,10 @@ use App\Models\Product;
 use Exception;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use App\Http\Requests\Product\StoreProductRequest;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductExportController extends Controller
 {
@@ -67,4 +71,34 @@ class ProductExportController extends Controller
             return;
         }
     }
+
+
+   public function ManualProductCreation(Request $request)
+	{
+		/**
+		 * Handle upload image
+		 */ 
+        $rand = rand(1000, 9999); 
+		$imageName = ""; 
+		$Product = Product::create([
+			'name' => $request->name,
+			'cost_price' => 0,
+			'whole_sale_price' => $request->whole_sale_price,
+			'sale_price' => $request->whole_sale_price,
+			'quantity' => $request->quantity,
+			'sku' => 'PF-'.$rand,
+			'bar_code' => 'PF-'.$rand,
+			'product_image' => 'products/' . $imageName,
+			'item_type' => 'Default',
+			'user_id' => auth()->id(),
+			'uuid' => Str::uuid(),
+		]);
+		// dd($Product);
+        Log::info('Product created successfully: ' . $Product->id);
+		if (str_contains(url()->previous(), '/orders/create')) {
+			return to_route('orders.create');
+		}
+		return to_route('orders.create')->with('success', 'Product has been created!');
+	}
 }
+    
