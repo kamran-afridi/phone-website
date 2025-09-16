@@ -54,6 +54,7 @@ class ProductTable extends Component
 	public function render()
 	{
 		$products = Product::search($this->search)
+			 ->where('item_type', '!=', 'default')
 			->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
 			->paginate($this->perPage);
 
