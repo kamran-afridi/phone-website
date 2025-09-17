@@ -225,12 +225,12 @@
             "version": "2.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blade-ui-kit/blade-heroicons.git",
+                "url": "https://github.com/driesvints/blade-heroicons.git",
                 "reference": "a7c377a4ef88cd54712e3e15cbed30446820da0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/a7c377a4ef88cd54712e3e15cbed30446820da0b",
+                "url": "https://api.github.com/repos/driesvints/blade-heroicons/zipball/a7c377a4ef88cd54712e3e15cbed30446820da0b",
                 "reference": "a7c377a4ef88cd54712e3e15cbed30446820da0b",
                 "shasum": ""
             },
@@ -294,12 +294,12 @@
             "version": "1.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blade-ui-kit/blade-icons.git",
+                "url": "https://github.com/driesvints/blade-icons.git",
                 "reference": "89660d93f9897d231e9113ba203cd17f4c5efade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/89660d93f9897d231e9113ba203cd17f4c5efade",
+                "url": "https://api.github.com/repos/driesvints/blade-icons/zipball/89660d93f9897d231e9113ba203cd17f4c5efade",
                 "reference": "89660d93f9897d231e9113ba203cd17f4c5efade",
                 "shasum": ""
             },
@@ -3079,12 +3079,12 @@
             "version": "2.72.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/briannesbitt/Carbon.git",
+                "url": "https://github.com/CarbonPHP/carbon.git",
                 "reference": "afd46589c216118ecd48ff2b95d77596af1e57ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/afd46589c216118ecd48ff2b95d77596af1e57ed",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/afd46589c216118ecd48ff2b95d77596af1e57ed",
                 "reference": "afd46589c216118ecd48ff2b95d77596af1e57ed",
                 "shasum": ""
             },
@@ -10178,12 +10178,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
