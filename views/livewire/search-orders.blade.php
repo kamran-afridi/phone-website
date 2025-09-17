@@ -18,7 +18,7 @@
         .abctable {
             max-height: 253px;
             overflow-x: auto;
-            overflow-y: scroll;
+            overflow-y: scroll; 
         }
 
         .abctable::-webkit-scrollbar {
