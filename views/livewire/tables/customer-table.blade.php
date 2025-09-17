@@ -17,7 +17,7 @@
                 Show
                 <div class="mx-2 d-inline-block">
                     <select wire:model.live="perPage" class="form-select form-select-sm" aria-label="result per page">
-                        <option value="5">5</option>
+                        <option value="5">5 </option>
                         <option value="10">10</option>
                         <option value="15">15</option>
                         <option value="25">25</option>
