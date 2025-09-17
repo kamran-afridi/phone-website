@@ -1,8 +1,7 @@
 <div class="card mb-4 mb-xl-0">
     <div class="card-header d-flex justify-content-between">
-        <div class="card-header-title">
-
-            Search Product
+        <div class="card-header-title"> 
+            Search Products
         </div>
         <div class="card-header-actions">
 
@@ -10,10 +9,8 @@
                 data-bs-toggle="modal" data-bs-target="#addManulProduct">
                 Add Manual Product
             </button>
-        </div>
-
-    </div>
-
+        </div> 
+    </div> 
     <style>
         .abctable {
             max-height: 253px;
