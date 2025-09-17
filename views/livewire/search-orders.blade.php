@@ -1,7 +1,7 @@
 <div class="card mb-4 mb-xl-0">
     <div class="card-header d-flex justify-content-between">
         <div class="card-header-title"> 
-            Search Products
+            Search Product
         </div>
         <div class="card-header-actions">
 
