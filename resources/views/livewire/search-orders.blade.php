@@ -1,6 +1,6 @@
 <div class="card mb-4 mb-xl-0">
     <div class="card-header d-flex justify-content-between">
-        <div class="card-header-title"> 
+        <div class="card-header-title">
             Search Product
         </div>
         <div class="card-header-actions">
@@ -9,8 +9,8 @@
                 data-bs-toggle="modal" data-bs-target="#addManulProduct">
                 Add Manual Product
             </button>
-        </div> 
-    </div> 
+        </div>
+    </div>
 
     <style>
         .abctable {
@@ -85,7 +85,7 @@
                 @endphp
                 @forelse ($products as $product)
                 <div class="card searchproductcard m-2 p-0 cursor-pointer"
-                    wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')"
+                    wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}', {{ $product->whole_sale_price }}, {{ $product->sale_price }})"
                     style="cursor: pointer;">
                     <div class="card-body">
                         <p class="text-center">
@@ -122,7 +122,7 @@
         <div class="col-md-12 searchproducts">
             @forelse ($products as $product)
             <div class="card searchproductcard m-2 p-0 cursor-pointer"
-                wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}')"
+                wire:click="addCartItem({{ $product->id }}, '{{ $product->name }}', {{ Session::get('customer_id') === \App\Enums\CustomerType::Normal ? $product->sale_price : $product->whole_sale_price }}, '{{ $product->sku }}', '{{ $product->whole_sale_price }}', '{{ $product->whole_sale_price }}')"
                 style="cursor: pointer;">
                 <div class="card-body">
                     <p class="text-center">
@@ -142,8 +142,6 @@
 
 
     </div>
-</div>
-
 </div>
 <!-- The modal -->
 <div class="modal modal-lg" id="addManulProduct">
@@ -166,15 +164,15 @@
                                 <div class="card-body">
                                     <div class="row row-cards">
                                         <div class="col-md-6">
-                                            <x-input name="name" id="name" value="{{ old('name') }}" />
+                                            <x-input name="name" id="name" value="{{ old('name') }}" required/>
                                         </div>
                                         <div class="col-6">
                                             <x-input label="Whole Sale Price" name="whole_sale_price" id="whole_sale_price"
-                                                type="number" value="{{ old('whole_sale_price') }}" />
+                                                type="number" value="{{ old('whole_sale_price') }}" required/>
                                         </div>
                                         <div class="col-12 mt-1">
                                             <x-input label="Quantity" name="quantity" id="quantity" type="number"
-                                                value="{{ old('quantity') }}" />
+                                                value="{{ old('quantity') }}" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -190,4 +188,5 @@
             </form>
         </div>
     </div>
+</div>
 </div>

@@ -23,9 +23,9 @@ class SearchOrders extends Component
     public $sortAsc = 'desc';
 
     //add to Cart
-    public $productId, $productName, $productsalePrice, $productSKU;
+    public $productId, $productName, $productsalePrice, $productSKU, $whole_sale_price, $sale_price;
 
-    public function addCartItem($productId, $name, $salePrice, $sku)
+    public function addCartItem($productId, $name, $salePrice, $sku, $whole_sale_price, $sale_price)
     {
         // $request->all();
         //dd($request);
@@ -42,7 +42,7 @@ class SearchOrders extends Component
                     session()->flash('error', 'Product is out of stock!');
                     return;
                 }
-                $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku]);
+                $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku, 'whole_sale_price' => $whole_sale_price, 'sale_price' => $sale_price]);
                 $this->dispatch('addedTocart');
                 session()->flash('success', value: 'Product has been added to cart!');
                 // if ($addItemToCart) {
