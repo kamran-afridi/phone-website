@@ -157,8 +157,8 @@
                                                                     placeholder="Price"
                                                                     autocomplete="off">  
                                                                 <datalist id="priceOptions-{{ $item->rowId }}"> 
-                                                                    <option value="1"> Whole Sale Price</option>
-                                                                    <option value="$item->sku->sale_price">Sale Price</option> 
+                                                                    <option value="{{$item->sku['whole_sale_price'] }}"> Whole Sale Price</option>
+                                                                    <option value="{{$item->sku['sale_price'] }}">Sale Price</option> 
                                                                 </datalist>
                                                             </div>
                                                         </div>
