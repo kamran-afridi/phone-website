@@ -63,7 +63,7 @@ class SearchOrders extends Component
                 //         return redirect('/orders/create');
                 //     }
                 // }
-                dd(Cart::content());
+                
             } catch (\Exception $e) {
                 // dd($e);
                 Session::flash('error', 'Product already in cart');
