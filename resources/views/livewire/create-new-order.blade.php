@@ -156,10 +156,11 @@
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
                                                                     autocomplete="off">
-                                                                <datalist id="priceOptions-{{ $item->rowId }}">
-                                                                    <option value="{{ $item->sku['whole_sale_price'] }}">Whole Sale Price</option>
-                                                                    <option value="{{ $item->sku['sale_price'] }}">Sale Price</option>
-                                                                </datalist>
+                                                                <select class="form-control" wire:model="cartItemprice.{{ $item->rowId }}">
+                                                                    <option value="{{ $item->options->whole_sale_price }}">Whole Sale Price ({{ $item->options->whole_sale_price }})</option>
+                                                                    <option value="{{ $item->options->sale_price }}">Sale Price ({{ $item->options->sale_price }})</option>
+                                                                </select>
+
 
                                                             </div>
                                                         </div>
