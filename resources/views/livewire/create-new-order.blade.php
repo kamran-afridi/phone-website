@@ -119,9 +119,9 @@
                                         {{-- @if ($newcartitem) --}}
                                         @forelse ($newcartitem as $item)
                                         <tr>
-                                            <td>
+                                            <td> 
                                                 @if (is_array($item->sku))
-                                                {{ $item->sku['sku'] ?? 'N/A' }} {{-- Display the sku if it's an array --}}
+                                                    {{ $item->sku['sku'] ?? 'N/A' }} {{-- Display the sku if it's an array --}}
                                                 @else
                                                 {{ $item->sku['sku'] }} {{-- Display the sku if it's a string --}}
                                                 @endif
@@ -145,7 +145,7 @@
                                                                     name="product_id"
                                                                     wire:model="cartId.{{ $item->rowId }}">
                                                             </div>
-                                                        </div> 
+                                                        </div>
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control"
@@ -155,18 +155,11 @@
                                                                     step="any"
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
-                                                                    autocomplete="off">
-                                                                <datalist id="priceOptions-{{ $item->rowId }}">
-                                                                    <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
-                                                                    <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
-                                                                    <option value="222">Whole Sale Price</option> 
-                                                                    <option value="222">Whole Sale Price</option> 
-                                                                    <option value="222">Whole Sale Price</option> Å
-                                                                    <option value="{{ $item->sku['sale_price'] ?? '' }}">Whole Sale Price</option> 
-                                                                    <option value="{{ $item->sku['sale_price'] ?? '' }}">Whole Sale Price</option> 
-
+                                                                    autocomplete="off">  
+                                                                <datalist id="priceOptions-{{ $item->rowId }}"> 
+                                                                    <option value="1"> Whole Sale Price</option>
+                                                                    <option value="$item->sku->sale_price">Sale Price</option> 
                                                                 </datalist>
-
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3 col-sm-3 ml-0">
