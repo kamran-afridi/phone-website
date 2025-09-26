@@ -158,6 +158,10 @@
                                                                     autocomplete="off">
                                                                 <datalist id="priceOptions-{{ $item->rowId }}"> 
                                                                     <option value="{{ $item->sku['sale_price']}}">Sale Price</option>
+                                                                    <option value="{{ $item->sku['sale_price']}}">1</option>
+                                                                    <option value="2">Sale Price</option>
+
+
 
                                                                 </datalist>
 
