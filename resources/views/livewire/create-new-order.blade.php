@@ -119,9 +119,9 @@
                                         {{-- @if ($newcartitem) --}}
                                         @forelse ($newcartitem as $item)
                                         <tr>
-                                            <td> 
+                                            <td>
                                                 @if (is_array($item->sku))
-                                                    {{ $item->sku['sku'] ?? 'N/A' }} {{-- Display the sku if it's an array --}}
+                                                {{ $item->sku['sku'] ?? 'N/A' }} {{-- Display the sku if it's an array --}}
                                                 @else
                                                 {{ $item->sku['sku'] }} {{-- Display the sku if it's a string --}}
                                                 @endif
@@ -155,10 +155,10 @@
                                                                     step="any"
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
-                                                                    autocomplete="off">  
-                                                                <datalist id="priceOptions-{{ $item->rowId }}"> 
-                                                                    <option value="{{$item->sku['whole_sale_price'] }}"> Whole Sale Price</option>
-                                                                    <option value="{{$item->sku['sale_price'] }}">Sale Price</option> 
+                                                                    autocomplete="off">
+                                                                <datalist id="priceOptions-{{ $item->rowId }}">
+                                                                    <option value="{{ $item->options->whole_sale_price }}">Whole Sale Price</option>
+                                                                    <option value="{{ $item->options->sale_price }}">Sale Price</option>
                                                                 </datalist>
                                                             </div>
                                                         </div>

@@ -35,14 +35,26 @@ class SearchOrders extends Component
             try {
                 $carts = Cart::content();
                 foreach ($carts as $cartItem) {
-                    $this->qty = $cartItem->qty; 
-                }  
+                    $this->qty = $cartItem->qty;
+                }
                 $product_stock = Product::where('id', $productId)->firstOrFail();
                 if ($product_stock->quantity <= $this->qty) {
                     session()->flash('error', 'Product is out of stock!');
                     return;
                 }
-                $addItemToCart = Cart::add($productId, $name, 1, $salePrice, ['sku' => $sku, 'whole_sale_price' => $whole_sale_price, 'sale_price' => $sale_price]);
+                $addItemToCart =
+                    Cart::add(
+                        $productId,
+                        $name,
+                        1,
+                        $salePrice,
+                        [
+                            'sku'             => $sku,
+                            'whole_sale_price' => $whole_sale_price,
+                            'sale_price'      => $sale_price,
+                        ]
+                    );
+
                 $this->dispatch('addedTocart');
                 session()->flash('success', value: 'Product has been added to cart!');
                 // if ($addItemToCart) {
