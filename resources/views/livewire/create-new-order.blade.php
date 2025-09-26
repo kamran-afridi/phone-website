@@ -145,8 +145,7 @@
                                                                     name="product_id"
                                                                     wire:model="cartId.{{ $item->rowId }}">
                                                             </div>
-                                                        </div>
-                                                        <pre>{{ var_dump($item->sku) }}</pre>
+                                                        </div> 
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control"
@@ -160,6 +159,10 @@
                                                                 <datalist id="priceOptions-{{ $item->rowId }}">
                                                                     <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
                                                                     <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
+                                                                    <option value="222">Whole Sale Price</option> 
+                                                                    <option value="222">Whole Sale Price</option> 
+                                                                    <option value="222">Whole Sale Price</option> Å
+                                                                    <option value="{{ $item->sku['sale_price'] ?? '' }}">Whole Sale Price</option> 
                                                                     <option value="{{ $item->sku['sale_price'] ?? '' }}">Whole Sale Price</option> 
 
                                                                 </datalist>
