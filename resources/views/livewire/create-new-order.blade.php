@@ -146,6 +146,7 @@
                                                                     wire:model="cartId.{{ $item->rowId }}">
                                                             </div>
                                                         </div>
+                                                        <pre>{{ var_dump($item->sku) }}</pre>
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control"
