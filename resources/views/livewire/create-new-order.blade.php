@@ -145,7 +145,8 @@
                                                                     name="product_id"
                                                                     wire:model="cartId.{{ $item->rowId }}">
                                                             </div>
-                                                        </div> 
+                                                        </div>
+                                                        <pre>{{ var_dump($item->sku) }}</pre>
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
                                                                 <input type="number" class="form-control"
@@ -156,12 +157,10 @@
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
                                                                     autocomplete="off">
-                                                                <datalist id="priceOptions-{{ $item->rowId }}"> 
-                                                                    <option value="{{ $item->sku['sale_price']}}">Sale Price</option>
-                                                                    <option value="{{ $item->sku['sale_price']}}">1</option>
-                                                                    <option value="2">Sale Price</option>
-
-
+                                                                <datalist id="priceOptions-{{ $item->rowId }}">
+                                                                    <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
+                                                                    <option value="{{ $item->sku['whole_sale_price'] ?? '' }}">Whole Sale Price</option> 
+                                                                    <option value="{{ $item->sku['sale_price'] ?? '' }}">Whole Sale Price</option> 
 
                                                                 </datalist>
 
