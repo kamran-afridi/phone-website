@@ -164,8 +164,8 @@
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
                                                                     autocomplete="off"
-                                                                    onfocus="this.value=0; this.dispatchEvent(new Event('input'))"
-                                                                    oninput="this.setAttribute('value', this.value)">
+                                                                    onfocus="this.value=''; this.dispatchEvent(new Event('input'))"
+                                                                    oninput="this.setAttribute('value', this.value)" required>
 
                                                                 <datalist id="priceOptions-{{ $item->rowId }}">
                                                                     <option value="{{ $item->options->whole_sale_price }}">Whole Sale Price</option>
