@@ -148,11 +148,12 @@
                                                         </div>
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
-                                                                 
+                                                                 <!-- useless -->
                                                                 <datalist id="priceOptions-{{ $item->rowId }}">
                                                                     <option value="{{ $item->sku['whole_sale_price'] }}">Whole Sale Price</option>
                                                                     <option value="{{ $item->sku['sale_price'] }}">Sale Price</option>
                                                                 </datalist>
+                                                                <!-- useless -->
                                                                 <input type="number"
                                                                     class="form-control"
                                                                     name="price"
