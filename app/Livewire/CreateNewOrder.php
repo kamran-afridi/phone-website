@@ -22,19 +22,24 @@ class CreateNewOrder extends Component
     public $qty = 0;
     public $thistotal = 0;
 
+    protected $rules = [
+        'cartItemquantity.*' => 'required|integer|min:1',
+        'cartItemprice.*' => 'required|numeric|min:0',
+    ];
+
     public function toggleColumn($column)
     {
         $this->columns[$column] = !$this->columns[$column];
     }
 
     public function EditQtyPrice($cartid)
-    { 
+    {
         // Check if requested quantity is greater than available stock
         $productId = Cart::get($cartid); // Fetch the product ID from the cart item 
-        $availableStock = Product::where('id', $productId->id)->value('quantity'); 
+        $availableStock = Product::where('id', $productId->id)->value('quantity');
         $availableStock = (int) $availableStock;
         // dd($this->cartItemquantity[$cartid]);
-        if ($availableStock < $this->cartItemquantity[$cartid]) { 
+        if ($availableStock < $this->cartItemquantity[$cartid]) {
             session()->flash('carterror', 'The requested quantity is not available in stock.');
             return;
         }
