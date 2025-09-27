@@ -148,6 +148,18 @@
                                                         </div>
                                                         <div class="col-md-5 col-sm-5 ml-0 mr-1">
                                                             <div class="input-group">
+                                                                <input type="number" class="form-control"
+                                                                    name="price" required
+                                                                    wire:model="cartItemprice.{{ $item->rowId }}"
+                                                                    value="{{ old('price', $item->price) }}"
+                                                                    step="any"
+                                                                    list="priceOptions-{{ $item->rowId }}"
+                                                                    placeholder="Price"
+                                                                    autocomplete="off">
+                                                                <datalist id="priceOptions-{{ $item->rowId }}">
+                                                                    <option value="{{ $item->sku['whole_sale_price'] }}">Whole Sale Price</option>
+                                                                    <option value="{{ $item->sku['sale_price'] }}">Sale Price</option>
+                                                                </datalist>
                                                                 <input type="number"
                                                                     class="form-control"
                                                                     name="price"
