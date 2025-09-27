@@ -131,7 +131,7 @@
                                             </td>
                                             <td style="min-width: 170px;" colspan="2">
                                                 {{-- <form  model:submit.prevent="EditQtyPrice({{ $item->rowId }})"> --}}
-                                                <form>
+                                                <form wire:submit.prevent="EditQtyPrice('{{ $item->rowId }}')">
 
                                                     @csrf
                                                     <div class="row">
