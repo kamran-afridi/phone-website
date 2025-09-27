@@ -164,7 +164,7 @@
                                                                     list="priceOptions-{{ $item->rowId }}"
                                                                     placeholder="Price"
                                                                     autocomplete="off"
-                                                                    onfocus="this.value=''; this.dispatchEvent(new Event('input'))"
+                                                                    onfocus="this.value=0; this.dispatchEvent(new Event('input'))"
                                                                     oninput="this.setAttribute('value', this.value)">
 
                                                                 <datalist id="priceOptions-{{ $item->rowId }}">
