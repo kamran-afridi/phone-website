@@ -34,6 +34,7 @@ class CreateNewOrder extends Component
 
     public function EditQtyPrice($cartid)
     {
+        $this->validate();
         // Check if requested quantity is greater than available stock
         $productId = Cart::get($cartid); // Fetch the product ID from the cart item 
         $availableStock = Product::where('id', $productId->id)->value('quantity');
