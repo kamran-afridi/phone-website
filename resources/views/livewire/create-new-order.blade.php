@@ -160,7 +160,23 @@
                                                                     <option value="{{ $item->sku['whole_sale_price'] }}">Whole Sale Price</option>
                                                                     <option value="{{ $item->sku['sale_price'] }}">Sale Price</option>
                                                                 </datalist>
+                                                                <input type="number"
+                                                                    class="form-control"
+                                                                    name="price"
+                                                                    required
+                                                                    wire:model="cartItemprice.{{ $item->rowId }}"
+                                                                    value="{{ old('price', $item->price) }}"
+                                                                    step="any"
+                                                                    list="priceOptions-{{ $item->rowId }}"
+                                                                    placeholder="Price"
+                                                                    autocomplete="off"
+                                                                    onfocus="this.value=''; this.dispatchEvent(new Event('input'))"
+                                                                    oninput="this.setAttribute('value', this.value)">
 
+                                                                <datalist id="priceOptions-{{ $item->rowId }}">
+                                                                    <option value="{{ $item->options->whole_sale_price }}">Whole Sale Price</option>
+                                                                    <option value="{{ $item->options->sale_price }}">Sale Price</option>
+                                                                </datalist>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3 col-sm-3 ml-0">
