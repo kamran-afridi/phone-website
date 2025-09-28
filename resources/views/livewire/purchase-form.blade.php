@@ -53,10 +53,7 @@
                     <input type="number" wire:model="invoiceProducts.{{ $index }}.quantity"
                         id="invoiceProducts[{{ $index }}][quantity]" class="form-control" />
                     @endif
-                </td>
-
-        @php var_dump($invoiceProduct);
-        @endphp
+                </td>  
                 {{-- - Unit Price - --}}
                 <td class="align-middle text-center">
                     @if ($invoiceProduct['is_saved'])
