@@ -167,7 +167,7 @@
                                             <x-input name="name" id="name" value="{{ old('name') }}" required/>
                                         </div>
                                         <div class="col-6">
-                                            <x-input label="Whole Sale Price" name="whole_sale_price" id="whole_sale_price"
+                                            <x-input label="Sale Price" name="whole_sale_price" id="whole_sale_price"
                                                 type="number" value="{{ old('whole_sale_price') }}" required/>
                                         </div>
                                         <div class="col-12 mt-1">

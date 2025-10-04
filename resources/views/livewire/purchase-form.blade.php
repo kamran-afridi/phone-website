@@ -131,7 +131,7 @@
                             <path d="M5 12l14 0" />
                         </svg>
                     </button>
-                </td>
+                </td> 
             </tr>
             <tr>
                 <th colspan="5" class="align-middle text-end">
