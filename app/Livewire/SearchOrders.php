@@ -107,7 +107,7 @@ class SearchOrders extends Component
             $products = cache()->remember($cacheKey, 60, function () {
                 return Product::where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('sku', 'like', '%' . $this->search . '%')
-                    ->where('user_id', '!=', '0')
+                    ->orwhere('user_id', '!=', '0')
                     ->limit(6)
                     ->get();
             });
