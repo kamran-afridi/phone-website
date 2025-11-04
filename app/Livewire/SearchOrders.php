@@ -63,7 +63,7 @@ class SearchOrders extends Component
                 //         return redirect('/orders/create');
                 //     }
                 // }
-                
+
             } catch (\Exception $e) {
                 // dd($e);
                 Session::flash('error', 'Product already in cart');
@@ -105,9 +105,11 @@ class SearchOrders extends Component
         if (!empty($this->search)) {
             $cacheKey = 'search_products_' . md5($this->search);
             $products = cache()->remember($cacheKey, 60, function () {
-                return Product::where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('sku', 'like', '%' . $this->search . '%')
-                    ->orwhere('user_id', '!=', '0')
+                return Product::where(function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('sku', 'like', '%' . $this->search . '%');
+                })
+                    ->where('user_id', '!=', 0)
                     ->limit(6)
                     ->get();
             });
