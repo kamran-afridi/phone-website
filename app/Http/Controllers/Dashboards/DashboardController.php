@@ -18,28 +18,33 @@ class DashboardController extends Controller
 		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user()->role !== 'user') {
 			return redirect()->route('orders.index');
 		}
-        if (auth()->user()->role === 'user') {
-            $orders = Order::where("user_id", auth()->user()->id)
-                ->whereDate('created_at', today())
+        // if (auth()->user()->role === 'user') {
+        //     $orders = Order::where("user_id", auth()->user()->id)
+        //         ->whereDate('created_at', today())
+        //         ->count();
+        // } else {
+        //     $orders = Order::whereDate('created_at', today())
+        //         ->count();
+        // }
+        $orders = Order::whereDate('created_at', today())
                 ->count();
-        } else {
-            $orders = Order::whereDate('created_at', today())
-                ->count();
-        }
 
 
-        if (auth()->user()->role === 'user') {
-            $thisorders = Order::where('user_id', auth()->user()->id)
-                ->whereDate('created_at', today())
-                ->get();
-        } else {
-            $thisorders = Order::whereDate('created_at', today())->get();
-        }
+        // if (auth()->user()->role === 'user') {
+        //     $thisorders = Order::where('user_id', auth()->user()->id)
+        //         ->whereDate('created_at', today())
+        //         ->get();
+        // } else {
+        //     $thisorders = Order::whereDate('created_at', today())->get();
+        // }
+        $thisorders = Order::whereDate('created_at', today())->get();
+        // dd($thisorders);
 
         $totalSales = 0;
         foreach ($thisorders as $order) {
-            if (!empty($order->org_total) && $order->org_total > 0) {
-                $totalSales += $order->org_total;
+
+            if (!empty($order->total) && $order->total > 0) {
+                $totalSales += $order->total;
             }
 
             if (!empty($order->total) && $order->total > 0) {
