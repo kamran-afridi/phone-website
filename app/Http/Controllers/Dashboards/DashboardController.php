@@ -15,9 +15,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-		if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user()->role !== 'user') {
-			return redirect()->route('orders.index');
-		}
+        if (auth()->user()->role !== 'admin' && auth()->user()->role !== 'superAdmin' && auth()->user()->role !== 'user') {
+            return redirect()->route('orders.index');
+        }
         // if (auth()->user()->role === 'user') {
         //     $orders = Order::where("user_id", auth()->user()->id)
         //         ->whereDate('created_at', today())
@@ -26,9 +26,14 @@ class DashboardController extends Controller
         //     $orders = Order::whereDate('created_at', today())
         //         ->count();
         // }
-        $orders = Order::whereDate('created_at', today())
+        if (auth()->user()->role === 'user') {
+            $orders = Order::where("user_id", auth()->user()->id)
+                ->whereDate('created_at', today())
                 ->count();
-
+        } else {
+            $orders = Order::whereDate('created_at', today())
+                ->count();
+        }
 
         // if (auth()->user()->role === 'user') {
         //     $thisorders = Order::where('user_id', auth()->user()->id)
@@ -43,7 +48,7 @@ class DashboardController extends Controller
                 ->get();
         } else {
             $thisorders = Order::whereDate('created_at', today())->get();
-        }   
+        }
         // dd($thisorders);
 
         $totalSales = 0;
@@ -78,6 +83,5 @@ class DashboardController extends Controller
             'categories' => $categories,
             'quotations' => $quotations
         ]);
-
     }
 }
