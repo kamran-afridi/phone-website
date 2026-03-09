@@ -37,7 +37,13 @@ class DashboardController extends Controller
         // } else {
         //     $thisorders = Order::whereDate('created_at', today())->get();
         // }
-        $thisorders = Order::whereDate('created_at', today())->get();
+        if (auth()->user()->role === 'user') {
+            $thisorders = Order::where('user_id', auth()->user()->id)
+                ->whereDate('created_at', today())
+                ->get();
+        } else {
+            $thisorders = Order::whereDate('created_at', today())->get();
+        }   
         // dd($thisorders);
 
         $totalSales = 0;
