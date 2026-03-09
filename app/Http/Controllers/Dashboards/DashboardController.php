@@ -45,10 +45,8 @@ class DashboardController extends Controller
 
             if (!empty($order->total) && $order->total > 0) {
                 $totalSales += $order->total;
-            }
-
-            if (!empty($order->total) && $order->total > 0) {
-                $totalSales += $order->total;
+            } else {
+                $totalSales += 0;
             }
         }
 
