@@ -214,8 +214,10 @@
                     <td class="align-middle text-center" style="width: 10%">
                         <x-button.show class="btn-icon" route="{{ route('products.show', $product->id) }}" />
                         <x-button.edit class="btn-icon" route="{{ route('products.edit', $product->id) }}" />
+                        @if (auth()->user()->role === 'admin' || auth()->user()->role === 'supplier'|| auth()->user()->role === 'superAdmin')
                         <x-button.delete class="btn-icon" route="{{ route('products.destroy', $product->id) }}"
                             onclick="return confirm('Are you sure to delete product {{ $product->name }} ?')" />
+                        @endif
                     </td>
                 </tr>
                 @empty
