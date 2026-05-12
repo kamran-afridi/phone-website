@@ -78,34 +78,34 @@
             </thead>
             <tbody>
                 @forelse ($users as $user)
-                    <tr>
-                        <td class="align-middle text-center" style="width: 10%">
-                            {{ $user->id }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $user->name }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $user->email }}
-                        </td>
-                        <td class="align-middle text-center">
-                            {{ $user->wearhouselocations->name }}
-                        </td>
-                        <td class="align-middle text-center d-none d-sm-table-cell" style="width: 15%">
-                            {{ $user->created_at->format('d-m-Y') }}
-                        </td>
-                        <td class="align-middle text-center" style="width: 15%">
-                            <x-button.show class="btn-icon" route="{{ route('users.show', $user->uuid) }}" />
-                            <x-button.edit class="btn-icon" route="{{ route('users.edit', $user) }}" />
-                            <x-button.delete class="btn-icon" route="{{ route('users.destroy', $user) }}" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="align-middle text-center" style="width: 10%">
+                        {{ $user->id }}
+                    </td>
+                    <td class="align-middle text-center">
+                        {{ $user->name }}
+                    </td>
+                    <td class="align-middle text-center">
+                        {{ $user->email }}
+                    </td>
+                    <td class="align-middle text-center">
+                        {{ $user->wearhouselocations?->name ?? 'N/A' }}
+                    </td>
+                    <td class="align-middle text-center d-none d-sm-table-cell" style="width: 15%">
+                        {{ $user->created_at->format('d-m-Y') }}
+                    </td>
+                    <td class="align-middle text-center" style="width: 15%">
+                        <x-button.show class="btn-icon" route="{{ route('users.show', $user->uuid) }}" />
+                        <x-button.edit class="btn-icon" route="{{ route('users.edit', $user) }}" />
+                        <x-button.delete class="btn-icon" route="{{ route('users.destroy', $user) }}" />
+                    </td>
+                </tr>
                 @empty
-                    <tr>
-                        <td class="align-middle text-center" colspan="8">
-                            No results found
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="align-middle text-center" colspan="8">
+                        No results found
+                    </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
